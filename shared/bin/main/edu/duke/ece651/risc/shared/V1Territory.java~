@@ -64,7 +64,6 @@ public class V1Territory<T> implements Territory<T> {
     return currDefenderArmy.get(0).getUnits();
   }
 
-  
   @Override
   public int getId() {
     return Id;
@@ -75,25 +74,4 @@ public class V1Territory<T> implements Territory<T> {
     return name;
   }
 
-  @Override
-  public int getGroup() {	
-    return group;
-  }
-
-@Override
-public Vector<Integer> getNeigh() {
-	return neigh;
 }
-
-}
-
-
-
-
-
-
-
-
-
-
-

@@ -1,0 +1,44 @@
+package edu.duke.ece651.risc.shared;
+import java.util.*;
+public class V1GameBoard<String> extends Board<String>{
+  public V1GameBoard(ArrayList<Territory<String>> territories, ArrayList<ArrayList<Integer>> worldMap){
+    super(territories, worldMap);
+   }
+                                  
+	@Override
+	public String whatIsIn(Territory<String> territory, boolean isSelf) {
+	  HashMap<String,Integer> infoMap = territory.getDisplayInfo(isSelf);
+		return null;
+	}
+
+	@Override
+	public boolean occupyTerritory(int owner, int territoryId) {
+		// TODO Auto-generated method stub
+		return false;
+	}
+
+	@Override
+	public void addUnits(int territoryId, int amount) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void removeUnits(int territory, int amount) {
+		// TODO Auto-generated method stub
+		
+	}
+
+}
+
+
+
+
+
+
+
+
+
+
+
+

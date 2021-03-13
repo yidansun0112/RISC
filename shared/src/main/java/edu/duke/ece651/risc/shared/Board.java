@@ -10,7 +10,8 @@ public abstract class Board<T> {
   }
   abstract public T whatIsIn(Territory<T> territory, boolean isSelf);
   abstract public boolean occupyTerritory(int owner, int territoryId);
-  abstract public void addUnits(int territoryId, int amount);
+
+  abstract public void addUnits(int territoryId, int amount, int playerId);
   abstract public void removeUnits(int territory, int amount);
   public ArrayList<Territory<T>> getTerritories(){
     return territories;
