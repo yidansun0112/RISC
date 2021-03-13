@@ -11,13 +11,13 @@ public class Army {
     this.commanderId = commanderId;
     this.units = units;
   }
-  public getCommanderId(){
+  public int getCommanderId(){
     return commanderId;
   }
-  public getUnits(){
+  public int getUnits(){
     return units;
   }
-  public setUnits(int units){
+  public void setUnits(int units){
     this.units = units;
   }
 
