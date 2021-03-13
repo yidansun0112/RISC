@@ -17,6 +17,10 @@ public interface Territory<T>{
 
   public String getName();
   public int getGroup();
+
+  public Object getCurrDefenderArmy();
+  public Object getEnemyArmy();
+  public void addEnemy(int playerId, int amount);
 }
 
 

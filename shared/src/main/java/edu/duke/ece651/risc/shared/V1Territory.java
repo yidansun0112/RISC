@@ -33,15 +33,15 @@ public class V1Territory<T> implements Territory<T> {
   }
 
   @Override
-	public HashMap<String, Integer> getDisplayInfo(boolean isSelf) {
-		HashMap<String,Integer> res = new HashMap<>();
-    if(isSelf){
+  public HashMap<String, Integer> getDisplayInfo(boolean isSelf) {
+    HashMap<String, Integer> res = new HashMap<>();
+    if (isSelf) {
       res.put("units", currDefenderArmy.get(0).getUnits());
-    }else{
+    } else {
       res.put("units", prevDefenderArmy.get(0).getUnits());
     }
     return res;
-	}
+  }
 
   @Override
   public void setOwner(int owner) {
@@ -75,18 +75,23 @@ public class V1Territory<T> implements Territory<T> {
   }
 
   @Override
-  public int getGroup() {	
+  public int getGroup() {
     return group;
   }
 
+  @Override
+  public Vector<Army<T>> getCurrDefenderArmy(){
+    return this.currDefenderArmy;
+  }
+
+  @Override
+  public Vector<Army<T>> getEnemyArmy(){
+    return this.enemyArmy;
+  }
+
+  @Override
+  public void addEnemy(int playerId, int amount){
+    Army<T> temp = new Army<T>(playerId, amount);
+    this.enemyArmy.add(temp);
+  }
 }
-
-
-
-
-
-
-
-
-
-
