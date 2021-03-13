@@ -1,6 +1,6 @@
 package edu.duke.ece651.risc.shared;
 
-public class Army {
+public class Army<T> {
   private int commanderId;
   private int units;
   public Army(){
