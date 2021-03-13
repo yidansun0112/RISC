@@ -16,7 +16,16 @@ public interface Territory<T>{
   public int getId();
   public String getName();
   public int getGroup();
+
   public Vector<Integer> getNeigh();
+
+  public Object getCurrDefenderArmy();
+  public Object getEnemyArmy();
+  public void addEnemy(int playerId, int amount);
+  public void updatePrevDefender();
+
+  public void initCurrDefender(int owner);
+
 }
 
 

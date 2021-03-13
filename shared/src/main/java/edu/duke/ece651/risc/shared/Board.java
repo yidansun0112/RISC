@@ -19,4 +19,19 @@ public abstract class Board<T> {
   public ArrayList<ArrayList<Integer>> getWorldMap(){
     return worldMap;
   }
+
+  abstract public void oneRoundDone();
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
