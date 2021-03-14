@@ -14,12 +14,12 @@ public abstract class OrderRuleChecker<T> {
   /*
    * This function will be overwritten by others to realize other checker.
    */
-  public abstract String checkMyRule(int playerId, T order, Board<T> board);
+  protected abstract String checkMyRule(int playerId, Order<T> order, Board<T> board);
 
   /*
    * This Function will be called every time to execute the check Chain.
    */
-  public String checkOrder(int playerId, T order, Board<T> board) {
+  public String checkOrder(int playerId, Order<T> order, Board<T> board) {
     String message = checkMyRule(playerId, order, board);
     if (message != null) {
       return message;
