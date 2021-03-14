@@ -1,0 +1,19 @@
+package edu.duke.ece651.risc.shared;
+
+public interface Board<T> {
+  public T whatIsIn(Territory<T> territory, boolean isSelf);
+  public boolean occupyTerritory(int owner, int territoryId);
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
