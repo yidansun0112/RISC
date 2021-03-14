@@ -1,9 +1,9 @@
 package edu.duke.ece651.risc.shared;
 import java.util.*;
-public class V1GameBoard extends Board<String>{
-  ArrayList<Territory<String>> territories;
-  ArrayList<ArrayList<Integer>> worldMap;
-  public V1GameBoard(ArrayList<Territory<String>> territories, ArrayList<ArrayList<Integer>> worldMap){
+public class V1GameBoard<T> extends Board<T>{
+  ArrayList<Territory<T>> territories;
+  int[][] worldMap;
+  public V1GameBoard(ArrayList<Territory<T>> territories, int[][] worldMap){
     super(territories, worldMap);
   }
 
@@ -17,7 +17,7 @@ public class V1GameBoard extends Board<String>{
      s.append("(next to:");
      String temp = " ";
      for(Integer n : neigh){
-       Territory<String> neighTerritory = territories.get(n);
+       Territory<T> neighTerritory = territories.get(n);
        String neighName = neighTerritory.getName();
        s.append(temp);
        s.append(neighName);
@@ -57,7 +57,7 @@ public class V1GameBoard extends Board<String>{
    * or Roshar (next to: Hogwarts, Scadrial, Elantris)  
    */  
   @Override
-  public String whatIsIn(Territory<String> territory, boolean isSelf) {
+  public String whatIsIn(Territory<T> territory, boolean isSelf) {
     HashMap<String, Integer> infoMap = new HashMap<>();
     infoMap=territory.getDisplayInfo(isSelf);
     Vector<Integer> neigh = new Vector<>();
@@ -75,7 +75,7 @@ public class V1GameBoard extends Board<String>{
   public synchronized boolean  occupyTerritory(int groupNum, int owner) {
       boolean ifOccupy = true;
       for (int i = groupNum * 3; i < groupNum * 3 + 3; i++) {
-        Territory<String> t = territories.get(i);
+        Territory<T> t = territories.get(i);
         if (t.getOwner() == -1) {
           ifOccupy = false;
           t.setOwner(owner);
@@ -86,28 +86,33 @@ public class V1GameBoard extends Board<String>{
   }
 
   /**
-   * Add certain amount of units in one territory for a player
-   * can add in his/her owner territory or a enemy's.  
+   * Add certain amount of units in a player's territory for a player
+   
    */  
   @Override
-  public void addUnits(int territoryId, int amount, int playerId) {
-    Territory<String> territory = territories.get(territoryId);
-    int owner = territory.getOwner();
-    if(playerId == owner){
+  public void addOwnUnits(int territoryId, int amount) {
+    Territory<T> territory = territories.get(territoryId);
       int curr = territory.getUnitAmount();
       territory.setUnitAmount(amount+curr);
-    }else{
-      territory.addEnemy(playerId, amount);
-    }
   }
 
+  /**
+   * Add an enemy army in a territory 
+   
+   */ 
+  @Override
+	public void addEnemyUnits(int territoryId, int amount, int playerId) {
+    Territory<T> territory = territories.get(territoryId);
+		territory.addEnemy(playerId, amount);
+	}
+  
   /**
    * remove certain amount of units in one territory for a player
    * can only remove units from his/her owner territory   
    */
   @Override
   public void removeUnits(int territoryId, int amount) {
-    Territory<String> territory = territories.get(territoryId);
+    Territory<T> territory = territories.get(territoryId);
     int curr = territory.getUnitAmount();
     territory.setUnitAmount(curr-amount);
   	
@@ -117,11 +122,13 @@ public class V1GameBoard extends Board<String>{
      * This function is used to update every Territory's previous defender army after one round done    
      */
 	@Override
-	public void oneRoundDone() {
-		for(Territory<String> t: territories){
+	public void updateAllPrevDefender() {
+		for(Territory<T> t: territories){
       t.updatePrevDefender();
     }
 	}
+
+	
 
 }
 

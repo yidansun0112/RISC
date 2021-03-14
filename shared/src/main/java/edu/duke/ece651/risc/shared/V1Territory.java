@@ -12,7 +12,7 @@ public class V1Territory<T> implements Territory<T> {
   private String name;
   private Vector<Integer> neigh;
 
-  V1Territory(int Id, String name, int group, ArrayList<Integer> adjacentList) {
+  V1Territory(int Id, String name, int group, int[] adjacentList) {
     this.Id = Id;
     this.name = name;
     this.group = group;
@@ -24,8 +24,8 @@ public class V1Territory<T> implements Territory<T> {
     enemyArmy = new Vector<Army<T>>();
     currDefenderArmy.add(initArmy);
     //prevDefenderArmy.add(initArmy);
-    for (int i = 0; i < adjacentList.size(); i++) {
-      if (adjacentList.get(i) != 0) { // in case need distance in the future
+    for (int i = 0; i < adjacentList.length; i++) {
+      if (adjacentList[i] != 0) { // in case need distance in the future
         neigh.add(i);
       }
     }
