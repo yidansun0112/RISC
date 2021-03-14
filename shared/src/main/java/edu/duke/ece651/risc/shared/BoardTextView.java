@@ -6,6 +6,9 @@ public class BoardTextView extends BoardView<String> {
     super(display);
   }
 
+  /*
+   * This Funciton will help to make the header of the response.
+   */
   public String makeHead(boolean assigned, int idx) {
     String parseLine = "------------------\n";
     if (assigned) {
@@ -14,6 +17,9 @@ public class BoardTextView extends BoardView<String> {
     return "Group " + idx + ":\n" + parseLine;
   }
 
+  /*
+   * This Function will help to display The whole Board.
+   */
   @Override
   public String displayFullBoard() {
     classify();
@@ -33,6 +39,11 @@ public class BoardTextView extends BoardView<String> {
     return sb.toString();
   }
 
+  /*
+   * For Different playerId, it the territory belongs to him, we will display it
+   * in self_Version. If not, we will display it in Enemy Verion.
+   */
+
   @Override
   public String displayBoardFor(int playerId) {
     StringBuffer sb = new StringBuffer();
@@ -42,6 +53,9 @@ public class BoardTextView extends BoardView<String> {
     return sb.toString();
   }
 
+  /*
+   * Return a Single Group of Territory.
+   */
   @Override
   public String displayGroup(int playerId) {
     classify();
