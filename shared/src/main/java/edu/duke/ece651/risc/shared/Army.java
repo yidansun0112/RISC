@@ -20,5 +20,20 @@ public class Army<T> {
   public void setUnits(int units){
     this.units = units;
   }
-
+  public void setCommanderId(int owner){
+    this.commanderId = owner;
+  }
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
