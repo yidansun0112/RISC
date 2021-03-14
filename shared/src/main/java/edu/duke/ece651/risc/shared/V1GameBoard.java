@@ -3,6 +3,9 @@ import java.util.*;
 public class V1GameBoard<T> extends Board<T>{
   ArrayList<Territory<T>> territories;
   int[][] worldMap;
+  public V1GameBoard(){
+    super();
+  }
   public V1GameBoard(ArrayList<Territory<T>> territories, int[][] worldMap){
     super(territories, worldMap);
   }

@@ -6,7 +6,7 @@ public interface Order<T> {
   /*
    * This Function will help to execute the Order;
    */
-  public boolean execute(ArrayList<T> territories);
+  public boolean execute(Board<T> board);
 
   /*
    * This is the SrcTerritory getter Function.
@@ -21,5 +21,5 @@ public interface Order<T> {
   /*
    * This is the unitAmount getter Function.
    */
-  public int unitAmount();
+  public int getUnitAmount();
 }
