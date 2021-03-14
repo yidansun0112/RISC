@@ -1,37 +1,41 @@
 package edu.duke.ece651.risc.client;
+
 import java.net.Socket;
+import java.net.UnknownHostException;
 import java.io.*;
 
 /**
  * This class handles a socket client which implements from GameClient.
  */
-public class SocketClient{
+public class SocketClient implements GameClient {
   private int hostPort;
   private String hostAddress;
   private Socket clientSocket;
 
-  public SocketClient(int port, String addr){
-    hostPort=port;
-    hostAddress=addr;
-    clientSocket=new Socket(hostAddress,hostPort);
+  public SocketClient(int port, String addr) throws UnknownHostException, IOException {
+    hostPort = port;
+    hostAddress = addr;
+    clientSocket = new Socket(hostAddress, hostPort);
   }
 
-  //question: what does connect server do
+  // question: what does connect server do
   @Override
-  public void connectServer(){
-    
+  public void connectServer() {
+
   }
 
-  @Overrride
-  public void disconnectServer(){
+  @Override
+  public void disconnectServer() throws IOException {
     clientSocket.close();
   }
+
   @Override
-  public InputStream getInputStream(){
+  public InputStream getInputStream() throws IOException {
     return clientSocket.getInputStream();
   }
+
   @Override
-  public OutputStream getOutputStream(){
+  public OutputStream getOutputStream() throws IOException {
     return clientSocket.getOutputStream();
   }
 }
