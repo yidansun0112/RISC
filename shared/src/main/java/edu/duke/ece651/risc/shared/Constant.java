@@ -8,6 +8,9 @@ package edu.duke.ece651.risc.shared;
  * the command line (or GUI, etc.) to the player.
  */
 public class Constant {
+
+  // --- Below are the messages that used by the server and the client --- //
+
   /** Indicate a player has finished the deployment */
   public static final String FINISH_DEPLOY_INFO = "Deploy Finished";
   /** Indicate the order issued by a player is illegal */
@@ -22,4 +25,11 @@ public class Constant {
   public static final String WIN_INFO = "You Win";
   /** Indicate the game has a winner now and is end */
   public static final String GAME_END_INFO = "The Game Is End";
+
+  // --- Below are the configuration for a game --- //
+
+  /** The maximun number of player allowed (inclusive) in a game room */
+  public static final int MAX_PLAYER_NUM = 5;
+  /** The minimum number of player allowed (inclusive) in a game room */
+  public static final int MIN_PLAYER_NUM = 2;
 }

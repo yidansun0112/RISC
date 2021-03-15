@@ -1,5 +1,7 @@
 package edu.duke.ece651.risc.client;
 
+import edu.duke.ece651.risc.shared.Constant;
+
 import java.io.*;
 import java.net.UnknownHostException;
 
@@ -88,7 +90,7 @@ public class V1GamePlayer<T> implements GamePlayer<T> {
         throw new IllegalArgumentException("Player number should be digit.");
       }
       int num = Integer.parseInt(strNum);
-      if (num < 2 || num > 5) {
+      if (num < Constant.MIN_PLAYER_NUM || num > Constant.MAX_PLAYER_NUM) {
         throw new IllegalArgumentException("Player number should be from 2 to 5.");
       }
       client.sendObject(strNum);
