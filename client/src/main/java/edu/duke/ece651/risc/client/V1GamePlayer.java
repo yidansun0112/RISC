@@ -79,20 +79,25 @@ public class V1GamePlayer<T> implements GamePlayer<T> {
 
   public void selectPlayerNum() throws IOException {
     out.println("You are the first player in this round, please choose how many players you want in this round.");
+    // TODO: remove magic number here
     out.println("Player number should be from 2 to 5.");
     out.println("Please make your choice:");
     try {
       String strNum = inputReader.readLine();
-      if (strNum.length() != 1) {
+      if (strNum.length() != 1) { // TODO: pre-assumption: what if in evo2 we allow ten player in a game?
         throw new IllegalArgumentException("Player number should only be one digit.");
       }
       if (!Character.isDigit(strNum.charAt(0))) {
+        // TODO: only parseInt would be enough to check the input here, to apply this
+        // refactoring, the test code needs to change also
         throw new IllegalArgumentException("Player number should be digit.");
       }
       int num = Integer.parseInt(strNum);
       if (num < Constant.MIN_PLAYER_NUM || num > Constant.MAX_PLAYER_NUM) {
+        // TODO: remove magic number here
         throw new IllegalArgumentException("Player number should be from 2 to 5.");
       }
+      // Choice is valid, send it to the server
       client.sendObject(strNum);
     } catch (IllegalArgumentException e) {
       out.println("Exception thrown:" + e);
@@ -102,6 +107,7 @@ public class V1GamePlayer<T> implements GamePlayer<T> {
   }
 
   public void selectGameMap() throws IOException, ClassNotFoundException {
+    // NOTE: RECEIVE string from server: receive the description of all available maps
     String mapChoice = (String) client.receiveObject();
     out.println("Please choose one map among the following maps.");
     out.println(mapChoice);
@@ -111,9 +117,11 @@ public class V1GamePlayer<T> implements GamePlayer<T> {
       if (!allDigits(strNum)) {
         throw new IllegalArgumentException("Map number should be pure number.");
       }
+      // NOTE: SEND string to server: send the map index of choosed map
       client.sendObject(strNum);
+      // NOTE: RECEIVE string from server: 
       String choiceInfo = (String) client.receiveObject();
-      if (choiceInfo != "Choice succeed!") {
+      if (choiceInfo != Constant.VALID_MAP_CHOICE_INFO) {
         throw new IllegalArgumentException(choiceInfo);
       }
       out.println(choiceInfo);
@@ -148,7 +156,7 @@ public class V1GamePlayer<T> implements GamePlayer<T> {
       }
       client.sendObject(strNum);
       String choiceInfo = (String) client.receiveObject();
-      if (choiceInfo != "Choice succeed!") {
+      if (choiceInfo != Constant.VALID_MAP_CHOICE_INFO) {
         throw new IllegalArgumentException(choiceInfo);
       }
       out.println(choiceInfo);

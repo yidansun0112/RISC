@@ -1,5 +1,7 @@
 package edu.duke.ece651.risc.client;
 
+import edu.duke.ece651.risc.shared.Constant;
+
 import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.Mockito.*;
 import org.mockito.Mock;
@@ -36,6 +38,7 @@ public class V1GamePlayerTest {
     MockitoAnnotations.initMocks(this);
     ByteArrayOutputStream bytes = new ByteArrayOutputStream();
     V1GamePlayer<String> player=createV1GamePlayer("11\na\n1\n6\n4\n", bytes);
+    // TODO: player doesn't need to know the type of exception, only know why his input is wrong would be enough
     String prompt="You are the first player in this round, please choose how many players you want in this round.\nPlayer number should be from 2 to 5.\nPlease make your choice:\n";
     String exceptLen="Exception thrown:java.lang.IllegalArgumentException: "+"Player number should only be one digit.\n"+"Please do that again!\n";
     String exceptDigit="Exception thrown:java.lang.IllegalArgumentException: "+"Player number should be digit.\n"+"Please do that again!\n";
@@ -49,7 +52,7 @@ public class V1GamePlayerTest {
   public void test_selectGameMap() throws IOException,ClassNotFoundException{
     MockitoAnnotations.initMocks(this);
     String mapChoices="Map 0: HarryPort\nMap 1: The Rings\n";
-    when(clientMock.receiveObject()).thenReturn(mapChoices,mapChoices,"Invalid choice",mapChoices,"Choice succeed!");
+    when(clientMock.receiveObject()).thenReturn(mapChoices,mapChoices,"Invalid choice",mapChoices,Constant.VALID_MAP_CHOICE_INFO);
     ByteArrayOutputStream bytes = new ByteArrayOutputStream();
     V1GamePlayer<String> player=createV1GamePlayer("a\n2\n1\n", bytes);
     String p1="Please choose one map among the following maps.\n";
@@ -57,7 +60,7 @@ public class V1GamePlayerTest {
     String prompt=p1+mapChoices+"\n"+p2;
     String exceptNotNum="Exception thrown:java.lang.IllegalArgumentException: "+"Map number should be pure number.\n"+"Please do that again!\n";
     String exceptInvalid="Exception thrown:java.lang.IllegalArgumentException: "+"Invalid choice\n"+"Please do that again!\n";
-    String successInfo="Choice succeed!\n";
+    String successInfo=Constant.VALID_MAP_CHOICE_INFO + "\n";
     String total=prompt+exceptNotNum+prompt+exceptInvalid+prompt+successInfo;
     player.selectGameMap();
     assertEquals(total,bytes.toString());
@@ -67,7 +70,7 @@ public class V1GamePlayerTest {
   public void test_initGame() throws IOException,ClassNotFoundException{
     MockitoAnnotations.initMocks(this);
     String mapChoices="Map 0: HarryPort\nMap 1: The Rings\n";
-    when(clientMock.receiveObject()).thenReturn("0",mapChoices,"Choice succeed!","1");
+    when(clientMock.receiveObject()).thenReturn("0",mapChoices,Constant.VALID_MAP_CHOICE_INFO,"1");
     ByteArrayOutputStream bytes = new ByteArrayOutputStream();
     V1GamePlayer<String> player0=createV1GamePlayer("4\n1\n", bytes);
     V1GamePlayer<String> player1=createV1GamePlayer(" ", bytes);
@@ -77,7 +80,7 @@ public class V1GamePlayerTest {
     String p1="Please choose one map among the following maps.\n";
     String p2="Please type the map number that you would like to choose:\n";
     String prompt2=p1+mapChoices+"\n"+p2;
-    String successInfo="Choice succeed!\n";
+    String successInfo=Constant.VALID_MAP_CHOICE_INFO + "\n";
     String id0="Your player ID is 0\n";
     String id1="Your player ID is 1\n";
     String total=id0+prompt1+prompt2+successInfo+id1;
@@ -88,7 +91,7 @@ public class V1GamePlayerTest {
   public void test_pickTerritory() throws IOException,ClassNotFoundException{
     MockitoAnnotations.initMocks(this);
     String groupChoices="Group 0: Hogwarts\nGroup 1: Oz\n";
-    when(clientMock.receiveObject()).thenReturn(groupChoices,groupChoices,"Invalid choice",groupChoices,"Choice succeed!");
+    when(clientMock.receiveObject()).thenReturn(groupChoices,groupChoices,"Invalid choice",groupChoices,Constant.VALID_MAP_CHOICE_INFO);
     ByteArrayOutputStream bytes = new ByteArrayOutputStream();
     V1GamePlayer<String> player=createV1GamePlayer("a\n2\n1\n", bytes);
     String p1="Please choose one group among the following groups.\n";
@@ -96,7 +99,7 @@ public class V1GamePlayerTest {
     String prompt=p1+groupChoices+"\n"+p2;
     String exceptNotNum="Exception thrown:java.lang.IllegalArgumentException: "+"Group number should be pure number.\n"+"Please do that again!\n";
     String exceptInvalid="Exception thrown:java.lang.IllegalArgumentException: "+"Invalid choice\n"+"Please do that again!\n";
-    String successInfo="Choice succeed!\n";
+    String successInfo=Constant.VALID_MAP_CHOICE_INFO + "\n";
     String total=prompt+exceptNotNum+prompt+exceptInvalid+prompt+successInfo;
     player.pickTerritory();
     assertEquals(total,bytes.toString());
