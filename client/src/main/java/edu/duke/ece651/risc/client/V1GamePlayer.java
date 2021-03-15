@@ -57,101 +57,101 @@ public class V1GamePlayer<T> implements GamePlayer<T> {
 
   /**
    * Getter for playerId
+   * 
    * @return playerId
    */
-  public int getPlayerId(){
+  public int getPlayerId() {
     return playerId;
   }
 
   /**
-   * This method receive playerID from server.
-   * (changed from joinGame())
+   * This method receive playerID from server. It sets the playerId field after
+   * receiving it, and print the ID to the command line. (This method is called by
+   * joinGame() and the player ID will be changed at that time.)
    */
   public void recvID() throws ClassNotFoundException, IOException {
-    String strID=(String)client.receiveObject();
-    playerId=Integer.parseInt(strID);
-    out.println("Your player ID is "+strID);
+    String strID = (String) client.receiveObject();
+    playerId = Integer.parseInt(strID);
+    out.println("Your player ID is " + strID);
   }
 
-  public void selectPlayerNum() throws IOException{
+  public void selectPlayerNum() throws IOException {
     out.println("You are the first player in this round, please choose how many players you want in this round.");
     out.println("Player number should be from 2 to 5.");
     out.println("Please make your choice:");
-    try{
-      String strNum=inputReader.readLine();
-      if(strNum.length()!=1){
+    try {
+      String strNum = inputReader.readLine();
+      if (strNum.length() != 1) {
         throw new IllegalArgumentException("Player number should only be one digit.");
       }
-      if(!Character.isDigit(strNum.charAt(0))){
+      if (!Character.isDigit(strNum.charAt(0))) {
         throw new IllegalArgumentException("Player number should be digit.");
       }
-      int num=Integer.parseInt(strNum);
-      if(num<2||num>5){
+      int num = Integer.parseInt(strNum);
+      if (num < 2 || num > 5) {
         throw new IllegalArgumentException("Player number should be from 2 to 5.");
       }
       client.sendObject(strNum);
-    }
-    catch(IllegalArgumentException e){
-      out.println("Exception thrown:"+e);
+    } catch (IllegalArgumentException e) {
+      out.println("Exception thrown:" + e);
       out.println("Please do that again!");
       selectPlayerNum();
     }
   }
 
-  public void selectGameMap() throws IOException,ClassNotFoundException{
-    String mapChoice=(String)client.receiveObject();
+  public void selectGameMap() throws IOException, ClassNotFoundException {
+    String mapChoice = (String) client.receiveObject();
     out.println("Please choose one map among the following maps.");
     out.println(mapChoice);
     out.println("Please type the map number that you would like to choose:");
-    try{
-      String strNum=inputReader.readLine();
-      if(!allDigits(strNum)){
+    try {
+      String strNum = inputReader.readLine();
+      if (!allDigits(strNum)) {
         throw new IllegalArgumentException("Map number should be pure number.");
       }
       client.sendObject(strNum);
-      String choiceInfo=(String)client.receiveObject();
-      if(choiceInfo!="Choice succeed!"){
+      String choiceInfo = (String) client.receiveObject();
+      if (choiceInfo != "Choice succeed!") {
         throw new IllegalArgumentException(choiceInfo);
       }
       out.println(choiceInfo);
-    }
-    catch(IllegalArgumentException e){
-      out.println("Exception thrown:"+e);
+    } catch (IllegalArgumentException e) {
+      out.println("Exception thrown:" + e);
       out.println("Please do that again!");
       selectGameMap();
     }
   }
 
-  public void initGame() throws IOException,ClassNotFoundException{
+  public void initGame() throws IOException, ClassNotFoundException {
     recvID();
-    if(playerId==0){
+    if (playerId == 0) {
       selectPlayerNum();
       selectGameMap();
     }
   }
 
   /**
-   * really similar with selectGameMap(), need to abstract out, but I am sleepy now.
+   * really similar with selectGameMap(), need to abstract out, but I am sleepy
+   * now.
    */
-  public void pickTerritory() throws IOException,ClassNotFoundException{
-    String mapGroup=(String)client.receiveObject();
+  public void pickTerritory() throws IOException, ClassNotFoundException {
+    String mapGroup = (String) client.receiveObject();
     out.println("Please choose one group among the following groups.");
     out.println(mapGroup);
     out.println("Please type the group number that you would like to choose:");
-    try{
-      String strNum=inputReader.readLine();
-      if(!allDigits(strNum)){
+    try {
+      String strNum = inputReader.readLine();
+      if (!allDigits(strNum)) {
         throw new IllegalArgumentException("Group number should be pure number.");
       }
       client.sendObject(strNum);
-      String choiceInfo=(String)client.receiveObject();
-      if(choiceInfo!="Choice succeed!"){
+      String choiceInfo = (String) client.receiveObject();
+      if (choiceInfo != "Choice succeed!") {
         throw new IllegalArgumentException(choiceInfo);
       }
       out.println(choiceInfo);
-    }
-    catch(IllegalArgumentException e){
-      out.println("Exception thrown:"+e);
+    } catch (IllegalArgumentException e) {
+      out.println("Exception thrown:" + e);
       out.println("Please do that again!");
       pickTerritory();
     }
@@ -161,16 +161,15 @@ public class V1GamePlayer<T> implements GamePlayer<T> {
    * Helper function to check whether a string is all digits.
    * 
    * @param strNum
-   * @return 
+   * @return
    */
-  private boolean allDigits(String strNum){
-    for(int i=0;i<strNum.length();i++){
-      if(!Character.isDigit(strNum.charAt(i))){
+  private boolean allDigits(String strNum) {
+    for (int i = 0; i < strNum.length(); i++) {
+      if (!Character.isDigit(strNum.charAt(i))) {
         return false;
       }
     }
     return true;
   }
 
-  
 }
