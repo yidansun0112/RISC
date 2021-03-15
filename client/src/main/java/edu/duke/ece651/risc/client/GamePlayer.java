@@ -6,5 +6,5 @@ package edu.duke.ece651.risc.client;
  * @param T String for V1
  */
 public interface GamePlayer<T> {
-  
+  // TODO: check what method in V1GamePlayer can also be put here
 }
