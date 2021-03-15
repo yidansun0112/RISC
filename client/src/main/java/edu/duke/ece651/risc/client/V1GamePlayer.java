@@ -12,7 +12,7 @@ import java.net.UnknownHostException;
  */
 public class V1GamePlayer<T> implements GamePlayer<T> {
   /** The Id of this player */
-  private int playerId;
+  private int playerId; // start from 0 (i.e., the first player)
   /** The game client object that connected to the server */
   private GameClient client;
   /** The BufferedReader to read command line inputs from the player */
@@ -77,6 +77,22 @@ public class V1GamePlayer<T> implements GamePlayer<T> {
     out.println("Your player ID is " + strID);
   }
 
+  /**
+   * Let the first player decide how many players he/she want in this game. If the
+   * input is invalid due to any one of the following reason: 1. contains
+   * non-number character 2. input is a number, but less than allowed minimum
+   * number of player in a game, or... 3. ...grater than allowed maximum number of
+   * player in a game
+   * 
+   * it will show the error reason and let the player re-input. If valid, it will
+   * send the player in put to the game server.
+   * 
+   * The method is called if the current player's id is 0, i.e., he/she is the
+   * first player that connected to the server.
+   * 
+   * 
+   * @throws IOException
+   */
   public void selectPlayerNum() throws IOException {
     out.println("You are the first player in this round, please choose how many players you want in this round.");
     // TODO: remove magic number here
@@ -106,6 +122,20 @@ public class V1GamePlayer<T> implements GamePlayer<T> {
     }
   }
 
+  /**
+   * Let the player input a number to choose a map. The input number is the map index 
+   * of all available maps that suitable for this amount of players.
+   * 
+   * If the player input is invalid due to one of the following reasons:
+   * 1. contains non-number characters
+   * 2. is a valid number, but not valid for a map index (decided by the game server)
+   * 
+   * this method will require the player to re-input, until the server regards this input
+   * is valid.
+   * 
+   * @throws IOException
+   * @throws ClassNotFoundException
+   */
   public void selectGameMap() throws IOException, ClassNotFoundException {
     // NOTE: RECEIVE string from server: receive the description of all available maps
     String mapChoice = (String) client.receiveObject();
@@ -141,10 +171,20 @@ public class V1GamePlayer<T> implements GamePlayer<T> {
   }
 
   /**
-   * really similar with selectGameMap(), need to abstract out, but I am sleepy
+   * Let the player choose a group of territory. If successfull obtained that group of territory, 
+   * this method will quit in a manner of tail-recursion.
+   * 
+   * If the player failed to obtain a group due to one of the following reasons:
+   * 1. input contains non-number character
+   * 2. this group does not exist (decided by server)
+   * 3. other player has already occupied this group (decided by server)
+   * it will require the current player to re-input, until successful get a group of territory.
+   * 
+   * Really similar with selectGameMap(), need to abstract out, but I am sleepy
    * now.
    */
   public void pickTerritory() throws IOException, ClassNotFoundException {
+    // NOTE: RECEIVE string from server: receive territory group description message
     String mapGroup = (String) client.receiveObject();
     out.println("Please choose one group among the following groups.");
     out.println(mapGroup);
@@ -154,16 +194,19 @@ public class V1GamePlayer<T> implements GamePlayer<T> {
       if (!allDigits(strNum)) {
         throw new IllegalArgumentException("Group number should be pure number.");
       }
+      // NOTE: SEND string to server: send the player's input group number as a string
       client.sendObject(strNum);
+      // NOTE: RECEIVE string from server: receive whether successfull occupy that
+      // group of territory.
       String choiceInfo = (String) client.receiveObject();
-      if (choiceInfo != Constant.VALID_MAP_CHOICE_INFO) {
+      if (choiceInfo != Constant.VALID_MAP_CHOICE_INFO) { // on success choosing, the method will quit from here
         throw new IllegalArgumentException(choiceInfo);
       }
       out.println(choiceInfo);
     } catch (IllegalArgumentException e) {
       out.println("Exception thrown:" + e);
       out.println("Please do that again!");
-      pickTerritory();
+      pickTerritory(); // tail recursion
     }
   }
 
