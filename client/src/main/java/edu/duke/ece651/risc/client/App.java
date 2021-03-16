@@ -13,6 +13,8 @@ public class App {
         BufferedReader input = new BufferedReader(new InputStreamReader(System.in));
         GamePlayer<String> player=new V1GamePlayer<String>(-1, client, input, System.out);
         player.initGame();
+        player.pickTerritory();
+        player.deployUnits();
         player.doPlayPhase();
     }
 }

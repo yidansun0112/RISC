@@ -14,4 +14,8 @@ public interface GamePlayer<T> {
   public void initGame() throws IOException, ClassNotFoundException;
 
   public void doPlayPhase() throws IOException, ClassNotFoundException;
+
+  public void pickTerritory() throws IOException, ClassNotFoundException;
+
+  public void deployUnits() throws IOException, ClassNotFoundException;
 }

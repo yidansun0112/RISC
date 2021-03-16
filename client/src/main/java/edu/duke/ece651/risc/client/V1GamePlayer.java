@@ -176,8 +176,6 @@ public class V1GamePlayer<T> implements GamePlayer<T> {
       selectPlayerNum();
       selectGameMap();
     }
-    pickTerritory();
-    deployUnits();
   }
 
   /**
@@ -193,6 +191,7 @@ public class V1GamePlayer<T> implements GamePlayer<T> {
    * Really similar with selectGameMap(), need to abstract out, but I am sleepy
    * now.
    */
+  @Override
   public void pickTerritory() throws IOException, ClassNotFoundException {
     // NOTE: RECEIVE string from server: receive territory group description message
     String mapGroup = (String) client.receiveObject();
@@ -223,6 +222,7 @@ public class V1GamePlayer<T> implements GamePlayer<T> {
     }
   }
 
+  @Override
   public void deployUnits() throws IOException, ClassNotFoundException{
     out.println("Please deploy units in your territories.");
     String msg=(String)client.receiveObject();
