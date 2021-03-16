@@ -25,3 +25,9 @@ public class MoveOrderConsistencyChecker<T> extends OrderRuleChecker<T> {
   }
 
 }
+
+
+
+
+
+
