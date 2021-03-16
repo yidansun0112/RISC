@@ -1,0 +1,29 @@
+package edu.duke.ece651.risc.shared;
+
+public class BoardView<T> {
+  private Board<T> toDisplay;
+
+  public BoardView(Board<T> display){
+    this.toDisplay = display;
+  }
+
+  public HashMap< classfi(){
+
+  }
+  public T displayFullBoard(){
+    
+  }
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
