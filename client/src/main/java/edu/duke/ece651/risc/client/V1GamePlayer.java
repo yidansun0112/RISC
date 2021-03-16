@@ -232,6 +232,8 @@ public class V1GamePlayer<T> implements GamePlayer<T> {
       try{
         ArrayList<Integer> deployment=stringParser(choice);
         client.sendObject(deployment);
+        String info=(String)client.receiveObject();
+        out.println(info);
         msg=(String)client.receiveObject();
       }catch(NumberFormatException e){
         out.println(e.getMessage()+" Territory/Units should be pure number.");
@@ -260,4 +262,21 @@ public class V1GamePlayer<T> implements GamePlayer<T> {
     deployment.add(units);
     return deployment;
   }
+
+  public void issueOrders() throws IOException, ClassNotFoundException{
+    //receive map, print
+    //print ordermenu
+    //get order title (M,A,D), should add into constant
+    //if not correct, continue ask input
+    //then ask order content, 
+  }
+
+  public void showOrderMenu(){
+    out.println("You are player "+playerId+", what would you like to do?");
+    out.println("(M)ove");
+    out.println("(A)ttack");
+    out.println("(D)one");
+  }
+
+  
 }

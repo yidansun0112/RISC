@@ -107,7 +107,7 @@ public class V1GamePlayerTest {
   public void test_deployUnits() throws IOException,ClassNotFoundException{
     MockitoAnnotations.initMocks(this);
     String territoryInfo="Territory 0: Hogwarts\nTerritory 1: Oz\n";
-    when(clientMock.receiveObject()).thenReturn(territoryInfo,territoryInfo,Constant.FINISH_DEPLOY_INFO);
+    when(clientMock.receiveObject()).thenReturn(territoryInfo,"succeed",territoryInfo,"succeed",Constant.FINISH_DEPLOY_INFO);
     ByteArrayOutputStream bytes = new ByteArrayOutputStream();
     V1GamePlayer<String> player=createV1GamePlayer("1 5\n,5\n1,\na,5\n1,a\n0,5\n1,5\n", bytes);
     String prompt="Please deploy units in your territories.\n";
@@ -117,7 +117,7 @@ public class V1GamePlayerTest {
     String exceptComma="Cannot find \",\" in your deployment.\n"+"Please do that again!\n";
     String exceptNotNumA="For input string: \"a\" Territory/Units should be pure number.\n"+"Please do that again!\n";
     String exceptNotNumNull="For input string: \"\" Territory/Units should be pure number.\n"+"Please do that again!\n";
-    String total=prompt+doChoice+exceptComma+doChoice+exceptNotNumNull+doChoice+exceptNotNumNull+doChoice+exceptNotNumA+doChoice+exceptNotNumA+doChoice+doChoice+Constant.FINISH_DEPLOY_INFO+"\n";
+    String total=prompt+doChoice+exceptComma+doChoice+exceptNotNumNull+doChoice+exceptNotNumNull+doChoice+exceptNotNumA+doChoice+exceptNotNumA+doChoice+"succeed\n"+doChoice+"succeed\n"+Constant.FINISH_DEPLOY_INFO+"\n";
     player.deployUnits();
     assertEquals(total,bytes.toString());
   }
