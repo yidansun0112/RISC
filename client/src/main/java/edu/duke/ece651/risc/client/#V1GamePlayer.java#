@@ -272,7 +272,7 @@ public class V1GamePlayer<T> implements GamePlayer<T> {
     while(true){
       //receive map, print
       //print ordermenu
-      out.print(map);
+      out.println(map);
       showOrderMenu();
       //get order title (M,A,D), should add into constant
       String choice=inputReader.readLine();
@@ -282,8 +282,8 @@ public class V1GamePlayer<T> implements GamePlayer<T> {
         String info=(String)client.receiveObject();
         map=(String)client.receiveObject();
         out.println(info);
-        if(choice.equals("D")){
-          out.print(map);
+        out.println(map);
+        if(choice=="D"){
           break;
         }
       }catch(IllegalArgumentException e){
