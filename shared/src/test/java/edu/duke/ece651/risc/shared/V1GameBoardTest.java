@@ -2,10 +2,12 @@ package edu.duke.ece651.risc.shared;
 
 import static org.junit.jupiter.api.Assertions.*;
 
+import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 import java.util.*;
 
 public class V1GameBoardTest {
+  @Disabled
   @Test
   public void test_gameboard() {
     BoardFactory<String> f = new V1BoardFactory<>();
