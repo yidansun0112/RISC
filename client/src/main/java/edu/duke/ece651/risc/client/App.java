@@ -3,12 +3,16 @@
  */
 package edu.duke.ece651.risc.client;
 
-public class App {
-    public String getGreeting() {
-        return "Hello world.";
-    }
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStreamReader;
 
-    public static void main(String[] args) {
-        System.out.println(new App().getGreeting());
+public class App {
+    public static void main(String[] args) throws IOException,ClassNotFoundException{
+        SocketClient client=new SocketClient(12345,"localhost");
+        BufferedReader input = new BufferedReader(new InputStreamReader(System.in));
+        GamePlayer<String> player=new V1GamePlayer<String>(-1, client, input, System.out);
+        player.initGame();
+        player.doPlayPhase();
     }
 }

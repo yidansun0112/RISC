@@ -148,4 +148,109 @@ public class V1GamePlayerTest {
     player.issueOrders();
     assertEquals(total, bytes.toString());
   }
+
+  @Test
+  public void test_doWatchPhase() throws IOException, ClassNotFoundException {
+    MockitoAnnotations.initMocks(this);
+    String result = "Still going";
+    when(clientMock.receiveObject()).thenReturn(Constant.CONFIRM_INFO, result, Constant.GAME_CONTINUE_INFO, result,
+        Constant.GAME_END_INFO, Constant.CONFIRM_INFO);
+    ByteArrayOutputStream bytes = new ByteArrayOutputStream();
+    V1GamePlayer<String> player = createV1GamePlayer("", bytes);
+    player.doWatchPhase();
+    String confirmInfo = Constant.CONFIRM_INFO + "\n";
+    String resultInfo = result + "\n";
+    String conInfo = Constant.GAME_CONTINUE_INFO + "\n";
+    String endInfo = Constant.GAME_END_INFO + "\n";
+    String total = confirmInfo + resultInfo + conInfo + resultInfo + endInfo + confirmInfo;
+    assertEquals(total, bytes.toString());
+  }
+
+  @Test
+  public void test_loseChoice_illegal_watch() throws IOException, ClassNotFoundException {
+    MockitoAnnotations.initMocks(this);
+    String result = "Still going";
+    when(clientMock.receiveObject()).thenReturn(Constant.CONFIRM_INFO, result, Constant.GAME_END_INFO,
+        Constant.CONFIRM_INFO);
+    ByteArrayOutputStream bytes = new ByteArrayOutputStream();
+    V1GamePlayer<String> player = createV1GamePlayer("A\nW\n", bytes);
+    String prompt = "Do you want to watch the game or quit?\n" + "W for watch, Q for quit\n"
+        + "Please make your choice:\n";
+    String exceptInfo = "Choice should be W or Q\n" + "Please do that again!\n";
+    String confirmInfo = Constant.CONFIRM_INFO + "\n";
+    String resultInfo = result + "\n";
+    String endInfo = Constant.GAME_END_INFO + "\n";
+    String total = prompt + exceptInfo + confirmInfo + resultInfo + endInfo + confirmInfo;
+    player.loseChoice();
+    assertEquals(total, bytes.toString());
+  }
+
+  @Test
+  public void test_loseChoice_quit() throws IOException, ClassNotFoundException {
+    MockitoAnnotations.initMocks(this);
+    when(clientMock.receiveObject()).thenReturn(Constant.CONFIRM_INFO);
+    ByteArrayOutputStream bytes = new ByteArrayOutputStream();
+    V1GamePlayer<String> player = createV1GamePlayer("Q\n", bytes);
+    player.loseChoice();
+    String prompt = "Do you want to watch the game or quit?\n" + "W for watch, Q for quit\n"
+        + "Please make your choice:\n";
+    String confirmInfo = Constant.CONFIRM_INFO + "\n";
+    String total = prompt + confirmInfo;
+    assertEquals(total, bytes.toString());
+  }
+
+  @Test
+  public void test_doPlayPhase_notLose_win() throws IOException, ClassNotFoundException {
+    MockitoAnnotations.initMocks(this);
+    String result = "Still going";
+    String map = "map info\n";
+    when(clientMock.receiveObject()).thenReturn(map, Constant.LEGAL_ORDER_INFO, map, result, Constant.NOT_LOSE_INFO,
+        map, Constant.LEGAL_ORDER_INFO, map, result, Constant.WIN_INFO, Constant.CONFIRM_INFO);
+    ByteArrayOutputStream bytes = new ByteArrayOutputStream();
+    V1GamePlayer<String> player = createV1GamePlayer("D\nD\n", bytes);
+    String ordermenu = "You are player 1, what would you like to do?\n" + "(M)ove\n" + "(A)ttack\n" + "(D)one\n";
+    String info = Constant.LEGAL_ORDER_INFO + "\n";
+    String resultInfo = result + "\n";
+    String confirmInfo = Constant.CONFIRM_INFO + "\n";
+    String total = map + ordermenu + info + map + resultInfo + map + ordermenu + info + map + resultInfo
+        + Constant.WIN_INFO + "\n" + confirmInfo;
+    player.doPlayPhase();
+    assertEquals(total, bytes.toString());
+  }
+
+  @Test
+  public void test_doPlayPhase_gameEnd() throws IOException,ClassNotFoundException{
+    MockitoAnnotations.initMocks(this);
+    String result = "Still going";
+    String map = "map info\n";
+    when(clientMock.receiveObject()).thenReturn(map, Constant.LEGAL_ORDER_INFO, map, result, Constant.GAME_END_INFO,Constant.CONFIRM_INFO);
+    ByteArrayOutputStream bytes = new ByteArrayOutputStream();
+    V1GamePlayer<String> player = createV1GamePlayer("D\n", bytes);
+    String ordermenu = "You are player 1, what would you like to do?\n" + "(M)ove\n" + "(A)ttack\n" + "(D)one\n";
+    String info = Constant.LEGAL_ORDER_INFO + "\n";
+    String resultInfo = result + "\n";
+    String confirmInfo = Constant.CONFIRM_INFO + "\n";
+    String total = map + ordermenu + info + map + resultInfo + Constant.GAME_END_INFO + "\n" + confirmInfo;
+    player.doPlayPhase();
+    assertEquals(total, bytes.toString());
+  }
+
+  @Test
+  public void test_doPlayPhase_lose() throws IOException,ClassNotFoundException{
+    MockitoAnnotations.initMocks(this);
+    String result = "Still going";
+    String map = "map info\n";
+    when(clientMock.receiveObject()).thenReturn(map, Constant.LEGAL_ORDER_INFO, map, result, Constant.LOSE_INFO,Constant.CONFIRM_INFO);
+    ByteArrayOutputStream bytes = new ByteArrayOutputStream();
+    V1GamePlayer<String> player = createV1GamePlayer("D\nQ\n", bytes);
+    String ordermenu = "You are player 1, what would you like to do?\n" + "(M)ove\n" + "(A)ttack\n" + "(D)one\n";
+    String info = Constant.LEGAL_ORDER_INFO + "\n";
+    String resultInfo = result + "\n";
+    String confirmInfo = Constant.CONFIRM_INFO + "\n";
+    String prompt = "Do you want to watch the game or quit?\n" + "W for watch, Q for quit\n"
+        + "Please make your choice:\n";
+    String total = map + ordermenu + info + map + resultInfo + Constant.LOSE_INFO + "\n" + prompt+confirmInfo;
+    player.doPlayPhase();
+    assertEquals(total, bytes.toString());
+  }
 }

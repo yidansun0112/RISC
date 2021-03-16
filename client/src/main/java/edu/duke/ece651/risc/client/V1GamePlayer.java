@@ -7,7 +7,6 @@ import edu.duke.ece651.risc.shared.AttackOrder;
 import edu.duke.ece651.risc.shared.DoneOrder;
 
 import java.io.*;
-import java.net.UnknownHostException;
 import java.util.ArrayList;
 
 /**
@@ -149,35 +148,36 @@ public class V1GamePlayer<T> implements GamePlayer<T> {
     while(true){
       try {
         String strNum = inputReader.readLine();
-        try{
-          int num = Integer.parseInt(strNum);
-        }catch(NumberFormatException e){
-          out.println(e.getMessage()+" Map number should be pure number.");
-          out.println("Please do that again!");
-          continue;
-        }
+        Integer.parseInt(strNum);
         // NOTE: SEND string to server: send the map index of choosed map
         client.sendObject(strNum);
         // NOTE: RECEIVE string from server: 
         String choiceInfo = (String) client.receiveObject();
-        if (choiceInfo != Constant.VALID_MAP_CHOICE_INFO) {
+        if (!choiceInfo.equals(Constant.VALID_MAP_CHOICE_INFO)) {
           throw new IllegalArgumentException(choiceInfo);
         }
         out.println(choiceInfo);
         break;
-      } catch (IllegalArgumentException e) {
+      } catch(NumberFormatException e){
+        out.println(e.getMessage()+" Map number should be pure number.");
+        out.println("Please do that again!");
+        continue;
+      }catch (IllegalArgumentException e) {
         out.println(e.getMessage());
         out.println("Please do that again!");
       }
     }
   }
 
+  @Override
   public void initGame() throws IOException, ClassNotFoundException {
     recvID();
     if (playerId == 0) {
       selectPlayerNum();
       selectGameMap();
     }
+    pickTerritory();
+    deployUnits();
   }
 
   /**
@@ -202,23 +202,21 @@ public class V1GamePlayer<T> implements GamePlayer<T> {
     while(true){
       try {
         String strNum = inputReader.readLine();
-        try{
-          int num = Integer.parseInt(strNum);
-        }catch(NumberFormatException e){
-          out.println(e.getMessage()+" Group number should be pure number.");
-          out.println("Please do that again!");
-          continue;
-        }
+        Integer.parseInt(strNum);
         // NOTE: SEND string to server: send the map index of choosed map
         client.sendObject(strNum);
         // NOTE: RECEIVE string from server: 
         String choiceInfo = (String) client.receiveObject();
-        if (choiceInfo != Constant.VALID_MAP_CHOICE_INFO) {
+        if (!choiceInfo.equals(Constant.VALID_MAP_CHOICE_INFO)) {
           throw new IllegalArgumentException(choiceInfo);
         }
         out.println(choiceInfo);
         break;
-      } catch (IllegalArgumentException e) {
+      } catch(NumberFormatException e){
+        out.println(e.getMessage()+" Group number should be pure number.");
+        out.println("Please do that again!");
+        continue;
+      }catch (IllegalArgumentException e) {
         out.println(e.getMessage());
         out.println("Please do that again!");
       }
@@ -228,7 +226,7 @@ public class V1GamePlayer<T> implements GamePlayer<T> {
   public void deployUnits() throws IOException, ClassNotFoundException{
     out.println("Please deploy units in your territories.");
     String msg=(String)client.receiveObject();
-    while(msg!=Constant.FINISH_DEPLOY_INFO){
+    while(!msg.equals(Constant.FINISH_DEPLOY_INFO)){
       out.println(msg);
       out.println("Please type in format \"Territory index,Units deployed in this territory\"");
       out.println("For example \"2,5\" will deploy 5 units in territory 2");
@@ -275,7 +273,7 @@ public class V1GamePlayer<T> implements GamePlayer<T> {
       out.print(map);
       showOrderMenu();
       //get order title (M,A,D), should add into constant
-      String choice=inputReader.readLine();
+      String choice=inputReader.readLine().toUpperCase();
       try{
         Order<T> order=createOrder(choice);
         client.sendObject(order);
@@ -335,5 +333,82 @@ public class V1GamePlayer<T> implements GamePlayer<T> {
       default:
         throw new IllegalArgumentException("Choices should be among M, A, D");
     }
+  }
+
+  @Override
+  public void doPlayPhase() throws IOException, ClassNotFoundException{
+    while(true){
+      issueOrders();
+      String combatInfo=(String)client.receiveObject();
+      out.println(combatInfo);
+      String result=(String)client.receiveObject();
+      switch(result){
+        case Constant.WIN_INFO:
+          out.println(result);
+          doEndPhase();
+          return;
+        case Constant.GAME_END_INFO:
+          out.println(result);
+          doEndPhase();
+          return;
+        case Constant.LOSE_INFO:
+          out.println(result);
+          loseChoice();
+          return;
+        default:
+          continue;
+      }
+    }
+  }
+
+  //TODO: TEST
+  public void loseChoice() throws IOException,ClassNotFoundException{
+    out.println("Do you want to watch the game or quit?");
+    out.println("W for watch, Q for quit");
+    out.println("Please make your choice:");
+    while(true){
+      String choice=inputReader.readLine().toUpperCase();
+      try{
+        switch(choice){
+          case "W":
+            doWatchPhase();
+            break;
+          case "Q":
+            doEndPhase();
+            break;
+          default:
+            throw new IllegalArgumentException("Choice should be W or Q");
+        }
+        break;
+      }catch(IllegalArgumentException e){
+        out.println(e.getMessage());
+        out.println("Please do that again!");
+        continue;
+      }
+    }
+  } 
+
+  public void doWatchPhase() throws IOException, ClassNotFoundException{
+    client.sendObject(Constant.TO_WATCH_INFO);
+    String confirmInfo=(String)client.receiveObject();
+    out.println(confirmInfo);
+    while(true){
+      String result=(String)client.receiveObject();
+      out.println(result);
+      String gameInfo=(String)client.receiveObject();
+      out.println(gameInfo);
+      if(gameInfo.equals(Constant.GAME_END_INFO)){
+        doEndPhase();
+        break;
+      }
+    }
+  }
+
+
+  public void doEndPhase() throws IOException,ClassNotFoundException{
+    client.sendObject(Constant.TO_QUIT_INFO);
+    String confirmInfo=(String)client.receiveObject();
+    out.println(confirmInfo);
+    client.disconnectServer();
   }
 }
