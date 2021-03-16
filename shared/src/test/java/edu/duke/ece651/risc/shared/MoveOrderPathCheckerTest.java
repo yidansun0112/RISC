@@ -17,7 +17,7 @@ public class MoveOrderPathCheckerTest {
     MoveOrder<String> m2 = new MoveOrder<>("1 4 3");
 
     MoveOrder<String> m3 = new MoveOrder<String>("0 3 0");
-    MoveOrder<String> m4 = new MoveOrder<String>("3 4 2");
+    MoveOrder<String> m4 = new MoveOrder<String>("3 3 2");
     
     MoveOrderPathChecker<String> checker = new MoveOrderPathChecker<>(null);
 
@@ -27,9 +27,10 @@ public class MoveOrderPathCheckerTest {
     //Now make the Territory 0 belongs to player1 and make the Territory 4 belongs to player0
     b.getTerritories().get(0).setOwner(1);
     b.getTerritories().get(4).setOwner(0);
-    String s1 = "Sorry, there is no path from Narnia to Roshar.\n";
+    String s1 = "Sorry, there is no path from Midkemia to Roshar.\n";
     assertEquals(s1, checker.checkOrder(0, m2, b));
     assertEquals(null, checker.checkOrder(0, m3, b));
+    assertEquals(null, checker.checkOrder(1, m4, b));
   }
 
 }
