@@ -2,16 +2,18 @@ package edu.duke.ece651.risc.shared;
 
 import java.util.*;
 
-public class V1GameBoard<T> extends Board<T> {
+public class V1GameBoard<T> implements Board<T> {
   ArrayList<Territory<T>> territories;
   int[][] worldMap;
 
   public V1GameBoard() {
-    super();
+    territories = new ArrayList<>();
+    worldMap = new int[1][1];
   }
 
   public V1GameBoard(ArrayList<Territory<T>> territories, int[][] worldMap) {
-    super(territories, worldMap);
+    this.territories = territories;
+    this.worldMap = worldMap;
   }
 
   /**
@@ -84,12 +86,10 @@ public class V1GameBoard<T> extends Board<T> {
   }
 
   @Override
-  public synchronized boolean occupyTerritory(int groupNum, int owner) {
+  public boolean occupyTerritory(int groupNum, int owner) {
     boolean ifOccupy = true;
-    int size = territories.size();
-
-    for (int i = 0; i < size; i++) {
-      Territory<T> t =territories.get(i);
+    
+    for (Territory<T> t : territories) {
       if (t.getGroup() == groupNum) {
         if (t.getOwner() == -1) {
           ifOccupy = false;
@@ -97,18 +97,9 @@ public class V1GameBoard<T> extends Board<T> {
           t.initCurrDefender(owner);
         }
       }
-      /*
-       * Territory<T> t =territories.get(i); if (t.getOwner() == -1) { ifOccupy =
-       * false; t.setOwner(owner); t.initCurrDefender(owner); }
-       */
     }
-
-    /*
-     * for (Territory<T> t : this.territories) { if (t.getGroup() == groupNum) { if
-     * (t.getOwner() == -1) { ifOccupy = false; t.setOwner(owner);
-     * t.initCurrDefender(owner); } } }
-     */
-    return ifOccupy;
+    
+      return ifOccupy;
   }
 
   /**
@@ -153,6 +144,17 @@ public class V1GameBoard<T> extends Board<T> {
     for (Territory<T> t : territories) {
       t.updatePrevDefender();
     }
+  }
+
+  @Override
+  public ArrayList<Territory<T>> getTerritories() {
+    return territories;
+  }
+
+  @Override
+  public int[][] getWorldMap() {
+    // TODO Auto-generated method stub
+    return worldMap;
   }
 
 }
