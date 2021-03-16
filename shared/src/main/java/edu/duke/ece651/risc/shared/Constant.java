@@ -28,10 +28,17 @@ public class Constant {
   /** Indicate the game has a winner now and is end */
   public static final String GAME_END_INFO = "The Game Is End!";
 
-  // --- Below are the configuration for a game --- //
+  // --- Below are the configurations for a game --- //
 
   /** The maximun number of player allowed (inclusive) in a game room */
   public static final int MAX_PLAYER_NUM = 5;
   /** The minimum number of player allowed (inclusive) in a game room */
   public static final int MIN_PLAYER_NUM = 2;
+
+  /** Values that indicate different status of a player */
+  public static final int SELF_NOT_LOSE_NO_ONE_WIN_STATUS = 0; // the player has not lost, but not win neither, the game
+                                                          // keeps going
+  public static final int SELF_LOSE_NO_ONE_WIN_STATUS = 1; // the player lose the game, but no one win, the game keeps going
+  public static final int SELF_WIN_STATUS = 2; // the player is the winner, the game will be end
+  public static final int SELF_LOSE_OTHER_WIN_STATUS = 3; // the player lose the game, and some one win, the game will be end
 }
