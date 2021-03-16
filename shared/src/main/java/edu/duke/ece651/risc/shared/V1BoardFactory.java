@@ -39,7 +39,7 @@ public class V1BoardFactory<T> implements BoardFactory<T> {
         { 1, 0, 1, 1, 1, 0 }, { 1, 0, 0, 1, 1, 1 }, { 1, 1, 0, 0, 1, 1 } };
     ArrayList<Territory<T>> territories = new ArrayList<>();
     for (int i = 0; i < 6; i++) {
-      territories.add(new V1Territory<T>(i, terriName.get(i), i % 3, worldMap[i]));
+      territories.add(new V1Territory<T>(i, terriName.get(i), i / 3, worldMap[i]));
     }
     Board<T> b = new V1GameBoard<T>(territories, worldMap);
     return b;
@@ -55,7 +55,7 @@ public class V1BoardFactory<T> implements BoardFactory<T> {
         { 0, 1, 0, 0, 0, 0, 1, 1, 1 } };
     ArrayList<Territory<T>> territories = new ArrayList<>();
     for (int i = 0; i < 9; i++) {
-      territories.add(new V1Territory<T>(i, terriName.get(i), i % 3, worldMap[i]));
+      territories.add(new V1Territory<T>(i, terriName.get(i), i / 3, worldMap[i]));
     }
     Board<T> b = new V1GameBoard<T>(territories, worldMap);
     return b;
@@ -73,7 +73,7 @@ public class V1BoardFactory<T> implements BoardFactory<T> {
         { 0, 1, 0, 0, 0, 0, 0, 1, 0, 1, 1, 1 }, { 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1 } };
     ArrayList<Territory<T>> territories = new ArrayList<>();
     for (int i = 0; i < 12; i++) {
-      territories.add(new V1Territory<T>(i, terriName.get(i), i % 3, worldMap[i]));
+      territories.add(new V1Territory<T>(i, terriName.get(i), i / 3, worldMap[i]));
     }
     Board<T> b = new V1GameBoard<T>(territories, worldMap);
     return b;
@@ -93,7 +93,7 @@ public class V1BoardFactory<T> implements BoardFactory<T> {
         { 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 1, 1, 1 }, { 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 1, 1 } };
     ArrayList<Territory<T>> territories = new ArrayList<>();
     for (int i = 0; i < 15; i++) {
-      territories.add(new V1Territory<T>(i, terriName.get(i), i % 3, worldMap[i]));
+      territories.add(new V1Territory<T>(i, terriName.get(i), i / 3, worldMap[i]));
     }
     Board<T> b = new V1GameBoard<T>(territories, worldMap);
     return b;
@@ -110,13 +110,13 @@ public class V1BoardFactory<T> implements BoardFactory<T> {
       b =  make2PlayerBoard();
       break;
     case 3:
-      b = make2PlayerBoard();
+      b = make3PlayerBoard();
       break;
     case 4:
-      b =  make2PlayerBoard();
+      b =  make4PlayerBoard();
      break;
     case 5:
-     b = make2PlayerBoard();
+     b = make5PlayerBoard();
      break;
     }
     return b;
