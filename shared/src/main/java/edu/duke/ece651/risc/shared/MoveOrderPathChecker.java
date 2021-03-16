@@ -53,7 +53,7 @@ public class MoveOrderPathChecker<T> extends OrderRuleChecker<T> {
 
     }
 
-    return "Sorry, there is no path from " + src.getName() + " to " + dest.getName() + "\n";
+    return "Sorry, there is no path from " + src.getName() + " to " + dest.getName() + ".\n";
   }
 
 }
