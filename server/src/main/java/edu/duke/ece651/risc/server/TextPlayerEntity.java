@@ -3,24 +3,11 @@ package edu.duke.ece651.risc.server;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 
-import edu.duke.ece651.risc.shared.Constant;
-
 /**
  * This class provide a concret implementation with type String as <T> for
  * evolution 1.
  */
 public class TextPlayerEntity extends PlayerEntity<String> {
-
-  /**
-   * Constructor that called when a player just get in a game room. The game has
-   * not actullay began, so initialize some fields with -1 value
-   * 
-   * @param toPlayer
-   * @param fromPlayer
-   */
-  public TextPlayerEntity(ObjectOutputStream toPlayer, ObjectInputStream fromPlayer, int playerId) {
-    this(toPlayer, fromPlayer, playerId, "BasicPlayer", -1, Constant.SELF_NOT_LOSE_NO_ONE_WIN_STATUS);
-  }
 
   /**
    * Constructor that takes in parameters and call the constructor of super class
