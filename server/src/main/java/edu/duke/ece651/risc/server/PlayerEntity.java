@@ -15,8 +15,8 @@ public abstract class PlayerEntity<T> {
   /** The id of this player in a game room */
   protected int playerId;
   /** The symbol that to display the player */
-  protected T playerSymbol; // in evolution1, a String is enough. This field is used to display a player in
-                            // GUI
+  protected T playerSymbol; // in evolution1, a String is enough. This field is to display a player in
+                            // GUI. We remain this field as a a place holder for GUI requirements.
   /** The index of territory group that the player picked at the start */
   protected int ownedGroup; // before picking any territory group, this is -1
   /** An integer indicating the status of player, defined in Constant class */
@@ -133,6 +133,20 @@ public abstract class PlayerEntity<T> {
    */
   public void setPlayerStatus(int playerStatus) {
     this.playerStatus = playerStatus;
+  }
+
+  /**
+   * @return the toPlayer
+   */
+  public ObjectOutputStream getToPlayer() {
+    return toPlayer;
+  }
+
+  /**
+   * @return the fromPlayer
+   */
+  public ObjectInputStream getFromPlayer() {
+    return fromPlayer;
   }
 
 }
