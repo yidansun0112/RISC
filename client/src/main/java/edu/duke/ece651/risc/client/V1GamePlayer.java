@@ -4,6 +4,7 @@ import edu.duke.ece651.risc.shared.Constant;
 
 import java.io.*;
 import java.net.UnknownHostException;
+import java.util.ArrayList;
 
 /**
  * This class handles a GamePlayer for Version1
@@ -52,10 +53,10 @@ public class V1GamePlayer<T> implements GamePlayer<T> {
    * @throws UnknownHostException
    * @throws IOException
    */
-  public V1GamePlayer(int serverPort, String serverAddr, BufferedReader inputReader, PrintStream out)
-      throws UnknownHostException, IOException {
-    this(-1, new SocketClient(serverPort, serverAddr), inputReader, out);
-  }
+  // public V1GamePlayer(int serverPort, String serverAddr, BufferedReader inputReader, PrintStream out)
+  //     throws UnknownHostException, IOException {
+  //   this(-1, new SocketClient(serverPort, serverAddr), inputReader, out);
+  // }
 
   /**
    * Getter for playerId
@@ -95,30 +96,29 @@ public class V1GamePlayer<T> implements GamePlayer<T> {
    */
   public void selectPlayerNum() throws IOException {
     out.println("You are the first player in this round, please choose how many players you want in this round.");
-    // TODO: remove magic number here
-    out.println("Player number should be from 2 to 5.");
+    out.println("Player number should be from "+Constant.MIN_PLAYER_NUM+" to "+Constant.MAX_PLAYER_NUM+".");
     out.println("Please make your choice:");
-    try {
-      String strNum = inputReader.readLine();
-      if (strNum.length() != 1) { // TODO: pre-assumption: what if in evo2 we allow ten player in a game?
-        throw new IllegalArgumentException("Player number should only be one digit.");
+    while(true){
+      try {
+        String strNum = inputReader.readLine();
+        int num;
+        try{
+          num = Integer.parseInt(strNum);
+        }catch(NumberFormatException e){
+          out.println(e.getMessage()+" Player number should be digits.");
+          out.println("Please do that again!");
+          continue;
+        }
+        if (num < Constant.MIN_PLAYER_NUM || num > Constant.MAX_PLAYER_NUM) {
+          throw new IllegalArgumentException("Player number should be from "+Constant.MIN_PLAYER_NUM+" to "+Constant.MAX_PLAYER_NUM+".");
+        }
+        // Choice is valid, send it to the server
+        client.sendObject(strNum);
+        break;
+      } catch (IllegalArgumentException e) {
+        out.println(e.getMessage());
+        out.println("Please do that again!");
       }
-      if (!Character.isDigit(strNum.charAt(0))) {
-        // TODO: only parseInt would be enough to check the input here, to apply this
-        // refactoring, the test code needs to change also
-        throw new IllegalArgumentException("Player number should be digit.");
-      }
-      int num = Integer.parseInt(strNum);
-      if (num < Constant.MIN_PLAYER_NUM || num > Constant.MAX_PLAYER_NUM) {
-        // TODO: remove magic number here
-        throw new IllegalArgumentException("Player number should be from 2 to 5.");
-      }
-      // Choice is valid, send it to the server
-      client.sendObject(strNum);
-    } catch (IllegalArgumentException e) {
-      out.println("Exception thrown:" + e);
-      out.println("Please do that again!");
-      selectPlayerNum();
     }
   }
 
@@ -142,23 +142,29 @@ public class V1GamePlayer<T> implements GamePlayer<T> {
     out.println("Please choose one map among the following maps.");
     out.println(mapChoice);
     out.println("Please type the map number that you would like to choose:");
-    try {
-      String strNum = inputReader.readLine();
-      if (!allDigits(strNum)) {
-        throw new IllegalArgumentException("Map number should be pure number.");
+    while(true){
+      try {
+        String strNum = inputReader.readLine();
+        try{
+          int num = Integer.parseInt(strNum);
+        }catch(NumberFormatException e){
+          out.println(e.getMessage()+" Map number should be pure number.");
+          out.println("Please do that again!");
+          continue;
+        }
+        // NOTE: SEND string to server: send the map index of choosed map
+        client.sendObject(strNum);
+        // NOTE: RECEIVE string from server: 
+        String choiceInfo = (String) client.receiveObject();
+        if (choiceInfo != Constant.VALID_MAP_CHOICE_INFO) {
+          throw new IllegalArgumentException(choiceInfo);
+        }
+        out.println(choiceInfo);
+        break;
+      } catch (IllegalArgumentException e) {
+        out.println(e.getMessage());
+        out.println("Please do that again!");
       }
-      // NOTE: SEND string to server: send the map index of choosed map
-      client.sendObject(strNum);
-      // NOTE: RECEIVE string from server: 
-      String choiceInfo = (String) client.receiveObject();
-      if (choiceInfo != Constant.VALID_MAP_CHOICE_INFO) {
-        throw new IllegalArgumentException(choiceInfo);
-      }
-      out.println(choiceInfo);
-    } catch (IllegalArgumentException e) {
-      out.println("Exception thrown:" + e);
-      out.println("Please do that again!");
-      selectGameMap();
     }
   }
 
@@ -189,40 +195,69 @@ public class V1GamePlayer<T> implements GamePlayer<T> {
     out.println("Please choose one group among the following groups.");
     out.println(mapGroup);
     out.println("Please type the group number that you would like to choose:");
-    try {
-      String strNum = inputReader.readLine();
-      if (!allDigits(strNum)) {
-        throw new IllegalArgumentException("Group number should be pure number.");
+    while(true){
+      try {
+        String strNum = inputReader.readLine();
+        try{
+          int num = Integer.parseInt(strNum);
+        }catch(NumberFormatException e){
+          out.println(e.getMessage()+" Group number should be pure number.");
+          out.println("Please do that again!");
+          continue;
+        }
+        // NOTE: SEND string to server: send the map index of choosed map
+        client.sendObject(strNum);
+        // NOTE: RECEIVE string from server: 
+        String choiceInfo = (String) client.receiveObject();
+        if (choiceInfo != Constant.VALID_MAP_CHOICE_INFO) {
+          throw new IllegalArgumentException(choiceInfo);
+        }
+        out.println(choiceInfo);
+        break;
+      } catch (IllegalArgumentException e) {
+        out.println(e.getMessage());
+        out.println("Please do that again!");
       }
-      // NOTE: SEND string to server: send the player's input group number as a string
-      client.sendObject(strNum);
-      // NOTE: RECEIVE string from server: receive whether successfull occupy that
-      // group of territory.
-      String choiceInfo = (String) client.receiveObject();
-      if (choiceInfo != Constant.VALID_MAP_CHOICE_INFO) { // on success choosing, the method will quit from here
-        throw new IllegalArgumentException(choiceInfo);
-      }
-      out.println(choiceInfo);
-    } catch (IllegalArgumentException e) {
-      out.println("Exception thrown:" + e);
-      out.println("Please do that again!");
-      pickTerritory(); // tail recursion
     }
   }
 
-  /**
-   * Helper function to check whether a string is all digits.
-   * 
-   * @param strNum
-   * @return
-   */
-  private boolean allDigits(String strNum) {
-    for (int i = 0; i < strNum.length(); i++) {
-      if (!Character.isDigit(strNum.charAt(i))) {
-        return false;
+  public void deployUnits() throws IOException, ClassNotFoundException{
+    out.println("Please deploy units in your territories.");
+    String msg=(String)client.receiveObject();
+    while(msg!=Constant.FINISH_DEPLOY_INFO){
+      out.println(msg);
+      out.println("Please type in format \"Territory index,Units deployed in this territory\"");
+      out.println("For example \"2,5\" will deploy 5 units in territory 2");
+      String choice=inputReader.readLine();
+      try{
+        ArrayList<Integer> deployment=stringParser(choice);
+        client.sendObject(deployment);
+        msg=(String)client.receiveObject();
+      }catch(NumberFormatException e){
+        out.println(e.getMessage()+" Territory/Units should be pure number.");
+        out.println("Please do that again!");
+        continue;
+      }catch(IllegalArgumentException e){
+        out.println(e.getMessage());
+        out.println("Please do that again!");
+        continue;
       }
     }
-    return true;
+    out.println(msg);
   }
 
+  private ArrayList<Integer> stringParser(String str){
+    int comma=str.indexOf(",");
+    if(comma==-1){
+      throw new IllegalArgumentException("Cannot find \",\" in your deployment.");
+    }
+    String strIndex=str.substring(0,comma);
+    String strUnits=str.substring(comma+1);
+    int index=Integer.parseInt(strIndex);
+    int units=Integer.parseInt(strUnits);
+    ArrayList<Integer> deployment=new ArrayList<Integer>();
+    deployment.add(index);
+    deployment.add(units);
+    return deployment;
+  }
 }
