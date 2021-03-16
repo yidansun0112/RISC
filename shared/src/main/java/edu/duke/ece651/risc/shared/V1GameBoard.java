@@ -86,7 +86,7 @@ public class V1GameBoard<T> implements Board<T> {
   }
 
   @Override
-  public boolean occupyTerritory(int groupNum, int owner) {
+  public synchronized boolean occupyTerritory(int groupNum, int owner) {
     boolean ifOccupy = true;
     
     for (Territory<T> t : territories) {
@@ -153,7 +153,6 @@ public class V1GameBoard<T> implements Board<T> {
 
   @Override
   public int[][] getWorldMap() {
-    // TODO Auto-generated method stub
     return worldMap;
   }
 
