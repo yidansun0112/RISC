@@ -41,11 +41,7 @@ public class V1BoardFactory<T> implements BoardFactory<T> {
     for (int i = 0; i < 6; i++) {
       territories.add(new V1Territory<T>(i, terriName.get(i), i / 3, worldMap[i]));
     }
-<<<<<<< HEAD
     Board<T> b = new V1GameBoard<>(territories, worldMap);
-=======
-    Board<T> b = new V1GameBoard<T>(territories, worldMap);
->>>>>>> featureLEGO
     return b;
   }
 
@@ -61,11 +57,7 @@ public class V1BoardFactory<T> implements BoardFactory<T> {
     for (int i = 0; i < 9; i++) {
       territories.add(new V1Territory<T>(i, terriName.get(i), i / 3, worldMap[i]));
     }
-<<<<<<< HEAD
     Board<T> b = new V1GameBoard<>(territories, worldMap);
-=======
-    Board<T> b = new V1GameBoard<T>(territories, worldMap);
->>>>>>> featureLEGO
     return b;
   }
   
@@ -83,11 +75,7 @@ public class V1BoardFactory<T> implements BoardFactory<T> {
     for (int i = 0; i < 12; i++) {
       territories.add(new V1Territory<T>(i, terriName.get(i), i / 3, worldMap[i]));
     }
-<<<<<<< HEAD
     Board<T> b = new V1GameBoard<>(territories, worldMap);
-=======
-    Board<T> b = new V1GameBoard<T>(territories, worldMap);
->>>>>>> featureLEGO
     return b;
   }
 
@@ -107,11 +95,7 @@ public class V1BoardFactory<T> implements BoardFactory<T> {
     for (int i = 0; i < 15; i++) {
       territories.add(new V1Territory<T>(i, terriName.get(i), i / 3, worldMap[i]));
     }
-<<<<<<< HEAD
     Board<T> b = new V1GameBoard<>(territories, worldMap);
-=======
-    Board<T> b = new V1GameBoard<T>(territories, worldMap);
->>>>>>> featureLEGO
     return b;
   }
 
