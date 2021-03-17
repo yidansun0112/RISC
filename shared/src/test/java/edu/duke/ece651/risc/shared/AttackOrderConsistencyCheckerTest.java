@@ -7,7 +7,7 @@ import org.junit.jupiter.api.Test;
 public class AttackOrderConsistencyCheckerTest {
   @Test
   public void test_consistency() {
-    BoardFactory<String> f = new V1BoardFactory<>();
+    BoardFactory<String> f = new V1BoardFactory();
     Board<String> b = f.makeGameBoard(2);
     OrderRuleChecker<String> r = new AttackOrderConsistencyChecker<String>(null);
     b.occupyTerritory(0, 0);
