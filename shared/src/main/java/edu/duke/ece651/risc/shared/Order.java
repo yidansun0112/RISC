@@ -1,8 +1,8 @@
 package edu.duke.ece651.risc.shared;
 
-import java.util.*;
+import java.io.Serializable;
 
-public interface Order<T> {
+public interface Order<T> extends Serializable {
   /*
    * This Function will help to execute the Order;
    */

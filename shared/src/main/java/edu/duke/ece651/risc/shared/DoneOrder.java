@@ -1,10 +1,15 @@
 package edu.duke.ece651.risc.shared;
 
 public class DoneOrder<T> implements Order<T> {
+  /**
+   * Fields required by Serializable 
+   */
+  static final long serialVersionUID = 0L;
+
   private String msg;
 
-  public DoneOrder(){
-    msg="I'm Done.";
+  public DoneOrder() {
+    msg = Constant.DONE_ORDER_INFO;
   }
 
   @Override

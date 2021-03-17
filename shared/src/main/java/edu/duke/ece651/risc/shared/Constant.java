@@ -23,6 +23,8 @@ public class Constant {
   public static final String ILLEGAL_ORDER_INFO = "The Order Is Illegal!";
   /** Indicate the order issued by a player is legal */
   public static final String LEGAL_ORDER_INFO = "The Order Is Legal!";
+  /** Indicate the player has issued all his/her order */
+  public static final String DONE_ORDER_INFO = "I'm Done.";
   /** Indicate a player has not lost the game yet */
   public static final String NOT_LOSE_INFO = "You Have Not Lost Yet!";
   /** Indicate a player has lost the game, but the game has no one win yet */
