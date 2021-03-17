@@ -7,7 +7,7 @@ import java.io.ObjectOutputStream;
  * This class provide a concret implementation with type String as <T> for
  * evolution 1.
  */
-public class TextPlayerEntity extends PlayerEntity<String> {
+public class TextPlayerEntity<T> extends PlayerEntity<T> {
 
   /**
    * Constructor that takes in parameters and call the constructor of super class
@@ -20,7 +20,7 @@ public class TextPlayerEntity extends PlayerEntity<String> {
    * @param ownedGroup   the territory group number owned by this player
    * @param playerStatus the status of this player
    */
-  public TextPlayerEntity(ObjectOutputStream toPlayer, ObjectInputStream fromPlayer, int playerId, String playerSymbol,
+  public TextPlayerEntity(ObjectOutputStream toPlayer, ObjectInputStream fromPlayer, int playerId, T playerSymbol,
       int ownedGroup, int playerStatus) {
     super(toPlayer, fromPlayer, playerId, playerSymbol, ownedGroup, playerStatus);
   }

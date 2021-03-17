@@ -27,6 +27,14 @@ public class Constant {
   public static final String WIN_INFO = "You Win!";
   /** Indicate the game has a winner now and is end */
   public static final String GAME_END_INFO = "The Game Is End!";
+  /** Indicate the game is still going */
+  public static final String GAME_CONTINUE_INFO = "The Game Is Continuing!";
+  /** Indicate the player will watch the game */
+  public static final String TO_WATCH_INFO = "I will watch the game!";
+  /** Indicate the player will quit the game */
+  public static final String TO_QUIT_INFO = "I will quit the game!";
+  /** Indicate the server has confirmed this player's choice */
+  public static final String CONFIRM_INFO = "Confirmed!";
 
   // --- Below are the configurations for a game --- //
 
@@ -34,6 +42,10 @@ public class Constant {
   public static final int MAX_PLAYER_NUM = 5;
   /** The minimum number of player allowed (inclusive) in a game room */
   public static final int MIN_PLAYER_NUM = 2;
+  /** The total units to be deployed for each player */
+  public static final int TOTAL_UNITS = 15;
+  /** The side number of the dice  */
+  public static final int DICE_SIDE = 20;
 
   /** Values that indicate different status of a player */
   public static final int SELF_NOT_LOSE_NO_ONE_WIN_STATUS = 0; // the player has not lost, but not win neither, the game

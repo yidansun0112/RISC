@@ -2,17 +2,18 @@ package edu.duke.ece651.risc.server;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertSame;
-import static org.mockito.Mockito.when;
 
 import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
+import java.net.Socket;
 
 import org.junit.jupiter.api.Test;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 
 import edu.duke.ece651.risc.shared.Constant;
+import edu.duke.ece651.risc.shared.TestLoopBackServer;
 
 public class TextPlayerEntityTest {
 
@@ -40,7 +41,10 @@ public class TextPlayerEntityTest {
   @Mock
   ObjectOutputStream oosAnthoerMock;
 
-  /** Some values that used in testing  */
+  @Mock
+  Socket sockMock;
+
+  /** Some values that used in testing */
   int playerId = -1;
   int anotherPlayerId = -1;
 
@@ -92,17 +96,58 @@ public class TextPlayerEntityTest {
     assertSame(oosAnthoerMock, tpe.getToPlayer());
   }
 
-  // @Test
-  // public void test_receiveObject() throws ClassNotFoundException, IOException {
-  //   MockitoAnnotations.initMocks(this);
-  //   String msg = new String("Hi there!"); // a string used in testing, it will "send" by the mocked oosMock object
-  //   when(oisMock.readObject()).thenReturn(msg);
+  @Test
+  /**
+   * Test sendObject() method and receiveObject() method
+   * @throws ClassNotFoundException
+   * @throws IOException
+   * @throws InterruptedException
+   */
+  public void test_sendObject_receiveObject() throws ClassNotFoundException, IOException, InterruptedException {
 
-  //   TextPlayerEntity tpe = new TextPlayerEntity(oosMock, oisMock, playerId, playerSymbol, ownedGroup, playerStatus);
-  //   String receivedMsg = (String) tpe.receiveObject();
-  //   // Thought they are actually the same String constant in JVM, but in real environment the server and client may be
-  //   // on different computer, so here we need call assertEquals() rather than assertSame()
-  //   assertEquals(msg, receivedMsg);
-  // }
+    // Start a new TestLoopBackServer in a separate thread
+    Thread th = make_test_server_thread_helper();
+    th.start();
+    Thread.sleep(100); // let the *current* thead wait for a while to let the server setup
+                       // this is a bit of hack
 
+    Socket socket = new Socket("localhost", 3301);
+    
+    TextPlayerEntity tpe = new TextPlayerEntity(new ObjectOutputStream(socket.getOutputStream()),
+    new ObjectInputStream(socket.getInputStream()), playerId, playerSymbol, ownedGroup, playerStatus);
+    
+    String msg = new String("Hi there!"); // a string used in testing, it will "send" by the mocked oosMock object
+    
+    // First we need to inform test loop back server how many msg we want to send and receive
+    tpe.sendObject(Integer.valueOf(1));
+    
+    tpe.sendObject(msg);
+    String receivedMsg = (String) tpe.receiveObject();
+    // Thought they are actually the same String constant in JVM, but in real
+    // environment the server and client may be
+    // on different computer, so here we need call assertEquals() rather than
+    // assertSame()
+    assertEquals(msg, receivedMsg);
+    
+    th.join();
+    socket.close();
+  }
+
+  /**
+   * Helper method that creates a new thread to run the test loopback server.
+   * 
+   * @return a Thread object that the server is running on
+   */
+  private Thread make_test_server_thread_helper() {
+    Thread th = new Thread() {
+      @Override
+      public void run() {
+        try {
+          TestLoopBackServer.main(new String[0]);
+        } catch (Exception e) {
+        }
+      }
+    };
+    return th;
+  }
 }
