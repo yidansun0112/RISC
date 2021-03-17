@@ -102,6 +102,7 @@ public abstract class GameRoom<T> {
       barrier.await();
       resolver.executeAllBattle(gameBoard);
       incrementUnits();
+      gameBoard.updateAllPrevDefender();
       if(checkEnd()){
         break;
       }
