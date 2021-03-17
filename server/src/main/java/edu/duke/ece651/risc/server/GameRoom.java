@@ -10,7 +10,7 @@ import java.util.Random;
 
 import edu.duke.ece651.risc.shared.*;
 
-public class GameRoom<T> {
+public abstract class GameRoom<T> {
 
   /** The number of players that participates in the game in this room */
   protected int playerNum;
@@ -67,16 +67,7 @@ public class GameRoom<T> {
   /**
    * Let the first player to choose a map for this room
    */
-  public void chooseMap() throws IOException, ClassNotFoundException{
-    PlayerEntity<T> firstPlayer=players.get(0);
-    BoardFactory<T> factory=new V1BoardFactory<T>();
-    gameBoard=factory.makeGameBoard(playerNum);
-    // view=new BoardTextView(gameBoard);
-    String msg="We only have one map now, please type any number to continue.";
-    firstPlayer.sendObject(msg);
-    String choice=(String)firstPlayer.receiveObject();
-    firstPlayer.sendObject(Constant.VALID_MAP_CHOICE_INFO);
-  }
+  public abstract void chooseMap() throws IOException, ClassNotFoundException;
 
   /**
    * Add a new player to this room.

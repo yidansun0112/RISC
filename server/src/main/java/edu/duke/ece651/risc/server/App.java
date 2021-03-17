@@ -12,6 +12,7 @@ public class App {
     public static void main(String[] args) throws IOException, ClassNotFoundException, InterruptedException,BrokenBarrierException {
         ServerSocket serverSock = new ServerSocket(12345);
         SocketServer<String> server = new SocketServer<String>(serverSock, "BasicPlayer");
-        server.runServer();
+        GameRoom<String> room=new TextRoom();
+        server.runServer(room);
     }
 }

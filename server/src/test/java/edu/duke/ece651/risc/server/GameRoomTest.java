@@ -9,7 +9,7 @@ import edu.duke.ece651.risc.shared.Constant;
 public class GameRoomTest {
   @Test
   public void test_addPlayer_setPlayerNum_getPlayerNum() {
-    GameRoom<String> room = new GameRoom<String>();
+    GameRoom<String> room = new TextRoom();
     assertEquals(0, room.getPlayerNum());
     room.addPlayer(
         new TextPlayerEntity<String>(null, null, 0, "BasicPlayer", -1, Constant.SELF_NOT_LOSE_NO_ONE_WIN_STATUS));

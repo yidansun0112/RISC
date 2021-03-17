@@ -51,11 +51,11 @@ public class SocketServer<T> implements GameServer<T> {
    * @throws IOException
    * @throws ClassNotFoundException
    */
-  public void connectPlayer() throws IOException, ClassNotFoundException {
+  public void connectPlayer(GameRoom<T> room) throws IOException, ClassNotFoundException {
     Socket firstSock = serverSocket.accept();
     // Got a player, create a game room for him/her. A socket server at least has
-    // one game room in evolution 1
-    rooms.add(new GameRoom<T>());
+    // one game room in evolution 
+    rooms.add(room);
     // Before picking territory group, no one owns any territory group, so we pass -1 here
     PlayerEntity<T> firstPlayer = new TextPlayerEntity<T>(new ObjectOutputStream(firstSock.getOutputStream()),
         new ObjectInputStream(firstSock.getInputStream()), 0, symbol, -1, Constant.SELF_NOT_LOSE_NO_ONE_WIN_STATUS);
@@ -101,8 +101,8 @@ public class SocketServer<T> implements GameServer<T> {
     }
   }
   
-  public void runServer() throws IOException, ClassNotFoundException, InterruptedException,BrokenBarrierException {
-    connectPlayer();
+  public void runServer(GameRoom<T> r) throws IOException, ClassNotFoundException, InterruptedException,BrokenBarrierException {
+    connectPlayer(r);
     connectAll();
     GameRoom<T> room=rooms.get(0);
     room.chooseMap();
