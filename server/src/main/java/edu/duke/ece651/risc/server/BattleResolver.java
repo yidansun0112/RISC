@@ -29,6 +29,7 @@ public class BattleResolver<T> implements Resolver<T> {
     for(int i=0;i<territories.size();i++){
       combatOnTerritory(territories.get(i));
     }
+    board.updateAllPrevDefender();
   }
 
   public void combatOnTerritory(Territory<T> battleField){

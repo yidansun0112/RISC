@@ -64,6 +64,8 @@ public class V1GameBoardTest {
     assertEquals(displayInfoEnemy.get("units"),5);
     assertEquals(terr.getId(), 0);
     assertEquals(terr.getName(), "Narnia");
+    assertEquals(b.deployUnits(0, 2, 0),true);
+    assertEquals(b.deployUnits(0, 2, 1),false);
   }
 
   @Test

@@ -13,6 +13,10 @@ public class Constant {
 
   /** Indicate a player successfully chose a map */
   public static final String VALID_MAP_CHOICE_INFO = "Choice Succeed!";
+  /** Indicate a player successfully chose a map */
+  public static final String INVALID_MAP_CHOICE_INFO = "This group has been occupied!";
+  /** Indicate the order issued by a player is legal */
+  public static final String LEGAL_DEPLOY_INFO = "The Order Is Legal!";
   /** Indicate a player has finished the deployment */
   public static final String FINISH_DEPLOY_INFO = "Deploy Finished!";
   /** Indicate the order issued by a player is illegal */

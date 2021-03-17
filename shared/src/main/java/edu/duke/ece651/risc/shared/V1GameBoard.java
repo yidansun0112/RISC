@@ -102,6 +102,16 @@ public class V1GameBoard implements Board<String> {
       return ifOccupy;
   }
 
+  @Override
+  public boolean deployUnits(int territoryId, int amount, int player) {
+    Territory<String> territory = territories.get(territoryId);
+    int owner = territory.getOwner();
+    if (owner == player) {
+      addOwnUnits(territoryId, amount);
+      return true;
+    }
+    return false;
+  }
   /**
    * Add certain amount of units in a player's territory for a player
    * 
