@@ -21,7 +21,7 @@ public class MoveOrderEffectChecker<T> extends OrderRuleChecker<T> {
     int requiredNum = order.getUnitAmount();
 
     // Compare and return the result.
-    if (requiredNum > srcNum) {
+    if (requiredNum > srcNum || requiredNum < 0) {
       return "Sorry, the source territory have " + srcNum + " units while we need " + requiredNum + " units.\n";
     }
     return null;

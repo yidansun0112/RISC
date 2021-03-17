@@ -1,6 +1,7 @@
 package edu.duke.ece651.risc.shared;
 
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.LinkedList;
 import java.util.Queue;
 import java.util.Vector;
@@ -22,10 +23,19 @@ public class MoveOrderPathChecker<T> extends OrderRuleChecker<T> {
     Territory<T> src = territories.get(order.getSrcTerritory());
     queue.offer(src);
 
-    Territory<T> dest = territories.get(order.getSrcTerritory());
-
+    Territory<T> dest = territories.get(order.getDestTerritory());
+    HashSet<Integer> visit = new HashSet<>();
     while (!queue.isEmpty()) {
       Territory<T> curr = queue.poll();
+
+      // If it is the destination. For example, move in the same territory. So it is
+      // necessary.
+      if (dest.getId() == curr.getId()) {
+        return null;
+      }
+
+      // Avoid visit a territory multiple times.
+      visit.add(curr.getId());
       Vector<Integer> neigh = curr.getNeigh();
 
       // Iterate over the neighbor of the current territory.
@@ -34,26 +44,25 @@ public class MoveOrderPathChecker<T> extends OrderRuleChecker<T> {
         if (i == dest.getId()) {
           return null;
         }
-
-        // Continue to Search
-        Territory<T> next = territories.get(i);
-        // Check if the territory belongs to this order.
-        // Not! Then We continue
-        if (next.getOwner() != playerId) {
-          continue;
+        if (territories.get(i).getOwner() == playerId && !visit.contains(i)) {
+          queue.offer(territories.get(i));
         }
 
-        // Yes, we can pass this territory. Add the neighbor to the queue.
-        Vector<Integer> nextNeigh = next.getNeigh();
-        for (int j : nextNeigh) {
-          queue.offer(territories.get(j));
-        }
-
+        /*
+         * // Continue to Search Territory<T> next = territories.get(i); // Check if the
+         * territory belongs to this order. // Not! Then We continue if (next.getOwner()
+         * != playerId) { continue; }
+         * 
+         * // Yes, we can pass this territory. Add the neighbor to the queue.
+         * Vector<Integer> nextNeigh = next.getNeigh(); for (int j : nextNeigh) { if
+         * (territories.get(j).getOwner() == playerId && !visit.contains(j)) {
+         * queue.offer(territories.get(j)); } }
+         */
       }
 
     }
 
-    return "Sorry, there is no path from " + src.getName() + " to " + dest.getName() + "\n";
+    return "Sorry, there is no path from " + src.getName() + " to " + dest.getName() + ".\n";
   }
 
 }

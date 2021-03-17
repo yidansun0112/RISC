@@ -12,7 +12,7 @@ public class AttackOrderConsistencyChecker<T> extends OrderRuleChecker<T> {
     if(!checkOwner(playerId, src,board)){
         return "Order is invalid: source territory you pick doesn't belong to you\n";
     }
-    if(!checkOwner(playerId, dest,board)){
+    if(checkOwner(playerId, dest,board)){
         return "Order is invalid: destination territory you pick shouldn't belong to you\n";
     }
       return null;
