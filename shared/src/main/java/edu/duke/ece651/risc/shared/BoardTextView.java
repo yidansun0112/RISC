@@ -1,8 +1,8 @@
 package edu.duke.ece651.risc.shared;
 
 public class BoardTextView extends BoardView<String> {
-
-  public BoardTextView(Board<String> display) {
+ 
+ public BoardTextView(Board<String> display) {
     super(display);
   }
 
