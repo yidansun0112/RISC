@@ -19,8 +19,8 @@ public interface Territory<T>{
 
   public Vector<Integer> getNeigh();
 
-  public Object getCurrDefenderArmy();
-  public Object getEnemyArmy();
+  public Vector<Army<T>> getCurrDefenderArmy();
+  public Vector<Army<T>> getEnemyArmy();
   public void addEnemy(int playerId, int amount);
   public void updatePrevDefender();
 
