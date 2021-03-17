@@ -3,12 +3,14 @@
  */
 package edu.duke.ece651.risc.server;
 
-public class App {
-    public String getGreeting() {
-        return "Hello world.";
-    }
+import java.io.IOException;
+import java.net.ServerSocket;
 
-    public static void main(String[] args) {
-        System.out.println(new App().getGreeting());
+public class App {
+
+    public static void main(String[] args) throws IOException, ClassNotFoundException {
+        ServerSocket serverSock = new ServerSocket(12345);
+        SocketServer<String> server = new SocketServer<String>(serverSock, "BasicPlayer");
+        server.runServer();
     }
 }

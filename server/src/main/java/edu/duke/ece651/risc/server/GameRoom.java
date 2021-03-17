@@ -11,15 +11,16 @@ import edu.duke.ece651.risc.shared.Constant;
 public class GameRoom<T> {
 
   /** The number of players that participates in the game in this room */
-  int playerNum;
+  protected int playerNum;
   /** The number of units that each player can deploy at start */
-  int totalUnits;
+  protected int totalUnits;
   /** The list that store all the players (including owner) in this room */
-  List<PlayerEntity<T>> players;
+  protected List<PlayerEntity<T>> players; // this field should be a thread-safe data structure, in evo1, we use a
+                                           // vector
   /** The game board for the game in this room */
-  Board<T> gameBoard;
+  protected Board<T> gameBoard;
   /** The BoardView that used to display the game board */
-  BoardView<T> view;
+  protected BoardView<T> view;
 
   /**
    * Default constructor. Here we only initialize the fields players with a
@@ -30,7 +31,7 @@ public class GameRoom<T> {
   }
 
   /**
-   * Constructor that initialize class fields with corresponding parameters. 
+   * Constructor that initialize class fields with corresponding parameters.
    * 
    * @param playerNum
    * @param totalUnits
@@ -38,8 +39,7 @@ public class GameRoom<T> {
    * @param gameBoard
    * @param view
    */
-  public GameRoom(int playerNum, int totalUnits, List<PlayerEntity<T>> players,
-      Board<T> gameBoard, BoardView<T> view) {
+  public GameRoom(int playerNum, int totalUnits, List<PlayerEntity<T>> players, Board<T> gameBoard, BoardView<T> view) {
     this.playerNum = playerNum;
     this.totalUnits = totalUnits;
     this.players = players;
@@ -47,19 +47,35 @@ public class GameRoom<T> {
     this.view = view;
   }
 
-  public void initRoom() {
-  }
+  // public void initRoom() {
+  // }
 
-  public void chooseMap() {
-  }
+  /**
+   * Let the first player to choose a map for this room
+   */
+  // public void chooseMap() {
+  // }
 
   /**
    * Add a new player to this room.
+   * 
    * @param newPlayer a new player that connected to the server
    */
   public void addPlayer(PlayerEntity<T> newPlayer) {
     players.add(newPlayer);
   }
 
+  /**
+   * @param playerNum the playerNum to set
+   */
+  public void setPlayerNum(int playerNum) {
+    this.playerNum = playerNum;
+  }
 
+  /**
+   * @return the playerNum
+   */
+  public int getPlayerNum() {
+    return playerNum;
+  }
 }
