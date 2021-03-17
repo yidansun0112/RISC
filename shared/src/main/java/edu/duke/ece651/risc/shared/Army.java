@@ -23,6 +23,9 @@ public class Army<T> {
   public void setCommanderId(int owner){
     this.commanderId = owner;
   }
+  public void minusUnit(int amount){
+    this.units = this.units - amount;
+  }
 }
 
 

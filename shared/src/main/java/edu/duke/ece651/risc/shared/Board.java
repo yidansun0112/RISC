@@ -25,6 +25,9 @@ public interface Board<T> {
   public int[][] getWorldMap();
 
   abstract public void updateAllPrevDefender();
+  public String unitsInfo(HashMap<String, Integer> infoMap);
+
+  public String whatisInTerritory(String name, int territoryId, Vector<Integer> neigh);
 }
 
 

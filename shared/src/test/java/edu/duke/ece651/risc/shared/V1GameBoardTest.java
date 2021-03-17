@@ -19,7 +19,8 @@ public class V1GameBoardTest {
       assertEquals(t.get(i).getUnitAmount(), -1);
     }
     Territory<String> terr = t.get(0);
-    //String unassigned = 
+    String unassigned = b.whatIsIn(terr, true);
+    assertEquals(unassigned,"Narnia(0) (next to: Midkemia, Oz, Elantris, Roshar, Scadrial)\n");
     assertEquals(b.occupyTerritory(0, 0), false); // group 0 owner is 0
     assertEquals(b.occupyTerritory(1, 1), false); // group 1 owner is 1
     assertEquals(b.occupyTerritory(1, 1), true); 
@@ -60,10 +61,16 @@ public class V1GameBoardTest {
     assertEquals(expected,neigh);
     HashMap<String, Integer> displayInfoSelf = terr.getDisplayInfo(true);
     assertEquals(displayInfoSelf.get("units"),4);
+    //assertEquals(b.unitsInfo(displayInfoSelf),"4 units in ");
+    //assertEquals(b.whatisInTerritory("Narnia", 0, neigh), "");
+    String assigned = b.whatIsIn(terr, true);
+    assertEquals(assigned,"4 units in Narnia(0) (next to: Midkemia, Oz, Elantris, Roshar, Scadrial)\n");
     HashMap<String, Integer> displayInfoEnemy = terr.getDisplayInfo(false);
     assertEquals(displayInfoEnemy.get("units"),5);
     assertEquals(terr.getId(), 0);
     assertEquals(terr.getName(), "Narnia");
+    assertEquals(b.deployUnits(0, 2, 0),true);
+    assertEquals(b.deployUnits(0, 2, 1),false);
   }
 
   @Test
