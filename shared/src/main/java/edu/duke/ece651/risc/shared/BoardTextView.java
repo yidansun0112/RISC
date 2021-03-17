@@ -1,8 +1,8 @@
 package edu.duke.ece651.risc.shared;
 
 public class BoardTextView extends BoardView<String> {
-
-  public BoardTextView(Board<String> display) {
+ 
+ public BoardTextView(Board<String> display) {
     super(display);
   }
 
@@ -46,11 +46,22 @@ public class BoardTextView extends BoardView<String> {
 
   @Override
   public String displayBoardFor(int playerId) {
+
+    classify();
     StringBuffer sb = new StringBuffer();
-    for (Territory<String> t : toDisplay.getTerritories()) {
-      sb.append(toDisplay.whatIsIn(t, t.getOwner() == playerId));
+    for (int Id : res.keySet()) {
+      // What is the display info after choice.
+      sb.append(makeHead(true, Id));
+      for (Territory<String> t : res.get(Id)) {
+        sb.append(toDisplay.whatIsIn(t, t.getOwner() == playerId));
+      }
     }
     return sb.toString();
+    /*
+     * StringBuffer sb = new StringBuffer(); for (Territory<String> t :
+     * toDisplay.getTerritories()) { sb.append(toDisplay.whatIsIn(t, t.getOwner() ==
+     * playerId)); } return sb.toString();
+     */
   }
 
   /*

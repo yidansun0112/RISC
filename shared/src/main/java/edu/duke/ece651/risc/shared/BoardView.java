@@ -12,7 +12,7 @@ public abstract class BoardView<T> {
   }
 
   public void classifyHelper(Territory<T> t, int index) {
-    if (res.containsKey(index)) {
+    if (!res.containsKey(index)) {
       ArrayList<Territory<T>> temp = new ArrayList<>();
       temp.add(t);
       res.put(index, temp);
