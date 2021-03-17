@@ -12,7 +12,7 @@ import static org.junit.jupiter.api.Assertions.*;
 public class BattleResolverTest {
   @Test
   public void test_battleresolver() {
-    BoardFactory<String> f = new V1BoardFactory();
+    BoardFactory<String> f = new V1BoardFactory<String>();
     Board<String> b = f.makeGameBoard(3);
     b.occupyTerritory(0, 0);
     b.occupyTerritory(1, 1);

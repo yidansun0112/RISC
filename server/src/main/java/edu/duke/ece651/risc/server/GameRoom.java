@@ -1,18 +1,14 @@
 package edu.duke.ece651.risc.server;
 
-import java.io.IOError;
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Vector;
+import java.util.concurrent.BrokenBarrierException;
+import java.util.concurrent.CyclicBarrier;
+import java.util.Random;
 
-import edu.duke.ece651.risc.shared.Board;
-import edu.duke.ece651.risc.shared.BoardFactory;
-import edu.duke.ece651.risc.shared.BoardTextView;
-import edu.duke.ece651.risc.shared.BoardView;
-import edu.duke.ece651.risc.shared.Constant;
-import edu.duke.ece651.risc.shared.OrderRuleChecker;
-import edu.duke.ece651.risc.shared.V1BoardFactory;
-import edu.duke.ece651.risc.shared.V1GameBoard;
+import edu.duke.ece651.risc.shared.*;
 
 public class GameRoom<T> {
 
@@ -27,6 +23,14 @@ public class GameRoom<T> {
   protected Board<T> gameBoard;
   /** The BoardView that used to display the game board */
   protected BoardView<T> view;
+  /**rule checker for move order */
+  protected OrderRuleChecker<T> moveChecker;
+  /** rule checker for attack order */
+  protected OrderRuleChecker<T> attackChecker;
+  /** battle resolver */
+  protected Resolver<T> resolver;
+  /** barrier */
+  protected CyclicBarrier barrier;
 
   /**
    * Default constructor. Here we only initialize the fields players with a
@@ -51,6 +55,10 @@ public class GameRoom<T> {
     this.players = players;
     this.gameBoard = gameBoard;
     this.view = view;
+    this.moveChecker=new MoveOrderConsistencyChecker<T>(new MoveOrderPathChecker<T>(new MoveOrderEffectChecker<T>(null)));
+    this.attackChecker=new AttackOrderConsistencyChecker<T>(new AttackOrderPathChecker<T>(new AttackOrderEffectChecker<T>(null)));
+    this.resolver=new BattleResolver<T>(new Random());
+    //this.barrier=new CyclicBarrier(playerNum);
   }
 
   // public void initRoom() {
@@ -61,13 +69,13 @@ public class GameRoom<T> {
    */
   public void chooseMap() throws IOException, ClassNotFoundException{
     PlayerEntity<T> firstPlayer=players.get(0);
-    V1BoardFactory factory=new V1BoardFactory();
-    // gameBoard=factory.makeGameBoard(playerNum);
+    BoardFactory<T> factory=new V1BoardFactory<T>();
+    gameBoard=factory.makeGameBoard(playerNum);
     // view=new BoardTextView(gameBoard);
-    // String msg=view.displayFullBoard()+"We only have one map now, please type any number to continue.";
-    // firstPlayer.sendObject(msg);
-    // String choice=(String)firstPlayer.receiveObject();
-
+    String msg="We only have one map now, please type any number to continue.";
+    firstPlayer.sendObject(msg);
+    String choice=(String)firstPlayer.receiveObject();
+    firstPlayer.sendObject(Constant.VALID_MAP_CHOICE_INFO);
   }
 
   /**
@@ -93,9 +101,35 @@ public class GameRoom<T> {
     return playerNum;
   }
 
-  public void playGame(){
+  public void playGame() throws InterruptedException, BrokenBarrierException{
+    barrier=new CyclicBarrier(playerNum);
     for(int i=0;i<playerNum;i++){
-      Thread t=new GameHostThread<T>(players.get(i), Constant.TOTAL_UNITS, gameBoard, view, new OrderRuleChecker<T>(), barrier);
+      Thread t=new GameHostThread<T>(players.get(i), Constant.TOTAL_UNITS, gameBoard, view, moveChecker,attackChecker, barrier);
+      t.start();
     }
+    while(true){
+      barrier.await();
+      resolver.executeAllBattle(gameBoard);
+      incrementUnits();
+      if(checkEnd()){
+        break;
+      }
+      barrier.await();
+    }
+  }
+
+  public void incrementUnits(){
+    int size = gameBoard.getTerritories().size();
+    for(int i=0;i<size;i++){
+      gameBoard.addOwnUnits(i, 1);
+    }
+  }
+
+  //TODO: to write this
+  public boolean checkEnd(){
+    //check
+    //if somebody win, set one to win, all others to lose_some_win
+    //else, if somebody lose, set its status to lose
+    return false;
   }
 }
