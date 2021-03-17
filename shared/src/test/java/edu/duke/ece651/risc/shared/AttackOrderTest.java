@@ -23,7 +23,7 @@ public class AttackOrderTest {
     assertThrows(IllegalArgumentException.class, () -> new AttackOrder<String>(s4));
     assertThrows(IllegalArgumentException.class, () -> new AttackOrder<String>(s5));
     // Create the Board
-    BoardFactory<String> f = new V1BoardFactory<>();
+    BoardFactory<String> f = new V1BoardFactory();
     Board<String> b = f.makeGameBoard(2);
     b.occupyTerritory(0, 0);
     b.occupyTerritory(1, 1);

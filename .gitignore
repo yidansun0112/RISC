@@ -27,6 +27,9 @@ hs_err_pid*
 
 # ignore .classpath
 *.classpath
+client/.classpath
+server/.classpath
+shared/.classpath
 
 # Ignore Gradle project-specific cache directory
 .gradle

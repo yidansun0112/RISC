@@ -24,6 +24,10 @@ public class MoveOrder<T> implements Order<T> {
     } catch (NumberFormatException e) {
       throw new IllegalArgumentException("There should only be made up of integers\n");
     }
+
+    if(unitAmount < 0){
+      throw new IllegalArgumentException("There should be positive.\n");
+    }
   }
 
   /*

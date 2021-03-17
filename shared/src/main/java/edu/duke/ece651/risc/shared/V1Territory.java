@@ -25,7 +25,7 @@ public class V1Territory<T> implements Territory<T> {
     currDefenderArmy.add(initArmy);
     //prevDefenderArmy.add(initArmy);
     for (int i = 0; i < adjacentList.length; i++) {
-      if (adjacentList[i] != 0) { // in case need distance in the future
+      if (adjacentList[i] != 0&& i!=Id) { // in case need distance in the future
         neigh.add(i);
       }
     }
@@ -121,8 +121,11 @@ public class V1Territory<T> implements Territory<T> {
   */
   @Override
   public void updatePrevDefender() {
-    prevDefenderArmy = new Vector<Army<T>>(currDefenderArmy);
-	
+    
+    for(Army<T> a : currDefenderArmy){
+      prevDefenderArmy.add(new Army<T>(a.getCommanderId(),a.getUnits()));
+    }
+    
   }
 
   /**

@@ -23,7 +23,10 @@ public class AttackOrder<T> implements Order<T> {
       DestTerritory = Integer.parseInt(element[1]);
       unitAmount = Integer.parseInt(element[2]);
     } catch (NumberFormatException e) {
-      throw new IllegalArgumentException("The order should only be made up of integers\n");
+      throw new IllegalArgumentException("The order should only be made up of positive integers\n");
+    }
+    if(unitAmount<0){
+      throw new IllegalArgumentException("The order should only be made up of positive integers\n");
     }
   }
 
