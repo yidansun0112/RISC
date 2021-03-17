@@ -26,6 +26,7 @@ public interface Territory<T>{
 
   public void initCurrDefender(int owner);
 
+  public void combineEnemyArmy();
 }
 
 

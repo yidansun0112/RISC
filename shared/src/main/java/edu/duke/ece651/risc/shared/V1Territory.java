@@ -141,6 +141,27 @@ public class V1Territory<T> implements Territory<T> {
 	
   }
 
+@Override
+public void combineEnemyArmy() {
+  HashMap<Integer, Army<T>> enemy = new HashMap<Integer,Army<T>>();
+  for(Army<T> a : enemyArmy){
+    int commander = a.getCommanderId();
+ 
+    if(enemy.containsKey(commander)){
+      int prev = enemy.get(commander).getUnits();
+      enemy.get(commander).setUnits(a.getUnits()+prev);
+    }
+    else{
+      enemy.put(commander, new Army<T>(commander,a.getUnits()));
+    }
+  }
+  enemyArmy = new Vector<Army<T>>();
+  for(Integer key : enemy.keySet()){
+    enemyArmy.add(enemy.get(key));
+  }
+	
+}
+
 }
 
 
