@@ -3,6 +3,7 @@ package edu.duke.ece651.risc.server;
 import edu.duke.ece651.risc.shared.*;
 
 import java.util.ArrayList;
+import java.util.concurrent.BrokenBarrierException;
 import java.util.concurrent.CyclicBarrier;
 
 
@@ -56,7 +57,8 @@ public class GameHostThread<T> extends Thread{
 
     //servier side: send msg (display group), receive deployment (arraylist), send info (if all done, send finish deploy)
     while(remainedUnits>0){
-      player.sendObject(view.displayGroup(player.getPlayerId()));
+      String msg=view.displayGroup(player.getPlayerId())+"You have "+remainedUnits+" left."
+      player.sendObject(msg);
       ArrayList<Integer> deployment=(ArrayList<Integer>)player.receiveObject();
       int territoryId=deployment.get(0);
       int unitAmount=deployment.get(1);
@@ -79,4 +81,55 @@ public class GameHostThread<T> extends Thread{
     player.sendObject(Constant.FINISH_DEPLOY_INFO);
   }
 
+  public void receiveOrder() throws IOException, ClassNotFoundException{
+    //player side : receive map, send order, receive order info
+    //receive another map even if done
+
+    //server side: send map, receive order, check order, send info
+    //if get done order, break and send other map
+    while(true){
+      player.sendObject(view.displayBoardFor(player.getPlayerId()));
+      Order<T> order=(Order<T>)player.receiveObject();
+      if(order instanceof DoneOrder){
+        player.sendObject(Constant.LEGAL_ORDER_INFO);
+        break;
+      }
+      String message=checker.checkOrder(player.getPlayerId(), order, board);
+      if(message==null){
+        order.execute(board);
+        player.sendObject(Constant.LEGAL_ORDER_INFO);
+      }
+      else{
+        player.sendObject(message);
+      }
+    }
+    player.sendObject(view.displayBoardFor(player.getPlayerId()));
+  }
+
+  public void checkStatus(){
+    switch(player.getPlayerStatus()){
+      case Constant.SELF_NOT_LOSE_NO_ONE_WIN_STATUS:
+        return;
+      case Constant.SE
+    }
+  }
+
+  public void loseChoice(){
+
+  }
+
+  public void doWatchPhase() throws IOException, InterruptedException,BrokenBarrierException, ClassNotFoundException{
+    player.sendObject(Constant.CONFIRM_INFO);
+    while(player.getPlayerStatus()!=3){
+      player.sendObject(view.displayFullBoard());
+      barrier.await();
+    }
+    player.receiveObject();
+    doEndPhase();
+  }
+
+  public void doEndPhase() throws IOException{
+    player.sendObject(Constant.CONFIRM_INFO);
+    //TODO: end this thread
+  }
 }
