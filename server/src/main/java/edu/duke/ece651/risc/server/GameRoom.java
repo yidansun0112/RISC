@@ -119,8 +119,8 @@ public abstract class GameRoom<T> {
   //TODO: to write this
   public boolean checkEnd(){
     //check
-    //if somebody win, set one to win, all others to lose_some_win
-    //else, if somebody lose, set its status to lose
+    //if somebody win, set one to win, all others to lose_some_win， and return true
+    //else, if somebody lose, set its status to lose, and return false
     return false;
   }
 }
