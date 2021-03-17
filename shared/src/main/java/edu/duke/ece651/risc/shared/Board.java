@@ -15,6 +15,7 @@ public interface Board<T> {
   public String whatIsIn(Territory<T> territory, boolean isSelf);
  public boolean occupyTerritory(int groupNum, int owner);
 
+  public boolean deployUnits(int territoryId, int amount, int player);
  public void addOwnUnits(int territoryId, int amount);
  public void addEnemyUnits(int territoryId, int amount, int playerId);
  public void removeUnits(int territory, int amount);

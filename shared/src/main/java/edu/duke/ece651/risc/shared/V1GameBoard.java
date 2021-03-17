@@ -88,7 +88,7 @@ public class V1GameBoard implements Board<String> {
   @Override
   public synchronized boolean occupyTerritory(int groupNum, int owner) {
     boolean ifOccupy = true;
-    
+
     for (Territory<String> t : territories) {
       if (t.getGroup() == groupNum) {
         if (t.getOwner() == -1) {
@@ -98,8 +98,19 @@ public class V1GameBoard implements Board<String> {
         }
       }
     }
-    
-      return ifOccupy;
+
+    return ifOccupy;
+  }
+
+  @Override
+  public boolean deployUnits(int territoryId, int amount, int player) {
+    Territory<String> territory = territories.get(territoryId);
+    int owner = territory.getOwner();
+    if (owner == player) {
+      addOwnUnits(territoryId, amount);
+      return true;
+    }
+    return false;
   }
 
   /**
@@ -157,8 +168,3 @@ public class V1GameBoard implements Board<String> {
   }
 
 }
-
-
-
-
-
