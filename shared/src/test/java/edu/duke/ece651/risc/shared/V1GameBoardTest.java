@@ -10,7 +10,7 @@ import org.junit.jupiter.api.Test;
 public class V1GameBoardTest {
   @Test
   public void test_gameboard2() {
-    BoardFactory<String> f = new V1BoardFactory();
+    BoardFactory<String> f = new V1BoardFactory<>();
     Board<String> b = f.makeGameBoard(2);
     ArrayList<Territory<String>> t = b.getTerritories();
     assertEquals(t.size(), 6);
@@ -75,7 +75,7 @@ public class V1GameBoardTest {
 
   @Test
   public void test_gameboard3() {
-    BoardFactory<String> f = new V1BoardFactory();
+    BoardFactory<String> f = new V1BoardFactory<>();
     Board<String> b3 = f.makeGameBoard(3);
     ArrayList<Territory<String>> t3 = b3.getTerritories();
     assertEquals(t3.size(), 9);

@@ -57,7 +57,11 @@ public class GameHostThread<T> extends Thread{
 
     //servier side: send msg (display group), receive deployment (arraylist), send info (if all done, send finish deploy)
     while(remainedUnits>0){
+<<<<<<< HEAD
       String msg=view.displayGroup(player.getPlayerId())+"You have "+remainedUnits+" left.";
+=======
+      String msg = view.displayGroup(player.getPlayerId()) + "You have " + remainedUnits + " left.";
+>>>>>>> ffe217a3f2e0218c135471da9b3806ddfddef203
       player.sendObject(msg);
       ArrayList<Integer> deployment=(ArrayList<Integer>)player.receiveObject();
       int territoryId=deployment.get(0);
@@ -109,6 +113,7 @@ public class GameHostThread<T> extends Thread{
   public boolean toEnd() throws IOException,ClassNotFoundException,InterruptedException,BrokenBarrierException{
     switch(player.getPlayerStatus()){
       case Constant.SELF_NOT_LOSE_NO_ONE_WIN_STATUS:
+<<<<<<< HEAD
         player.sendObject(Constant.NOT_LOSE_INFO);
         return false;
       case Constant.SELF_LOSE_NO_ONE_WIN_STATUS:
@@ -125,6 +130,10 @@ public class GameHostThread<T> extends Thread{
         return true;
       default:
         return false;
+=======
+        return;
+        //case Constant.SE
+>>>>>>> ffe217a3f2e0218c135471da9b3806ddfddef203
     }
   }
 

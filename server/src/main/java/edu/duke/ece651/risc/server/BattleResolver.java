@@ -10,8 +10,8 @@ public class BattleResolver<T> implements Resolver<T> {
   
   private Random rdm;
 
-  public BattleResolver(){
-    rdm=new Random();
+  public BattleResolver(Random r){
+    rdm = r;
   }
 
   @Override
@@ -26,13 +26,13 @@ public class BattleResolver<T> implements Resolver<T> {
   }
 
   public void executeAllBattle(Board<T> board){
-    //TODO : combineEnemyArmy
+    combineEnemyArmy(board);
     //go through territory and combatOnTerritory
     ArrayList<Territory<T>> territories=board.getTerritories();
     for(int i=0;i<territories.size();i++){
       combatOnTerritory(territories.get(i));
     }
-    board.updateAllPrevDefender();
+    //board.updateAllPrevDefender();
   }
 
   public void combatOnTerritory(Territory<T> battleField){
@@ -42,13 +42,14 @@ public class BattleResolver<T> implements Resolver<T> {
     while(enemyArmy.size()>0){
       //get an random index amony (0-enemyArmy size)
       int index=rdm.nextInt(enemyArmy.size());
-      Army<T> defender=currDefender.get(index);
+      Army<T> defender=currDefender.get(0);
       Army<T> attacker=enemyArmy.get(index);
       //winner = conbatBetween return
       currDefender.set(0,combatBetween(defender,attacker));
       //delete enemy
       enemyArmy.remove(index);
     }
+    battleField.setOwner(currDefender.get(0).getCommanderId());
     //maybe need to reset currDefender and enemyArmy on this territory
     //do not know whether origin value will be changed or not
   }

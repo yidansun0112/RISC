@@ -2,7 +2,7 @@ package edu.duke.ece651.risc.shared;
 
 import java.util.*;
 
-public class V1BoardFactory implements BoardFactory<String> {
+public class V1BoardFactory<T> implements BoardFactory<T> {
   protected HashMap<Integer, String> terriName;
 
   public V1BoardFactory() {
@@ -34,55 +34,55 @@ public class V1BoardFactory implements BoardFactory<String> {
   /**
    * Generate a v1 game board for 2 players  
    */
-  protected Board<String> make2PlayerBoard() {
+  protected Board<T> make2PlayerBoard() {
     int[][] worldMap = new int[][] { { 1, 1, 1, 1, 1, 1 }, { 1, 1, 1, 0, 0, 1 }, { 1, 1, 1, 1, 0, 0 },
         { 1, 0, 1, 1, 1, 0 }, { 1, 0, 0, 1, 1, 1 }, { 1, 1, 0, 0, 1, 1 } };
-    ArrayList<Territory<String>> territories = new ArrayList<>();
+    ArrayList<Territory<T>> territories = new ArrayList<>();
     for (int i = 0; i < 6; i++) {
-      territories.add(new V1Territory<String>(i, terriName.get(i), i / 3, worldMap[i]));
+      territories.add(new V1Territory<T>(i, terriName.get(i), i / 3, worldMap[i]));
     }
-    Board<String> b = new V1GameBoard(territories, worldMap);
+    Board<T> b = new V1GameBoard<>(territories, worldMap);
     return b;
   }
 
   /**
    * Generate a v1 game board for 3 players  
    */
-  protected Board<String> make3PlayerBoard() {
+  protected Board<T> make3PlayerBoard() {
     int[][] worldMap = new int[][] { { 1, 1, 1, 1, 0, 0, 1, 0, 0 }, { 1, 1, 1, 0, 0, 0, 0, 0, 1 },
         { 1, 1, 1, 0, 0, 1, 0, 0, 0 }, { 1, 0, 0, 1, 1, 1, 1, 0, 0 }, { 0, 0, 0, 1, 1, 1, 0, 1, 0 },
         { 0, 0, 1, 1, 1, 1, 0, 0, 0 }, { 1, 0, 0, 1, 0, 0, 1, 1, 1 }, { 0, 0, 0, 0, 1, 0, 1, 1, 1 },
         { 0, 1, 0, 0, 0, 0, 1, 1, 1 } };
-    ArrayList<Territory<String>> territories = new ArrayList<>();
+    ArrayList<Territory<T>> territories = new ArrayList<>();
     for (int i = 0; i < 9; i++) {
-      territories.add(new V1Territory<String>(i, terriName.get(i), i / 3, worldMap[i]));
+      territories.add(new V1Territory<T>(i, terriName.get(i), i / 3, worldMap[i]));
     }
-    Board<String> b = new V1GameBoard(territories, worldMap);
+    Board<T> b = new V1GameBoard<>(territories, worldMap);
     return b;
   }
   
   /**
    * Generate a v1 game board for 4 players  
    */
-  protected Board<String> make4PlayerBoard() {
+  protected Board<T> make4PlayerBoard() {
     int[][] worldMap = new int[][] { { 1, 1, 0, 1, 0, 0, 0, 0, 0, 1, 0, 0 }, { 1, 1, 1, 0, 1, 0, 0, 0, 0, 0, 1, 0 },
         { 0, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0 }, { 1, 0, 0, 1, 1, 0, 1, 0, 0, 0, 0, 0 },
         { 0, 1, 0, 1, 1, 1, 0, 1, 0, 0, 0, 0 }, { 0, 0, 0, 0, 1, 1, 0, 0, 0, 0, 0, 0 },
         { 0, 0, 0, 1, 0, 1, 1, 0, 0, 1, 0, 0 }, { 0, 0, 0, 0, 1, 0, 1, 1, 1, 0, 1, 0 },
         { 0, 0, 0, 0, 0, 0, 0, 1, 1, 0, 0, 0 }, { 1, 0, 0, 0, 0, 0, 1, 0, 0, 1, 1, 0 },
         { 0, 1, 0, 0, 0, 0, 0, 1, 0, 1, 1, 1 }, { 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1 } };
-    ArrayList<Territory<String>> territories = new ArrayList<>();
+    ArrayList<Territory<T>> territories = new ArrayList<>();
     for (int i = 0; i < 12; i++) {
-      territories.add(new V1Territory<String>(i, terriName.get(i), i / 3, worldMap[i]));
+      territories.add(new V1Territory<T>(i, terriName.get(i), i / 3, worldMap[i]));
     }
-    Board<String> b = new V1GameBoard(territories, worldMap);
+    Board<T> b = new V1GameBoard<>(territories, worldMap);
     return b;
   }
 
   /**
    * Generate a v1 game board for 5 players  
    */
-  protected Board<String> make5PlayerBoard() {
+  protected Board<T> make5PlayerBoard() {
     int[][] worldMap = new int[][] { { 1, 1, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0 },
         { 1, 1, 1, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0 }, { 0, 1, 1, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 1 },
         { 1, 0, 0, 1, 1, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0 }, { 0, 1, 0, 1, 1, 1, 0, 1, 0, 0, 0, 0, 0, 0, 0 },
@@ -91,11 +91,11 @@ public class V1BoardFactory implements BoardFactory<String> {
         { 0, 0, 0, 0, 0, 0, 1, 0, 0, 1, 1, 0, 1, 0, 0 }, { 0, 0, 0, 0, 0, 0, 0, 1, 0, 1, 1, 1, 0, 1, 0 },
         { 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 1, 1, 0, 0, 1 }, { 1, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 1, 1, 0 },
         { 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 1, 1, 1 }, { 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 1, 1 } };
-    ArrayList<Territory<String>> territories = new ArrayList<>();
+    ArrayList<Territory<T>> territories = new ArrayList<>();
     for (int i = 0; i < 15; i++) {
-      territories.add(new V1Territory<String>(i, terriName.get(i), i / 3, worldMap[i]));
+      territories.add(new V1Territory<T>(i, terriName.get(i), i / 3, worldMap[i]));
     }
-    Board<String> b = new V1GameBoard(territories, worldMap);
+    Board<T> b = new V1GameBoard<>(territories, worldMap);
     return b;
   }
 
@@ -103,8 +103,8 @@ public class V1BoardFactory implements BoardFactory<String> {
    * Generate a game board based on the given player number  
    */
   @Override
-  public Board<String> makeGameBoard(int playerNum) {
-    Board<String> b = new V1GameBoard();
+  public Board<T> makeGameBoard(int playerNum) {
+    Board<T> b = new V1GameBoard<>();
     switch(playerNum){
     case 2:
       b =  make2PlayerBoard();
