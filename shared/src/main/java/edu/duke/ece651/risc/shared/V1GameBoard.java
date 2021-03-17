@@ -2,8 +2,8 @@ package edu.duke.ece651.risc.shared;
 
 import java.util.*;
 
-public class V1GameBoard<T> implements Board<T> {
-  ArrayList<Territory<T>> territories;
+public class V1GameBoard implements Board<String> {
+  ArrayList<Territory<String>> territories;
   int[][] worldMap;
 
   public V1GameBoard() {
@@ -11,7 +11,7 @@ public class V1GameBoard<T> implements Board<T> {
     worldMap = new int[1][1];
   }
 
-  public V1GameBoard(ArrayList<Territory<T>> territories, int[][] worldMap) {
+  public V1GameBoard(ArrayList<Territory<String>> territories, int[][] worldMap) {
     this.territories = territories;
     this.worldMap = worldMap;
   }
@@ -28,7 +28,7 @@ public class V1GameBoard<T> implements Board<T> {
     s.append("(next to:");
     String temp = " ";
     for (Integer n : neigh) {
-      Territory<T> neighTerritory = territories.get(n);
+      Territory<String> neighTerritory = territories.get(n);
       String neighName = neighTerritory.getName();
       s.append(temp);
       s.append(neighName);
@@ -71,7 +71,7 @@ public class V1GameBoard<T> implements Board<T> {
    *         Scadrial, Elantris) or Roshar (next to: Hogwarts, Scadrial, Elantris)
    */
   @Override
-  public String whatIsIn(Territory<T> territory, boolean isSelf) {
+  public String whatIsIn(Territory<String> territory, boolean isSelf) {
     HashMap<String, Integer> infoMap = new HashMap<>();
     infoMap = territory.getDisplayInfo(isSelf);
     Vector<Integer> neigh = new Vector<>();
@@ -89,7 +89,7 @@ public class V1GameBoard<T> implements Board<T> {
   public synchronized boolean occupyTerritory(int groupNum, int owner) {
     boolean ifOccupy = true;
     
-    for (Territory<T> t : territories) {
+    for (Territory<String> t : territories) {
       if (t.getGroup() == groupNum) {
         if (t.getOwner() == -1) {
           ifOccupy = false;
@@ -108,7 +108,7 @@ public class V1GameBoard<T> implements Board<T> {
    */
   @Override
   public void addOwnUnits(int territoryId, int amount) {
-    Territory<T> territory = territories.get(territoryId);
+    Territory<String> territory = territories.get(territoryId);
     int curr = territory.getUnitAmount();
     territory.setUnitAmount(amount + curr);
   }
@@ -119,7 +119,7 @@ public class V1GameBoard<T> implements Board<T> {
    */
   @Override
   public void addEnemyUnits(int territoryId, int amount, int playerId) {
-    Territory<T> territory = territories.get(territoryId);
+    Territory<String> territory = territories.get(territoryId);
     territory.addEnemy(playerId, amount);
   }
 
@@ -129,7 +129,7 @@ public class V1GameBoard<T> implements Board<T> {
    */
   @Override
   public void removeUnits(int territoryId, int amount) {
-    Territory<T> territory = territories.get(territoryId);
+    Territory<String> territory = territories.get(territoryId);
     int curr = territory.getUnitAmount();
     territory.setUnitAmount(curr - amount);
 
@@ -141,13 +141,13 @@ public class V1GameBoard<T> implements Board<T> {
    */
   @Override
   public void updateAllPrevDefender() {
-    for (Territory<T> t : territories) {
+    for (Territory<String> t : territories) {
       t.updatePrevDefender();
     }
   }
 
   @Override
-  public ArrayList<Territory<T>> getTerritories() {
+  public ArrayList<Territory<String>> getTerritories() {
     return territories;
   }
 
@@ -157,3 +157,8 @@ public class V1GameBoard<T> implements Board<T> {
   }
 
 }
+
+
+
+
+
