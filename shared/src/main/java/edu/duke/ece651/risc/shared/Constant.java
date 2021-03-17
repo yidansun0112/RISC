@@ -44,6 +44,8 @@ public class Constant {
   public static final int MIN_PLAYER_NUM = 2;
   /** The total units to be deployed for each player */
   public static final int TOTAL_UNITS = 15;
+  /** The side number of the dice  */
+  public static final int DICE_SIDE = 20;
 
   /** Values that indicate different status of a player */
   public static final int SELF_NOT_LOSE_NO_ONE_WIN_STATUS = 0; // the player has not lost, but not win neither, the game
