@@ -57,7 +57,7 @@ public class GameHostThread<T> extends Thread{
 
     //servier side: send msg (display group), receive deployment (arraylist), send info (if all done, send finish deploy)
     while(remainedUnits>0){
-      String msg=view.displayGroup(player.getPlayerId())+"You have "+remainedUnits+" left."
+      String msg = view.displayGroup(player.getPlayerId()) + "You have " + remainedUnits + " left.";
       player.sendObject(msg);
       ArrayList<Integer> deployment=(ArrayList<Integer>)player.receiveObject();
       int territoryId=deployment.get(0);
@@ -110,7 +110,7 @@ public class GameHostThread<T> extends Thread{
     switch(player.getPlayerStatus()){
       case Constant.SELF_NOT_LOSE_NO_ONE_WIN_STATUS:
         return;
-      case Constant.SE
+        //case Constant.SE
     }
   }
 
