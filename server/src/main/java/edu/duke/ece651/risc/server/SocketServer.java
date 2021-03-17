@@ -7,6 +7,7 @@ import java.net.ServerSocket;
 import java.net.Socket;
 import java.util.List;
 import java.util.Vector;
+import java.util.concurrent.BrokenBarrierException;
 
 import edu.duke.ece651.risc.shared.BoardFactory;
 import edu.duke.ece651.risc.shared.Constant;
@@ -100,8 +101,11 @@ public class SocketServer<T> implements GameServer<T> {
     }
   }
   
-  public void runServer() throws IOException, ClassNotFoundException {
+  public void runServer() throws IOException, ClassNotFoundException, InterruptedException,BrokenBarrierException {
     connectPlayer();
     connectAll();
+    GameRoom<T> room=rooms.get(0);
+    room.chooseMap();
+    room.playGame();
   }
 }
