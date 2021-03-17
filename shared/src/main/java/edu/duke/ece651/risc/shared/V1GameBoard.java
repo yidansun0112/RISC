@@ -22,7 +22,7 @@ public class V1GameBoard implements Board<String> {
    * 
    * @return String in the format like Narnia(0) (next to: Oz, Mordor, Roshar)
    */
- public String whatisInTerritory(String name, int territoryId, Vector<Integer> neigh) {
+ protected String whatisInTerritory(String name, int territoryId, Vector<Integer> neigh) {
     StringBuilder s = new StringBuilder();
     s.append(name + "(" + territoryId + ") ");
     s.append("(next to:");
@@ -44,7 +44,7 @@ public class V1GameBoard implements Board<String> {
    * 
    * @return String is either in the format like: 10 units in or just a ""
    */
-  public String unitsInfo(HashMap<String, Integer> infoMap) {
+  protected String unitsInfo(HashMap<String, Integer> infoMap) {
     Iterable<String> keySet = infoMap.keySet();
     StringBuilder s = new StringBuilder();
     String temp = "";
@@ -113,16 +113,7 @@ public class V1GameBoard implements Board<String> {
     return false;
   }
 
-  @Override
-  public boolean deployUnits(int territoryId, int amount, int player) {
-    Territory<String> territory = territories.get(territoryId);
-    int owner = territory.getOwner();
-    if (owner == player) {
-      addOwnUnits(territoryId, amount);
-      return true;
-    }
-    return false;
-  }
+
   /**
    * Add certain amount of units in a player's territory for a player
    * 
