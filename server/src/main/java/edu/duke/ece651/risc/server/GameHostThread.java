@@ -57,7 +57,7 @@ public class GameHostThread<T> extends Thread{
 
     //servier side: send msg (display group), receive deployment (arraylist), send info (if all done, send finish deploy)
     while(remainedUnits>0){
-      String msg=view.displayGroup(player.getPlayerId())+"You have "+remainedUnits+" left."
+      String msg=view.displayGroup(player.getPlayerId())+"You have "+remainedUnits+" left.";
       player.sendObject(msg);
       ArrayList<Integer> deployment=(ArrayList<Integer>)player.receiveObject();
       int territoryId=deployment.get(0);
@@ -106,23 +106,55 @@ public class GameHostThread<T> extends Thread{
     player.sendObject(view.displayBoardFor(player.getPlayerId()));
   }
 
-  public void checkStatus(){
+  public boolean toEnd() throws IOException,ClassNotFoundException,InterruptedException,BrokenBarrierException{
     switch(player.getPlayerStatus()){
       case Constant.SELF_NOT_LOSE_NO_ONE_WIN_STATUS:
-        return;
-      case Constant.SE
+        player.sendObject(Constant.NOT_LOSE_INFO);
+        return false;
+      case Constant.SELF_LOSE_NO_ONE_WIN_STATUS:
+        player.sendObject(Constant.LOSE_INFO);
+        loseChoice();
+        return true;
+      case Constant.SELF_WIN_STATUS:
+        player.sendObject(Constant.WIN_INFO);
+        doEndPhase();
+        return true;
+      case Constant.SELF_LOSE_OTHER_WIN_STATUS:
+        player.sendObject(Constant.GAME_END_INFO);
+        doEndPhase();
+        return true;
+      default:
+        return false;
     }
   }
 
-  public void loseChoice(){
-
+  public void loseChoice() throws IOException, ClassNotFoundException,InterruptedException,BrokenBarrierException{ 
+    String choice=(String)player.receiveObject();
+    switch(choice){
+      case Constant.TO_WATCH_INFO:
+        doWatchPhase();
+        return;
+      case Constant.TO_QUIT_INFO:
+        doEndPhase();
+        return;
+      default:
+        return;
+    }
   }
 
   public void doWatchPhase() throws IOException, InterruptedException,BrokenBarrierException, ClassNotFoundException{
     player.sendObject(Constant.CONFIRM_INFO);
-    while(player.getPlayerStatus()!=3){
-      player.sendObject(view.displayFullBoard());
+    while(true){
       barrier.await();
+      barrier.await();
+      player.sendObject(view.displayFullBoard());
+      if(player.getPlayerStatus()==Constant.SELF_LOSE_OTHER_WIN_STATUS){
+        player.sendObject(Constant.GAME_END_INFO);
+        break;
+      }
+      else{
+        player.sendObject(Constant.GAME_CONTINUE_INFO);
+      }
     }
     player.receiveObject();
     doEndPhase();
@@ -130,6 +162,30 @@ public class GameHostThread<T> extends Thread{
 
   public void doEndPhase() throws IOException{
     player.sendObject(Constant.CONFIRM_INFO);
-    //TODO: end this thread
+  }
+
+  @Override
+  public void run() {
+    try{
+      pickTerritory();
+      deployUnits();
+      while(true){
+        receiveOrder();
+        barrier.await();
+        barrier.await();
+        player.sendObject(view.displayFullBoard());
+        if(toEnd()){
+          break;
+        }
+      }
+    }catch(IOException e){
+      return;
+    }catch(InterruptedException e){
+      return;
+    }catch(BrokenBarrierException e){
+      return;
+    }catch(ClassNotFoundException e){
+      return;
+    }
   }
 }

@@ -1,12 +1,18 @@
 package edu.duke.ece651.risc.server;
 
+import java.io.IOError;
+import java.io.IOException;
 import java.util.List;
 import java.util.Vector;
 
 import edu.duke.ece651.risc.shared.Board;
 import edu.duke.ece651.risc.shared.BoardFactory;
+import edu.duke.ece651.risc.shared.BoardTextView;
 import edu.duke.ece651.risc.shared.BoardView;
 import edu.duke.ece651.risc.shared.Constant;
+import edu.duke.ece651.risc.shared.OrderRuleChecker;
+import edu.duke.ece651.risc.shared.V1BoardFactory;
+import edu.duke.ece651.risc.shared.V1GameBoard;
 
 public class GameRoom<T> {
 
@@ -53,8 +59,16 @@ public class GameRoom<T> {
   /**
    * Let the first player to choose a map for this room
    */
-  // public void chooseMap() {
-  // }
+  public void chooseMap() throws IOException, ClassNotFoundException{
+    PlayerEntity<T> firstPlayer=players.get(0);
+    V1BoardFactory factory=new V1BoardFactory();
+    // gameBoard=factory.makeGameBoard(playerNum);
+    // view=new BoardTextView(gameBoard);
+    // String msg=view.displayFullBoard()+"We only have one map now, please type any number to continue.";
+    // firstPlayer.sendObject(msg);
+    // String choice=(String)firstPlayer.receiveObject();
+
+  }
 
   /**
    * Add a new player to this room.
@@ -77,5 +91,11 @@ public class GameRoom<T> {
    */
   public int getPlayerNum() {
     return playerNum;
+  }
+
+  public void playGame(){
+    for(int i=0;i<playerNum;i++){
+      Thread t=new GameHostThread<T>(players.get(i), Constant.TOTAL_UNITS, gameBoard, view, new OrderRuleChecker<T>(), barrier);
+    }
   }
 }
