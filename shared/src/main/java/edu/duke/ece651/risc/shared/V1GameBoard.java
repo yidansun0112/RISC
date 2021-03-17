@@ -152,7 +152,7 @@ public class V1GameBoard<T> implements Board<T> {
    * after one round done
    */
   @Override
-  public void updateAllPrevDefender() {
+  public synchronized void updateAllPrevDefender() {
     for (Territory<T> t : territories) {
       t.updatePrevDefender();
     }

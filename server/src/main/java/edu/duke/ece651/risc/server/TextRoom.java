@@ -21,6 +21,7 @@ public class TextRoom extends GameRoom<String>{
     PlayerEntity<String> firstPlayer=players.get(0);
     BoardFactory<String> factory=new V1BoardFactory<String>();
     gameBoard=factory.makeGameBoard(playerNum);
+    gameBoard.updateAllPrevDefender();
     view=new BoardTextView(gameBoard);
     String msg=view.displayFullBoard()+"We only have one map now, please type any number to continue.";
     firstPlayer.sendObject(msg);
@@ -29,3 +30,10 @@ public class TextRoom extends GameRoom<String>{
   }
 
 }
+
+
+
+
+
+
+

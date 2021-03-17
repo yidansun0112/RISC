@@ -37,18 +37,19 @@ public class GameHostThread<T> extends Thread {
     // server side : send displayboard, receive choice, use occupyterritory,
     // if true, send success
     // if false, send info, and then send showgroup again
+    player.sendObject(view.displayFullBoard());
     while (true) {
-      player.sendObject(view.displayFullBoard());
       String choice = (String) player.receiveObject();
       // TODO: occupy should be synchronized
-      boolean success = board.occupyTerritory(Integer.parseInt(choice), player.getPlayerId());
-      if (success) {
+      boolean occupied = board.occupyTerritory(Integer.parseInt(choice), player.getPlayerId());
+      if (!occupied) {
         player.sendObject(Constant.VALID_MAP_CHOICE_INFO);
         break;
       } else {
         player.sendObject(Constant.INVALID_MAP_CHOICE_INFO);
       }
     }
+    board.updateAllPrevDefender();
   }
 
   public void deployUnits() throws IOException, ClassNotFoundException {
