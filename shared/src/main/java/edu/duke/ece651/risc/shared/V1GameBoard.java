@@ -22,7 +22,7 @@ public class V1GameBoard implements Board<String> {
    * 
    * @return String in the format like Narnia(0) (next to: Oz, Mordor, Roshar)
    */
-  protected String whatisInTerritory(String name, int territoryId, Vector<Integer> neigh) {
+ public String whatisInTerritory(String name, int territoryId, Vector<Integer> neigh) {
     StringBuilder s = new StringBuilder();
     s.append(name + "(" + territoryId + ") ");
     s.append("(next to:");
@@ -35,7 +35,7 @@ public class V1GameBoard implements Board<String> {
       temp = ", ";
     }
     s.append(")");
-    return "";
+    return s.toString();
   }
 
   /**
@@ -44,7 +44,7 @@ public class V1GameBoard implements Board<String> {
    * 
    * @return String is either in the format like: 10 units in or just a ""
    */
-  protected String unitsInfo(HashMap<String, Integer> infoMap) {
+  public String unitsInfo(HashMap<String, Integer> infoMap) {
     Iterable<String> keySet = infoMap.keySet();
     StringBuilder s = new StringBuilder();
     String temp = "";
@@ -88,7 +88,7 @@ public class V1GameBoard implements Board<String> {
   @Override
   public synchronized boolean occupyTerritory(int groupNum, int owner) {
     boolean ifOccupy = true;
-    
+
     for (Territory<String> t : territories) {
       if (t.getGroup() == groupNum) {
         if (t.getOwner() == -1) {
@@ -98,8 +98,19 @@ public class V1GameBoard implements Board<String> {
         }
       }
     }
-    
-      return ifOccupy;
+
+    return ifOccupy;
+  }
+
+  @Override
+  public boolean deployUnits(int territoryId, int amount, int player) {
+    Territory<String> territory = territories.get(territoryId);
+    int owner = territory.getOwner();
+    if (owner == player) {
+      addOwnUnits(territoryId, amount);
+      return true;
+    }
+    return false;
   }
 
   @Override
@@ -167,8 +178,3 @@ public class V1GameBoard implements Board<String> {
   }
 
 }
-
-
-
-
-

@@ -24,6 +24,7 @@ public class Army<T> {
     this.commanderId = owner;
   }
 
+
   public void minusUnit(int amout){
     this.units=this.units-amout;
   }
