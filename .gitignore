@@ -42,3 +42,13 @@ build
 server/.project
 client/.project
 shared/.project
+
+
+# Ignore .settings
+.settings/org.eclipse.buildship.core.prefs
+
+#Ignore .DS_Store
+.DS_Store
+
+#Ignore .settings
+.settings/
