@@ -19,7 +19,10 @@ public class BattleResolver<T> implements Resolver<T> {
     //go through every territory
     //go through every enemyArmy
     //and combine
-    
+    ArrayList<Territory<T>> territory = board.getTerritories();
+    for(Territory<T> t: territory){
+      t.combineEnemyArmy();
+    }
   }
 
   public void executeAllBattle(Board<T> board){
