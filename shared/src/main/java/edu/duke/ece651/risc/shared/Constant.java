@@ -42,6 +42,8 @@ public class Constant {
   public static final int MAX_PLAYER_NUM = 5;
   /** The minimum number of player allowed (inclusive) in a game room */
   public static final int MIN_PLAYER_NUM = 2;
+  /** The total units to be deployed for each player */
+  public static final int TOTAL_UNITS = 15;
 
   /** Values that indicate different status of a player */
   public static final int SELF_NOT_LOSE_NO_ONE_WIN_STATUS = 0; // the player has not lost, but not win neither, the game
