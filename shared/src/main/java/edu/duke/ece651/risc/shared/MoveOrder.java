@@ -15,6 +15,7 @@ public class MoveOrder<T> implements Order<T> {
   /*
    * This Constructor will perform Format Check and construct. If it failed. it
    * will return an IllegalArumentException.
+   * @Parameter s is the order which has format "src dest unit"
    */
   public MoveOrder(String s) {
 
