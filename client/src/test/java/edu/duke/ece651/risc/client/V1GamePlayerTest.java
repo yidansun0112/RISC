@@ -51,14 +51,15 @@ public class V1GamePlayerTest {
     String mapChoices = "Map 0: HarryPort\nMap 1: The Rings\n";
     when(clientMock.receiveObject()).thenReturn(mapChoices, "Invalid choice", Constant.VALID_MAP_CHOICE_INFO);
     ByteArrayOutputStream bytes = new ByteArrayOutputStream();
-    V1GamePlayer<String> player = createV1GamePlayer("a\n2\n1\n", bytes);
+    V1GamePlayer<String> player = createV1GamePlayer("-1\na\n2\n1\n", bytes);
     String p1 = "Please choose one map among the following maps.\n";
     String p2 = "Please type the map number that you would like to choose:\n";
     String prompt = p1 + mapChoices + "\n" + p2;
+    String exceptNega = "Cannot choose a map with negative index.\n"+"Please do that again!\n";
     String exceptNotNum = "For input string: \"a\" Map number should be pure number.\n" + "Please do that again!\n";
     String exceptInvalid = "Invalid choice\n" + "Please do that again!\n";
     String successInfo = Constant.VALID_MAP_CHOICE_INFO + "\n";
-    String total = prompt + exceptNotNum + exceptInvalid + successInfo;
+    String total = prompt + exceptNega + exceptNotNum + exceptInvalid + successInfo;
     player.selectGameMap();
     assertEquals(total, bytes.toString());
   }
@@ -90,14 +91,15 @@ public class V1GamePlayerTest {
     String groupChoices = "Group 0: Hogwarts\nGroup 1: Oz\n";
     when(clientMock.receiveObject()).thenReturn(groupChoices, "Invalid choice", Constant.VALID_MAP_CHOICE_INFO);
     ByteArrayOutputStream bytes = new ByteArrayOutputStream();
-    V1GamePlayer<String> player = createV1GamePlayer("a\n2\n1\n", bytes);
+    V1GamePlayer<String> player = createV1GamePlayer("-1\na\n2\n1\n", bytes);
     String p1 = "Please choose one group among the following groups.\n";
     String p2 = "Please type the group number that you would like to choose:\n";
     String prompt = p1 + groupChoices + "\n" + p2;
+    String exceptNega = "Cannot choose a group with negative index.\n"+"Please do that again!\n";
     String exceptNotNum = "For input string: \"a\" Group number should be pure number.\n" + "Please do that again!\n";
     String exceptInvalid = "Invalid choice\n" + "Please do that again!\n";
     String successInfo = Constant.VALID_MAP_CHOICE_INFO + "\n";
-    String total = prompt + exceptNotNum + exceptInvalid + successInfo;
+    String total = prompt + exceptNega + exceptNotNum + exceptInvalid + successInfo;
     player.pickTerritory();
     assertEquals(total, bytes.toString());
   }
@@ -219,11 +221,12 @@ public class V1GamePlayerTest {
   }
 
   @Test
-  public void test_doPlayPhase_gameEnd() throws IOException,ClassNotFoundException{
+  public void test_doPlayPhase_gameEnd() throws IOException, ClassNotFoundException {
     MockitoAnnotations.initMocks(this);
     String result = "Still going";
     String map = "map info\n";
-    when(clientMock.receiveObject()).thenReturn(map, Constant.LEGAL_ORDER_INFO, map, result, Constant.GAME_END_INFO,Constant.CONFIRM_INFO);
+    when(clientMock.receiveObject()).thenReturn(map, Constant.LEGAL_ORDER_INFO, map, result, Constant.GAME_END_INFO,
+        Constant.CONFIRM_INFO);
     ByteArrayOutputStream bytes = new ByteArrayOutputStream();
     V1GamePlayer<String> player = createV1GamePlayer("D\n", bytes);
     String ordermenu = "You are player 1, what would you like to do?\n" + "(M)ove\n" + "(A)ttack\n" + "(D)one\n";
@@ -236,11 +239,12 @@ public class V1GamePlayerTest {
   }
 
   @Test
-  public void test_doPlayPhase_lose() throws IOException,ClassNotFoundException{
+  public void test_doPlayPhase_lose() throws IOException, ClassNotFoundException {
     MockitoAnnotations.initMocks(this);
     String result = "Still going";
     String map = "map info\n";
-    when(clientMock.receiveObject()).thenReturn(map, Constant.LEGAL_ORDER_INFO, map, result, Constant.LOSE_INFO,Constant.CONFIRM_INFO);
+    when(clientMock.receiveObject()).thenReturn(map, Constant.LEGAL_ORDER_INFO, map, result, Constant.LOSE_INFO,
+        Constant.CONFIRM_INFO);
     ByteArrayOutputStream bytes = new ByteArrayOutputStream();
     V1GamePlayer<String> player = createV1GamePlayer("D\nQ\n", bytes);
     String ordermenu = "You are player 1, what would you like to do?\n" + "(M)ove\n" + "(A)ttack\n" + "(D)one\n";
@@ -249,7 +253,7 @@ public class V1GamePlayerTest {
     String confirmInfo = Constant.CONFIRM_INFO + "\n";
     String prompt = "Do you want to watch the game or quit?\n" + "W for watch, Q for quit\n"
         + "Please make your choice:\n";
-    String total = map + ordermenu + info + map + resultInfo + Constant.LOSE_INFO + "\n" + prompt+confirmInfo;
+    String total = map + ordermenu + info + map + resultInfo + Constant.LOSE_INFO + "\n" + prompt + confirmInfo;
     player.doPlayPhase();
     assertEquals(total, bytes.toString());
   }
