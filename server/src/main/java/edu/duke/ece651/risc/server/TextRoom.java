@@ -23,9 +23,9 @@ public class TextRoom extends GameRoom<String>{
     gameBoard=factory.makeGameBoard(playerNum);
     gameBoard.updateAllPrevDefender();
     view=new BoardTextView(gameBoard);
-    String msg=view.displayFullBoard()+"We only have one map now, please type any number to continue.";
+    String msg=view.displayFullBoard()+"We only have one map now, please type any non-negative number to continue.";
     firstPlayer.sendObject(msg);
-    String choice=(String)firstPlayer.receiveObject();
+    String choice=(String)firstPlayer.receiveObject(); // NOTE: not used in evolution1, since there's only one map
     firstPlayer.sendObject(Constant.VALID_MAP_CHOICE_INFO);
   }
 

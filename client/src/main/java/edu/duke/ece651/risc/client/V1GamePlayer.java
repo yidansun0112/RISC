@@ -131,9 +131,13 @@ public class V1GamePlayer<T> implements GamePlayer<T> {
     while (true) {
       try {
         String strNum = inputReader.readLine();
-        Integer.parseInt(strNum);
+        int mapIndex = Integer.parseInt(strNum);
+        // All maps should have a non-negative indexes
+        if (mapIndex < 0) {
+          throw new IllegalArgumentException("Cannot choose a map with negative index.");
+        }
         // NOTE: SEND string to server: send the map index of choosed map
-        client.sendObject(strNum);
+        client.sendObject(strNum); // if the player input passes all format checking, send it to server
         // NOTE: RECEIVE string from server:
         String choiceInfo = (String) client.receiveObject();
         if (!choiceInfo.equals(Constant.VALID_MAP_CHOICE_INFO)) {
@@ -193,6 +197,7 @@ public class V1GamePlayer<T> implements GamePlayer<T> {
     while (true) {
       try {
         String strNum = inputReader.readLine();
+        // TODO: prevent the negative input here!!!
         Integer.parseInt(strNum);
         // NOTE: SEND string to server: send the map index of choosed map
         client.sendObject(strNum);

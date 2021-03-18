@@ -3,6 +3,11 @@ package edu.duke.ece651.risc.shared;
 import java.util.ArrayList;
 
 public class MoveOrder<T> implements Order<T> {
+  /**
+   * Fields required by Serializable 
+   */
+  static final long serialVersionUID = 1L;
+
   private final int SrcTerritory;
   private final int DestTerritory;
   private final int unitAmount;

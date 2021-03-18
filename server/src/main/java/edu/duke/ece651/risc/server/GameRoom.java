@@ -92,10 +92,11 @@ public abstract class GameRoom<T> {
     return playerNum;
   }
 
-  public void playGame() throws InterruptedException, BrokenBarrierException{
-    barrier=new CyclicBarrier(playerNum);
-    for(int i=0;i<playerNum;i++){
-      Thread t=new GameHostThread<T>(players.get(i), Constant.TOTAL_UNITS, gameBoard, view, moveChecker,attackChecker, barrier);
+  public void playGame() throws InterruptedException, BrokenBarrierException {
+    barrier = new CyclicBarrier(playerNum + 1);
+    for (int i = 0; i < playerNum; i++) {
+      Thread t = new GameHostThread<T>(players.get(i), Constant.TOTAL_UNITS, gameBoard, view, moveChecker,
+          attackChecker, barrier);
       t.start();
     }
     while(true){
@@ -120,8 +121,8 @@ public abstract class GameRoom<T> {
   //TODO: to write this
   public boolean checkEnd(){
     //check
-    //if somebody win, set one to win, all others to lose_some_win
-    //else, if somebody lose, set its status to lose
+    //if somebody win, set one to win, all others to lose_some_win， and return true
+    //else, if somebody lose, set its status to lose, and return false
     return false;
   }
 }

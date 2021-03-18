@@ -87,7 +87,7 @@ public class V1GameBoard<T> implements Board<T> {
 
   @Override
   public synchronized boolean occupyTerritory(int groupNum, int owner) {
-    boolean ifOccupy = true;
+    boolean ifOccupy = true; // true if a territory already has its owner (i.e., Territory.owner >= 0)
 
     for (Territory<T> t : territories) {
       if (t.getGroup() == groupNum) {
@@ -149,7 +149,8 @@ public class V1GameBoard<T> implements Board<T> {
 
   /**
    * This function is used to update every Territory's previous defender army
-   * after one round done
+   * after one round done or when a territory is occupied by a player in picking
+   * territory group stage.
    */
   @Override
   public synchronized void updateAllPrevDefender() {

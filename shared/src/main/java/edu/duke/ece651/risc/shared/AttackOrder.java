@@ -1,8 +1,11 @@
 package edu.duke.ece651.risc.shared;
 
-import java.util.ArrayList;
-
 public class AttackOrder<T> implements Order<T> {
+
+  /**
+   * Fields required by Serializable 
+   */
+  static final long serialVersionUID = 2L;
 
   private int SrcTerritory;
   private int DestTerritory;

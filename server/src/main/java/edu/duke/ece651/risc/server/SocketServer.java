@@ -61,8 +61,7 @@ public class SocketServer<T> implements GameServer<T> {
         new ObjectInputStream(firstSock.getInputStream()), 0, symbol, -1, Constant.SELF_NOT_LOSE_NO_ONE_WIN_STATUS);
 
     // add the first player of this room into the list of player field
-    GameRoom<T> currRoom = rooms.firstElement();
-    currRoom.addPlayer(firstPlayer);
+    room.addPlayer(firstPlayer);
 
     // NOTE: SEND to client the player ID
     firstPlayer.sendObject(new String("0")); // for the first player, his/her id is 0
@@ -70,7 +69,7 @@ public class SocketServer<T> implements GameServer<T> {
     String playerNumMsg = (String) firstPlayer.receiveObject();
     int playerNum = Integer.parseInt(playerNumMsg);
     // Update the room playerNum field
-    currRoom.setPlayerNum(playerNum);
+    room.setPlayerNum(playerNum);
   }
 
   /**

@@ -122,7 +122,9 @@ public class V1Territory<T> implements Territory<T> {
   @Override
   public void updatePrevDefender() {
     prevDefenderArmy.clear();
-    for(Army<T> a : currDefenderArmy){
+    for(Army<T> a : currDefenderArmy) {
+      // BUG: if two threads call board.updateAllPrevDefender(), for one territory, 
+      // this will add Armies for twice, which errorly doubled the prevDefenderArmy!!!
       prevDefenderArmy.add(new Army<T>(a.getCommanderId(),a.getUnits()));
     }
     
