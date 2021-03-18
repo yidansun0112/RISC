@@ -197,6 +197,7 @@ public class V1GamePlayer<T> implements GamePlayer<T> {
     while (true) {
       try {
         String strNum = inputReader.readLine();
+        // TODO: prevent the negative input here!!!
         Integer.parseInt(strNum);
         // NOTE: SEND string to server: send the map index of choosed map
         client.sendObject(strNum);
