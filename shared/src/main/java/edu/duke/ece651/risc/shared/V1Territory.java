@@ -121,7 +121,7 @@ public class V1Territory<T> implements Territory<T> {
   */
   @Override
   public void updatePrevDefender() {
-    
+    prevDefenderArmy.clear();
     for(Army<T> a : currDefenderArmy){
       prevDefenderArmy.add(new Army<T>(a.getCommanderId(),a.getUnits()));
     }
@@ -155,7 +155,7 @@ public void combineEnemyArmy() {
       enemy.put(commander, new Army<T>(commander,a.getUnits()));
     }
   }
-  enemyArmy = new Vector<Army<T>>();
+  enemyArmy.clear();
   for(Integer key : enemy.keySet()){
     enemyArmy.add(enemy.get(key));
   }
