@@ -10,6 +10,10 @@ import java.util.Random;
 
 import edu.duke.ece651.risc.shared.*;
 
+/**
+ * This class serves as a gameroom for the game.
+ * It holds all players, let the first player to choose map, execute battle and check player status in each round.
+ */
 public abstract class GameRoom<T> {
 
   /** The number of players that participates in the game in this room */
@@ -61,9 +65,6 @@ public abstract class GameRoom<T> {
     //this.barrier=new CyclicBarrier(playerNum);
   }
 
-  // public void initRoom() {
-  // }
-
   /**
    * Let the first player to choose a map for this room
    */
@@ -92,6 +93,17 @@ public abstract class GameRoom<T> {
     return playerNum;
   }
 
+  /**
+   * Play the game.
+   * 
+   * Create a thread for each player.
+   * Execute battle after every player finish issuing orders.
+   * Increment one unit on each territory.
+   * Update player status.
+   * 
+   * @throws InterruptedException
+   * @throws BrokenBarrierException
+   */
   public void playGame() throws InterruptedException, BrokenBarrierException {
     barrier = new CyclicBarrier(playerNum + 1);
     for (int i = 0; i < playerNum; i++) {
@@ -105,12 +117,16 @@ public abstract class GameRoom<T> {
       incrementUnits();
       gameBoard.updateAllPrevDefender();
       if(checkEnd()){
+        //maybe should add a barrier.await() here
         break;
       }
       barrier.await();
     }
   }
 
+  /**
+   * Increment one unit for every territory on the board.
+   */
   public void incrementUnits(){
     int size = gameBoard.getTerritories().size();
     for(int i=0;i<size;i++){
