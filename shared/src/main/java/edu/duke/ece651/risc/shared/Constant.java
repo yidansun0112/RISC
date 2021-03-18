@@ -17,6 +17,12 @@ public class Constant {
   public static final String INVALID_MAP_CHOICE_INFO = "This group has been occupied!";
   /** Indicate the order issued by a player is legal */
   public static final String LEGAL_DEPLOY_INFO = "The Order Is Legal!";
+  /** Indicate the player is not the owner of this territory */
+  public static final String NOT_OWNER_INFO = "You are not the owner of this territory!";
+  /** Indicate the named territory does not exist */
+  public static final String NO_SUCH_TERRITORY_INFO = "This territory does not exist!";
+  /** Indicate the player does not have enough units */
+  public static final String INSUFFICIENT_UNIT_INFO = "You don't have enough units remained!";
   /** Indicate a player has finished the deployment */
   public static final String FINISH_DEPLOY_INFO = "Deploy Finished!";
   /** Indicate the order issued by a player is illegal */

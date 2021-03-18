@@ -66,13 +66,13 @@ public class GameHostThread<T> extends Thread {
       int unitAmount = deployment.get(1);
       // check units
       // >0 continue
-      if (remainedUnits - unitAmount >= 0) {
+      if (remainedUnits >= unitAmount) {
         boolean result = board.deployUnits(territoryId, unitAmount, player.getPlayerId());
         if (result) {
           remainedUnits -= unitAmount;
           player.sendObject(Constant.LEGAL_DEPLOY_INFO);
         } else {
-          player.sendObject("You are not the owner of this territory!");
+          player.sendObject(Constant.NOT_OWNER_INFO);
         }
       } else {
         player.sendObject("You don't have enough units remained!");
@@ -180,12 +180,13 @@ public class GameHostThread<T> extends Thread {
       pickTerritory();
       deployUnits();
       while (true) {
+        // BUG: add a check lose here, if current player lose, dont do receiveOrder, but directly barrier.await()
         receiveOrder();
         barrier.await();
         barrier.await();
         player.sendObject(view.displayFullBoard());
         if (toEnd()) {
-          break;
+          break;  // BUG: do not break here, but to continue
         }
       }
     } catch (IOException e) {
