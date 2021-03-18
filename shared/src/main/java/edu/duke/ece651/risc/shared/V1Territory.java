@@ -46,12 +46,18 @@ public class V1Territory<T> implements Territory<T> {
     return res;
   }
 
+  /*
+    Set the Owner
+*/
   @Override
   public void setOwner(int owner) {
     currOwner = owner;
 
   }
 
+  /*
+    Return the Territory Owner.
+*/
   @Override
   public int getOwner() {
     return currOwner;
@@ -75,33 +81,50 @@ public class V1Territory<T> implements Territory<T> {
     return currDefenderArmy.get(0).getUnits();
   }
 
-  
+
+  /*
+    return Id 
+   */
   @Override
   public int getId() {
     return Id;
   }
 
+  /*
+    return name. 
+   */
   @Override
   public String getName() {
     return name;
   }
 
+  /*
+    return Group Num.
+*/
   @Override
   public int getGroup() {
     return group;
   }
 
+  /*
+    Return neighbor Vectore
+*/
   @Override
   public Vector<Integer> getNeigh() {
     return neigh;
   }
 
-
+  /*
+    return DefenderArmy Vectore
+*/
   @Override
   public Vector<Army<T>> getCurrDefenderArmy() {
     return this.currDefenderArmy;
   }
 
+  /*
+    return enemyArmy Vectore
+*/
   @Override
   public Vector<Army<T>> getEnemyArmy(){
     return this.enemyArmy;
@@ -143,6 +166,10 @@ public class V1Territory<T> implements Territory<T> {
 	
   }
 
+
+  /*
+    Combine the Army with the same Commander.
+*/
 @Override
 public void combineEnemyArmy() {
   HashMap<Integer, Army<T>> enemy = new HashMap<Integer,Army<T>>();
