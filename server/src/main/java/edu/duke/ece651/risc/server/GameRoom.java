@@ -92,10 +92,12 @@ public abstract class GameRoom<T> {
     return playerNum;
   }
 
-  public void playGame() throws InterruptedException, BrokenBarrierException{
-    barrier=new CyclicBarrier(playerNum);
-    for(int i=0;i<playerNum;i++){
-      Thread t=new GameHostThread<T>(players.get(i), Constant.TOTAL_UNITS, gameBoard, view, moveChecker,attackChecker, barrier);
+  public void playGame() throws InterruptedException, BrokenBarrierException {
+    barrier = new CyclicBarrier(playerNum); // BUG: potential bug, here might need to be playerNum + 1, since we need
+                                            // sync between all player AND server(game room)
+    for (int i = 0; i < playerNum; i++) {
+      Thread t = new GameHostThread<T>(players.get(i), Constant.TOTAL_UNITS, gameBoard, view, moveChecker,
+          attackChecker, barrier);
       t.start();
     }
     while(true){
