@@ -9,6 +9,12 @@ public class BoardTextView extends BoardView<String> {
     super(display);
   }
 
+  /*
+    @param t is the Territory
+    @param index is the Id of the cooresponding Group or Player
+    @oaram res is the HashMap to store different kinds of territory.
+    This Function will store territory of different group into the Map.
+*/
   protected void classifyHelper(Territory<String> t, int index, HashMap<Integer, ArrayList<Territory<String>>> res) {
     if (!res.containsKey(index)) {
       ArrayList<Territory<String>> temp = new ArrayList<>();
@@ -19,6 +25,10 @@ public class BoardTextView extends BoardView<String> {
     }
   }
 
+  /*
+    this will iterate over the TerritoryList to classify different Territories. 
+    @param res is the HashMap to store.
+*/
   protected void classify(HashMap<Integer, ArrayList<Territory<String>>> res) {
     res.clear();
     for (Territory<String> t : toDisplay.getTerritories()) {
@@ -36,7 +46,8 @@ public class BoardTextView extends BoardView<String> {
 
   /*
    * This Funciton will help to make the header of the response.
-   */
+     @param assigned to identify if this is a group or player.
+*/
   public String makeHead(boolean assigned, int idx) {
     String parseLine = "------------------\n";
     if (assigned) {

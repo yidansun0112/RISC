@@ -5,17 +5,32 @@ import java.util.List;
 import java.util.Vector;
 
 import edu.duke.ece651.risc.shared.*;
+
+/**
+ * This class handles a TextRoom for Version 1.
+ */
 public class TextRoom extends GameRoom<String>{
   
-
+  /**
+   * Constructor for TextRoom.
+   */
   public TextRoom(){
     this(0, Constant.TOTAL_UNITS, new Vector<PlayerEntity<String>>(), null, null);
   }
 
+  /**
+   * Constructor
+   */
   public TextRoom(int playerNum, int totalUnits, List<PlayerEntity<String>> players, Board<String> gameBoard, BoardView<String> view) {
     super(playerNum,totalUnits,players,gameBoard,view);
   }
 
+  /**
+   * This method let the first player to choose map.
+   * 
+   * @throws IOException
+   * @throws ClassNotFoundException
+   */
   @Override
   public void chooseMap() throws IOException, ClassNotFoundException{
     PlayerEntity<String> firstPlayer=players.get(0);

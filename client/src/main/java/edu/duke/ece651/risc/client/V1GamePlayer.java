@@ -84,7 +84,7 @@ public class V1GamePlayer<T> implements GamePlayer<T> {
     out.println("Please make your choice:");
     while (true) {
       try {
-        String strNum = inputReader.readLine();
+        String strNum = inputReader.readLine().trim();
         int num;
         try {
           num = Integer.parseInt(strNum);
@@ -130,7 +130,7 @@ public class V1GamePlayer<T> implements GamePlayer<T> {
     out.println("Please type the map number that you would like to choose:");
     while (true) {
       try {
-        String strNum = inputReader.readLine();
+        String strNum = inputReader.readLine().trim();
         int mapIndex = Integer.parseInt(strNum);
         // All maps should have a non-negative indexes
         if (mapIndex < 0) {
@@ -196,9 +196,12 @@ public class V1GamePlayer<T> implements GamePlayer<T> {
     out.println("Please type the group number that you would like to choose:");
     while (true) {
       try {
-        String strNum = inputReader.readLine();
-        // TODO: prevent the negative input here!!!
-        Integer.parseInt(strNum);
+        String strNum = inputReader.readLine().trim();
+        // DONE: prevent the negative input here!!!
+        int groupIndex=Integer.parseInt(strNum);
+        if (groupIndex < 0) {
+          throw new IllegalArgumentException("Cannot choose a group with negative index.");
+        }
         // NOTE: SEND string to server: send the map index of choosed map
         client.sendObject(strNum);
         // NOTE: RECEIVE string from server:
@@ -237,7 +240,7 @@ public class V1GamePlayer<T> implements GamePlayer<T> {
       out.println(msg);
       out.println("Please type in format \"Territory index,Units deployed in this territory\"");
       out.println("For example \"2,5\" will deploy 5 units in territory 2");
-      String choice = inputReader.readLine();
+      String choice = inputReader.readLine().trim();
       try {
         ArrayList<Integer> deployment = stringParser(choice);
         client.sendObject(deployment);
@@ -298,7 +301,7 @@ public class V1GamePlayer<T> implements GamePlayer<T> {
       out.print(map);
       showOrderMenu();
       // get order title (M,A,D), should add into constant
-      String choice = inputReader.readLine().toUpperCase();
+      String choice = inputReader.readLine().toUpperCase().trim();
       try {
         Order<T> order = createOrder(choice);
         client.sendObject(order);
@@ -340,7 +343,7 @@ public class V1GamePlayer<T> implements GamePlayer<T> {
     out.println("Please type the content of your move order.");
     out.println("Format: \"Source_territory_index Destination_territory_index units_to_move");
     out.println("For example: \"1 3 5\" will move 5 units from territory 1 to territory 3");
-    String str = inputReader.readLine();
+    String str = inputReader.readLine().trim();
     MoveOrder<T> moveOrder = new MoveOrder<T>(str);
     return moveOrder;
   }
@@ -358,7 +361,7 @@ public class V1GamePlayer<T> implements GamePlayer<T> {
     out.println("Please type the content of your attack order.");
     out.println("Format: \"Source_territory_index Destination_territory_index units_to_attack");
     out.println("For example: \"1 3 5\" will move 5 units from territory 1 to attack territory 3");
-    String str = inputReader.readLine();
+    String str = inputReader.readLine().trim();
     AttackOrder<T> attackOrder = new AttackOrder<T>(str);
     return attackOrder;
   }
