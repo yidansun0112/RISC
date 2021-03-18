@@ -35,7 +35,7 @@ public class AttackOrder<T> implements Order<T> {
 
   /**
    * Execute attack order which means remove units in attacker territory and add enemy army in destination territory
-  
+   * @param board is the board to be executed attack order on
    */
   @Override
   public boolean execute(Board<T> board) {
@@ -49,17 +49,27 @@ public class AttackOrder<T> implements Order<T> {
     }
     return true;
   }
-
+  /**
+   * Getter for SrcTerritory
+   * @return  SrcTerritory
+   */
   @Override
   public int getSrcTerritory() {
     return SrcTerritory;
   }
-
+  /**
+   * Getter for Desterritory
+   * @return  DestTerritory
+   */
   @Override
   public int getDestTerritory() {
     return DestTerritory;
   }
 
+  /**
+   * Getter for  unitAmount
+   * @return  DestTerritory
+   */
   @Override
   public int getUnitAmount() {
     return unitAmount;
