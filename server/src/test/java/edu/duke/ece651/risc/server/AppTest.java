@@ -19,10 +19,15 @@ class AppTest {
 
     
     @Test
-    public void test_main(){
+    public void test_main() throws InterruptedException{
         // Start a new TestLoopBackServer in a separate thread
       Thread server=make_server_thread_helper();
       server.start();
+
+      // Let the thread that excute teh test_main sleep for a while,
+      // wait for the server setup
+      Thread.sleep(200);
+
       Thread th0 = make_test_player_thread_helper("0");
       th0.start();
       Thread th1 = make_test_player_thread_helper("1");
@@ -48,7 +53,7 @@ class AppTest {
           @Override
           public void run() {
             try {
-              Thread.sleep(100);
+              // Thread.sleep(100);
               String[] args={id}; 
               TestPlayer.main(args);
             } catch (Exception e) {
