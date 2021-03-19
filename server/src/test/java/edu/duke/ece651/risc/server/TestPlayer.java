@@ -51,6 +51,7 @@ public class TestPlayer {
         Order<String> order=new DoneOrder<String>();
         send.writeObject(order);
         recv.readObject();
+        recv.readObject();
         //recv result
         recv.readObject();
         recv.readObject();
@@ -89,8 +90,12 @@ public class TestPlayer {
         recv.readObject();
         //issue orders
         recv.readObject();
-        Order<String> order=new AttackOrder<String>("3 0 15");
-        send.writeObject(order);
+        Order<String> order1=new AttackOrder<String>("3 0 15");
+        send.writeObject(order1);
+        recv.readObject();
+        Order<String> order2=new DoneOrder<String>();
+        send.writeObject(order2);
+        recv.readObject();
         recv.readObject();
         //recv result
         recv.readObject();

@@ -18,41 +18,43 @@ class AppTest {
     private Random rdmMock;
 
     
-    // @Test
-    // public void test_main(){
-    //     // Start a new TestLoopBackServer in a separate thread
-    //   Thread server=make_server_thread_helper();
-    //   server.start();
-    //   Thread th0 = make_test_player_thread_helper("0");
-    //   th0.start();
-    //   Thread th1 = make_test_player_thread_helper("1");
-    //   th1.start();
-    // }
+    @Test
+    public void test_main(){
+        // Start a new TestLoopBackServer in a separate thread
+      Thread server=make_server_thread_helper();
+      server.start();
+      Thread th0 = make_test_player_thread_helper("0");
+      th0.start();
+      Thread th1 = make_test_player_thread_helper("1");
+      th1.start();
+    }
 
-    // private Thread make_server_thread_helper() {
-    //   Thread th = new Thread() {
-    //     @Override
-    //     public void run() {
-    //       try {
-    //         App.main(new String[0]);
-    //       } catch (Exception e) {
-    //       }
-    //     }
-    //   };
-    //   return th;
-    // }
+    private Thread make_server_thread_helper() {
+      Thread th = new Thread() {
+        @Override
+        public void run() {
+          try {
+            App.main(new String[0]);
+            System.out.println("test finished!");
+          } catch (Exception e) {
+          }
+        }
+      };
+      return th;
+    }
 
-    // private Thread make_test_player_thread_helper(String id) {
-    //     Thread th = new Thread() {
-    //       @Override
-    //       public void run() {
-    //         try {
-    //           String[] args={id}; 
-    //           TestPlayer.main(args);
-    //         } catch (Exception e) {
-    //         }
-    //       }
-    //     };
-    //     return th;
-    //   }
+    private Thread make_test_player_thread_helper(String id) {
+        Thread th = new Thread() {
+          @Override
+          public void run() {
+            try {
+              Thread.sleep(100);
+              String[] args={id}; 
+              TestPlayer.main(args);
+            } catch (Exception e) {
+            }
+          }
+        };
+        return th;
+      }
 }

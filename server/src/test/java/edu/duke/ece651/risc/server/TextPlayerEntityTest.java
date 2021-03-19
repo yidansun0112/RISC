@@ -113,7 +113,7 @@ public class TextPlayerEntityTest {
 
     Socket socket = new Socket("localhost", 3301);
     
-    TextPlayerEntity tpe = new TextPlayerEntity(new ObjectOutputStream(socket.getOutputStream()),
+    TextPlayerEntity<String> tpe = new TextPlayerEntity<String>(new ObjectOutputStream(socket.getOutputStream()),
     new ObjectInputStream(socket.getInputStream()), playerId, playerSymbol, ownedGroup, playerStatus);
     
     String msg = new String("Hi there!"); // a string used in testing, it will "send" by the mocked oosMock object
