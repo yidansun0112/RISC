@@ -5,12 +5,17 @@ import java.util.*;
 public class V1GameBoard<T> implements Board<T> {
   ArrayList<Territory<T>> territories;
   int[][] worldMap;
-
+/**
+ * Default constructor for V1GameBoard
+ */
   public V1GameBoard() {
     territories = new ArrayList<>();
     worldMap = new int[1][1];
   }
 
+  /**
+   * Constructor for V1GameBoard, given territories and worlpmap
+   */
   public V1GameBoard(ArrayList<Territory<T>> territories, int[][] worldMap) {
     this.territories = territories;
     this.worldMap = worldMap;
@@ -85,6 +90,12 @@ public class V1GameBoard<T> implements Board<T> {
     return s.toString();
   }
 
+  /**
+  * Occupy a group a territories for the owner
+  * @param groupNum is the group number of the territories to be assigned
+  * @param owner is the owner of the group
+  * @return true if the territory has been occupied, otherwise false
+  */
   @Override
   public synchronized boolean occupyTerritory(int groupNum, int owner) {
     boolean ifOccupy = true; // true if a territory already has its owner (i.e., Territory.owner >= 0)
@@ -102,6 +113,13 @@ public class V1GameBoard<T> implements Board<T> {
     return ifOccupy;
   }
 
+  /** 
+  * Deploy certain amount of units on a territory for a player
+  * @param territoryId is the id of the territory to be deployed
+  * @param amount is the amount of units to be deployed
+  * @param player is the player id 
+  * @return true if deploy units succeed, othereise false
+  */
   @Override
   public boolean deployUnits(int territoryId, int amount, int player) {
     Territory<T> territory = territories.get(territoryId);
@@ -115,9 +133,11 @@ public class V1GameBoard<T> implements Board<T> {
 
 
   /**
-   * Add certain amount of units in a player's territory for a player
-   * 
-   */
+  * Add own units for a territory
+  * 
+  * @param territoryId
+  * @param amount
+  */
   @Override
   public void addOwnUnits(int territoryId, int amount) {
     Territory<T> territory = territories.get(territoryId);
@@ -126,9 +146,11 @@ public class V1GameBoard<T> implements Board<T> {
   }
 
   /**
-   * Add an enemy army in a territory
-   * 
-   */
+  * Add enemy units for a territory
+  * @param territoryId
+  * @param amount
+  * @param playerId
+  */
   @Override
   public void addEnemyUnits(int territoryId, int amount, int playerId) {
     Territory<T> territory = territories.get(territoryId);
@@ -136,9 +158,11 @@ public class V1GameBoard<T> implements Board<T> {
   }
 
   /**
-   * remove certain amount of units in one territory for a player can only remove
-   * units from his/her owner territory
-   */
+  * Remove units from one territory
+  * @param territory 
+  * @param amount 
+  * 
+  */
   @Override
   public void removeUnits(int territoryId, int amount) {
     Territory<T> territory = territories.get(territoryId);
@@ -159,11 +183,19 @@ public class V1GameBoard<T> implements Board<T> {
     }
   }
 
+  /**
+  * Getter for territories
+  * @return territories
+  */
   @Override
   public ArrayList<Territory<T>> getTerritories() {
     return territories;
   }
 
+  /**
+   * Getter for worldMap
+   * @return worldMap
+   */
   @Override
   public int[][] getWorldMap() {
     return worldMap;

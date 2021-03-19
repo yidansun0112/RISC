@@ -100,7 +100,9 @@ public class V1BoardFactory<T> implements BoardFactory<T> {
   }
 
   /**
-   * Generate a game board based on the given player number  
+   * Generate a game board based on the given player number 
+   * @param playerNum is the player number
+   * @return a Board
    */
   @Override
   public Board<T> makeGameBoard(int playerNum) {
