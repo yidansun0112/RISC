@@ -55,7 +55,7 @@ class AppTest {
     try{
       System.setIn(input);
       System.setOut(out);
-      String[] args={"prog","localhost"};
+      String[] args={"localhost"};
       App.main(args);
     }finally{
       System.setIn(oldIn);
