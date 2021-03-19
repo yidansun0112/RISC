@@ -53,9 +53,12 @@ public class SocketServer<T> implements GameServer<T> {
    */
   public void connectPlayer(GameRoom<T> room) throws IOException, ClassNotFoundException {
     Socket firstSock = serverSocket.accept();
+
     // Got a player, create a game room for him/her. A socket server at least has
-    // one game room in evolution 
+    // one game room in evolution
+    System.out.println("Server got the first player!");
     rooms.add(room);
+
     // Before picking territory group, no one owns any territory group, so we pass -1 here
     PlayerEntity<T> firstPlayer = new TextPlayerEntity<T>(new ObjectOutputStream(firstSock.getOutputStream()),
         new ObjectInputStream(firstSock.getInputStream()), 0, symbol, -1, Constant.SELF_NOT_LOSE_NO_ONE_WIN_STATUS);
@@ -100,11 +103,35 @@ public class SocketServer<T> implements GameServer<T> {
     }
   }
   
-  public void runServer(GameRoom<T> r) throws IOException, ClassNotFoundException, InterruptedException,BrokenBarrierException {
+  public void start(GameRoom<T> r) throws IOException, ClassNotFoundException, InterruptedException,BrokenBarrierException {
+    System.out.println("The server is now waiting for all the players...");
     connectPlayer(r);
+    System.out.println("Now waiting for the rest of players come...");
     connectAll();
+    System.out.println("All players are here, the game now begin!");
     GameRoom<T> room=rooms.get(0);
     room.chooseMap();
     room.playGame();
+
+    closeServer();
+
+    System.out.println("Game is end. Close the server.");
   }
+
+  /**
+   * This method will close the server socket and all connected sockets to release
+   * resources. In evolution2, the server may be required to run forever, at that
+   * time we may implements Autoclosable. This method is only used in evolution 1.
+   * 
+   * @throws IOException
+   */
+  private void closeServer() throws IOException {
+    for (Socket sock : playerSockets) {
+      sock.close();
+    }
+    serverSocket.close();
+    
+  }
+
+  
 }

@@ -258,6 +258,7 @@ public class V1GamePlayer<T> implements GamePlayer<T> {
       }
     }
     out.println(msg);
+    out.println("Please be patient to wait other players finish their deployment...");
   }
 
   /**
@@ -454,7 +455,7 @@ public class V1GamePlayer<T> implements GamePlayer<T> {
     out.println("W for watch, Q for quit");
     out.println("Please make your choice:");
     while (true) {
-      String choice = inputReader.readLine().toUpperCase();
+      String choice = inputReader.readLine().trim().toUpperCase();
       try {
         switch (choice) {
         case "W":

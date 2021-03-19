@@ -96,28 +96,41 @@ public abstract class GameRoom<T> {
   /**
    * Play the game.
    * 
-   * Create a thread for each player.
-   * Execute battle after every player finish issuing orders.
-   * Increment one unit on each territory.
-   * Update player status.
+   * Create threads for each player. In each thread let the corresponding player 
+   * pick territory and deploy their units. When all the player finish their 
+   * deployment, start to play serverial turns, which involve:
+   * 
+   * 1. Receive, check and execute orders;
+   * 2. Execute battle after every player finish issuing orders.
+   * 3. Increment one unit on each territory.
+   * 4. Update player status.
+   * 
+   * When each turn ends, check if the game has a winner:
+   *   if has a winner, end the whole game
+   *   else continue the game for the rest of the player who has not lost yet.
    * 
    * @throws InterruptedException
    * @throws BrokenBarrierException
+   * @throws IOException
    */
-  public void playGame() throws InterruptedException, BrokenBarrierException {
+  public void playGame() throws InterruptedException, BrokenBarrierException, IOException {
     barrier = new CyclicBarrier(playerNum + 1);
     for (int i = 0; i < playerNum; i++) {
       Thread t = new GameHostThread<T>(players.get(i), Constant.TOTAL_UNITS, gameBoard, view, moveChecker,
           attackChecker, barrier);
       t.start();
     }
+    // Wait all the player finishing their deployment
+    barrier.await();
     while(true){
       barrier.await();
       resolver.executeAllBattle(gameBoard);
       incrementUnits();
       gameBoard.updateAllPrevDefender();
       if(checkEnd()){
-        //maybe should add a barrier.await() here
+        barrier.await();
+        barrier.await();
+        closeAllStreams();
         break;
       }
       barrier.await();
@@ -134,11 +147,68 @@ public abstract class GameRoom<T> {
     }
   }
 
-  //TODO: to write this
-  public boolean checkEnd(){
-    //check
-    //if somebody win, set one to win, all others to lose_some_win， and return true
-    //else, if somebody lose, set its status to lose, and return false
+  /**
+   * Thia method will check each players current status, e.g, how many territories
+   * does each player have, to see whether a player has lost or win the game. It
+   * will set all the players' status with appropriate value.
+   * 
+   * We abstract this method out of checkEnd() for single responsibility.
+   */
+  protected void updatePlayerStatus() {
+    int numTerritory = gameBoard.getTerritories().size(); // how many territories in total
+
+    int[] eachHaving = new int[playerNum]; // index is player id, value is # of territory
+                                           // this player currently has
+
+    // Count the current occupying
+    for (Territory<T> t : gameBoard.getTerritories()) {
+      eachHaving[t.getOwner()]++;
+    }
+    
+    int winnerId = -1; // the player's id who wins the game. If no one wins, set it to -1.
+    for (int i = 0; i < eachHaving.length; i++) {
+      if (eachHaving[i] == numTerritory) {
+        winnerId = i;
+        break;
+      }
+    }
+
+    // Set the player status according to whether the game has winner
+    for (int i = 0; i < eachHaving.length; i++) {
+      PlayerEntity<T> player = players.get(i);
+        player.setPlayerStatus(
+          (winnerId != -1) ? ((eachHaving[i] == 0) ? Constant.SELF_LOSE_OTHER_WIN_STATUS : Constant.SELF_WIN_STATUS) : 
+                             ((eachHaving[i] == 0) ? Constant.SELF_NOT_LOSE_NO_ONE_WIN_STATUS : Constant.SELF_NOT_LOSE_NO_ONE_WIN_STATUS)
+                             );
+    }
+  }
+
+  /**
+   * Update all players satuts (whether a player win or lose), to decide whether
+   * we will end this game. If no one wins the game, the game should continue. If
+   * someone wins the game, the game should end.
+   * 
+   * @return true if the game has winner. return false if no one wins the game
+   */
+  public boolean checkEnd() {
+    updatePlayerStatus();
+    for (PlayerEntity<T> player : players) {
+      if (player.playerStatus == Constant.SELF_WIN_STATUS) {
+        return true;
+      }
+    }
     return false;
+  }
+
+  /**
+   * This method will close the ObjectInputStreams and ObjectOutputStreams each
+   * player entity holds to release the resource.
+   * @throws IOException
+   */
+  protected void closeAllStreams() throws IOException {
+    for (PlayerEntity<T> player : players) {
+      player.getFromPlayer().close();
+      player.getToPlayer().close();
+    }
   }
 }

@@ -13,6 +13,6 @@ public class App {
         ServerSocket serverSock = new ServerSocket(12345);
         SocketServer<String> server = new SocketServer<String>(serverSock, "BasicPlayer");
         GameRoom<String> room=new TextRoom();
-        server.runServer(room);
+        server.start(room);
     }
 }
