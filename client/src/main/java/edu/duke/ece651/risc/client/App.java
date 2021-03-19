@@ -22,7 +22,7 @@ public class App {
      * @throws ClassNotFoundException
      */
     public static void main(String[] args) throws IOException,ClassNotFoundException{
-        SocketClient client=new SocketClient(12345," vcm-18386.vm.duke.edu");
+        SocketClient client=new SocketClient(12345,args[1]);
         BufferedReader input = new BufferedReader(new InputStreamReader(System.in));
         GamePlayer<String> player=new V1GamePlayer<String>(-1, client, input, System.out);
         player.initGame();
