@@ -16,10 +16,10 @@ public class MoveOrderConsistencyChecker<T> extends OrderRuleChecker<T> {
     Territory<T> territory_dest = board.getTerritories().get(order.getDestTerritory());
 
     if (territory_src.getOwner() != playerId) {
-      return "The Source Destination doesn't belong to this player.\n";
+      return "The source territory doesn't belong to this player.\n";
     }
     if (territory_dest.getOwner() != playerId) {
-      return "The Source Destination doesn't belong to this player.\n";
+      return "The destination territory doesn't belong to this player.\n";
     }
     return null;
   }

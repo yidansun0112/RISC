@@ -24,8 +24,8 @@ public class MoveOrderConsistencyCheckerTest {
       b.getTerritories().get(i + 3).setUnitAmount(5);
     }
     
-    String s1 = "The Source Destination doesn't belong to this player.\n";
-    String s2 = "The Source Destination doesn't belong to this player.\n";
+    String s1 = "The source territory doesn't belong to this player.\n";
+    String s2 = "The destination territory doesn't belong to this player.\n";
 
     MoveOrderConsistencyChecker checker = new MoveOrderConsistencyChecker<String>(null);
 
