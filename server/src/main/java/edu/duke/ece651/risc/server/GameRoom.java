@@ -124,9 +124,15 @@ public abstract class GameRoom<T> {
     barrier.await();
     while(true){
       barrier.await();
+      synchronized(System.in){
+        System.out.println("All players done with their orders");
+      }
       resolver.executeAllBattle(gameBoard);
       incrementUnits();
       gameBoard.updateAllPrevDefender();
+      synchronized(System.in){
+        System.out.println("Battle finished, now check anyone wins");
+      }
       if(checkEnd()){
         barrier.await();
         barrier.await();
@@ -134,6 +140,12 @@ public abstract class GameRoom<T> {
         break;
       }
       barrier.await();
+      synchronized(System.in){
+        System.out.println("No one wins, now waiting all players done again");
+      }
+    }
+    synchronized(System.in){
+      System.out.println("Tread for GameRoom exits");
     }
   }
 
@@ -178,7 +190,7 @@ public abstract class GameRoom<T> {
       PlayerEntity<T> player = players.get(i);
         player.setPlayerStatus(
           (winnerId != -1) ? ((eachHaving[i] == 0) ? Constant.SELF_LOSE_OTHER_WIN_STATUS : Constant.SELF_WIN_STATUS) : 
-                             ((eachHaving[i] == 0) ? Constant.SELF_NOT_LOSE_NO_ONE_WIN_STATUS : Constant.SELF_NOT_LOSE_NO_ONE_WIN_STATUS)
+                             ((eachHaving[i] == 0) ? Constant.SELF_LOSE_NO_ONE_WIN_STATUS : Constant.SELF_NOT_LOSE_NO_ONE_WIN_STATUS)
                              );
     }
   }

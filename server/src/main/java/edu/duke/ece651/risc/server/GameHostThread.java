@@ -304,6 +304,10 @@ public class GameHostThread<T> extends Thread {
       barrier.await();
       // Now the streams are closed, quit the thread alone with the GameRoom
       // barrier.await();
+
+      synchronized(System.in){
+        System.out.println("Thread for " + player.playerId + " exits, the player status is" + player.playerStatus);
+      }
     } catch (IOException e) {
       return;
     } catch (InterruptedException e) {
