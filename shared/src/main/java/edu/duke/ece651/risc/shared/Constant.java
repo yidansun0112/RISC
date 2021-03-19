@@ -14,7 +14,7 @@ public class Constant {
   /** Indicate a player successfully chose a map */
   public static final String VALID_MAP_CHOICE_INFO = "Choice Succeed!";
   /** Indicate a player successfully chose a map */
-  public static final String INVALID_MAP_CHOICE_INFO = "This group has been occupied!";
+  public static final String INVALID_MAP_CHOICE_INFO = "Invalid Choice, please choose a valid one!";
   /** Indicate the order issued by a player is legal */
   public static final String LEGAL_DEPLOY_INFO = "The Order Is Legal!";
   /** Indicate the player is not the owner of this territory */

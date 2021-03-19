@@ -121,9 +121,10 @@ public class V1GamePlayerTest {
         + "Please do that again!\n";
     String exceptNotNumNull = "For input string: \"\" Territory/Units should be pure number.\n"
         + "Please do that again!\n";
+    String waitMsg = "Please be patient to wait other players finish their deployment...\n";
     String total = prompt + doChoice + exceptComma + doChoice + exceptNotNumNull + doChoice + exceptNotNumNull
         + doChoice + exceptNotNumA + doChoice + exceptNotNumA + doChoice + "succeed\n" + doChoice + "succeed\n"
-        + Constant.FINISH_DEPLOY_INFO + "\n";
+        + Constant.FINISH_DEPLOY_INFO + "\n" + waitMsg;
     player.deployUnits();
     assertEquals(total, bytes.toString());
   }
