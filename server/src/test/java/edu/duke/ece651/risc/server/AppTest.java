@@ -30,8 +30,13 @@ class AppTest {
 
       Thread th0 = make_test_player_thread_helper("0");
       th0.start();
+
+      Thread.sleep(300);
+
       Thread th1 = make_test_player_thread_helper("1");
       th1.start();
+
+      Thread.sleep(300); // a bit of hacky
 
       server.join();
       th0.join();
