@@ -72,7 +72,6 @@ public class GameHostThread<T> extends Thread {
     player.sendObject(view.displayFullBoard());
     while (true) {
       String choice = (String) player.receiveObject();
-      // TODO: occupy should be synchronized
       boolean occupied = board.occupyTerritory(Integer.parseInt(choice), player.getPlayerId());
       if (!occupied) {
         player.sendObject(Constant.VALID_MAP_CHOICE_INFO);
