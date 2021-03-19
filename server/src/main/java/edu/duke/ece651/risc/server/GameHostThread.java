@@ -140,7 +140,7 @@ public class GameHostThread<T> extends Thread {
         break;
       } else if (order instanceof MoveOrder) {
         message = moveChecker.checkOrder(player.getPlayerId(), order, board);
-      } else if (order instanceof AttackOrder) {
+      } else {
         message = attackChecker.checkOrder(player.getPlayerId(), order, board);
       }
       if (message == null) {

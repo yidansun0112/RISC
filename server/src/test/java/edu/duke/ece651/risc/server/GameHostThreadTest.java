@@ -9,6 +9,7 @@ import org.mockito.MockitoAnnotations;
 import java.io.*;
 import java.net.UnknownHostException;
 import java.util.ArrayList;
+import java.util.concurrent.BrokenBarrierException;
 import java.util.concurrent.CyclicBarrier;
 
 import edu.duke.ece651.risc.shared.*;
@@ -18,8 +19,7 @@ public class GameHostThreadTest {
   @Mock
   private PlayerEntity<String> playerMock;
 
-  private GameHostThread<String> createGameHostThread(int num,OutputStream bytes) {
-    PrintStream output = new PrintStream(bytes, true);
+  private GameHostThread<String> createGameHostThread(int num) {
     BoardFactory<String> factory=new V1BoardFactory<String>();
     Board<String> board=factory.makeGameBoard(num);
     board.updateAllPrevDefender();
@@ -35,8 +35,7 @@ public class GameHostThreadTest {
     MockitoAnnotations.initMocks(this);
     when(playerMock.getPlayerId()).thenReturn(0);
     when(playerMock.receiveObject()).thenReturn("4","0");
-    ByteArrayOutputStream bytes = new ByteArrayOutputStream();
-    GameHostThread<String> gameThread=createGameHostThread(2, bytes);
+    GameHostThread<String> gameThread=createGameHostThread(2);
     gameThread.pickTerritory();
   }
 
@@ -48,8 +47,7 @@ public class GameHostThreadTest {
     ArrayList<Integer> d2=createArrayList(0, 20);
     ArrayList<Integer> d3=createArrayList(0, 15);
     when(playerMock.receiveObject()).thenReturn("0",d1,d2,d3);
-    ByteArrayOutputStream bytes = new ByteArrayOutputStream();
-    GameHostThread<String> gameThread=createGameHostThread(2, bytes);
+    GameHostThread<String> gameThread=createGameHostThread(2);
     gameThread.pickTerritory();
     gameThread.deployUnits();
   }
@@ -73,11 +71,63 @@ public class GameHostThreadTest {
     Order<String> attackOrder=new AttackOrder<String>("0 3 5");
     Order<String> doneOrder=new DoneOrder<String>();
     when(playerMock.receiveObject()).thenReturn("0",deploy,illegalMoveOrder,legalMoveOrder,attackOrder,doneOrder);
-    ByteArrayOutputStream bytes = new ByteArrayOutputStream();
-    GameHostThread<String> gameThread=createGameHostThread(2, bytes);
+    GameHostThread<String> gameThread=createGameHostThread(2);
     gameThread.pickTerritory();
     gameThread.deployUnits();
     gameThread.receiveOrder();
   }
+
+  @Test
+  public void test_checkWinLose() throws IOException, ClassNotFoundException, InterruptedException, BrokenBarrierException {
+    MockitoAnnotations.initMocks(this);
+    when(playerMock.getPlayerStatus()).thenReturn(Constant.SELF_NOT_LOSE_NO_ONE_WIN_STATUS,5);
+    GameHostThread<String> gameThread=createGameHostThread(2);
+    assertEquals(false, gameThread.checkWinLose());
+    assertEquals(false, gameThread.checkWinLose());
+  }
+
+  // /**
+  //  * Helper method that creates a new thread to run the test loopback server.
+  //  * @return a Thread object that the server is running on
+  //  */
+  // private Thread make_test_host_thread_helper(CyclicBarrier barrier) {
+  //   Thread th = new Thread() {
+  //     @Override
+  //     public void run() {
+  //       try {
+  //         barrier.await();
+  //         for(int i=0;i<3;i++){
+  //           barrier.await();
+  //           barrier.await();
+  //         }
+  //         barrier.await();
+  //       } catch (Exception e) {
+  //       }
+  //     }
+  //   };
+  //   return th;
+  // }
+
+  // /**
+  //  * Helper method that creates a new thread to run the test loopback server.
+  //  * @return a Thread object that the server is running on
+  //  */
+  // private Thread make_test_room_thread_helper(CyclicBarrier barrier) {
+  //   Thread th = new Thread() {
+  //     @Override
+  //     public void run() {
+  //       try {
+  //         barrier.await();
+  //         for(int i=0;i<3;i++){
+  //           barrier.await();
+  //           barrier.await();
+  //         }
+  //         barrier.await();
+  //       } catch (Exception e) {
+  //       }
+  //     }
+  //   };
+  //   return th;
+  // }
 }
 
