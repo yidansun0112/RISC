@@ -32,6 +32,10 @@ class AppTest {
       th0.start();
       Thread th1 = make_test_player_thread_helper("1");
       th1.start();
+
+      server.join();
+      th0.join();
+      th1.join();
     }
 
     private Thread make_server_thread_helper() {
