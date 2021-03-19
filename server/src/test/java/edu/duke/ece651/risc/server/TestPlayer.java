@@ -4,6 +4,7 @@ import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.net.Socket;
+import java.util.ArrayList;
 
 import edu.duke.ece651.risc.shared.*;
 
@@ -40,7 +41,10 @@ public class TestPlayer {
         recv.readObject();
         //deploy units
         recv.readObject();
-        send.writeObject("0,15");
+        ArrayList<Integer> deploy=new ArrayList<Integer>();
+        deploy.add(0);
+        deploy.add(15);
+        send.writeObject(deploy);
         recv.readObject();
         //issue orders
         recv.readObject();
@@ -78,7 +82,10 @@ public class TestPlayer {
         recv.readObject();
         //deploy units
         recv.readObject();
-        send.writeObject("3,15");
+        ArrayList<Integer> deploy=new ArrayList<Integer>();
+        deploy.add(3);
+        deploy.add(15);
+        send.writeObject(deploy);
         recv.readObject();
         //issue orders
         recv.readObject();

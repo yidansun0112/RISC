@@ -61,9 +61,13 @@ public abstract class GameRoom<T> {
     this.view = view;
     this.moveChecker=new MoveOrderConsistencyChecker<T>(new MoveOrderPathChecker<T>(new MoveOrderEffectChecker<T>(null)));
     this.attackChecker=new AttackOrderConsistencyChecker<T>(new AttackOrderPathChecker<T>(new AttackOrderEffectChecker<T>(null)));
-    this.resolver=new BattleResolver<T>(new Random());
-    //this.barrier=new CyclicBarrier(playerNum);
+    Random rdm=makeRandom();
+    this.resolver=new BattleResolver<T>(rdm);
   }
+
+  public Random makeRandom() {
+    return new Random();
+}
 
   /**
    * Let the first player to choose a map for this room
