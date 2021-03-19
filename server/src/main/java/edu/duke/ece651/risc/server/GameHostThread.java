@@ -309,12 +309,24 @@ public class GameHostThread<T> extends Thread {
       }
     } catch (IOException e) {
       return;
-    } catch (InterruptedException e) {
+    } catch (InterruptedException e){
       return;
-    } catch (BrokenBarrierException e) {
+    }catch (BrokenBarrierException e){
       return;
-    } catch (ClassNotFoundException e) {
+    }catch (ClassNotFoundException e){
       return;
     }
   }
 }
+
+
+
+
+
+
+
+
+
+
+
+

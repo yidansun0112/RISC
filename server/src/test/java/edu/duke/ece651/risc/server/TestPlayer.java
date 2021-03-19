@@ -46,12 +46,22 @@ public class TestPlayer {
         deploy.add(15);
         send.writeObject(deploy);
         recv.readObject();
-        //issue orders
+        //first round issue orders
         recv.readObject();
-        Order<String> order=new DoneOrder<String>();
-        send.writeObject(order);
+        sendOrder("order", "D", recv, send);
+        //recv result
         recv.readObject();
         recv.readObject();
+        //second round
+        recv.readObject();
+        sendOrder("2 1 1", "M", recv, send);
+        sendOrder("order", "D", recv, send);
+        //recv result
+        recv.readObject();
+        recv.readObject();
+        //third round
+        recv.readObject();
+        sendOrder("order", "D", recv, send);
         //recv result
         recv.readObject();
         recv.readObject();
@@ -88,15 +98,29 @@ public class TestPlayer {
         deploy.add(15);
         send.writeObject(deploy);
         recv.readObject();
-        //issue orders
+        //first issue orders
         recv.readObject();
-        Order<String> order1=new AttackOrder<String>("3 0 15");
-        send.writeObject(order1);
-        recv.readObject();
-        Order<String> order2=new DoneOrder<String>();
-        send.writeObject(order2);
+        sendOrder("3 0 15", "A", recv, send);
+        sendOrder("order", "D", recv, send);
+        //recv result
         recv.readObject();
         recv.readObject();
+        //second issue orders
+        recv.readObject();
+        sendOrder("3 2 1", "A", recv, send);
+        sendOrder("0 1 3", "A", recv, send);
+        sendOrder("order", "D", recv, send);
+        //recv result
+        recv.readObject();
+        recv.readObject();
+        //third issue orders
+        recv.readObject();
+        sendOrder("2 0 2", "M", recv, send);
+        sendOrder("3 0 1", "M", recv, send);
+        sendOrder("4 0 2", "M", recv, send);
+        sendOrder("5 0 2", "M", recv, send);
+        sendOrder("0 1 8", "A", recv, send);
+        sendOrder("order", "D", recv, send);
         //recv result
         recv.readObject();
         recv.readObject();
@@ -114,6 +138,23 @@ public class TestPlayer {
     }
   }
 
+  public void sendOrder(String order, String type,ObjectInputStream recv,ObjectOutputStream send) throws IOException, ClassNotFoundException{
+    Order<String> od=new DoneOrder<String>();
+    switch(type){
+      case "M":
+        od=new MoveOrder<String>(order);
+        break;
+      case "A":
+        od=new AttackOrder<String>(order);
+        break;
+      case "D":
+        od=new DoneOrder<String>();
+        break;
+    }
+    send.writeObject(od);
+    recv.readObject();
+    recv.readObject();
+  }
 
   public static void main(String[] args) throws IOException {
     TestPlayer testPlayer = new TestPlayer("localhost",12345);
