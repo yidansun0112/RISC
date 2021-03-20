@@ -290,20 +290,25 @@ public class GameHostThread<T> extends Thread {
         barrier.await();
         barrier.await();
 
-        synchronized(System.in){
-          System.out.println(player.playerId + " " + player.playerStatus);
-        }
-        
+        // synchronized(System.in){
+        // System.out.println(player.playerId + " " + player.playerStatus);
+        // }
+
         player.sendObject(view.displayFullBoard());
         if (checkWinLose()) {
           break;
         }
       }
-      // Now wait for the GameRoom close the streams hold by PlayerEntity to release resources
+      // Now wait for the GameRoom close the streams hold by PlayerEntity to release
+      // resources
       barrier.await();
       // Now the streams are closed, quit the thread alone with the GameRoom
       // barrier.await();
 
+      // synchronized(System.in){
+      // System.out.println("Thread for " + player.playerId + " exits, the player
+      // status is" + player.playerStatus);
+      // }
     } catch (IOException | InterruptedException | BrokenBarrierException | ClassNotFoundException e) {
       return;
     }

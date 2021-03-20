@@ -1,0 +1,618 @@
+Your player ID is 1
+Please choose one group among the following groups.
+Group 0:
+------------------
+Narnia(0) (next to: Midkemia, Elantris, Narnia)
+Midkemia(1) (next to: Narnia, Oz, Roshar, Britt)
+Oz(2) (next to: Midkemia)
+Group 1:
+------------------
+Elantris(3) (next to: Narnia, Roshar, Gondor)
+Roshar(4) (next to: Midkemia, Elantris, Scadrial, Mordor)
+Scadrial(5) (next to: Roshar)
+Group 2:
+------------------
+Gondor(6) (next to: Elantris, Mordor, Narnia)
+Mordor(7) (next to: Roshar, Gondor, Hogwarts, Britt)
+Hogwarts(8) (next to: Mordor)
+Group 3:
+------------------
+Narnia(9) (next to: Narnia, Gondor, Britt)
+Britt(10) (next to: Midkemia, Mordor, Narnia, Calibre)
+Calibre(11) (next to: Britt)
+
+Please type the group number that you would like to choose:
+Choice Succeed!
+Please deploy units in your territories.
+0 units in Elantris(3) (next to: Narnia, Roshar, Gondor)
+0 units in Roshar(4) (next to: Midkemia, Elantris, Scadrial, Mordor)
+0 units in Scadrial(5) (next to: Roshar)
+You have 15 left.
+Please type in format "Territory index,Units deployed in this territory"
+For example "2,5" will deploy 5 units in territory 2
+The Order Is Legal!
+Deploy Finished!
+Please be patient to wait other players finish their deployment...
+Player 0:
+------------------
+0 units in Narnia(0) (next to: Midkemia, Elantris, Narnia)
+0 units in Midkemia(1) (next to: Narnia, Oz, Roshar, Britt)
+0 units in Oz(2) (next to: Midkemia)
+Player 1:
+------------------
+0 units in Elantris(3) (next to: Narnia, Roshar, Gondor)
+0 units in Roshar(4) (next to: Midkemia, Elantris, Scadrial, Mordor)
+15 units in Scadrial(5) (next to: Roshar)
+Player 2:
+------------------
+0 units in Gondor(6) (next to: Elantris, Mordor, Narnia)
+0 units in Mordor(7) (next to: Roshar, Gondor, Hogwarts, Britt)
+0 units in Hogwarts(8) (next to: Mordor)
+Player 3:
+------------------
+0 units in Narnia(9) (next to: Narnia, Gondor, Britt)
+0 units in Britt(10) (next to: Midkemia, Mordor, Narnia, Calibre)
+0 units in Calibre(11) (next to: Britt)
+You are player 1, what would you like to do?
+(M)ove
+(A)ttack
+(D)one
+Please type the content of your move order.
+Format: "Source_territory_index Destination_territory_index units_to_move
+For example: "1 3 5" will move 5 units from territory 1 to territory 3
+The Order Is Legal!
+Player 0:
+------------------
+0 units in Narnia(0) (next to: Midkemia, Elantris, Narnia)
+0 units in Midkemia(1) (next to: Narnia, Oz, Roshar, Britt)
+0 units in Oz(2) (next to: Midkemia)
+Player 1:
+------------------
+1 units in Elantris(3) (next to: Narnia, Roshar, Gondor)
+0 units in Roshar(4) (next to: Midkemia, Elantris, Scadrial, Mordor)
+14 units in Scadrial(5) (next to: Roshar)
+Player 2:
+------------------
+0 units in Gondor(6) (next to: Elantris, Mordor, Narnia)
+0 units in Mordor(7) (next to: Roshar, Gondor, Hogwarts, Britt)
+0 units in Hogwarts(8) (next to: Mordor)
+Player 3:
+------------------
+0 units in Narnia(9) (next to: Narnia, Gondor, Britt)
+0 units in Britt(10) (next to: Midkemia, Mordor, Narnia, Calibre)
+0 units in Calibre(11) (next to: Britt)
+You are player 1, what would you like to do?
+(M)ove
+(A)ttack
+(D)one
+Please type the content of your move order.
+Format: "Source_territory_index Destination_territory_index units_to_move
+For example: "1 3 5" will move 5 units from territory 1 to territory 3
+The Order Is Legal!
+Player 0:
+------------------
+0 units in Narnia(0) (next to: Midkemia, Elantris, Narnia)
+0 units in Midkemia(1) (next to: Narnia, Oz, Roshar, Britt)
+0 units in Oz(2) (next to: Midkemia)
+Player 1:
+------------------
+1 units in Elantris(3) (next to: Narnia, Roshar, Gondor)
+1 units in Roshar(4) (next to: Midkemia, Elantris, Scadrial, Mordor)
+13 units in Scadrial(5) (next to: Roshar)
+Player 2:
+------------------
+0 units in Gondor(6) (next to: Elantris, Mordor, Narnia)
+0 units in Mordor(7) (next to: Roshar, Gondor, Hogwarts, Britt)
+0 units in Hogwarts(8) (next to: Mordor)
+Player 3:
+------------------
+0 units in Narnia(9) (next to: Narnia, Gondor, Britt)
+0 units in Britt(10) (next to: Midkemia, Mordor, Narnia, Calibre)
+0 units in Calibre(11) (next to: Britt)
+You are player 1, what would you like to do?
+(M)ove
+(A)ttack
+(D)one
+Please type the content of your attack order.
+Format: "Source_territory_index Destination_territory_index units_to_attack
+For example: "1 3 5" will move 5 units from territory 1 to attack territory 3
+The Order Is Legal!
+Player 0:
+------------------
+0 units in Narnia(0) (next to: Midkemia, Elantris, Narnia)
+0 units in Midkemia(1) (next to: Narnia, Oz, Roshar, Britt)
+0 units in Oz(2) (next to: Midkemia)
+Player 1:
+------------------
+0 units in Elantris(3) (next to: Narnia, Roshar, Gondor)
+1 units in Roshar(4) (next to: Midkemia, Elantris, Scadrial, Mordor)
+13 units in Scadrial(5) (next to: Roshar)
+Player 2:
+------------------
+0 units in Gondor(6) (next to: Elantris, Mordor, Narnia)
+0 units in Mordor(7) (next to: Roshar, Gondor, Hogwarts, Britt)
+0 units in Hogwarts(8) (next to: Mordor)
+Player 3:
+------------------
+0 units in Narnia(9) (next to: Narnia, Gondor, Britt)
+0 units in Britt(10) (next to: Midkemia, Mordor, Narnia, Calibre)
+0 units in Calibre(11) (next to: Britt)
+You are player 1, what would you like to do?
+(M)ove
+(A)ttack
+(D)one
+Please type the content of your attack order.
+Format: "Source_territory_index Destination_territory_index units_to_attack
+For example: "1 3 5" will move 5 units from territory 1 to attack territory 3
+The Order Is Legal!
+Player 0:
+------------------
+0 units in Narnia(0) (next to: Midkemia, Elantris, Narnia)
+0 units in Midkemia(1) (next to: Narnia, Oz, Roshar, Britt)
+0 units in Oz(2) (next to: Midkemia)
+Player 1:
+------------------
+0 units in Elantris(3) (next to: Narnia, Roshar, Gondor)
+0 units in Roshar(4) (next to: Midkemia, Elantris, Scadrial, Mordor)
+13 units in Scadrial(5) (next to: Roshar)
+Player 2:
+------------------
+0 units in Gondor(6) (next to: Elantris, Mordor, Narnia)
+0 units in Mordor(7) (next to: Roshar, Gondor, Hogwarts, Britt)
+0 units in Hogwarts(8) (next to: Mordor)
+Player 3:
+------------------
+0 units in Narnia(9) (next to: Narnia, Gondor, Britt)
+0 units in Britt(10) (next to: Midkemia, Mordor, Narnia, Calibre)
+0 units in Calibre(11) (next to: Britt)
+You are player 1, what would you like to do?
+(M)ove
+(A)ttack
+(D)one
+The Order Is Legal!
+Player 0:
+------------------
+0 units in Narnia(0) (next to: Midkemia, Elantris, Narnia)
+0 units in Midkemia(1) (next to: Narnia, Oz, Roshar, Britt)
+0 units in Oz(2) (next to: Midkemia)
+Player 1:
+------------------
+0 units in Elantris(3) (next to: Narnia, Roshar, Gondor)
+0 units in Roshar(4) (next to: Midkemia, Elantris, Scadrial, Mordor)
+13 units in Scadrial(5) (next to: Roshar)
+Player 2:
+------------------
+0 units in Gondor(6) (next to: Elantris, Mordor, Narnia)
+0 units in Mordor(7) (next to: Roshar, Gondor, Hogwarts, Britt)
+0 units in Hogwarts(8) (next to: Mordor)
+Player 3:
+------------------
+0 units in Narnia(9) (next to: Narnia, Gondor, Britt)
+0 units in Britt(10) (next to: Midkemia, Mordor, Narnia, Calibre)
+0 units in Calibre(11) (next to: Britt)
+Player 0:
+------------------
+4 units in Narnia(0) (next to: Midkemia, Elantris, Narnia)
+9 units in Midkemia(1) (next to: Narnia, Oz, Roshar, Britt)
+1 units in Oz(2) (next to: Midkemia)
+2 units in Elantris(3) (next to: Narnia, Roshar, Gondor)
+2 units in Roshar(4) (next to: Midkemia, Elantris, Scadrial, Mordor)
+2 units in Narnia(9) (next to: Narnia, Gondor, Britt)
+2 units in Britt(10) (next to: Midkemia, Mordor, Narnia, Calibre)
+Player 1:
+------------------
+14 units in Scadrial(5) (next to: Roshar)
+2 units in Gondor(6) (next to: Elantris, Mordor, Narnia)
+2 units in Mordor(7) (next to: Roshar, Gondor, Hogwarts, Britt)
+Player 2:
+------------------
+16 units in Hogwarts(8) (next to: Mordor)
+Player 3:
+------------------
+16 units in Calibre(11) (next to: Britt)
+
+Player 0:
+------------------
+4 units in Narnia(0) (next to: Midkemia, Elantris, Narnia)
+9 units in Midkemia(1) (next to: Narnia, Oz, Roshar, Britt)
+1 units in Oz(2) (next to: Midkemia)
+2 units in Elantris(3) (next to: Narnia, Roshar, Gondor)
+2 units in Roshar(4) (next to: Midkemia, Elantris, Scadrial, Mordor)
+2 units in Narnia(9) (next to: Narnia, Gondor, Britt)
+2 units in Britt(10) (next to: Midkemia, Mordor, Narnia, Calibre)
+Player 1:
+------------------
+14 units in Scadrial(5) (next to: Roshar)
+2 units in Gondor(6) (next to: Elantris, Mordor, Narnia)
+2 units in Mordor(7) (next to: Roshar, Gondor, Hogwarts, Britt)
+Player 2:
+------------------
+16 units in Hogwarts(8) (next to: Mordor)
+Player 3:
+------------------
+16 units in Calibre(11) (next to: Britt)
+You are player 1, what would you like to do?
+(M)ove
+(A)ttack
+(D)one
+Please type the content of your move order.
+Format: "Source_territory_index Destination_territory_index units_to_move
+For example: "1 3 5" will move 5 units from territory 1 to territory 3
+The Order Is Legal!
+Player 0:
+------------------
+4 units in Narnia(0) (next to: Midkemia, Elantris, Narnia)
+9 units in Midkemia(1) (next to: Narnia, Oz, Roshar, Britt)
+1 units in Oz(2) (next to: Midkemia)
+2 units in Elantris(3) (next to: Narnia, Roshar, Gondor)
+2 units in Roshar(4) (next to: Midkemia, Elantris, Scadrial, Mordor)
+2 units in Narnia(9) (next to: Narnia, Gondor, Britt)
+2 units in Britt(10) (next to: Midkemia, Mordor, Narnia, Calibre)
+Player 1:
+------------------
+14 units in Scadrial(5) (next to: Roshar)
+0 units in Gondor(6) (next to: Elantris, Mordor, Narnia)
+4 units in Mordor(7) (next to: Roshar, Gondor, Hogwarts, Britt)
+Player 2:
+------------------
+16 units in Hogwarts(8) (next to: Mordor)
+Player 3:
+------------------
+16 units in Calibre(11) (next to: Britt)
+You are player 1, what would you like to do?
+(M)ove
+(A)ttack
+(D)one
+Please type the content of your attack order.
+Format: "Source_territory_index Destination_territory_index units_to_attack
+For example: "1 3 5" will move 5 units from territory 1 to attack territory 3
+invalid order: You can only attack an enemy territory that is next to you!
+
+Player 0:
+------------------
+4 units in Narnia(0) (next to: Midkemia, Elantris, Narnia)
+9 units in Midkemia(1) (next to: Narnia, Oz, Roshar, Britt)
+1 units in Oz(2) (next to: Midkemia)
+2 units in Elantris(3) (next to: Narnia, Roshar, Gondor)
+2 units in Roshar(4) (next to: Midkemia, Elantris, Scadrial, Mordor)
+2 units in Narnia(9) (next to: Narnia, Gondor, Britt)
+2 units in Britt(10) (next to: Midkemia, Mordor, Narnia, Calibre)
+Player 1:
+------------------
+14 units in Scadrial(5) (next to: Roshar)
+0 units in Gondor(6) (next to: Elantris, Mordor, Narnia)
+4 units in Mordor(7) (next to: Roshar, Gondor, Hogwarts, Britt)
+Player 2:
+------------------
+16 units in Hogwarts(8) (next to: Mordor)
+Player 3:
+------------------
+16 units in Calibre(11) (next to: Britt)
+You are player 1, what would you like to do?
+(M)ove
+(A)ttack
+(D)one
+The Order Is Legal!
+Player 0:
+------------------
+4 units in Narnia(0) (next to: Midkemia, Elantris, Narnia)
+9 units in Midkemia(1) (next to: Narnia, Oz, Roshar, Britt)
+1 units in Oz(2) (next to: Midkemia)
+2 units in Elantris(3) (next to: Narnia, Roshar, Gondor)
+2 units in Roshar(4) (next to: Midkemia, Elantris, Scadrial, Mordor)
+2 units in Narnia(9) (next to: Narnia, Gondor, Britt)
+2 units in Britt(10) (next to: Midkemia, Mordor, Narnia, Calibre)
+Player 1:
+------------------
+14 units in Scadrial(5) (next to: Roshar)
+0 units in Gondor(6) (next to: Elantris, Mordor, Narnia)
+4 units in Mordor(7) (next to: Roshar, Gondor, Hogwarts, Britt)
+Player 2:
+------------------
+16 units in Hogwarts(8) (next to: Mordor)
+Player 3:
+------------------
+16 units in Calibre(11) (next to: Britt)
+Player 0:
+------------------
+1 units in Narnia(0) (next to: Midkemia, Elantris, Narnia)
+1 units in Midkemia(1) (next to: Narnia, Oz, Roshar, Britt)
+1 units in Oz(2) (next to: Midkemia)
+1 units in Elantris(3) (next to: Narnia, Roshar, Gondor)
+1 units in Roshar(4) (next to: Midkemia, Elantris, Scadrial, Mordor)
+2 units in Gondor(6) (next to: Elantris, Mordor, Narnia)
+1 units in Narnia(9) (next to: Narnia, Gondor, Britt)
+1 units in Britt(10) (next to: Midkemia, Mordor, Narnia, Calibre)
+2 units in Calibre(11) (next to: Britt)
+Player 1:
+------------------
+15 units in Scadrial(5) (next to: Roshar)
+5 units in Mordor(7) (next to: Roshar, Gondor, Hogwarts, Britt)
+Player 2:
+------------------
+17 units in Hogwarts(8) (next to: Mordor)
+
+Player 0:
+------------------
+1 units in Narnia(0) (next to: Midkemia, Elantris, Narnia)
+1 units in Midkemia(1) (next to: Narnia, Oz, Roshar, Britt)
+1 units in Oz(2) (next to: Midkemia)
+1 units in Elantris(3) (next to: Narnia, Roshar, Gondor)
+1 units in Roshar(4) (next to: Midkemia, Elantris, Scadrial, Mordor)
+2 units in Gondor(6) (next to: Elantris, Mordor, Narnia)
+1 units in Narnia(9) (next to: Narnia, Gondor, Britt)
+1 units in Britt(10) (next to: Midkemia, Mordor, Narnia, Calibre)
+2 units in Calibre(11) (next to: Britt)
+Player 1:
+------------------
+15 units in Scadrial(5) (next to: Roshar)
+5 units in Mordor(7) (next to: Roshar, Gondor, Hogwarts, Britt)
+Player 2:
+------------------
+17 units in Hogwarts(8) (next to: Mordor)
+You are player 1, what would you like to do?
+(M)ove
+(A)ttack
+(D)one
+Please type the content of your attack order.
+Format: "Source_territory_index Destination_territory_index units_to_attack
+For example: "1 3 5" will move 5 units from territory 1 to attack territory 3
+The Order Is Legal!
+Player 0:
+------------------
+1 units in Narnia(0) (next to: Midkemia, Elantris, Narnia)
+1 units in Midkemia(1) (next to: Narnia, Oz, Roshar, Britt)
+1 units in Oz(2) (next to: Midkemia)
+1 units in Elantris(3) (next to: Narnia, Roshar, Gondor)
+1 units in Roshar(4) (next to: Midkemia, Elantris, Scadrial, Mordor)
+2 units in Gondor(6) (next to: Elantris, Mordor, Narnia)
+1 units in Narnia(9) (next to: Narnia, Gondor, Britt)
+1 units in Britt(10) (next to: Midkemia, Mordor, Narnia, Calibre)
+2 units in Calibre(11) (next to: Britt)
+Player 1:
+------------------
+15 units in Scadrial(5) (next to: Roshar)
+0 units in Mordor(7) (next to: Roshar, Gondor, Hogwarts, Britt)
+Player 2:
+------------------
+17 units in Hogwarts(8) (next to: Mordor)
+You are player 1, what would you like to do?
+(M)ove
+(A)ttack
+(D)one
+The Order Is Legal!
+Player 0:
+------------------
+1 units in Narnia(0) (next to: Midkemia, Elantris, Narnia)
+1 units in Midkemia(1) (next to: Narnia, Oz, Roshar, Britt)
+1 units in Oz(2) (next to: Midkemia)
+1 units in Elantris(3) (next to: Narnia, Roshar, Gondor)
+1 units in Roshar(4) (next to: Midkemia, Elantris, Scadrial, Mordor)
+2 units in Gondor(6) (next to: Elantris, Mordor, Narnia)
+1 units in Narnia(9) (next to: Narnia, Gondor, Britt)
+1 units in Britt(10) (next to: Midkemia, Mordor, Narnia, Calibre)
+2 units in Calibre(11) (next to: Britt)
+Player 1:
+------------------
+15 units in Scadrial(5) (next to: Roshar)
+0 units in Mordor(7) (next to: Roshar, Gondor, Hogwarts, Britt)
+Player 2:
+------------------
+17 units in Hogwarts(8) (next to: Mordor)
+Player 0:
+------------------
+2 units in Narnia(0) (next to: Midkemia, Elantris, Narnia)
+2 units in Midkemia(1) (next to: Narnia, Oz, Roshar, Britt)
+2 units in Oz(2) (next to: Midkemia)
+2 units in Elantris(3) (next to: Narnia, Roshar, Gondor)
+2 units in Roshar(4) (next to: Midkemia, Elantris, Scadrial, Mordor)
+3 units in Gondor(6) (next to: Elantris, Mordor, Narnia)
+2 units in Narnia(9) (next to: Narnia, Gondor, Britt)
+2 units in Britt(10) (next to: Midkemia, Mordor, Narnia, Calibre)
+3 units in Calibre(11) (next to: Britt)
+Player 1:
+------------------
+16 units in Scadrial(5) (next to: Roshar)
+1 units in Mordor(7) (next to: Roshar, Gondor, Hogwarts, Britt)
+Player 2:
+------------------
+9 units in Hogwarts(8) (next to: Mordor)
+
+Player 0:
+------------------
+2 units in Narnia(0) (next to: Midkemia, Elantris, Narnia)
+2 units in Midkemia(1) (next to: Narnia, Oz, Roshar, Britt)
+2 units in Oz(2) (next to: Midkemia)
+2 units in Elantris(3) (next to: Narnia, Roshar, Gondor)
+2 units in Roshar(4) (next to: Midkemia, Elantris, Scadrial, Mordor)
+3 units in Gondor(6) (next to: Elantris, Mordor, Narnia)
+2 units in Narnia(9) (next to: Narnia, Gondor, Britt)
+2 units in Britt(10) (next to: Midkemia, Mordor, Narnia, Calibre)
+3 units in Calibre(11) (next to: Britt)
+Player 1:
+------------------
+16 units in Scadrial(5) (next to: Roshar)
+1 units in Mordor(7) (next to: Roshar, Gondor, Hogwarts, Britt)
+Player 2:
+------------------
+9 units in Hogwarts(8) (next to: Mordor)
+You are player 1, what would you like to do?
+(M)ove
+(A)ttack
+(D)one
+Please type the content of your attack order.
+Format: "Source_territory_index Destination_territory_index units_to_attack
+For example: "1 3 5" will move 5 units from territory 1 to attack territory 3
+The Order Is Legal!
+Player 0:
+------------------
+2 units in Narnia(0) (next to: Midkemia, Elantris, Narnia)
+2 units in Midkemia(1) (next to: Narnia, Oz, Roshar, Britt)
+2 units in Oz(2) (next to: Midkemia)
+2 units in Elantris(3) (next to: Narnia, Roshar, Gondor)
+2 units in Roshar(4) (next to: Midkemia, Elantris, Scadrial, Mordor)
+3 units in Gondor(6) (next to: Elantris, Mordor, Narnia)
+2 units in Narnia(9) (next to: Narnia, Gondor, Britt)
+2 units in Britt(10) (next to: Midkemia, Mordor, Narnia, Calibre)
+3 units in Calibre(11) (next to: Britt)
+Player 1:
+------------------
+16 units in Scadrial(5) (next to: Roshar)
+0 units in Mordor(7) (next to: Roshar, Gondor, Hogwarts, Britt)
+Player 2:
+------------------
+9 units in Hogwarts(8) (next to: Mordor)
+You are player 1, what would you like to do?
+(M)ove
+(A)ttack
+(D)one
+The Order Is Legal!
+Player 0:
+------------------
+2 units in Narnia(0) (next to: Midkemia, Elantris, Narnia)
+2 units in Midkemia(1) (next to: Narnia, Oz, Roshar, Britt)
+2 units in Oz(2) (next to: Midkemia)
+2 units in Elantris(3) (next to: Narnia, Roshar, Gondor)
+2 units in Roshar(4) (next to: Midkemia, Elantris, Scadrial, Mordor)
+3 units in Gondor(6) (next to: Elantris, Mordor, Narnia)
+2 units in Narnia(9) (next to: Narnia, Gondor, Britt)
+2 units in Britt(10) (next to: Midkemia, Mordor, Narnia, Calibre)
+3 units in Calibre(11) (next to: Britt)
+Player 1:
+------------------
+16 units in Scadrial(5) (next to: Roshar)
+0 units in Mordor(7) (next to: Roshar, Gondor, Hogwarts, Britt)
+Player 2:
+------------------
+9 units in Hogwarts(8) (next to: Mordor)
+Player 0:
+------------------
+3 units in Narnia(0) (next to: Midkemia, Elantris, Narnia)
+3 units in Midkemia(1) (next to: Narnia, Oz, Roshar, Britt)
+3 units in Oz(2) (next to: Midkemia)
+3 units in Elantris(3) (next to: Narnia, Roshar, Gondor)
+3 units in Roshar(4) (next to: Midkemia, Elantris, Scadrial, Mordor)
+3 units in Gondor(6) (next to: Elantris, Mordor, Narnia)
+2 units in Mordor(7) (next to: Roshar, Gondor, Hogwarts, Britt)
+3 units in Narnia(9) (next to: Narnia, Gondor, Britt)
+3 units in Britt(10) (next to: Midkemia, Mordor, Narnia, Calibre)
+4 units in Calibre(11) (next to: Britt)
+Player 1:
+------------------
+17 units in Scadrial(5) (next to: Roshar)
+Player 2:
+------------------
+6 units in Hogwarts(8) (next to: Mordor)
+
+Player 0:
+------------------
+3 units in Narnia(0) (next to: Midkemia, Elantris, Narnia)
+3 units in Midkemia(1) (next to: Narnia, Oz, Roshar, Britt)
+3 units in Oz(2) (next to: Midkemia)
+3 units in Elantris(3) (next to: Narnia, Roshar, Gondor)
+3 units in Roshar(4) (next to: Midkemia, Elantris, Scadrial, Mordor)
+3 units in Gondor(6) (next to: Elantris, Mordor, Narnia)
+2 units in Mordor(7) (next to: Roshar, Gondor, Hogwarts, Britt)
+3 units in Narnia(9) (next to: Narnia, Gondor, Britt)
+3 units in Britt(10) (next to: Midkemia, Mordor, Narnia, Calibre)
+4 units in Calibre(11) (next to: Britt)
+Player 1:
+------------------
+17 units in Scadrial(5) (next to: Roshar)
+Player 2:
+------------------
+6 units in Hogwarts(8) (next to: Mordor)
+You are player 1, what would you like to do?
+(M)ove
+(A)ttack
+(D)one
+The Order Is Legal!
+Player 0:
+------------------
+3 units in Narnia(0) (next to: Midkemia, Elantris, Narnia)
+3 units in Midkemia(1) (next to: Narnia, Oz, Roshar, Britt)
+3 units in Oz(2) (next to: Midkemia)
+3 units in Elantris(3) (next to: Narnia, Roshar, Gondor)
+3 units in Roshar(4) (next to: Midkemia, Elantris, Scadrial, Mordor)
+3 units in Gondor(6) (next to: Elantris, Mordor, Narnia)
+2 units in Mordor(7) (next to: Roshar, Gondor, Hogwarts, Britt)
+3 units in Narnia(9) (next to: Narnia, Gondor, Britt)
+3 units in Britt(10) (next to: Midkemia, Mordor, Narnia, Calibre)
+4 units in Calibre(11) (next to: Britt)
+Player 1:
+------------------
+17 units in Scadrial(5) (next to: Roshar)
+Player 2:
+------------------
+6 units in Hogwarts(8) (next to: Mordor)
+Player 0:
+------------------
+1 units in Narnia(0) (next to: Midkemia, Elantris, Narnia)
+1 units in Midkemia(1) (next to: Narnia, Oz, Roshar, Britt)
+1 units in Oz(2) (next to: Midkemia)
+1 units in Elantris(3) (next to: Narnia, Roshar, Gondor)
+1 units in Roshar(4) (next to: Midkemia, Elantris, Scadrial, Mordor)
+1 units in Gondor(6) (next to: Elantris, Mordor, Narnia)
+1 units in Mordor(7) (next to: Roshar, Gondor, Hogwarts, Britt)
+29 units in Hogwarts(8) (next to: Mordor)
+1 units in Narnia(9) (next to: Narnia, Gondor, Britt)
+1 units in Britt(10) (next to: Midkemia, Mordor, Narnia, Calibre)
+1 units in Calibre(11) (next to: Britt)
+Player 1:
+------------------
+18 units in Scadrial(5) (next to: Roshar)
+
+Player 0:
+------------------
+1 units in Narnia(0) (next to: Midkemia, Elantris, Narnia)
+1 units in Midkemia(1) (next to: Narnia, Oz, Roshar, Britt)
+1 units in Oz(2) (next to: Midkemia)
+1 units in Elantris(3) (next to: Narnia, Roshar, Gondor)
+1 units in Roshar(4) (next to: Midkemia, Elantris, Scadrial, Mordor)
+1 units in Gondor(6) (next to: Elantris, Mordor, Narnia)
+1 units in Mordor(7) (next to: Roshar, Gondor, Hogwarts, Britt)
+29 units in Hogwarts(8) (next to: Mordor)
+1 units in Narnia(9) (next to: Narnia, Gondor, Britt)
+1 units in Britt(10) (next to: Midkemia, Mordor, Narnia, Calibre)
+1 units in Calibre(11) (next to: Britt)
+Player 1:
+------------------
+18 units in Scadrial(5) (next to: Roshar)
+You are player 1, what would you like to do?
+(M)ove
+(A)ttack
+(D)one
+The Order Is Legal!
+Player 0:
+------------------
+1 units in Narnia(0) (next to: Midkemia, Elantris, Narnia)
+1 units in Midkemia(1) (next to: Narnia, Oz, Roshar, Britt)
+1 units in Oz(2) (next to: Midkemia)
+1 units in Elantris(3) (next to: Narnia, Roshar, Gondor)
+1 units in Roshar(4) (next to: Midkemia, Elantris, Scadrial, Mordor)
+1 units in Gondor(6) (next to: Elantris, Mordor, Narnia)
+1 units in Mordor(7) (next to: Roshar, Gondor, Hogwarts, Britt)
+29 units in Hogwarts(8) (next to: Mordor)
+1 units in Narnia(9) (next to: Narnia, Gondor, Britt)
+1 units in Britt(10) (next to: Midkemia, Mordor, Narnia, Calibre)
+1 units in Calibre(11) (next to: Britt)
+Player 1:
+------------------
+18 units in Scadrial(5) (next to: Roshar)
+Player 0:
+------------------
+1 units in Narnia(0) (next to: Midkemia, Elantris, Narnia)
+1 units in Midkemia(1) (next to: Narnia, Oz, Roshar, Britt)
+1 units in Oz(2) (next to: Midkemia)
+1 units in Elantris(3) (next to: Narnia, Roshar, Gondor)
+1 units in Roshar(4) (next to: Midkemia, Elantris, Scadrial, Mordor)
+27 units in Scadrial(5) (next to: Roshar)
+1 units in Gondor(6) (next to: Elantris, Mordor, Narnia)
+1 units in Mordor(7) (next to: Roshar, Gondor, Hogwarts, Britt)
+1 units in Hogwarts(8) (next to: Mordor)
+1 units in Narnia(9) (next to: Narnia, Gondor, Britt)
+1 units in Britt(10) (next to: Midkemia, Mordor, Narnia, Calibre)
+1 units in Calibre(11) (next to: Britt)
+
+The Game Is End!
+Confirmed!

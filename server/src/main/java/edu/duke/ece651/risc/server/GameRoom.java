@@ -11,8 +11,9 @@ import java.util.Random;
 import edu.duke.ece651.risc.shared.*;
 
 /**
- * This class serves as a gameroom for the game.
- * It holds all players, let the first player to choose map, execute battle and check player status in each round.
+ * This class serves as a gameroom for the game. It holds all players, let the
+ * first player to choose map, execute battle and check player status in each
+ * round.
  */
 public abstract class GameRoom<T> {
 
@@ -27,7 +28,7 @@ public abstract class GameRoom<T> {
   protected Board<T> gameBoard;
   /** The BoardView that used to display the game board */
   protected BoardView<T> view;
-  /**rule checker for move order */
+  /** rule checker for move order */
   protected OrderRuleChecker<T> moveChecker;
   /** rule checker for attack order */
   protected OrderRuleChecker<T> attackChecker;
@@ -35,14 +36,6 @@ public abstract class GameRoom<T> {
   protected Resolver<T> resolver;
   /** barrier */
   protected CyclicBarrier barrier;
-
-  /**
-   * Default constructor. Here we only initialize the fields players with a
-   * vector. Other fields will be initialized after the owner has decided the map.
-   */
-  public GameRoom() {
-    this(0, Constant.TOTAL_UNITS, new Vector<PlayerEntity<T>>(), null, null);
-  }
 
   /**
    * Constructor that initialize class fields with corresponding parameters.
@@ -59,11 +52,12 @@ public abstract class GameRoom<T> {
     this.players = players;
     this.gameBoard = gameBoard;
     this.view = view;
-    this.moveChecker=new MoveOrderConsistencyChecker<T>(new MoveOrderPathChecker<T>(new MoveOrderEffectChecker<T>(null)));
-    this.attackChecker=new AttackOrderConsistencyChecker<T>(new AttackOrderPathChecker<T>(new AttackOrderEffectChecker<T>(null)));
-    this.resolver=new BattleResolver<T>(new Random(1));
+    this.moveChecker = new MoveOrderConsistencyChecker<T>(
+        new MoveOrderPathChecker<T>(new MoveOrderEffectChecker<T>(null)));
+    this.attackChecker = new AttackOrderConsistencyChecker<T>(
+        new AttackOrderPathChecker<T>(new AttackOrderEffectChecker<T>(null)));
+    this.resolver = new BattleResolver<T>(new Random(1));
   }
-
 
   /**
    * Let the first player to choose a map for this room
@@ -96,18 +90,17 @@ public abstract class GameRoom<T> {
   /**
    * Play the game.
    * 
-   * Create threads for each player. In each thread let the corresponding player 
-   * pick territory and deploy their units. When all the player finish their 
+   * Create threads for each player. In each thread let the corresponding player
+   * pick territory and deploy their units. When all the player finish their
    * deployment, start to play serverial turns, which involve:
    * 
-   * 1. Receive, check and execute orders;
-   * 2. Execute battle after every player finish issuing orders.
-   * 3. Increment one unit on each territory.
-   * 4. Update player status.
+   * 1. Receive, check and execute orders; 2. Execute battle after every player
+   * finish issuing orders. 3. Increment one unit on each territory. 4. Update
+   * player status.
    * 
-   * When each turn ends, check if the game has a winner:
-   *   if has a winner, end the whole game
-   *   else continue the game for the rest of the player who has not lost yet.
+   * When each turn ends, check if the game has a winner: if has a winner, end the
+   * whole game else continue the game for the rest of the player who has not lost
+   * yet.
    * 
    * @throws InterruptedException
    * @throws BrokenBarrierException
@@ -122,39 +115,37 @@ public abstract class GameRoom<T> {
     }
     // Wait all the player finishing their deployment
     barrier.await();
-    while(true){
+    while (true) {
       barrier.await();
-      synchronized(System.in){
-        System.out.println("All players done with their orders");
-      }
+
+      System.out.println("All players done with their orders");
+
       resolver.executeAllBattle(gameBoard);
       incrementUnits();
       gameBoard.updateAllPrevDefender();
-      synchronized(System.in){
-        System.out.println("Battle finished, now check anyone wins");
-      }
-      if(checkEnd()){
+
+      System.out.println("Battle finished, now check anyone wins");
+
+      if (checkEnd()) {
         barrier.await();
         barrier.await();
         closeAllStreams();
         break;
       }
       barrier.await();
-      synchronized(System.in){
-        System.out.println("No one wins, now waiting all players done again");
-      }
+
+      System.out.println("No one wins, now waiting all players done again");
+
     }
-    synchronized(System.in){
-      System.out.println("Tread for GameRoom exits");
-    }
+
   }
 
   /**
    * Increment one unit for every territory on the board.
    */
-  public void incrementUnits(){
+  public void incrementUnits() {
     int size = gameBoard.getTerritories().size();
-    for(int i=0;i<size;i++){
+    for (int i = 0; i < size; i++) {
       gameBoard.addOwnUnits(i, 1);
     }
   }
@@ -176,7 +167,7 @@ public abstract class GameRoom<T> {
     for (Territory<T> t : gameBoard.getTerritories()) {
       eachHaving[t.getOwner()]++;
     }
-    
+
     int winnerId = -1; // the player's id who wins the game. If no one wins, set it to -1.
     for (int i = 0; i < eachHaving.length; i++) {
       if (eachHaving[i] == numTerritory) {
@@ -188,10 +179,9 @@ public abstract class GameRoom<T> {
     // Set the player status according to whether the game has winner
     for (int i = 0; i < eachHaving.length; i++) {
       PlayerEntity<T> player = players.get(i);
-        player.setPlayerStatus(
-          (winnerId != -1) ? ((eachHaving[i] == 0) ? Constant.SELF_LOSE_OTHER_WIN_STATUS : Constant.SELF_WIN_STATUS) : 
-                             ((eachHaving[i] == 0) ? Constant.SELF_LOSE_NO_ONE_WIN_STATUS : Constant.SELF_NOT_LOSE_NO_ONE_WIN_STATUS)
-                             );
+      player.setPlayerStatus((winnerId != -1)
+          ? ((eachHaving[i] == 0) ? Constant.SELF_LOSE_OTHER_WIN_STATUS : Constant.SELF_WIN_STATUS)
+          : ((eachHaving[i] == 0) ? Constant.SELF_LOSE_NO_ONE_WIN_STATUS : Constant.SELF_NOT_LOSE_NO_ONE_WIN_STATUS));
     }
   }
 
@@ -215,6 +205,7 @@ public abstract class GameRoom<T> {
   /**
    * This method will close the ObjectInputStreams and ObjectOutputStreams each
    * player entity holds to release the resource.
+   * 
    * @throws IOException
    */
   protected void closeAllStreams() throws IOException {
