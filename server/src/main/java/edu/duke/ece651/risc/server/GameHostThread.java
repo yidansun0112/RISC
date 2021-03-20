@@ -99,6 +99,10 @@ public class GameHostThread<T> extends Thread {
       ArrayList<Integer> deployment = (ArrayList<Integer>) player.receiveObject();
       int territoryId = deployment.get(0);
       int unitAmount = deployment.get(1);
+      if (territoryId >= board.getTerritories().size()) {
+        player.sendObject("This territory does not exist!");
+        continue;
+      }
       // check units
       // >0 continue
       if (remainedUnits >= unitAmount) {

@@ -45,10 +45,11 @@ public class GameHostThreadTest {
   public void test_deployUnits() throws IOException, ClassNotFoundException {
     MockitoAnnotations.initMocks(this);
     when(playerMock.getPlayerId()).thenReturn(0);
+    ArrayList<Integer> d0 = createArrayList(9, 15);
     ArrayList<Integer> d1 = createArrayList(3, 5);
     ArrayList<Integer> d2 = createArrayList(0, 20);
     ArrayList<Integer> d3 = createArrayList(0, 15);
-    when(playerMock.receiveObject()).thenReturn("0", d1, d2, d3);
+    when(playerMock.receiveObject()).thenReturn("0", d0, d1, d2, d3);
     GameHostThread<String> gameThread = createGameHostThread(2);
     gameThread.pickTerritory();
     gameThread.deployUnits();
