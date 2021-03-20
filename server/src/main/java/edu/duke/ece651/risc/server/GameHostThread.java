@@ -113,6 +113,7 @@ public class GameHostThread<T> extends Thread {
         player.sendObject("You don't have enough units remained!");
       }
     }
+    board.updateAllPrevDefender();
     player.sendObject(Constant.FINISH_DEPLOY_INFO);
   }
 
