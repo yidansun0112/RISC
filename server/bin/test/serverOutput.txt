@@ -19,5 +19,4 @@ Battle finished, now check anyone wins
 No one wins, now waiting all players done again
 All players done with their orders
 Battle finished, now check anyone wins
-Tread for GameRoom exits
 Game is end. Close the server.
