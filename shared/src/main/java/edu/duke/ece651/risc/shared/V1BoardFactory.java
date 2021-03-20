@@ -25,9 +25,9 @@ public class V1BoardFactory<T> implements BoardFactory<T> {
     terriName.put(8, "Hogwarts");
     terriName.put(9, "Narnia");
     terriName.put(10, "Britt");
-    terriName.put(12, "Calibre");
-    terriName.put(13, "Elk");
-    terriName.put(14, "Floyd");
+    terriName.put(11, "Calibre");
+    terriName.put(12, "Elk");
+    terriName.put(13, "Floyd");
 
   }
 
@@ -65,12 +65,21 @@ public class V1BoardFactory<T> implements BoardFactory<T> {
    * Generate a v1 game board for 4 players  
    */
   protected Board<T> make4PlayerBoard() {
-    int[][] worldMap = new int[][] { { 1, 1, 0, 1, 0, 0, 0, 0, 0, 1, 0, 0 }, { 1, 1, 1, 0, 1, 0, 0, 0, 0, 0, 1, 0 },
-        { 0, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0 }, { 1, 0, 0, 1, 1, 0, 1, 0, 0, 0, 0, 0 },
-        { 0, 1, 0, 1, 1, 1, 0, 1, 0, 0, 0, 0 }, { 0, 0, 0, 0, 1, 1, 0, 0, 0, 0, 0, 0 },
-        { 0, 0, 0, 1, 0, 1, 1, 0, 0, 1, 0, 0 }, { 0, 0, 0, 0, 1, 0, 1, 1, 1, 0, 1, 0 },
-        { 0, 0, 0, 0, 0, 0, 0, 1, 1, 0, 0, 0 }, { 1, 0, 0, 0, 0, 0, 1, 0, 0, 1, 1, 0 },
-        { 0, 1, 0, 0, 0, 0, 0, 1, 0, 1, 1, 1 }, { 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1 } };
+    int[][] worldMap = new int[][] {
+      //  0  1  2  3  4  5  6  7  8  9  10  11
+        { 1, 1, 0, 1, 0, 0, 0, 0, 0, 1, 0, 0 }, // 0
+        { 1, 1, 1, 0, 1, 0, 0, 0, 0, 0, 1, 0 }, // 1
+        { 0, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0 }, // 2
+        { 1, 0, 0, 1, 1, 0, 1, 0, 0, 0, 0, 0 }, // 3
+        { 0, 1, 0, 1, 1, 1, 0, 1, 0, 0, 0, 0 }, // 4
+        { 0, 0, 0, 0, 1, 1, 0, 0, 0, 0, 0, 0 }, // 5
+        { 0, 0, 0, 1, 0, 0, 1, 1, 0, 1, 0, 0 }, // 6
+        { 0, 0, 0, 0, 1, 0, 1, 1, 1, 0, 1, 0 }, // 7
+        { 0, 0, 0, 0, 0, 0, 0, 1, 1, 0, 0, 0 }, // 8
+        { 1, 0, 0, 0, 0, 0, 1, 0, 0, 1, 1, 0 }, // 9
+        { 0, 1, 0, 0, 0, 0, 0, 1, 0, 1, 1, 1 }, // 10
+        { 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1 }  // 11
+      };
     ArrayList<Territory<T>> territories = new ArrayList<>();
     for (int i = 0; i < 12; i++) {
       territories.add(new V1Territory<T>(i, terriName.get(i), i / 3, worldMap[i]));
