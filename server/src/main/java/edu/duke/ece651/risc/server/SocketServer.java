@@ -9,7 +9,6 @@ import java.util.List;
 import java.util.Vector;
 import java.util.concurrent.BrokenBarrierException;
 
-import edu.duke.ece651.risc.shared.BoardFactory;
 import edu.duke.ece651.risc.shared.Constant;
 
 public class SocketServer<T> implements GameServer<T> {

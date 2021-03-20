@@ -7,17 +7,12 @@ import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.*;
 
 import java.io.IOException;
-import java.io.ObjectInputStream;
-import java.io.ObjectOutputStream;
-import java.net.Socket;
+
 import java.net.UnknownHostException;
 
 import java.io.ByteArrayOutputStream;
 import java.io.InputStream;
 import java.io.PrintStream;
-import java.io.BufferedReader;
-import java.io.OutputStream;
-import java.io.StringReader;
 
 import org.junit.jupiter.api.parallel.Resources;
 import org.junit.jupiter.api.parallel.ResourceLock;
@@ -25,7 +20,7 @@ import org.junit.jupiter.api.parallel.ResourceAccessMode;
 
 class AppTest {
 
-/**
+  /**
    * Test the SocketClient sending, receiving and disconnecting
    * 
    * @throws UnknownHostException
