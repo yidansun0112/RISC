@@ -8,14 +8,33 @@ import java.io.IOException;
  * @param T String for V1
  */
 public interface GamePlayer<T> {
-  // TODO: check what method in V1GamePlayer can also be put here
 
-
+  /**
+   * The initial step of a game.
+   * 
+   * @throws IOException
+   * @throws ClassNotFoundException
+   */
   public void initGame() throws IOException, ClassNotFoundException;
 
-  public void doPlayPhase() throws IOException, ClassNotFoundException;
-
+  /**
+   * Let the player pick the territory
+   * @throws IOException
+   * @throws ClassNotFoundException
+   */
   public void pickTerritory() throws IOException, ClassNotFoundException;
 
+  /**
+   * Let the player deploy all his/her units
+   * @throws IOException
+   * @throws ClassNotFoundException
+   */
   public void deployUnits() throws IOException, ClassNotFoundException;
+
+  /**
+   * Let the player actually player the game (i.e., issuing orders, etc.)
+   * @throws IOException
+   * @throws ClassNotFoundException
+   */
+  public void doPlayPhase() throws IOException, ClassNotFoundException;
 }
