@@ -14,24 +14,13 @@ public class AttackOrderConsistencyCheckerTest {
     b.occupyTerritory(1, 1);
     Order<String> o1 = new AttackOrder<String>("0 3 2");
     int dest = o1.getDestTerritory();
-    assertEquals(dest,3);
-    assertEquals(b.getTerritories().get(3).getOwner(),1);
-    assertEquals(r.checkOrder(0,o1,b),null);
+    assertEquals(dest, 3);
+    assertEquals(b.getTerritories().get(3).getOwner(), 1);
+    assertEquals(r.checkOrder(0, o1, b), null);
     Order<String> o2 = new AttackOrder<String>("4 3 2");
-    assertEquals(r.checkOrder(0,o2,b),"Order is invalid: source territory you pick doesn't belong to you\n");
+    assertEquals(r.checkOrder(0, o2, b), "Order is invalid: source territory you pick doesn't belong to you\n");
     Order<String> o3 = new AttackOrder<String>("0 2 2");
-    assertEquals(r.checkOrder(0,o3,b),"Order is invalid: destination territory you pick shouldn't belong to you\n");
+    assertEquals(r.checkOrder(0, o3, b), "Order is invalid: destination territory you pick shouldn't belong to you\n");
   }
 
 }
-
-
-
-
-
-
-
-
-
-
-

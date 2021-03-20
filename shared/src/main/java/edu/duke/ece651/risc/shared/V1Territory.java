@@ -23,9 +23,9 @@ public class V1Territory<T> implements Territory<T> {
     prevDefenderArmy = new Vector<Army<T>>();
     enemyArmy = new Vector<Army<T>>();
     currDefenderArmy.add(initArmy);
-    //prevDefenderArmy.add(initArmy);
+    // prevDefenderArmy.add(initArmy);
     for (int i = 0; i < adjacentList.length; i++) {
-      if (adjacentList[i] != 0&& i!=Id) { // in case need distance in the future
+      if (adjacentList[i] != 0 && i != Id) { // in case need distance in the future
         neigh.add(i);
       }
     }
@@ -33,7 +33,9 @@ public class V1Territory<T> implements Territory<T> {
 
   /**
    * This function gets the amount of units in each army of current defender
-   * @return HashMap<String, Integer> that records the amount of units in each army of current defender.
+   * 
+   * @return HashMap<String, Integer> that records the amount of units in each
+   *         army of current defender.
    */
   @Override
   public HashMap<String, Integer> getDisplayInfo(boolean isSelf) {
@@ -47,8 +49,8 @@ public class V1Territory<T> implements Territory<T> {
   }
 
   /*
-    Set the Owner
-*/
+   * Set the Owner
+   */
   @Override
   public void setOwner(int owner) {
     currOwner = owner;
@@ -56,16 +58,16 @@ public class V1Territory<T> implements Territory<T> {
   }
 
   /*
-    Return the Territory Owner.
-*/
+   * Return the Territory Owner.
+   */
   @Override
   public int getOwner() {
     return currOwner;
   }
 
   /**
-   * Set the amount of units in first army of current Defender Army 
-   * (Actually in evol1, there would be and only be 1 army in current defender army)
+   * Set the amount of units in first army of current Defender Army (Actually in
+   * evol1, there would be and only be 1 army in current defender army)
    */
   @Override
   public void setUnitAmount(int amount) {
@@ -73,17 +75,16 @@ public class V1Territory<T> implements Territory<T> {
   }
 
   /**
-   * get the amount of units in first army of current Defender Army 
-   * (Actually in evol1, there would be and only be 1 army in current defender army)
+   * get the amount of units in first army of current Defender Army (Actually in
+   * evol1, there would be and only be 1 army in current defender army)
    */
   @Override
   public int getUnitAmount() {
     return currDefenderArmy.get(0).getUnits();
   }
 
-
   /*
-    return Id 
+   * return Id
    */
   @Override
   public int getId() {
@@ -91,7 +92,7 @@ public class V1Territory<T> implements Territory<T> {
   }
 
   /*
-    return name. 
+   * return name.
    */
   @Override
   public String getName() {
@@ -99,34 +100,34 @@ public class V1Territory<T> implements Territory<T> {
   }
 
   /*
-    return Group Num.
-*/
+   * return Group Num.
+   */
   @Override
   public int getGroup() {
     return group;
   }
 
   /*
-    Return neighbor Vectore
-*/
+   * Return neighbor Vectore
+   */
   @Override
   public Vector<Integer> getNeigh() {
     return neigh;
   }
 
   /*
-    return DefenderArmy Vectore
-*/
+   * return DefenderArmy Vectore
+   */
   @Override
   public Vector<Army<T>> getCurrDefenderArmy() {
     return this.currDefenderArmy;
   }
 
   /*
-    return enemyArmy Vectore
-*/
+   * return enemyArmy Vectore
+   */
   @Override
-  public Vector<Army<T>> getEnemyArmy(){
+  public Vector<Army<T>> getEnemyArmy() {
     return this.enemyArmy;
   }
 
@@ -134,71 +135,58 @@ public class V1Territory<T> implements Territory<T> {
    * This add an army of enemy in the territory
    */
   @Override
-  public void addEnemy(int playerId, int amount){
+  public void addEnemy(int playerId, int amount) {
     Army<T> temp = new Army<T>(playerId, amount);
     this.enemyArmy.add(temp);
   }
 
   /**
-  *  This update the previous defender army to be the same with current defender army after all the combat ends.
-  */
+   * This update the previous defender army to be the same with current defender
+   * army after all the combat ends.
+   */
   @Override
   public void updatePrevDefender() {
     prevDefenderArmy.clear();
-    for(Army<T> a : currDefenderArmy) {
-      prevDefenderArmy.add(new Army<T>(a.getCommanderId(),a.getUnits()));
+    for (Army<T> a : currDefenderArmy) {
+      prevDefenderArmy.add(new Army<T>(a.getCommanderId(), a.getUnits()));
     }
-    
+
   }
 
   /**
-   * Set units number of each army in current defender army to be 0
-   * only call this when one territory is assigned an owner
+   * Set units number of each army in current defender army to be 0 only call this
+   * when one territory is assigned an owner
    */
   @Override
   public void initCurrDefender(int owner) {
-    for(Army<T> army: currDefenderArmy){
+    for (Army<T> army : currDefenderArmy) {
       army.setUnits(0);
       army.setCommanderId(owner);
     }
-	
-  }
 
+  }
 
   /*
-    Combine the Army with the same Commander.
-*/
-@Override
-public void combineEnemyArmy() {
-  HashMap<Integer, Army<T>> enemy = new HashMap<Integer,Army<T>>();
-  for(Army<T> a : enemyArmy){
-    int commander = a.getCommanderId();
- 
-    if(enemy.containsKey(commander)){
-      int prev = enemy.get(commander).getUnits();
-      enemy.get(commander).setUnits(a.getUnits()+prev);
+   * Combine the Army with the same Commander.
+   */
+  @Override
+  public void combineEnemyArmy() {
+    HashMap<Integer, Army<T>> enemy = new HashMap<Integer, Army<T>>();
+    for (Army<T> a : enemyArmy) {
+      int commander = a.getCommanderId();
+
+      if (enemy.containsKey(commander)) {
+        int prev = enemy.get(commander).getUnits();
+        enemy.get(commander).setUnits(a.getUnits() + prev);
+      } else {
+        enemy.put(commander, new Army<T>(commander, a.getUnits()));
+      }
     }
-    else{
-      enemy.put(commander, new Army<T>(commander,a.getUnits()));
+    enemyArmy.clear();
+    for (Integer key : enemy.keySet()) {
+      enemyArmy.add(enemy.get(key));
     }
+
   }
-  enemyArmy.clear();
-  for(Integer key : enemy.keySet()){
-    enemyArmy.add(enemy.get(key));
-  }
-	
-}
 
 }
-
-
-
-
-
-
-
-
-
-
-
-

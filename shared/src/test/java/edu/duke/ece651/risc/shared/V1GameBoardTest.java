@@ -20,16 +20,16 @@ public class V1GameBoardTest {
     }
     Territory<String> terr = t.get(0);
     String unassigned = b.whatIsIn(terr, true);
-    assertEquals(unassigned,"Narnia(0) (next to: Midkemia, Oz, Elantris, Roshar, Scadrial)\n");
+    assertEquals(unassigned, "Narnia(0) (next to: Midkemia, Oz, Elantris, Roshar, Scadrial)\n");
     assertEquals(b.occupyTerritory(0, 0), false); // group 0 owner is 0
     assertEquals(b.occupyTerritory(1, 1), false); // group 1 owner is 1
-    assertEquals(b.occupyTerritory(1, 1), true); 
+    assertEquals(b.occupyTerritory(1, 1), true);
     for (int i = 0; i < 3; i++) {
       assertEquals(t.get(i).getOwner(), 0);
       Army<String> a = terr.getCurrDefenderArmy().get(0);
       assertEquals(a.getUnits(), 0);
     }
-    
+
     for (int i = 3; i < 6; i++) {
       assertEquals(t.get(i).getOwner(), 1);
       assertEquals(t.get(i).getUnitAmount(), 0);
@@ -41,36 +41,36 @@ public class V1GameBoardTest {
 
     assertEquals(defenderArmy.get(0).getCommanderId(), 0);
     assertEquals(terr.getUnitAmount(), 0);
-    b.addOwnUnits(0,3);
-    assertEquals(terr.getUnitAmount(),3);
-    b.addEnemyUnits(0,2,1);
+    b.addOwnUnits(0, 3);
+    assertEquals(terr.getUnitAmount(), 3);
+    b.addEnemyUnits(0, 2, 1);
     Army<String> temp = terr.getEnemyArmy().get(0);
-    assertEquals(temp.getUnits(),2);
-    assertEquals(temp.getCommanderId(),1);
-    b.addOwnUnits(0,2);
-    assertEquals(terr.getUnitAmount(),5);
-    b.updateAllPrevDefender(); //update
-    b.removeUnits(0,1);
-    assertEquals(terr.getUnitAmount(),4);
+    assertEquals(temp.getUnits(), 2);
+    assertEquals(temp.getCommanderId(), 1);
+    b.addOwnUnits(0, 2);
+    assertEquals(terr.getUnitAmount(), 5);
+    b.updateAllPrevDefender(); // update
+    b.removeUnits(0, 1);
+    assertEquals(terr.getUnitAmount(), 4);
     int[][] worldMap = b.getWorldMap();
-    Vector<Integer> neigh =terr.getNeigh();
+    Vector<Integer> neigh = terr.getNeigh();
     Vector<Integer> expected = new Vector<Integer>();
-    for(int i=1;i<6;i++){
+    for (int i = 1; i < 6; i++) {
       expected.add(i);
     }
-    assertEquals(expected,neigh);
+    assertEquals(expected, neigh);
     HashMap<String, Integer> displayInfoSelf = terr.getDisplayInfo(true);
-    assertEquals(displayInfoSelf.get("units"),4);
-    //assertEquals(b.unitsInfo(displayInfoSelf),"4 units in ");
-    //assertEquals(b.whatisInTerritory("Narnia", 0, neigh), "");
+    assertEquals(displayInfoSelf.get("units"), 4);
+    // assertEquals(b.unitsInfo(displayInfoSelf),"4 units in ");
+    // assertEquals(b.whatisInTerritory("Narnia", 0, neigh), "");
     String assigned = b.whatIsIn(terr, true);
-    assertEquals(assigned,"4 units in Narnia(0) (next to: Midkemia, Oz, Elantris, Roshar, Scadrial)\n");
+    assertEquals(assigned, "4 units in Narnia(0) (next to: Midkemia, Oz, Elantris, Roshar, Scadrial)\n");
     HashMap<String, Integer> displayInfoEnemy = terr.getDisplayInfo(false);
-    assertEquals(displayInfoEnemy.get("units"),5);
+    assertEquals(displayInfoEnemy.get("units"), 5);
     assertEquals(terr.getId(), 0);
     assertEquals(terr.getName(), "Narnia");
-    assertEquals(b.deployUnits(0, 2, 0),true);
-    assertEquals(b.deployUnits(0, 2, 1),false);
+    assertEquals(b.deployUnits(0, 2, 0), true);
+    assertEquals(b.deployUnits(0, 2, 1), false);
   }
 
   @Test
@@ -87,15 +87,3 @@ public class V1GameBoardTest {
     assertEquals(t5.size(), 15);
   }
 }
-
-
-
-
-
-
-
-
-
-
-
-

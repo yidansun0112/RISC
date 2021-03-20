@@ -11,8 +11,8 @@ import edu.duke.ece651.risc.shared.*;
 public class TestPlayer {
   Socket playerSock;
 
-  public TestPlayer(String ip,int port) throws IOException {
-    this.playerSock = new Socket(ip,port);
+  public TestPlayer(String ip, int port) throws IOException {
+    this.playerSock = new Socket(ip, port);
   }
 
   /**
@@ -23,46 +23,46 @@ public class TestPlayer {
    * @throws IOException
    */
   public void runAsFirst() throws IOException {
-    try { 
+    try {
       try {
         ObjectInputStream recv = new ObjectInputStream(playerSock.getInputStream());
         ObjectOutputStream send = new ObjectOutputStream(playerSock.getOutputStream());
-        //recv id
+        // recv id
         recv.readObject();
-        //select player num
+        // select player num
         send.writeObject("2");
-        //select game map
+        // select game map
         recv.readObject();
         send.writeObject("0");
         recv.readObject();
-        //pick territory
+        // pick territory
         recv.readObject();
         send.writeObject("0");
         recv.readObject();
-        //deploy units
+        // deploy units
         recv.readObject();
-        ArrayList<Integer> deploy=new ArrayList<Integer>();
+        ArrayList<Integer> deploy = new ArrayList<Integer>();
         deploy.add(0);
         deploy.add(15);
         send.writeObject(deploy);
         recv.readObject();
-        //first round issue orders
+        // first round issue orders
         recv.readObject();
         sendOrder("order", "D", recv, send);
-        //recv result
+        // recv result
         recv.readObject();
         recv.readObject();
-        //second round
+        // second round
         recv.readObject();
         sendOrder("2 1 1", "M", recv, send);
         sendOrder("order", "D", recv, send);
-        //recv result
+        // recv result
         recv.readObject();
         recv.readObject();
-        //third round
+        // third round
         recv.readObject();
         sendOrder("order", "D", recv, send);
-        //recv result
+        // recv result
         recv.readObject();
         recv.readObject();
         send.writeObject(Constant.TO_QUIT_INFO);
@@ -79,41 +79,40 @@ public class TestPlayer {
     }
   }
 
-
   public void runAsSecond() throws IOException {
-    try { 
+    try {
       try {
         ObjectInputStream recv = new ObjectInputStream(playerSock.getInputStream());
         ObjectOutputStream send = new ObjectOutputStream(playerSock.getOutputStream());
-        //recv id
+        // recv id
         recv.readObject();
-        //pick territory
+        // pick territory
         recv.readObject();
         send.writeObject("1");
         recv.readObject();
-        //deploy units
+        // deploy units
         recv.readObject();
-        ArrayList<Integer> deploy=new ArrayList<Integer>();
+        ArrayList<Integer> deploy = new ArrayList<Integer>();
         deploy.add(3);
         deploy.add(15);
         send.writeObject(deploy);
         recv.readObject();
-        //first issue orders
+        // first issue orders
         recv.readObject();
         sendOrder("3 0 15", "A", recv, send);
         sendOrder("order", "D", recv, send);
-        //recv result
+        // recv result
         recv.readObject();
         recv.readObject();
-        //second issue orders
+        // second issue orders
         recv.readObject();
         sendOrder("3 2 1", "A", recv, send);
         sendOrder("0 1 3", "A", recv, send);
         sendOrder("order", "D", recv, send);
-        //recv result
+        // recv result
         recv.readObject();
         recv.readObject();
-        //third issue orders
+        // third issue orders
         recv.readObject();
         sendOrder("2 0 2", "M", recv, send);
         sendOrder("3 0 1", "M", recv, send);
@@ -121,7 +120,7 @@ public class TestPlayer {
         sendOrder("5 0 2", "M", recv, send);
         sendOrder("0 1 8", "A", recv, send);
         sendOrder("order", "D", recv, send);
-        //recv result
+        // recv result
         recv.readObject();
         recv.readObject();
         send.writeObject(Constant.TO_QUIT_INFO);
@@ -138,18 +137,19 @@ public class TestPlayer {
     }
   }
 
-  public void sendOrder(String order, String type,ObjectInputStream recv,ObjectOutputStream send) throws IOException, ClassNotFoundException{
-    Order<String> od=new DoneOrder<String>();
-    switch(type){
-      case "M":
-        od=new MoveOrder<String>(order);
-        break;
-      case "A":
-        od=new AttackOrder<String>(order);
-        break;
-      case "D":
-        od=new DoneOrder<String>();
-        break;
+  public void sendOrder(String order, String type, ObjectInputStream recv, ObjectOutputStream send)
+      throws IOException, ClassNotFoundException {
+    Order<String> od = new DoneOrder<String>();
+    switch (type) {
+    case "M":
+      od = new MoveOrder<String>(order);
+      break;
+    case "A":
+      od = new AttackOrder<String>(order);
+      break;
+    case "D":
+      od = new DoneOrder<String>();
+      break;
     }
     send.writeObject(od);
     recv.readObject();
@@ -157,11 +157,10 @@ public class TestPlayer {
   }
 
   public static void main(String[] args) throws IOException {
-    TestPlayer testPlayer = new TestPlayer("localhost",12345);
-    if(args[0]=="0"){
+    TestPlayer testPlayer = new TestPlayer("localhost", 12345);
+    if (args[0] == "0") {
       testPlayer.runAsFirst();
-    }
-    else{
+    } else {
       testPlayer.runAsSecond();
     }
   }

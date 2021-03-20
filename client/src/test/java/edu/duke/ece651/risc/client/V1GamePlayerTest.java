@@ -55,7 +55,7 @@ public class V1GamePlayerTest {
     String p1 = "Please choose one map among the following maps.\n";
     String p2 = "Please type the map number that you would like to choose:\n";
     String prompt = p1 + mapChoices + "\n" + p2;
-    String exceptNega = "Cannot choose a map with negative index.\n"+"Please do that again!\n";
+    String exceptNega = "Cannot choose a map with negative index.\n" + "Please do that again!\n";
     String exceptNotNum = "For input string: \"a\" Map number should be pure number.\n" + "Please do that again!\n";
     String exceptInvalid = "Invalid choice\n" + "Please do that again!\n";
     String successInfo = Constant.VALID_MAP_CHOICE_INFO + "\n";
@@ -95,7 +95,7 @@ public class V1GamePlayerTest {
     String p1 = "Please choose one group among the following groups.\n";
     String p2 = "Please type the group number that you would like to choose:\n";
     String prompt = p1 + groupChoices + "\n" + p2;
-    String exceptNega = "Cannot choose a group with negative index.\n"+"Please do that again!\n";
+    String exceptNega = "Cannot choose a group with negative index.\n" + "Please do that again!\n";
     String exceptNotNum = "For input string: \"a\" Group number should be pure number.\n" + "Please do that again!\n";
     String exceptInvalid = "Invalid choice\n" + "Please do that again!\n";
     String successInfo = Constant.VALID_MAP_CHOICE_INFO + "\n";

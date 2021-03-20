@@ -19,6 +19,7 @@ public interface GamePlayer<T> {
 
   /**
    * Let the player pick the territory
+   * 
    * @throws IOException
    * @throws ClassNotFoundException
    */
@@ -26,6 +27,7 @@ public interface GamePlayer<T> {
 
   /**
    * Let the player deploy all his/her units
+   * 
    * @throws IOException
    * @throws ClassNotFoundException
    */
@@ -33,6 +35,7 @@ public interface GamePlayer<T> {
 
   /**
    * Let the player actually player the game (i.e., issuing orders, etc.)
+   * 
    * @throws IOException
    * @throws ClassNotFoundException
    */

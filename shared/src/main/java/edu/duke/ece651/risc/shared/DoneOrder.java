@@ -2,7 +2,7 @@ package edu.duke.ece651.risc.shared;
 
 public class DoneOrder<T> implements Order<T> {
   /**
-   * Fields required by Serializable 
+   * Fields required by Serializable
    */
   static final long serialVersionUID = 0L;
 
@@ -13,23 +13,31 @@ public class DoneOrder<T> implements Order<T> {
   }
 
   @Override
-  public boolean execute(Board<T> board){return false;}
+  public boolean execute(Board<T> board) {
+    return false;
+  }
 
   /*
    * This is the SrcTerritory getter Function.
    */
   @Override
-  public int getSrcTerritory(){return -1;}
+  public int getSrcTerritory() {
+    return -1;
+  }
 
   /*
    * This is the DestTerritory getter Function.
    */
   @Override
-  public int getDestTerritory(){return -1;}
+  public int getDestTerritory() {
+    return -1;
+  }
 
   /*
    * This is the unitAmount getter Function.
    */
   @Override
-  public int getUnitAmount(){return -1;}
+  public int getUnitAmount() {
+    return -1;
+  }
 }

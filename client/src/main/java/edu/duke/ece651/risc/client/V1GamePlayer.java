@@ -198,7 +198,7 @@ public class V1GamePlayer<T> implements GamePlayer<T> {
       try {
         String strNum = inputReader.readLine().trim();
         // DONE: prevent the negative input here!!!
-        int groupIndex=Integer.parseInt(strNum);
+        int groupIndex = Integer.parseInt(strNum);
         if (groupIndex < 0) {
           throw new IllegalArgumentException("Cannot choose a group with negative index.");
         }
@@ -264,7 +264,8 @@ public class V1GamePlayer<T> implements GamePlayer<T> {
   /**
    * Helper function to parse deployment from string to arraylist.
    * 
-   * This function parse string in front of "," to territory index, and string after "," to unit amount.
+   * This function parse string in front of "," to territory index, and string
+   * after "," to unit amount.
    * 
    * @param str string to parse with
    * @throws NumberFormatException when string is not pure number.
@@ -287,9 +288,11 @@ public class V1GamePlayer<T> implements GamePlayer<T> {
   /**
    * Let the player issue orders.
    * 
-   * Player will continue receive current map from server, and make choice among move, attack and Done and then type content of the order.
-   * Player will send the order to server and receive order info to indicate legal or not, and receive another map.
-   * If the player choose to done, we will print the final map and return.
+   * Player will continue receive current map from server, and make choice among
+   * move, attack and Done and then type content of the order. Player will send
+   * the order to server and receive order info to indicate legal or not, and
+   * receive another map. If the player choose to done, we will print the final
+   * map and return.
    * 
    * @throws IOException
    * @throws ClassNotFoundException
@@ -334,7 +337,8 @@ public class V1GamePlayer<T> implements GamePlayer<T> {
   /**
    * This method lets the player to type in the content of moveorder.
    * 
-   * Player should type with format like "1 3 5", which will move 5 units from territory 1 to territory 3.
+   * Player should type with format like "1 3 5", which will move 5 units from
+   * territory 1 to territory 3.
    * 
    * @return MoveOrder<T>
    * @throws IllegalArgumentException when order format is wrong
@@ -352,7 +356,8 @@ public class V1GamePlayer<T> implements GamePlayer<T> {
   /**
    * This method lets the player to type in the content of attack.
    * 
-   * Player should type with format like "1 3 5", which will move 5 units from territory 1 to attack territory 3.
+   * Player should type with format like "1 3 5", which will move 5 units from
+   * territory 1 to attack territory 3.
    * 
    * @return AttackOrder<T>
    * @throws IllegalArgumentException when order format is wrong
@@ -380,10 +385,8 @@ public class V1GamePlayer<T> implements GamePlayer<T> {
   /**
    * This method helps to create order based on the choice.
    * 
-   * "M" : will create a MoveOrder
-   * "A" : will create an AttackOrder
-   * "D" : will create a DoneOrder
-   * others: will throw IllegalArgumentException
+   * "M" : will create a MoveOrder "A" : will create an AttackOrder "D" : will
+   * create a DoneOrder others: will throw IllegalArgumentException
    * 
    * @param choice the order type player choose to make
    * @return Order<T>
@@ -405,12 +408,11 @@ public class V1GamePlayer<T> implements GamePlayer<T> {
   /**
    * This method let player to play the game.
    * 
-   * Player need to issue orders at first.
-   * Then player will wait to receive combat result from server.
-   * And receive the current game result.
-   * If the player wins or somebody wins, the game will end.
-   * If the player lose, he/she need to choose whether to watch the game or quit.
-   * If the player does not lose, he/she need to issue order again.
+   * Player need to issue orders at first. Then player will wait to receive combat
+   * result from server. And receive the current game result. If the player wins
+   * or somebody wins, the game will end. If the player lose, he/she need to
+   * choose whether to watch the game or quit. If the player does not lose, he/she
+   * need to issue order again.
    * 
    * @throws IOException
    * @throws ClassNotFoundException
@@ -442,10 +444,11 @@ public class V1GamePlayer<T> implements GamePlayer<T> {
   }
 
   /**
-   * This method lets the player to choose whether to watch the game or quit after losing the game.
+   * This method lets the player to choose whether to watch the game or quit after
+   * losing the game.
    * 
-   * Player need to type the choice, W for watch and Q for quit. (Case insensitive)
-   * Send this choice to server and wait confirm.
+   * Player need to type the choice, W for watch and Q for quit. (Case
+   * insensitive) Send this choice to server and wait confirm.
    * 
    * @throws IOException
    * @throws ClassNotFoundException
@@ -479,9 +482,9 @@ public class V1GamePlayer<T> implements GamePlayer<T> {
   /**
    * This method lets the player do watch phase.
    * 
-   * Player will send watch decision to server and wait confirm information.
-   * Then player will wait to receive combat result and game info in every round.
-   * If game info is GAME_END_INFO, the player need to end the game.
+   * Player will send watch decision to server and wait confirm information. Then
+   * player will wait to receive combat result and game info in every round. If
+   * game info is GAME_END_INFO, the player need to end the game.
    * 
    * @throws IOException
    * @throws ClassNotFoundException
@@ -505,8 +508,8 @@ public class V1GamePlayer<T> implements GamePlayer<T> {
   /**
    * This method lets the player to end the game.
    * 
-   * Player need to send TO_QUIT_INFO to server at first and receive confirm info from server.
-   * Then the player will disconnet with the server and game end.
+   * Player need to send TO_QUIT_INFO to server at first and receive confirm info
+   * from server. Then the player will disconnet with the server and game end.
    * 
    * @throws IOException
    * @throws ClassNotFoundException

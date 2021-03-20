@@ -53,28 +53,28 @@ public class TestServer {
     if (s == null) {
       throw new IOException();
     }
-    try { 
+    try {
       try {
 
         ObjectInputStream recv = new ObjectInputStream(s.getInputStream());
         ObjectOutputStream send = new ObjectOutputStream(s.getOutputStream());
         // send id
         send.writeObject("1");
-        //pick territory
+        // pick territory
         send.writeObject("This is map.");
         recv.readObject();
         send.writeObject(Constant.VALID_MAP_CHOICE_INFO);
-        //deploy units
+        // deploy units
         send.writeObject(Constant.FINISH_DEPLOY_INFO);
-        //issue Orders
+        // issue Orders
         send.writeObject("This is map.");
         recv.readObject();
         send.writeObject(Constant.LEGAL_ORDER_INFO);
         send.writeObject("This is map.");
-        //send result
+        // send result
         send.writeObject("This is combat info");
         send.writeObject(Constant.GAME_END_INFO);
-        //do end phase
+        // do end phase
         recv.readObject();
         send.writeObject(Constant.CONFIRM_INFO);
       } catch (ClassNotFoundException e) {
@@ -95,4 +95,3 @@ public class TestServer {
     testSerevr.run();
   }
 }
-

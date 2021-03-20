@@ -104,7 +104,7 @@ public class BoardTextViewTest {
     assertEquals(sb2.toString(), bt1.displayBoardFor(1));
 
     StringBuffer sb3 = new StringBuffer();
-    for(int i = 0 ; i < 3 ; i ++){
+    for (int i = 0; i < 3; i++) {
       sb3.append(b.whatIsIn(territories.get(i), true));
     }
 
@@ -112,7 +112,3 @@ public class BoardTextViewTest {
   }
 
 }
-
-
-
-

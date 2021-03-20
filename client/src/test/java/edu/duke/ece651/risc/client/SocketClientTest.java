@@ -90,6 +90,7 @@ public class SocketClientTest {
 
   /**
    * Helper method that creates a new thread to run the test loopback server.
+   * 
    * @return a Thread object that the server is running on
    */
   private Thread make_test_server_thread_helper() {

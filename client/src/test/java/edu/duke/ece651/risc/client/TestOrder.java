@@ -10,7 +10,7 @@ public class TestOrder implements Serializable {
    * required by Serializable
    */
   private static final long serialVersionUID = 1L;
-  
+
   int intA;
   int intB;
   int intC;

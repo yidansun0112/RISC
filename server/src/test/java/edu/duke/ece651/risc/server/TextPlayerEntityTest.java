@@ -99,6 +99,7 @@ public class TextPlayerEntityTest {
   @Test
   /**
    * Test sendObject() method and receiveObject() method
+   * 
    * @throws ClassNotFoundException
    * @throws IOException
    * @throws InterruptedException
@@ -112,15 +113,16 @@ public class TextPlayerEntityTest {
                        // this is a bit of hack
 
     Socket socket = new Socket("localhost", 3301);
-    
+
     TextPlayerEntity<String> tpe = new TextPlayerEntity<String>(new ObjectOutputStream(socket.getOutputStream()),
-    new ObjectInputStream(socket.getInputStream()), playerId, playerSymbol, ownedGroup, playerStatus);
-    
+        new ObjectInputStream(socket.getInputStream()), playerId, playerSymbol, ownedGroup, playerStatus);
+
     String msg = new String("Hi there!"); // a string used in testing, it will "send" by the mocked oosMock object
-    
-    // First we need to inform test loop back server how many msg we want to send and receive
+
+    // First we need to inform test loop back server how many msg we want to send
+    // and receive
     tpe.sendObject(Integer.valueOf(1));
-    
+
     tpe.sendObject(msg);
     String receivedMsg = (String) tpe.receiveObject();
     // Thought they are actually the same String constant in JVM, but in real
@@ -128,7 +130,7 @@ public class TextPlayerEntityTest {
     // on different computer, so here we need call assertEquals() rather than
     // assertSame()
     assertEquals(msg, receivedMsg);
-    
+
     th.join();
     socket.close();
   }

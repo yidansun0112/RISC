@@ -24,7 +24,8 @@ public class TestGamePlayer implements Runnable {
       player.pickTerritory();
       player.deployUnits();
       player.doPlayPhase();
-    } catch (Exception e) {}
+    } catch (Exception e) {
+    }
   }
 
   /**

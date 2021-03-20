@@ -4,6 +4,7 @@ import static org.junit.jupiter.api.Assertions.*;
 
 import org.junit.jupiter.api.Test;
 import java.util.*;
+
 public class AttackOrderTest {
   @Test
   public void test_AttackOrder() {
@@ -27,24 +28,13 @@ public class AttackOrderTest {
     Board<String> b = f.makeGameBoard(2);
     b.occupyTerritory(0, 0);
     b.occupyTerritory(1, 1);
-    b.addOwnUnits(0,3);
+    b.addOwnUnits(0, 3);
     AttackOrder<String> a2 = new AttackOrder<>("7 7 7");
     assertEquals(false, a2.execute(b));
     assertEquals(true, a1.execute(b));
-    assertEquals(1,b.getTerritories().get(a1.getSrcTerritory()).getUnitAmount());
+    assertEquals(1, b.getTerritories().get(a1.getSrcTerritory()).getUnitAmount());
     Vector<Army<String>> a = b.getTerritories().get(3).getEnemyArmy();
-    assertEquals(a.get(0).getUnits(),2);
+    assertEquals(a.get(0).getUnits(), 2);
   }
 
 }
-
-
-
-
-
-
-
-
-
-
-

@@ -12,19 +12,13 @@ public class AttackOrderPathCheckerTest {
     OrderRuleChecker<String> r = new AttackOrderPathChecker<String>(null);
     b.occupyTerritory(0, 0);
     b.occupyTerritory(1, 1);
-   
+
     Order<String> o1 = new AttackOrder<String>("0 3 2");
-    assertEquals(r.checkOrder(0,o1,b),null);
-    
+    assertEquals(r.checkOrder(0, o1, b), null);
+
     Order<String> o2 = new AttackOrder<String>("1 4 2");
-    assertEquals(r.checkOrder(0,o2,b),"invalid order: You can only attack an enemy territory that is next to you!\n");
+    assertEquals(r.checkOrder(0, o2, b),
+        "invalid order: You can only attack an enemy territory that is next to you!\n");
   }
 
 }
-
-
-
-
-
-
-

@@ -30,9 +30,8 @@ class AppTest {
    */
   @ResourceLock(value = Resources.SYSTEM_OUT, mode = ResourceAccessMode.READ_WRITE)
   @Test
-  public void test_main()
-      throws UnknownHostException, IOException, InterruptedException, ClassNotFoundException {
-    //set up
+  public void test_main() throws UnknownHostException, IOException, InterruptedException, ClassNotFoundException {
+    // set up
     ByteArrayOutputStream bytes = new ByteArrayOutputStream();
     PrintStream out = new PrintStream(bytes, true);
     InputStream input = getClass().getClassLoader().getResourceAsStream("input.txt");
@@ -47,12 +46,12 @@ class AppTest {
     Thread.sleep(100); // let the *current* thead wait for a while to let the server setup
                        // this is a bit of hack
     // Now the TestLoopBackServer should start to wait for a connection...
-    try{
+    try {
       System.setIn(input);
       System.setOut(out);
-      String[] args={"localhost"};
+      String[] args = { "localhost" };
       App.main(args);
-    }finally{
+    } finally {
       System.setIn(oldIn);
       System.setOut(oldOut);
     }
@@ -64,6 +63,7 @@ class AppTest {
 
   /**
    * Helper method that creates a new thread to run the test loopback server.
+   * 
    * @return a Thread object that the server is running on
    */
   private Thread make_test_server_thread_helper() {
@@ -78,7 +78,5 @@ class AppTest {
     };
     return th;
   }
-
-  
 
 }

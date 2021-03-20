@@ -19,11 +19,11 @@ public class MoveOrderConsistencyCheckerTest {
     MoveOrder<String> m3 = new MoveOrder<String>("3 3 0");
     MoveOrder<String> m4 = new MoveOrder<String>("3 4 2");
 
-    for(int i = 0 ; i < 3 ; i++){
+    for (int i = 0; i < 3; i++) {
       b.getTerritories().get(i).setUnitAmount(5);
       b.getTerritories().get(i + 3).setUnitAmount(5);
     }
-    
+
     String s1 = "The source territory doesn't belong to this player.\n";
     String s2 = "The destination territory doesn't belong to this player.\n";
 

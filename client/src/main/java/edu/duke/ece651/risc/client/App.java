@@ -14,17 +14,16 @@ public class App {
     /**
      * This is the main method of the whole project.
      * 
-     * A client is created to handle connection with server.
-     * A BufferedReader is created to handle input.
-     * A player is created for play logic.
+     * A client is created to handle connection with server. A BufferedReader is
+     * created to handle input. A player is created for play logic.
      * 
      * @throws IOException
      * @throws ClassNotFoundException
      */
-    public static void main(String[] args) throws IOException,ClassNotFoundException{
-        SocketClient client=new SocketClient(12345,args[0]);
+    public static void main(String[] args) throws IOException, ClassNotFoundException {
+        SocketClient client = new SocketClient(12345, args[0]);
         BufferedReader input = new BufferedReader(new InputStreamReader(System.in));
-        GamePlayer<String> player=new V1GamePlayer<String>(-1, client, input, System.out);
+        GamePlayer<String> player = new V1GamePlayer<String>(-1, client, input, System.out);
         player.initGame();
         player.pickTerritory();
         player.deployUnits();

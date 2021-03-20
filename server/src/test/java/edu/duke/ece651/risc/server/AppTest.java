@@ -49,16 +49,8 @@ class AppTest {
                                                                                                     // player type in
                                                                                                     // command line
     assertNotNull(player0Input);
-    InputStream expectedPlayer0Output = getClass().getClassLoader().getResourceAsStream("player0Output.txt"); // what
-                                                                                                              // player
-                                                                                                              // 1
-                                                                                                              // client
-                                                                                                              // supposed
-                                                                                                              // to
-                                                                                                              // print
-                                                                                                              // to
-                                                                                                              // command
-                                                                                                              // line
+    // what player 1 client supposed to print to command line
+    InputStream expectedPlayer0Output = getClass().getClassLoader().getResourceAsStream("player0Output.txt");
     assertNotNull(expectedPlayer0Output);
     ByteArrayOutputStream p0bytes = new ByteArrayOutputStream();
     PrintStream p0Out = new PrintStream(p0bytes, true); // what did player 1 client really print

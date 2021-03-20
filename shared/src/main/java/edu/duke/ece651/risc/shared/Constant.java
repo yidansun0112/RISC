@@ -56,13 +56,15 @@ public class Constant {
   public static final int MIN_PLAYER_NUM = 2;
   /** The total units to be deployed for each player */
   public static final int TOTAL_UNITS = 15;
-  /** The side number of the dice  */
+  /** The side number of the dice */
   public static final int DICE_SIDE = 20;
 
   /** Values that indicate different status of a player */
   public static final int SELF_NOT_LOSE_NO_ONE_WIN_STATUS = 0; // the player has not lost, but not win neither, the game
-                                                          // keeps going
-  public static final int SELF_LOSE_NO_ONE_WIN_STATUS = 1; // the player lose the game, but no one win, the game keeps going
+  // keeps going
+  public static final int SELF_LOSE_NO_ONE_WIN_STATUS = 1; // the player lose the game, but no one win, the game keeps
+                                                           // going
   public static final int SELF_WIN_STATUS = 2; // the player is the winner, the game will be end
-  public static final int SELF_LOSE_OTHER_WIN_STATUS = 3; // the player lose the game, and some one win, the game will be end
+  public static final int SELF_LOSE_OTHER_WIN_STATUS = 3; // the player lose the game, and some one win, the game will
+                                                          // be end
 }

@@ -58,7 +58,8 @@ public class SocketServer<T> implements GameServer<T> {
     System.out.println("Server got the first player!");
     rooms.add(room);
 
-    // Before picking territory group, no one owns any territory group, so we pass -1 here
+    // Before picking territory group, no one owns any territory group, so we pass
+    // -1 here
     PlayerEntity<T> firstPlayer = new TextPlayerEntity<T>(new ObjectOutputStream(firstSock.getOutputStream()),
         new ObjectInputStream(firstSock.getInputStream()), 0, symbol, -1, Constant.SELF_NOT_LOSE_NO_ONE_WIN_STATUS);
 
@@ -101,14 +102,15 @@ public class SocketServer<T> implements GameServer<T> {
       newPlayer.sendObject(String.valueOf(i + 1));
     }
   }
-  
-  public void start(GameRoom<T> r) throws IOException, ClassNotFoundException, InterruptedException,BrokenBarrierException {
+
+  public void start(GameRoom<T> r)
+      throws IOException, ClassNotFoundException, InterruptedException, BrokenBarrierException {
     System.out.println("The server is now waiting for all the players...");
     connectPlayer(r);
     System.out.println("Now waiting for the rest of players come...");
     connectAll();
     System.out.println("All players are here, the game now begin!");
-    GameRoom<T> room=rooms.get(0);
+    GameRoom<T> room = rooms.get(0);
     room.chooseMap();
     room.playGame();
 
@@ -129,8 +131,7 @@ public class SocketServer<T> implements GameServer<T> {
       sock.close();
     }
     serverSocket.close();
-    
+
   }
 
-  
 }

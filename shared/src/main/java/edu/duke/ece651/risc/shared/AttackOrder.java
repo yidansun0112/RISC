@@ -3,7 +3,7 @@ package edu.duke.ece651.risc.shared;
 public class AttackOrder<T> implements Order<T> {
 
   /**
-   * Fields required by Serializable 
+   * Fields required by Serializable
    */
   static final long serialVersionUID = 2L;
 
@@ -13,7 +13,8 @@ public class AttackOrder<T> implements Order<T> {
 
   /**
    * Constructor that takes a string.
-   * @param order is the string used to construct the object  
+   * 
+   * @param order is the string used to construct the object
    * @throw IllegalArgumentException if the format is not correct
    */
   public AttackOrder(String order) {
@@ -28,13 +29,15 @@ public class AttackOrder<T> implements Order<T> {
     } catch (NumberFormatException e) {
       throw new IllegalArgumentException("The order should only be made up of positive integers\n");
     }
-    if(unitAmount<0){
+    if (unitAmount < 0) {
       throw new IllegalArgumentException("The order should only be made up of positive integers\n");
     }
   }
 
   /**
-   * Execute attack order which means remove units in attacker territory and add enemy army in destination territory
+   * Execute attack order which means remove units in attacker territory and add
+   * enemy army in destination territory
+   * 
    * @param board is the board to be executed attack order on
    */
   @Override
@@ -49,17 +52,21 @@ public class AttackOrder<T> implements Order<T> {
     }
     return true;
   }
+
   /**
    * Getter for SrcTerritory
-   * @return  SrcTerritory
+   * 
+   * @return SrcTerritory
    */
   @Override
   public int getSrcTerritory() {
     return SrcTerritory;
   }
+
   /**
    * Getter for Desterritory
-   * @return  DestTerritory
+   * 
+   * @return DestTerritory
    */
   @Override
   public int getDestTerritory() {
@@ -67,8 +74,9 @@ public class AttackOrder<T> implements Order<T> {
   }
 
   /**
-   * Getter for  unitAmount
-   * @return  DestTerritory
+   * Getter for unitAmount
+   * 
+   * @return DestTerritory
    */
   @Override
   public int getUnitAmount() {
