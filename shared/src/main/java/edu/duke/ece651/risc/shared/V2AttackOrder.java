@@ -12,7 +12,7 @@ public class V2AttackOrder<T> implements Order<T> {
   private int DestTerritory;
   private HashMap<Integer, Integer> unitAmount;
   //String order ?  
-  public V2AttackOrder(int SrcTerritory, int DestTerritory, private HashMap<Integer, Integer> unitAmount){
+  public V2AttackOrder(int SrcTerritory, int DestTerritory, HashMap<Integer, Integer> unitAmount){
     this.SrcTerritory = SrcTerritory;
     this.DestTerritory = DestTerritory;
     this.unitAmount = unitAmount;
