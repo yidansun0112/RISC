@@ -1,7 +1,5 @@
 package edu.duke.ece651.risc.shared;
 
-import java.util.ArrayList;
-
 public class MoveOrder<T> implements Order<T> {
   /**
    * Fields required by Serializable 
