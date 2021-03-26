@@ -68,5 +68,6 @@ public class Constant {
   public static final int SELF_LOSE_OTHER_WIN_STATUS = 3; // the player lose the game, and some one win, the game will
                                                           // be end
 
+  /** Indicate the total level numbers */                                                      
   public static final int TOTAL_LEVELS = 6;
 }
