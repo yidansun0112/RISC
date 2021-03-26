@@ -1,4 +1,4 @@
-package edu.duke.ece651.risc.server;
+package edu.duke.ece651.risc.shared;
 
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;

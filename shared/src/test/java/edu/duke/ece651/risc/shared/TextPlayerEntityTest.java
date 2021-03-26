@@ -1,4 +1,4 @@
-package edu.duke.ece651.risc.server;
+package edu.duke.ece651.risc.shared;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertSame;

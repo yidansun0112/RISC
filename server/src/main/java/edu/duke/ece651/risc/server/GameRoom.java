@@ -193,7 +193,7 @@ public abstract class GameRoom<T> {
   public boolean checkEnd() {
     updatePlayerStatus();
     for (PlayerEntity<T> player : players) {
-      if (player.playerStatus == Constant.SELF_WIN_STATUS) {
+      if (player.getPlayerStatus() == Constant.SELF_WIN_STATUS) {
         return true;
       }
     }
