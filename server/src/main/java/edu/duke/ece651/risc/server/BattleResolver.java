@@ -94,18 +94,18 @@ public class BattleResolver<T> implements Resolver<T> {
    */
   public Army<T> combatBetween(Army<T> defender, Army<T> attacker) {
     // while loop (defender and attacker left both >0)
-    while (defender.getUnits() > 0 && attacker.getUnits() > 0) {
+    while (defender.getBasicUnits() > 0 && attacker.getBasicUnits() > 0) {
       // get two random int, (0-19),
       int forDefender = rdm.nextInt(Constant.DICE_SIDE);
       int forAttacker = rdm.nextInt(Constant.DICE_SIDE);
       // compare, little one unit -1
       if (forDefender >= forAttacker) {
-        attacker.minusUnit(1);
+        attacker.minusBasicUnit(1);
       } else {
-        defender.minusUnit(1);
+        defender.minusBasicUnit(1);
       }
     }
-    if (defender.getUnits() > 0) {
+    if (defender.getBasicUnits() > 0) {
       return defender;
     } else {
       return attacker;

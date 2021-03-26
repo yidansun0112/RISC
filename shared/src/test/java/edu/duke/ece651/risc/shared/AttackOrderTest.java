@@ -34,7 +34,7 @@ public class AttackOrderTest {
     assertEquals(true, a1.execute(b));
     assertEquals(1, b.getTerritories().get(a1.getSrcTerritory()).getUnitAmount());
     Vector<Army<String>> a = b.getTerritories().get(3).getEnemyArmy();
-    assertEquals(a.get(0).getUnits(), 2);
+    assertEquals(a.get(0).getBasicUnits(), 2);
   }
 
 }

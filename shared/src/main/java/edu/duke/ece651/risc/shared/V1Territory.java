@@ -41,9 +41,9 @@ public class V1Territory<T> implements Territory<T> {
   public HashMap<String, Integer> getDisplayInfo(boolean isSelf) {
     HashMap<String, Integer> res = new HashMap<>();
     if (isSelf) {
-      res.put("units", currDefenderArmy.get(0).getUnits());
+      res.put("units", currDefenderArmy.get(0).getBasicUnits());
     } else {
-      res.put("units", prevDefenderArmy.get(0).getUnits());
+      res.put("units", prevDefenderArmy.get(0).getBasicUnits());
     }
     return res;
   }
@@ -71,7 +71,7 @@ public class V1Territory<T> implements Territory<T> {
    */
   @Override
   public void setUnitAmount(int amount) {
-    currDefenderArmy.get(0).setUnits(amount);
+    currDefenderArmy.get(0).setBasicUnits(amount);
   }
 
   /**
@@ -80,7 +80,7 @@ public class V1Territory<T> implements Territory<T> {
    */
   @Override
   public int getUnitAmount() {
-    return currDefenderArmy.get(0).getUnits();
+    return currDefenderArmy.get(0).getBasicUnits();
   }
 
   /*
@@ -148,7 +148,7 @@ public class V1Territory<T> implements Territory<T> {
   public void updatePrevDefender() {
     prevDefenderArmy.clear();
     for (Army<T> a : currDefenderArmy) {
-      prevDefenderArmy.add(new Army<T>(a.getCommanderId(), a.getUnits()));
+      prevDefenderArmy.add(new Army<T>(a.getCommanderId(), a.getBasicUnits()));
     }
 
   }
@@ -160,7 +160,7 @@ public class V1Territory<T> implements Territory<T> {
   @Override
   public void initCurrDefender(int owner) {
     for (Army<T> army : currDefenderArmy) {
-      army.setUnits(0);
+      army.setBasicUnits(0);
       army.setCommanderId(owner);
     }
 
@@ -176,10 +176,10 @@ public class V1Territory<T> implements Territory<T> {
       int commander = a.getCommanderId();
 
       if (enemy.containsKey(commander)) {
-        int prev = enemy.get(commander).getUnits();
-        enemy.get(commander).setUnits(a.getUnits() + prev);
+        int prev = enemy.get(commander).getBasicUnits();
+        enemy.get(commander).setBasicUnits(a.getBasicUnits() + prev);
       } else {
-        enemy.put(commander, new Army<T>(commander, a.getUnits()));
+        enemy.put(commander, new Army<T>(commander, a.getBasicUnits()));
       }
     }
     enemyArmy.clear();

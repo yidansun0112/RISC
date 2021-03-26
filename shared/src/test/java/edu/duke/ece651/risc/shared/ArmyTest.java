@@ -8,7 +8,7 @@ public class ArmyTest {
   @Test
   public void test_army() {
     Army<String> a = new Army<String>(0,2);
-    a.minusUnit(1);
-    assertEquals(a.getUnits(),1);
+    a.minusBasicUnit(1);
+    assertEquals(a.getBasicUnits(),1);
   }
 }
