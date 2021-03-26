@@ -104,6 +104,44 @@ public class V2ArmyTest {
     assertEquals(3, am.getUnitAmtByLevel(2));
   }
 
+
+  /**
+   * Test the getUnitAmtByLevel method
+   */
+  @Test
+  public void test_getTotalUnitAmount() {
+    int commanderId = 2;
+    V2Army<String> am = new V2Army<>(commanderId);
+    am.addUnit(0, 1);
+    am.addUnit(1, 2);
+    am.addUnit(2, 3);
+    assertEquals(6, am.getTotalUnitAmount());
+
+    am.addUnit(4, 5);
+    assertEquals(11, am.getTotalUnitAmount());
+  }
+
+  /**
+   * Test the getUnitAmtByLevel method
+   */
+  @Test
+  public void test_getMinMaxLevel() {
+    int commanderId = 2;
+    V2Army<String> am = new V2Army<>(commanderId);
+    assertEquals(0, am.getMinUnitLevel());
+    am.addUnit(2, 3);
+    assertEquals(2, am.getMaxUnitLevel());
+    assertEquals(2, am.getMinUnitLevel());
+    am.addUnit(1, 2);
+    am.addUnit(4, 2);
+    assertEquals(4, am.getMaxUnitLevel());
+    assertEquals(1, am.getMinUnitLevel());
+    am.addUnit(0, 2);
+    am.addUnit(6, 2);
+    assertEquals(6, am.getMaxUnitLevel());
+    assertEquals(0, am.getMinUnitLevel());
+  }
+
   /**
    * Test the getBasicUnits method. We deprecated it, but since it is new code in
    * evo2, we still need to test it.

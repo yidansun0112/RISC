@@ -158,4 +158,45 @@ public class V2Army<T> extends Army<T> {
   public void minusBasicUnit(int amount) {
     removeUnit(0, amount);
   }
+
+  /**
+   * This method will calculate the amount of units in all levels.
+   */
+  @Override
+  public int getTotalUnitAmount(){
+    int amount=0;
+    for(int i=0;i<=Constant.TOTAL_LEVELS;i++){
+      amount+=getUnitAmtByLevel(i);
+    }
+    return amount;
+  }
+
+  /**
+   * This method will return the max level of units in this army.
+   */
+  @Override
+  public int getMaxUnitLevel(){
+    int maxLevel=0;
+    for(int i=0;i<=Constant.TOTAL_LEVELS;i++){
+      if(getUnitAmtByLevel(i)>0){
+        maxLevel=i;
+      }
+    }
+    return maxLevel;
+  }
+
+  /**
+   * This method will return the min level of units in this army.
+   */
+  @Override
+  public int getMinUnitLevel(){
+    int minLevel=0;
+    for(int i=0;i<=Constant.TOTAL_LEVELS;i++){
+      if(getUnitAmtByLevel(i)>0){
+        minLevel=i;
+        break;
+      }
+    }
+    return minLevel;
+  }
 }

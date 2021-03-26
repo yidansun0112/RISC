@@ -105,4 +105,30 @@ public class Army<T> {
     // this.units = this.units - amount;
     removeUnit(0, amount);
   }
+
+  /**
+   * In evo1, all units are in level 0.
+   * We just return units amount there.
+   */
+  public int getTotalUnitAmount(){
+    return this.units;
+  }
+
+  /**
+   * This method will return the max level of units in this army.
+   * 
+   * This method is not used in evo1.
+   */
+  public int getMaxUnitLevel(){
+    return 0;
+  }
+
+  /**
+   * This method will return the min level of units in this army.
+   * 
+   * This method is not used in evo1.
+   */
+  public int getMinUnitLevel(){
+    return 0;
+  }
 }
