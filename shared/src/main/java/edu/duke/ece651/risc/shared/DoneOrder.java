@@ -1,5 +1,7 @@
 package edu.duke.ece651.risc.shared;
 
+import java.util.HashMap;
+
 public class DoneOrder<T> implements Order<T> {
   /**
    * Fields required by Serializable
@@ -40,4 +42,5 @@ public class DoneOrder<T> implements Order<T> {
   public int getUnitAmount() {
     return -1;
   }
+
 }

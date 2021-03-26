@@ -44,11 +44,7 @@ public class V2AttackOrder<T> implements Order<T> {
     public int getUnitAmount() {
         return 0;
     }
-     
-    @Override
-    public HashMap<Integer, Integer> getUnitMap() {
-        return unitAmount;
-    }
+    
     
 
 }

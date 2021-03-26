@@ -9,9 +9,9 @@ public class AttackOrder<T> implements Order<T> {
    */
   static final long serialVersionUID = 2L;
 
-  private int SrcTerritory;
-  private int DestTerritory;
-  private int unitAmount;
+  public int SrcTerritory;
+  public int DestTerritory;
+  public int unitAmount;
 
   /**
    * Constructor that takes a string.
@@ -85,9 +85,5 @@ public class AttackOrder<T> implements Order<T> {
     return unitAmount;
   }
 
-  @Override
-  public HashMap<Integer, Integer> getUnitMap() {
-    return null;
-  }
 
 }

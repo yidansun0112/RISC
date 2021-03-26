@@ -76,8 +76,4 @@ public class MoveOrder<T> implements Order<T> {
     return this.unitAmount;
   }
 
-  @Override
-  public HashMap<Integer, Integer> getUnitMap() {
-    return null;
-  }
 }

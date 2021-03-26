@@ -23,6 +23,4 @@ public interface Order<T> extends Serializable {
    * This is the unitAmount getter Function.
    */
   public int getUnitAmount();
-
-  public HashMap<Integer, Integer> getUnitMap();
 }
