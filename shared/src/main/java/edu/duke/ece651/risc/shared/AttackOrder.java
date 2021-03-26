@@ -1,5 +1,7 @@
 package edu.duke.ece651.risc.shared;
 
+import java.util.HashMap;
+
 public class AttackOrder<T> implements Order<T> {
 
   /**
@@ -7,9 +9,9 @@ public class AttackOrder<T> implements Order<T> {
    */
   static final long serialVersionUID = 2L;
 
-  private int SrcTerritory;
-  private int DestTerritory;
-  private int unitAmount;
+  public int SrcTerritory;
+  public int DestTerritory;
+  public int unitAmount;
 
   /**
    * Constructor that takes a string.
@@ -82,5 +84,6 @@ public class AttackOrder<T> implements Order<T> {
   public int getUnitAmount() {
     return unitAmount;
   }
+
 
 }

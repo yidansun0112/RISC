@@ -207,4 +207,21 @@ public class V1GameBoard<T> implements Board<T> {
     return worldMap;
   }
 
+  @Override
+  public void addOwnUnits(int territoryId, HashMap<Integer, Integer> army) {
+    
+    
+  }
+
+  @Override
+  public void addEnemyUnits(int territoryId, HashMap<Integer, Integer> amount, int playerId) {
+    
+    
+  }
+
+  @Override
+  public void removeUnits(int territoryId, HashMap<Integer, Integer> army) {
+    
+  }
+
 }
