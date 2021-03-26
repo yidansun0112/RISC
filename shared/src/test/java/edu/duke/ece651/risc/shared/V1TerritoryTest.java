@@ -14,7 +14,7 @@ public class V1TerritoryTest {
     t.addEnemy(2, 3);
     t.combineEnemyArmy();
     assertEquals(2, t.getEnemyArmy().size());
-    assertEquals(3, t.getEnemyArmy().get(0).getUnits());
-    assertEquals(3, t.getEnemyArmy().get(1).getUnits());
+    assertEquals(3, t.getEnemyArmy().get(0).getBasicUnits());
+    assertEquals(3, t.getEnemyArmy().get(1).getBasicUnits());
   }
 }

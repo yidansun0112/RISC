@@ -27,7 +27,7 @@ public class V1GameBoardTest {
     for (int i = 0; i < 3; i++) {
       assertEquals(t.get(i).getOwner(), 0);
       Army<String> a = terr.getCurrDefenderArmy().get(0);
-      assertEquals(a.getUnits(), 0);
+      assertEquals(a.getBasicUnits(), 0);
     }
 
     for (int i = 3; i < 6; i++) {
@@ -37,7 +37,7 @@ public class V1GameBoardTest {
     terr.initCurrDefender(0);
     Vector<Army<String>> defenderArmy = terr.getCurrDefenderArmy();
     assertEquals(defenderArmy.size(), 1);
-    assertEquals(defenderArmy.get(0).getUnits(), 0);
+    assertEquals(defenderArmy.get(0).getBasicUnits(), 0);
 
     assertEquals(defenderArmy.get(0).getCommanderId(), 0);
     assertEquals(terr.getUnitAmount(), 0);
@@ -45,7 +45,7 @@ public class V1GameBoardTest {
     assertEquals(terr.getUnitAmount(), 3);
     b.addEnemyUnits(0, 2, 1);
     Army<String> temp = terr.getEnemyArmy().get(0);
-    assertEquals(temp.getUnits(), 2);
+    assertEquals(temp.getBasicUnits(), 2);
     assertEquals(temp.getCommanderId(), 1);
     b.addOwnUnits(0, 2);
     assertEquals(terr.getUnitAmount(), 5);
