@@ -24,6 +24,19 @@ public class V2Territory<T> extends V1Territory<T> {
             currDefenderArmy.get(0).removeUnit(level, army.getOrDefault(level, 0));
         }
     }
+
+    /**
+    * This will be the Evolution2 getUnitAmount(), this is just a piece of Code. 
+    */
+
+  public HashMap<Integer, Integer> getUnitAmountV2(){
+    HashMap<Integer, Integer> res = new HashMap<>();
+    for(int i = 0 ; i <= 6 ; i ++){
+        res.put(i, currDefenderArmy.get(0).getUnitAmtByLevel(i));
+    }
+    return res;
+  }
+
     /**
     * 
     * @param playerId Is the PlayerId of the Enemy
@@ -42,13 +55,14 @@ public class V2Territory<T> extends V1Territory<T> {
             break;
         }
     }
-    
+
     // If there is no suitable 
     Army<T> newArmy = new V2Army<>(playerId);
     for(int level : army.keySet()){
         newArmy.addUnit(level, army.getOrDefault(level, 0));
     }
     
+    enemyArmy.add(newArmy);
   }
 
 
