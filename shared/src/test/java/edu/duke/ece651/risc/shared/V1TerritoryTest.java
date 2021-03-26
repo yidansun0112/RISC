@@ -17,4 +17,22 @@ public class V1TerritoryTest {
     assertEquals(3, t.getEnemyArmy().get(0).getBasicUnits());
     assertEquals(3, t.getEnemyArmy().get(1).getBasicUnits());
   }
+
+  @Test
+  public void test_getUnitAmountV2() {
+  Territory<String> t = new V1Territory<String>(0, "test", 0, new int[] { 1, 1, 1, 1, 1, 1 });
+  assertEquals(null, t.getUnitAmountV2().get(0));
+  }
 }
+
+
+
+
+
+
+
+
+
+
+
+
