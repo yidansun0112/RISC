@@ -3,14 +3,14 @@ package edu.duke.ece651.risc.shared;
 import java.util.*;
 
 public class V1Territory<T> implements Territory<T> {
-  private int group;
-  private int Id;
-  private int currOwner;
-  private Vector<Army<T>> currDefenderArmy;
-  private Vector<Army<T>> prevDefenderArmy;
-  private Vector<Army<T>> enemyArmy;
-  private String name;
-  private Vector<Integer> neigh;
+  protected int group;
+  protected int Id;
+  protected int currOwner;
+  protected Vector<Army<T>> currDefenderArmy;
+  protected Vector<Army<T>> prevDefenderArmy;
+  protected Vector<Army<T>> enemyArmy;
+  protected String name;
+  protected Vector<Integer> neigh;
 
   V1Territory(int Id, String name, int group, int[] adjacentList) {
     this.Id = Id;
@@ -31,6 +31,24 @@ public class V1Territory<T> implements Territory<T> {
     }
   }
 
+  V1Territory(int Id, String name, int group , int[] adjacentList, int currOwner){
+    this.Id = Id;
+    this.name = name;
+    this.group = group;
+    this.currOwner = -1;
+    neigh = new Vector<Integer>();
+    Army<T> initArmy = new V2Army<T>(currOwner);// helper instance
+    currDefenderArmy = new Vector<Army<T>>();
+    prevDefenderArmy = new Vector<Army<T>>();
+    enemyArmy = new Vector<Army<T>>();
+    currDefenderArmy.add(initArmy);
+    // prevDefenderArmy.add(initArmy);
+    for (int i = 0; i < adjacentList.length; i++) {
+      if (adjacentList[i] != 0 && i != Id) { // in case need distance in the future
+        neigh.add(i);
+      }
+    }
+  }
   /**
    * This function gets the amount of units in each army of current defender
    * 
@@ -83,6 +101,15 @@ public class V1Territory<T> implements Territory<T> {
     return currDefenderArmy.get(0).getBasicUnits();
   }
 
+  /**
+   * This will be the Evolution2 getUnitAmount(), this is just a piece of Code. 
+   */
+
+   public HashMap<Integer, Integer> getUnitAmountV2(){
+     HashMap<Integer, Integer> res = new HashMap<>();
+     return res;
+   }
+
   /*
    * return Id
    */
@@ -132,13 +159,19 @@ public class V1Territory<T> implements Territory<T> {
   }
 
   /**
-   * This add an army of enemy in the territory
+   * This add an army of enemy in the territory For Evolution 1
    */
   @Override
   public void addEnemy(int playerId, int amount) {
     Army<T> temp = new Army<T>(playerId, amount);
     this.enemyArmy.add(temp);
   }
+
+  /**
+   * This add an army of enemy in the territory For Evolution 2 
+   */
+  @Override
+  public void addEnemy(int playerId, HashMap<Integer, Integer> army){}
 
   /**
    * This update the previous defender army to be the same with current defender
@@ -188,5 +221,17 @@ public class V1Territory<T> implements Territory<T> {
     }
 
   }
+
+  /**
+   * This will help to remove the Unit in the Current Defender Army Evol2
+   */
+  @Override
+  public void removeUnitAmount(HashMap<Integer, Integer> army){}
+
+  /**
+   * This will help to add the Unit in the Current Defender Army Evol2
+   */
+  @Override
+  public void addUnitAmount(HashMap<Integer, Integer> army){}
 
 }
