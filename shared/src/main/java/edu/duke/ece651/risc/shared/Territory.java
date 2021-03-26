@@ -71,10 +71,13 @@ public interface Territory<T>{
    */
   
   public void addEnemy(int playerId, int amount);
-/**
+
+ 
+
+  /**
   *  This update the previous defender army to be the same with current defender army after all the combat ends.
   */
-  
+
   public void updatePrevDefender();
 /**
    * Set units number of each army in current defender army to be 0
@@ -87,6 +90,31 @@ public interface Territory<T>{
     Combine the Army with the same Commander.
 */
   public void combineEnemyArmy();
+
+  /***************************The Following is The Evolution 2 Code *************************************/
+
+   /**
+   * This add an army of enemy in the territory For Evolution 2 
+   */
+  public void addEnemy(int playerId, HashMap<Integer, Integer> army);
+
+  /**
+   * This will get The Evol 2 Unit with a HashMap<Level, Amount>
+   */
+  public HashMap<Integer, Integer> getUnitAmountV2();
+
+  /**
+   * This will help to remove the Unit in the Current Defender Army
+   */
+
+   /**
+    * This pair of Function will replace the setUnitAmount in Evol1 to add or remove units from the army. 
+    */
+  public void removeUnitAmount(HashMap<Integer, Integer> army);
+
+
+  public void addUnitAmount(HashMap<Integer, Integer> army);
+
 }
 
 
