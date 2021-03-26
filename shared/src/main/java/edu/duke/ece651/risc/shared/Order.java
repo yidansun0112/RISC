@@ -1,6 +1,7 @@
 package edu.duke.ece651.risc.shared;
 
 import java.io.Serializable;
+import java.util.HashMap;
 
 public interface Order<T> extends Serializable {
   /*
@@ -22,4 +23,6 @@ public interface Order<T> extends Serializable {
    * This is the unitAmount getter Function.
    */
   public int getUnitAmount();
+
+  public HashMap<Integer, Integer> getUnitMap();
 }

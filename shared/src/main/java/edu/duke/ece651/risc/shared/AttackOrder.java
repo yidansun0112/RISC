@@ -1,5 +1,7 @@
 package edu.duke.ece651.risc.shared;
 
+import java.util.HashMap;
+
 public class AttackOrder<T> implements Order<T> {
 
   /**
@@ -81,6 +83,11 @@ public class AttackOrder<T> implements Order<T> {
   @Override
   public int getUnitAmount() {
     return unitAmount;
+  }
+
+  @Override
+  public HashMap<Integer, Integer> getUnitMap() {
+    return null;
   }
 
 }

@@ -1,5 +1,7 @@
 package edu.duke.ece651.risc.shared;
 
+import java.util.HashMap;
+
 public class MoveOrder<T> implements Order<T> {
   /**
    * Fields required by Serializable 
@@ -72,5 +74,10 @@ public class MoveOrder<T> implements Order<T> {
   @Override
   public int getUnitAmount() {
     return this.unitAmount;
+  }
+
+  @Override
+  public HashMap<Integer, Integer> getUnitMap() {
+    return null;
   }
 }
