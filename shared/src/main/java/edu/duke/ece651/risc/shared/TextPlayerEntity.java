@@ -25,4 +25,59 @@ public class TextPlayerEntity<T> extends PlayerEntity<T> {
     super(toPlayer, fromPlayer, playerId, playerSymbol, ownedGroup, playerStatus);
   }
 
+  /******************************************************************************
+   * Below are the evo1 version of dummy implementation for the methods that are
+   * actually used in evo2
+   ******************************************************************************/
+
+  @Override
+  public void harvestAllResource() {
+    return;
+  }
+
+  @Override
+  public Resource getFoodResource() {
+    return null;
+  }
+
+  @Override
+  public void consumeFoodResource(int amt) {
+    return;
+  }
+
+  @Override
+  public Resource getTechResource() {
+    return null;
+  }
+
+  @Override
+  public void consumeTechResource(int amt) {
+    return;
+  }
+
+  @Override
+  public int getTechLevel() {
+    return 0;
+  }
+
+  @Override
+  public void upgradeTechLevel() {
+    return;
+  }
+
+  // @Override
+  // public boolean canUpTechLevel() {
+  //   return false;
+  // }
+
+  @Override
+  public void setNeedUpTechLv() {
+    return;
+  }
+
+  @Override
+  public boolean getNeedUpTechLv() {
+    return false;
+  }
+
 }

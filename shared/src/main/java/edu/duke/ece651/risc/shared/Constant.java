@@ -68,6 +68,21 @@ public class Constant {
   public static final int SELF_LOSE_OTHER_WIN_STATUS = 3; // the player lose the game, and some one win, the game will
                                                           // be end
 
-  /** Indicate the total level numbers */                                                      
+  /** Indicate the total level numbers */
   public static final int TOTAL_LEVELS = 6;
+  /** Indicate the initial max tech level at the beginning of the game */
+  public static final int INIT_MAX_TECH_LEVEL = 1; // note it starts at 1 (pdf2 7 a.)
+
+  /**
+   * Indicate the initial amount of food resource that each player can have at the
+   * beginning
+   */
+  public static final int INIT_FOOD_RESOURCE = 0;
+
+  /**
+   * Indicate the initial amount of technology resource that each player can have
+   * at the beginning
+   */
+  public static final int INIT_TECH_RESOURCE = 0;
+
 }

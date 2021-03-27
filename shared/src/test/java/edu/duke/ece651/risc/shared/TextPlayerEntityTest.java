@@ -1,6 +1,7 @@
 package edu.duke.ece651.risc.shared;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNull;
 import static org.junit.jupiter.api.Assertions.assertSame;
 
 import java.io.IOException;
@@ -11,9 +12,6 @@ import java.net.Socket;
 import org.junit.jupiter.api.Test;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
-
-import edu.duke.ece651.risc.shared.Constant;
-import edu.duke.ece651.risc.shared.TestLoopBackServer;
 
 public class TextPlayerEntityTest {
 
@@ -66,7 +64,7 @@ public class TextPlayerEntityTest {
   public void test_TextPlayerEntity_constructor_getter_setters() throws IOException {
     MockitoAnnotations.initMocks(this);
 
-    TextPlayerEntity tpe = new TextPlayerEntity(oosMock, oisMock, playerId, playerSymbol, ownedGroup, playerStatus);
+    TextPlayerEntity<String> tpe = new TextPlayerEntity<String>(oosMock, oisMock, playerId, playerSymbol, ownedGroup, playerStatus);
 
     // Test getters and setters
 
@@ -151,5 +149,33 @@ public class TextPlayerEntityTest {
       }
     };
     return th;
+  }
+
+  /**
+   * Testing the dummy implementation methods that are acutally used in evo2 but
+   * presented in evo1 code
+   */
+  @Test
+  public void test_dummy_methods() {
+    TextPlayerEntity<String> p = new TextPlayerEntity<String>(null, null, 0, "Red", 0,
+        Constant.SELF_NOT_LOSE_NO_ONE_WIN_STATUS);
+
+      p.harvestAllResource(); // this method has no actual action, no need to assert here
+
+      assertNull(p.getFoodResource());
+
+      p.consumeFoodResource(0); // this method has no actual action, no need to assert here
+
+      assertNull(p.getTechResource());
+
+      p.consumeTechResource(0);
+
+      assertEquals(0, p.getTechLevel());
+
+      p.upgradeTechLevel();
+      // assertEquals(false, p.canUpTechLevel());
+
+      p.setNeedUpTechLv();
+      assertEquals(false, p.getNeedUpTechLv());
   }
 }
