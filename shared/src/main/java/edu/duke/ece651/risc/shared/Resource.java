@@ -51,8 +51,16 @@ public class Resource {
    * Consume (remove) some amount of resource
    * 
    * @param amt the amount of resource to consume
+   * @throws IllegalArgumentException if the {@code amt} is more than current
+   *                                  resource amount.
    */
   public void consumeResource(int amt) {
+    // Fail fast. In general we need to prevent all invalid consuming in order rule
+    // checker. Add this throw only for the convenience of debugging.
+    // This if-clause should not be executed in a game!
+    if (resourceAmt < amt) {
+      throw new IllegalArgumentException("Invalid amount to consume!");
+    }
     this.resourceAmt -= amt;
   }
 }

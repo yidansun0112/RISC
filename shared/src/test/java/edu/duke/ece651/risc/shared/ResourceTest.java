@@ -1,7 +1,7 @@
 package edu.duke.ece651.risc.shared;
 
-import static org.junit.jupiter.api.Assertions.assertAll;
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 
 import org.junit.jupiter.api.Test;
 
@@ -19,5 +19,7 @@ public class ResourceTest {
 
     r.setResourceAmt(0);
     assertEquals(0, r.getResourceAmt());
+
+    assertThrows(IllegalArgumentException.class, () -> r.consumeResource(1));
   }
 }
