@@ -27,14 +27,14 @@ public interface Territory<T> {
    * evol1, there would be and only be 1 army in current defender army)
    */
 
-  public void setUnitAmount(int amount);
+  public void setDefendUnitAmount(int amount);
 
   /**
    * get the amount of units in first army of current Defender Army (Actually in
    * evol1, there would be and only be 1 army in current defender army)
    */
 
-  public int getUnitAmount();
+  public int getDefendUnitAmount();
 
   /*
    * return Id

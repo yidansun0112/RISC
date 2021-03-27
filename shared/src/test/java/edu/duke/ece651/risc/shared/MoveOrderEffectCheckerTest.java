@@ -20,8 +20,8 @@ public class MoveOrderEffectCheckerTest {
     MoveOrder<String> m4 = new MoveOrder<String>("3 4 2");
 
     for (int i = 0; i < 3; i++) {
-      b.getTerritories().get(i).setUnitAmount(5);
-      b.getTerritories().get(i + 3).setUnitAmount(5);
+      b.getTerritories().get(i).setDefendUnitAmount(5);
+      b.getTerritories().get(i + 3).setDefendUnitAmount(5);
     }
 
     MoveOrderEffectChecker<String> checker = new MoveOrderEffectChecker<String>(null);

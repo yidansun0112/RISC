@@ -29,7 +29,7 @@ public class MoveOrderTest {
 
     MoveOrder<String> m2 = new MoveOrder<>("7 7 7");
     assertEquals(false, m2.execute(b));
-    assertEquals(0, b.getTerritories().get(m1.getSrcTerritory()).getUnitAmount());
+    assertEquals(0, b.getTerritories().get(m1.getSrcTerritory()).getDefendUnitAmount());
     assertEquals(true, m1.execute(b));
 
     assertThrows(IllegalArgumentException.class, () -> new MoveOrder<>("0 1 -1"));

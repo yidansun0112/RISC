@@ -32,7 +32,7 @@ public class BattleResolverTest {
     resolver.executeAllBattle(b);
     ArrayList<Territory<String>> territory = b.getTerritories();
     assertEquals(territory.get(1).getOwner(), 2);
-    assertEquals(territory.get(1).getUnitAmount(), 3);
+    assertEquals(territory.get(1).getDefendUnitAmount(), 3);
   }
 
 }

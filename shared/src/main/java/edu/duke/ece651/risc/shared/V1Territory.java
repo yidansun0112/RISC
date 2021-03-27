@@ -4,7 +4,7 @@ import java.util.*;
 
 public class V1Territory<T> implements Territory<T> {
   protected int group;
-  protected int Id;
+  protected int id;
   protected int currOwner;
   protected Vector<Army<T>> currDefenderArmy;
   protected Vector<Army<T>> prevDefenderArmy;
@@ -12,8 +12,8 @@ public class V1Territory<T> implements Territory<T> {
   protected String name;
   protected Vector<Integer> neigh;
 
-  V1Territory(int Id, String name, int group, int[] adjacentList) {
-    this.Id = Id;
+  V1Territory(int id, String name, int group, int[] adjacentList) {
+    this.id = id;
     this.name = name;
     this.group = group;
     this.currOwner = -1;
@@ -25,14 +25,14 @@ public class V1Territory<T> implements Territory<T> {
     currDefenderArmy.add(initArmy);
     // prevDefenderArmy.add(initArmy);
     for (int i = 0; i < adjacentList.length; i++) {
-      if (adjacentList[i] != 0 && i != Id) { // in case need distance in the future
+      if (adjacentList[i] != 0 && i != id) { // in case need distance in the future
         neigh.add(i);
       }
     }
   }
 
-  V1Territory(int Id, String name, int group, int[] adjacentList, int currOwner) {
-    this.Id = Id;
+  V1Territory(int id, String name, int group, int[] adjacentList, int currOwner) {
+    this.id = id;
     this.name = name;
     this.group = group;
     this.currOwner = -1;
@@ -44,7 +44,7 @@ public class V1Territory<T> implements Territory<T> {
     currDefenderArmy.add(initArmy);
     // prevDefenderArmy.add(initArmy);
     for (int i = 0; i < adjacentList.length; i++) {
-      if (adjacentList[i] != 0 && i != Id) { // in case need distance in the future
+      if (adjacentList[i] != 0 && i != id) { // in case need distance in the future
         neigh.add(i);
       }
     }
@@ -89,7 +89,7 @@ public class V1Territory<T> implements Territory<T> {
    * evol1, there would be and only be 1 army in current defender army)
    */
   @Override
-  public void setUnitAmount(int amount) {
+  public void setDefendUnitAmount(int amount) {
     currDefenderArmy.get(0).setBasicUnits(amount);
   }
 
@@ -98,7 +98,7 @@ public class V1Territory<T> implements Territory<T> {
    * evol1, there would be and only be 1 army in current defender army)
    */
   @Override
-  public int getUnitAmount() {
+  public int getDefendUnitAmount() {
     return currDefenderArmy.get(0).getBasicUnits();
   }
 
@@ -112,11 +112,11 @@ public class V1Territory<T> implements Territory<T> {
   }
 
   /*
-   * return Id
+   * return id
    */
   @Override
   public int getId() {
-    return Id;
+    return id;
   }
 
   /*

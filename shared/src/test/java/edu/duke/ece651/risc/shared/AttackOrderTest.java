@@ -32,7 +32,7 @@ public class AttackOrderTest {
     AttackOrder<String> a2 = new AttackOrder<>("7 7 7");
     assertEquals(false, a2.execute(b));
     assertEquals(true, a1.execute(b));
-    assertEquals(1, b.getTerritories().get(a1.getSrcTerritory()).getUnitAmount());
+    assertEquals(1, b.getTerritories().get(a1.getSrcTerritory()).getDefendUnitAmount());
     Vector<Army<String>> a = b.getTerritories().get(3).getEnemyArmy();
     assertEquals(a.get(0).getBasicUnits(), 2);
   }
