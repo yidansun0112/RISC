@@ -31,7 +31,7 @@ public class V1Territory<T> implements Territory<T> {
     }
   }
 
-  V1Territory(int Id, String name, int group , int[] adjacentList, int currOwner){
+  V1Territory(int Id, String name, int group, int[] adjacentList, int currOwner) {
     this.Id = Id;
     this.name = name;
     this.group = group;
@@ -49,6 +49,7 @@ public class V1Territory<T> implements Territory<T> {
       }
     }
   }
+
   /**
    * This function gets the amount of units in each army of current defender
    * 
@@ -102,13 +103,13 @@ public class V1Territory<T> implements Territory<T> {
   }
 
   /**
-   * This will be the Evolution2 getUnitAmount(), this is just a piece of Code. 
+   * This will be the Evolution2 getUnitAmount(), this is just a piece of Code.
    */
 
-   public HashMap<Integer, Integer> getUnitAmountV2(){
-     HashMap<Integer, Integer> res = new HashMap<>();
-     return res;
-   }
+  public HashMap<Integer, Integer> getUnitAmountV2() {
+    HashMap<Integer, Integer> res = new HashMap<>();
+    return res;
+  }
 
   /*
    * return Id
@@ -168,10 +169,11 @@ public class V1Territory<T> implements Territory<T> {
   }
 
   /**
-   * This add an army of enemy in the territory For Evolution 2 
+   * This add an army of enemy in the territory For Evolution 2
    */
   @Override
-  public void addEnemy(int playerId, HashMap<Integer, Integer> army){}
+  public void addEnemy(int playerId, HashMap<Integer, Integer> army) {
+  }
 
   /**
    * This update the previous defender army to be the same with current defender
@@ -226,12 +228,14 @@ public class V1Territory<T> implements Territory<T> {
    * This will help to remove the Unit in the Current Defender Army Evol2
    */
   @Override
-  public void removeUnitAmount(HashMap<Integer, Integer> army){}
+  public void removeUnitAmount(HashMap<Integer, Integer> army) {
+  }
 
   /**
    * This will help to add the Unit in the Current Defender Army Evol2
    */
   @Override
-  public void addUnitAmount(HashMap<Integer, Integer> army){}
+  public void addUnitAmount(HashMap<Integer, Integer> army) {
+  }
 
 }

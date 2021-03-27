@@ -1,7 +1,6 @@
 package edu.duke.ece651.risc.shared;
 
 import java.io.Serializable;
-import java.util.HashMap;
 
 public interface Order<T> extends Serializable {
   /*

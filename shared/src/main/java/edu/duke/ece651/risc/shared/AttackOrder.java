@@ -1,7 +1,5 @@
 package edu.duke.ece651.risc.shared;
 
-import java.util.HashMap;
-
 public class AttackOrder<T> implements Order<T> {
 
   /**
@@ -9,8 +7,8 @@ public class AttackOrder<T> implements Order<T> {
    */
   static final long serialVersionUID = 2L;
 
-  public int SrcTerritory;
-  public int DestTerritory;
+  public int srcTerritory;
+  public int destTerritory;
   public int unitAmount;
 
   /**
@@ -25,8 +23,8 @@ public class AttackOrder<T> implements Order<T> {
       throw new IllegalArgumentException("There shoudl be 3 parts in an order\n");
     }
     try {
-      SrcTerritory = Integer.parseInt(element[0]);
-      DestTerritory = Integer.parseInt(element[1]);
+      srcTerritory = Integer.parseInt(element[0]);
+      destTerritory = Integer.parseInt(element[1]);
       unitAmount = Integer.parseInt(element[2]);
     } catch (NumberFormatException e) {
       throw new IllegalArgumentException("The order should only be made up of positive integers\n");
@@ -45,10 +43,10 @@ public class AttackOrder<T> implements Order<T> {
   @Override
   public boolean execute(Board<T> board) {
     try {
-      Territory<T> src = board.getTerritories().get(SrcTerritory);
+      Territory<T> src = board.getTerritories().get(srcTerritory);
       int attackerId = src.getOwner();
-      board.addEnemyUnits(DestTerritory, unitAmount, attackerId);
-      board.removeUnits(SrcTerritory, unitAmount);
+      board.addEnemyUnits(destTerritory, unitAmount, attackerId);
+      board.removeUnits(srcTerritory, unitAmount);
     } catch (Exception e) {
       return false;
     }
@@ -62,7 +60,7 @@ public class AttackOrder<T> implements Order<T> {
    */
   @Override
   public int getSrcTerritory() {
-    return SrcTerritory;
+    return srcTerritory;
   }
 
   /**
@@ -72,7 +70,7 @@ public class AttackOrder<T> implements Order<T> {
    */
   @Override
   public int getDestTerritory() {
-    return DestTerritory;
+    return destTerritory;
   }
 
   /**
@@ -84,6 +82,5 @@ public class AttackOrder<T> implements Order<T> {
   public int getUnitAmount() {
     return unitAmount;
   }
-
 
 }

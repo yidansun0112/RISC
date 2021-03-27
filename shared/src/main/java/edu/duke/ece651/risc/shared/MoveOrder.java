@@ -1,20 +1,19 @@
 package edu.duke.ece651.risc.shared;
 
-import java.util.HashMap;
-
 public class MoveOrder<T> implements Order<T> {
   /**
-   * Fields required by Serializable 
+   * Fields required by Serializable
    */
   static final long serialVersionUID = 1L;
 
-  private final int SrcTerritory;
-  private final int DestTerritory;
+  private final int srcTerritory;
+  private final int destTerritory;
   private final int unitAmount;
 
   /*
    * This Constructor will perform Format Check and construct. If it failed. it
    * will return an IllegalArumentException.
+   * 
    * @Parameter s is the order which has format "src dest unit"
    */
   public MoveOrder(String s) {
@@ -24,14 +23,14 @@ public class MoveOrder<T> implements Order<T> {
       throw new IllegalArgumentException("There should be 3 parts in an order\n");
     }
     try {
-      SrcTerritory = Integer.parseInt(element[0]);
-      DestTerritory = Integer.parseInt(element[1]);
+      srcTerritory = Integer.parseInt(element[0]);
+      destTerritory = Integer.parseInt(element[1]);
       unitAmount = Integer.parseInt(element[2]);
     } catch (NumberFormatException e) {
       throw new IllegalArgumentException("There should only be made up of integers\n");
     }
 
-    if(unitAmount < 0){
+    if (unitAmount < 0) {
       throw new IllegalArgumentException("There should be positive.\n");
     }
   }
@@ -43,8 +42,8 @@ public class MoveOrder<T> implements Order<T> {
   public boolean execute(Board<T> board) {
     // Remove the units of Srouce and add Units in the Destination.
     try {
-      board.removeUnits(SrcTerritory, unitAmount);
-      board.addOwnUnits(DestTerritory, unitAmount);
+      board.removeUnits(srcTerritory, unitAmount);
+      board.addOwnUnits(destTerritory, unitAmount);
       return true;
     } catch (Exception e) {
       return false;
@@ -56,7 +55,7 @@ public class MoveOrder<T> implements Order<T> {
    */
   @Override
   public int getSrcTerritory() {
-    return this.SrcTerritory;
+    return this.srcTerritory;
   }
 
   /*
@@ -65,7 +64,7 @@ public class MoveOrder<T> implements Order<T> {
   @Override
 
   public int getDestTerritory() {
-    return this.DestTerritory;
+    return this.destTerritory;
   }
 
   /*

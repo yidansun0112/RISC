@@ -1,8 +1,9 @@
 package edu.duke.ece651.risc.shared;
+
 import java.util.*;
 
 public class V2GameBoard<T> extends V1GameBoard<T> {
-  public V2GameBoard(ArrayList<Territory<T>> territories, int[][] worldMap){
+  public V2GameBoard(ArrayList<Territory<T>> territories, int[][] worldMap) {
     super(territories, worldMap);
   }
 
@@ -16,22 +17,9 @@ public class V2GameBoard<T> extends V1GameBoard<T> {
     territory.addEnemy(playerId, army);
   }
 
-
   public void removeUnits(int territoryId, HashMap<Integer, Integer> army) {
     Territory<T> territory = territories.get(territoryId);
     territory.removeUnitAmount(army);
   }
 
 }
-
-
-
-
-
-
-
-
-
-
-
-

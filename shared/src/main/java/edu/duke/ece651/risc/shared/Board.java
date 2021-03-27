@@ -38,8 +38,9 @@ public interface Board<T> {
    * @param amount
    */
   public void addOwnUnits(int territoryId, int amount);
-  
+
   public void addOwnUnits(int territoryId, HashMap<Integer, Integer> army);
+
   /**
    * Add enemy units for a territory
    * 
@@ -50,6 +51,7 @@ public interface Board<T> {
   public void addEnemyUnits(int territoryId, int amount, int playerId);
 
   public void addEnemyUnits(int territoryId, HashMap<Integer, Integer> amount, int playerId);
+
   /**
    * Remove units from one territory
    * 
@@ -58,8 +60,9 @@ public interface Board<T> {
    * 
    */
   public void removeUnits(int territory, int amount);
-  
+
   public void removeUnits(int territoryId, HashMap<Integer, Integer> army);
+
   /**
    * Getter for territories
    * 
