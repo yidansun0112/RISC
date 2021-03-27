@@ -3,8 +3,11 @@ package edu.duke.ece651.risc.shared;
 /**
  * This class is used to represent various kinds of resources that a player can
  * have in a game. In evolution 2, there are two kinds of resources, the food
- * resource and the technology resource. To avoid primitive obsession, I created
- * a class to wrap two kinds of resources, to make the code more flexible.
+ * resource and the technology resource.
+ * 
+ * To avoid primitive obsession, I created a class to wrap two kinds of
+ * resources, to make the code more flexible. By this I mean, think what if we
+ * have R tech resource, SR tech resource and SSR tech resource in evo3?
  * 
  * @since evolution2
  * @author zl246
