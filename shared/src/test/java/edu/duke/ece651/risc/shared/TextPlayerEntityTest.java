@@ -1,7 +1,6 @@
 package edu.duke.ece651.risc.shared;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertNull;
 import static org.junit.jupiter.api.Assertions.assertSame;
 
 import java.io.IOException;
@@ -160,7 +159,7 @@ public class TextPlayerEntityTest {
     TextPlayerEntity<String> p = new TextPlayerEntity<String>(null, null, 0, "Red", 0,
         Constant.SELF_NOT_LOSE_NO_ONE_WIN_STATUS);
 
-      p.harvestAllResource(); // this method has no actual action, no need to assert here
+      p.harvestAllResource(null); // this method has no actual action, no need to assert here
 
       assertEquals(0, p.getFoodResourceAmount());
 

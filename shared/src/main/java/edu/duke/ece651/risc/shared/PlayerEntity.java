@@ -46,14 +46,17 @@ public abstract class PlayerEntity<T> {
   /**
    * This method will harvest various kinds of resources for the player, which are
    * currently allowed to be harvested according to the game rules
+   * 
+   * @since evolution 2
+   * 
+   * @param gs the GameStatus object which contains all the territory
    */
-  public abstract void harvestAllResource();
+  public abstract void harvestAllResource(GameStatus<T> gs);
 
   /**
    * This method will return the food resource possessed by this player.
    * 
-   * @return Resource object which contains the information about the current
-   *         amount of this kind of resource.
+   * @return the amount of the food resource that this player currently has
    */
   public abstract int getFoodResourceAmount();
 
@@ -65,10 +68,9 @@ public abstract class PlayerEntity<T> {
   public abstract void consumeFoodResource(int amt);
 
   /**
-   * This method will return the food resource possessed by this player.
+   * This method will return the technology resource possessed by this player.
    * 
-   * @return Resource object which contains the information about the current
-   *         amount of this kind of resource.
+   * @return the amount of the technology resource that this player currently has
    */
   public abstract int getTechResourceAmount();
 

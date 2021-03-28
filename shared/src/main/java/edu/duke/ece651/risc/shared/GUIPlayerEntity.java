@@ -2,6 +2,7 @@ package edu.duke.ece651.risc.shared;
 
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
+import java.util.ArrayList;
 
 public class GUIPlayerEntity<T> extends PlayerEntity<T> {
 
@@ -34,10 +35,25 @@ public class GUIPlayerEntity<T> extends PlayerEntity<T> {
     this.needUpTechLv = false;
   }
 
+  /**
+   * This method will harvest various kinds of resources for the player, which are
+   * currently allowed to be harvested according to the game rules
+   * 
+   * @since evolution 2
+   * 
+   * @param gs the GameStatus object which contains all the territory
+   */
   @Override
-  public void harvestAllResource() {
-    // TODO add new method and field in V2 territory then back here to finish this
-    return;
+  public void harvestAllResource(GameStatus<T> gs) {
+    ArrayList<Territory<T>> territories = gs.getGameBoard().getTerritories();
+    // Iterate all the territories, if the territory is owned by the current player,
+    // then get the resource production and add them to the current player.
+    for (Territory<T> t : territories) {
+      if (t.getOwner() == this.playerId) {
+        this.foodResource.addResource(t.getFoodProduction());
+        this.techResource.addResource(t.getTechProduction());
+      }
+    }
   }
 
   @Override
