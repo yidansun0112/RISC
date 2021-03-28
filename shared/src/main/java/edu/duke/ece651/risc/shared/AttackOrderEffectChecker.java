@@ -29,4 +29,18 @@ public class AttackOrderEffectChecker<T> extends OrderRuleChecker<T> {
     return null;
   }
 
+  /********************************
+   * New method used in evolution 2
+   ********************************/
+
+  /**
+   * Implementation which is suitable for evo 1, but this method should not be
+   * used in evo 1.
+   * 
+   * Provide this for LSP satisfaction
+   */
+  @Override
+  protected String checkMyRule(int playerId, Order<T> order, GameStatus<T> gs) {
+    return checkMyRule(playerId, order, gs.getGameBoard());
+  }
 }

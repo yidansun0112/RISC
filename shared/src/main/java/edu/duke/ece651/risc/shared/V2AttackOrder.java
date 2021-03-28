@@ -48,4 +48,10 @@ public class V2AttackOrder<T> implements Order<T> {
   public int getUnitAmount() {
     return 0;
   }
+
+  @Override
+  public boolean execute(GameStatus<T> gs) {
+    // TODO Auto-generated method stub
+    return false;
+  }
 }

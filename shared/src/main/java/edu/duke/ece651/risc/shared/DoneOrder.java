@@ -43,4 +43,18 @@ public class DoneOrder<T> implements Order<T> {
     return -1;
   }
 
+  /********************************
+   * New method used in evolution 2
+   ********************************/
+
+  /**
+   * Provide the dummy implementation here. This method should not be used in evo1
+   * code.
+   * 
+   * Provided for LSP satisfaction.
+   */
+  @Override
+  public boolean execute(GameStatus<T> gs) {
+    return false;
+  }
 }
