@@ -6,8 +6,8 @@ public class V2Territory<T> extends V1Territory<T> {
 
   // TODO: pay the technical debt here... see the todo at the second constructor
   // of V1Territory..
-  public V2Territory(int id, String name, int group, int[] adjacentList, int currOwner) {
-    super(id, name, group, adjacentList, currOwner);
+  public V2Territory(int id, String name, int group, int[] adjacentList) {
+    super(id, name, group, adjacentList);
   }
 
   /**
@@ -16,6 +16,11 @@ public class V2Territory<T> extends V1Territory<T> {
    */
   @Override
   public void updatePrevDefender() {
+    if (currDefenderArmy.isEmpty()) { // will only this if-clause once at the beginning of the game before
+                                      // pickTerritory
+      Army<T> helperArmy = new V2Army<T>(-1); // helper instance
+      currDefenderArmy.add(helperArmy);
+    }
     prevDefenderArmy.clear();
     for (Army<T> currArmy : currDefenderArmy) {
       int currArmyOwner = currArmy.getCommanderId();

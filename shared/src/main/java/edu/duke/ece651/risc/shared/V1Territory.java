@@ -18,34 +18,10 @@ public class V1Territory<T> implements Territory<T> {
     this.group = group;
     this.currOwner = -1;
     neigh = new Vector<Integer>();
-    Army<T> initArmy = new Army<T>();// helper instance
     currDefenderArmy = new Vector<Army<T>>();
     prevDefenderArmy = new Vector<Army<T>>();
     enemyArmy = new Vector<Army<T>>();
-    currDefenderArmy.add(initArmy);
-    // prevDefenderArmy.add(initArmy);
-    for (int i = 0; i < adjacentList.length; i++) {
-      if (adjacentList[i] != 0 && i != id) { // in case need distance in the future
-        neigh.add(i);
-      }
-    }
-  }
-
-  // TODO: pay the technical debt here... after finish all refactoring...
-  // do not add an army when create a territory, and before get curr defender army
-  // we first check whether currDefender.size == 0
-  V1Territory(int id, String name, int group, int[] adjacentList, int currOwner) {
-    this.id = id;
-    this.name = name;
-    this.group = group;
-    this.currOwner = -1;
-    neigh = new Vector<Integer>();
-    Army<T> initArmy = new V2Army<T>(currOwner);// helper instance
-    currDefenderArmy = new Vector<Army<T>>();
-    prevDefenderArmy = new Vector<Army<T>>();
-    enemyArmy = new Vector<Army<T>>();
-    currDefenderArmy.add(initArmy);
-    // prevDefenderArmy.add(initArmy);
+    updatePrevDefender();
     for (int i = 0; i < adjacentList.length; i++) {
       if (adjacentList[i] != 0 && i != id) { // in case need distance in the future
         neigh.add(i);
@@ -169,6 +145,10 @@ public class V1Territory<T> implements Territory<T> {
    */
   @Override
   public void updatePrevDefender() {
+    if (currDefenderArmy.isEmpty()) {
+      Army<T> helperArmy = new Army<T>();
+      currDefenderArmy.add(helperArmy);
+    }
     prevDefenderArmy.clear();
     for (Army<T> a : currDefenderArmy) {
       prevDefenderArmy.add(new Army<T>(a.getCommanderId(), a.getBasicUnits()));
