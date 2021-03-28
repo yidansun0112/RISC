@@ -16,7 +16,7 @@ public class MoveOrderEffectChecker<T> extends OrderRuleChecker<T> {
 
     // Get the needed Information from the parameter.
     Territory<T> src = board.getTerritories().get(order.getSrcTerritory());
-    int srcNum = src.getDefendUnitAmount();
+    int srcNum = src.getBasicDefendUnitAmount();
 
     int requiredNum = order.getUnitAmount();
 

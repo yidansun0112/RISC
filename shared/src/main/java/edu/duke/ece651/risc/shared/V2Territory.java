@@ -49,12 +49,11 @@ public class V2Territory<T> extends V1Territory<T> {
       if (commanderToArmy.containsKey(commander)) {
         Army<T> alreadyExist = commanderToArmy.get(commander);
         combineTwoArmies(alreadyExist, a);
-      }
-      else {
+      } else {
         commanderToArmy.put(commander, a);
       }
     }
-    
+
     // Now commanderToArmy contains all combined army, replace the army instance
     // with new ones.
     enemyArmy.clear();
@@ -76,6 +75,10 @@ public class V2Territory<T> extends V1Territory<T> {
       a1.addUnit(lv, howMany);
     }
   }
+
+  /***************************************
+   * The Following is The Evolution 2 Code
+   ***************************************/
 
   /**
    * This method will add the specified amount of units with specified level into
@@ -105,15 +108,10 @@ public class V2Territory<T> extends V1Territory<T> {
   }
 
   /**
-   * This Pair of the Function will help to add or remove the Unit from the
-   * CurrentDefender Army.
-   */
-
-  /**
    * Add specified amount of units with specified level to the defender army
    */
   @Override
-  public void addUnitAmount(int level, int amt) {
+  public void addDefendUnits(int level, int amt) {
     currDefenderArmy.get(0).addUnit(level, amt);
   }
 
@@ -121,7 +119,7 @@ public class V2Territory<T> extends V1Territory<T> {
    * Remove specified amount of units with specified level from the defender army
    */
   @Override
-  public void removeUnitAmount(int level, int amt) {
+  public void removeDefendUnits(int level, int amt) {
     currDefenderArmy.get(0).removeUnit(level, amt);
   }
 }

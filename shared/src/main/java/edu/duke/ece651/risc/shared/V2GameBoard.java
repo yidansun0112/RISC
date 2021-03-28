@@ -18,13 +18,13 @@ public class V2GameBoard<T> extends V1GameBoard<T> {
   @Override
   public void addOwnUnits(int territoryId, int level, int amount) {
     Territory<T> toAddTo = territories.get(0);
-    toAddTo.addUnitAmount(level, amount);
+    toAddTo.addDefendUnits(level, amount);
   }
 
   @Override
   public void removeUnits(int territoryId, int level, int amount) {
     Territory<T> toRemoveFrom = territories.get(territoryId);
-    toRemoveFrom.removeUnitAmount(level, amount);
+    toRemoveFrom.removeDefendUnits(level, amount);
   }
 
   @Override

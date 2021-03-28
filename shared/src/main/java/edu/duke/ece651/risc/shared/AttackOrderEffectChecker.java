@@ -23,7 +23,7 @@ public class AttackOrderEffectChecker<T> extends OrderRuleChecker<T> {
   protected String checkMyRule(int playerId, Order<T> order, Board<T> board) {
     Territory<T> srcTerri = board.getTerritories().get(order.getSrcTerritory());
     int amount = order.getUnitAmount();
-    if (srcTerri.getDefendUnitAmount() < amount) {
+    if (srcTerri.getBasicDefendUnitAmount() < amount) {
       return "invalid order: Units on your territory is not enough\n";
     }
     return null;

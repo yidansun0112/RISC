@@ -87,25 +87,23 @@ public class V1Territory<T> implements Territory<T> {
     return currOwner;
   }
 
-  // TODO: after fix all syntax error, rename this method into setBasicDefendUnit
   /**
    * Set the amount of units in first army of current Defender Army (Actually in
    * evol1, there would be and only be 1 army in current defender army)
    */
   @Override
-  public void setDefendUnitAmount(int amount) {
+  public void setBasicDefendUnitAmount(int amount) {
     Army<T> armyToSet = currDefenderArmy.get(0);
     armyToSet.setBasicUnits(0);
-    addUnitAmount(0, amount);
+    addDefendUnits(0, amount);
   }
 
-  // TODO: after fix all syntax error, rename this method into getBasicDefendUnit
   /**
    * get the amount of units in first army of current Defender Army (Actually in
    * evol1, there would be and only be 1 army in current defender army)
    */
   @Override
-  public int getDefendUnitAmount() {
+  public int getBasicDefendUnitAmount() {
     return currDefenderArmy.get(0).getBasicUnits();
   }
 
@@ -210,7 +208,11 @@ public class V1Territory<T> implements Territory<T> {
       enemyArmy.add(enemy.get(key));
     }
   }
-  
+
+  /****************************************
+   * The Following is The Evolution 2 Code
+   ***************************************/
+
   /**
    * This method is the impementation suitable for evo1, which will ignore the
    * level, and just create an army, add the specified amount of units into it.
@@ -221,25 +223,23 @@ public class V1Territory<T> implements Territory<T> {
     this.enemyArmy.add(temp);
   }
 
-  // TODO: after fix all syntax error, rename this method into removeDefendUnit
-  /**
-   * This will help to remove the Unit in the Current Defender Army Evol2
-   * 
-   * Provide implementation in evo1 for LSP satisfaction
-   */
-  @Override
-  public void removeUnitAmount(int level, int amt) {
-    currDefenderArmy.get(0).removeUnit(level, amt);
-  }
-
-  // TODO: after fix all syntax error, rename this method into addDefendUnit
   /**
    * This will help to add the Unit in the Current Defender Army Evol2
    * 
    * Provide implementation in evo1 for LSP satisfaction
    */
   @Override
-  public void addUnitAmount(int level, int amt) {
+  public void addDefendUnits(int level, int amt) {
     currDefenderArmy.get(0).addUnit(level, amt);
+  }
+
+  /**
+   * This will help to remove the Unit in the Current Defender Army Evol2
+   * 
+   * Provide implementation in evo1 for LSP satisfaction
+   */
+  @Override
+  public void removeDefendUnits(int level, int amt) {
+    currDefenderArmy.get(0).removeUnit(level, amt);
   }
 }

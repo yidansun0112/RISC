@@ -26,13 +26,13 @@ public interface Territory<T> {
    * Set the amount of units in first army of current Defender Army (Actually in
    * evol1, there would be and only be 1 army in current defender army)
    */
-  public void setDefendUnitAmount(int amount);
+  public void setBasicDefendUnitAmount(int amount);
 
   /**
    * get the amount of units in first army of current Defender Army (Actually in
    * evol1, there would be and only be 1 army in current defender army)
    */
-  public int getDefendUnitAmount();
+  public int getBasicDefendUnitAmount();
 
   /**
    * return id
@@ -59,7 +59,7 @@ public interface Territory<T> {
    */
   public Vector<Army<T>> getCurrDefenderArmy();
 
-  /*
+  /**
    * return enemyArmy Vectore
    */
   public Vector<Army<T>> getEnemyArmy();
@@ -86,9 +86,9 @@ public interface Territory<T> {
    */
   public void combineEnemyArmy();
 
-  /***************************
+  /***************************************
    * The Following is The Evolution 2 Code
-   *************************************/
+   ***************************************/
 
   /**
    * Add the specified amount of units with specified level, into the army which
@@ -116,9 +116,9 @@ public interface Territory<T> {
    * @since evolution 2
    * 
    * @param level the level of the units to add
-   * @param am    the amount of units to add
+   * @param amt   the amount of units to add
    */
-  public void addUnitAmount(int level, int amt);
+  public void addDefendUnits(int level, int amt);
 
   /**
    * This will remove the specifed amount of units with spcified level from the
@@ -127,7 +127,7 @@ public interface Territory<T> {
    * @since evolution 2
    * 
    * @param level the level of the units to remove
-   * @param am    the amount of units to remove
+   * @param amt   the amount of units to remove
    */
-  public void removeUnitAmount(int level, int amt);
+  public void removeDefendUnits(int level, int amt);
 }

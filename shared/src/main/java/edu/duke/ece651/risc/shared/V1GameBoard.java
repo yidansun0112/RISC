@@ -235,15 +235,15 @@ public class V1GameBoard<T> implements Board<T> {
   @Override
   public void addOwnUnits(int territoryId, int level, int amount) {
     Territory<T> territory = territories.get(territoryId);
-    int curr = territory.getDefendUnitAmount();
-    territory.setDefendUnitAmount(amount + curr);
+    int curr = territory.getBasicDefendUnitAmount();
+    territory.setBasicDefendUnitAmount(amount + curr);
   }
 
   @Override
   public void removeUnits(int territoryId, int level, int amount) {
     Territory<T> territory = territories.get(territoryId);
-    int curr = territory.getDefendUnitAmount();
-    territory.setDefendUnitAmount(curr - amount);
+    int curr = territory.getBasicDefendUnitAmount();
+    territory.setBasicDefendUnitAmount(curr - amount);
   }
 
   @Override

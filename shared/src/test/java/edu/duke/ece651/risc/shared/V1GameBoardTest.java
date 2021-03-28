@@ -16,7 +16,7 @@ public class V1GameBoardTest {
     assertEquals(t.size(), 6);
     for (int i = 0; i < 6; i++) {
       assertEquals(t.get(i).getOwner(), -1);
-      assertEquals(t.get(i).getDefendUnitAmount(), -1);
+      assertEquals(t.get(i).getBasicDefendUnitAmount(), -1);
     }
     Territory<String> terr = t.get(0);
     String unassigned = b.whatIsIn(terr, true);
@@ -32,7 +32,7 @@ public class V1GameBoardTest {
 
     for (int i = 3; i < 6; i++) {
       assertEquals(t.get(i).getOwner(), 1);
-      assertEquals(t.get(i).getDefendUnitAmount(), 0);
+      assertEquals(t.get(i).getBasicDefendUnitAmount(), 0);
     }
     terr.initCurrDefender(0);
     Vector<Army<String>> defenderArmy = terr.getCurrDefenderArmy();
@@ -40,18 +40,18 @@ public class V1GameBoardTest {
     assertEquals(defenderArmy.get(0).getBasicUnits(), 0);
 
     assertEquals(defenderArmy.get(0).getCommanderId(), 0);
-    assertEquals(terr.getDefendUnitAmount(), 0);
+    assertEquals(terr.getBasicDefendUnitAmount(), 0);
     b.addOwnUnits(0, 3);
-    assertEquals(terr.getDefendUnitAmount(), 3);
+    assertEquals(terr.getBasicDefendUnitAmount(), 3);
     b.addEnemyUnits(0, 2, 1);
     Army<String> temp = terr.getEnemyArmy().get(0);
     assertEquals(temp.getBasicUnits(), 2);
     assertEquals(temp.getCommanderId(), 1);
     b.addOwnUnits(0, 2);
-    assertEquals(terr.getDefendUnitAmount(), 5);
+    assertEquals(terr.getBasicDefendUnitAmount(), 5);
     b.updateAllPrevDefender(); // update
     b.removeUnits(0, 1);
-    assertEquals(terr.getDefendUnitAmount(), 4);
+    assertEquals(terr.getBasicDefendUnitAmount(), 4);
     int[][] worldMap = b.getWorldMap();
     Vector<Integer> neigh = terr.getNeigh();
     Vector<Integer> expected = new Vector<Integer>();
