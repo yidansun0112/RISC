@@ -94,9 +94,6 @@ public interface Territory<T> {
    * Add the specified amount of units with specified level, into the army which
    * belongs to the specified player.
    * 
-   * Note: this method will automatically find the army which belongs to the
-   * player, and add units into it. It will not create a new army each time called
-   * 
    * @since evolution 2
    * 
    * @param playerId the player id which the unit(army) belongs to
@@ -130,4 +127,31 @@ public interface Territory<T> {
    * @param amt   the amount of units to remove
    */
   public void removeDefendUnits(int level, int amt);
+
+  /**
+   * Return the amount of food resources produced in one turn
+   * 
+   * @since evolution 2
+   * 
+   * @return the amount of food resource
+   */
+  public int getFoodProduction();
+
+  /**
+   * Return the amount of technology resources produced in one turn
+   * 
+   * @since evolution 2
+   * 
+   * @return the amount of technology resource
+   */
+  public int getTechProduction();
+
+  /**
+   * Get the size of the territory
+   * 
+   * @since evolution 2
+   * 
+   * @return the size of the territory
+   */
+  public int getSize();
 }

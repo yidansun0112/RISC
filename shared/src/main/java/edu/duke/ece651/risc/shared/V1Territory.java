@@ -12,6 +12,20 @@ public class V1Territory<T> implements Territory<T> {
   protected String name;
   protected Vector<Integer> neigh;
 
+  /**
+   * COnstructor that will initailize fields with corresponding parameters, except
+   * the currOwner will be initialized with -1 (the territory should not have a
+   * owner when just created.).
+   * 
+   * This constuctor will also put a instance of army of the corresponding type
+   * with commanderId equals -1 into a currDefenderArmy. This instance will help
+   * to display the amount of unit at the start of the game.
+   * 
+   * @param id           the id of the territory.
+   * @param name         the name of the territory
+   * @param group        the group this territory belongs to
+   * @param adjacentList the ids of territories which this territory adjacent to
+   */
   V1Territory(int id, String name, int group, int[] adjacentList) {
     this.id = id;
     this.name = name;
@@ -221,5 +235,38 @@ public class V1Territory<T> implements Territory<T> {
   @Override
   public void removeDefendUnits(int level, int amt) {
     currDefenderArmy.get(0).removeUnit(level, amt);
+  }
+
+  /**
+   * Implementation suitable for evo1. Since there is no rules about the resources
+   * in evo1, here we just return 0.
+   * 
+   * For LSP satisfaction
+   */
+  @Override
+  public int getFoodProduction() {
+    return 0;
+  }
+
+  /**
+   * Implementation suitable for evo1. Since there is no rules about the resources
+   * in evo1, here we just return 0.
+   * 
+   * For LSP satisfaction
+   */
+  @Override
+  public int getTechProduction() {
+    return 0;
+  }
+
+  /**
+   * Implementation suitable for evo1. Since there is no rules about the sizes in
+   * evo1, here we just return 0.
+   * 
+   * For LSP satisfaction
+   */
+  @Override
+  public int getSize() {
+    return 0;
   }
 }

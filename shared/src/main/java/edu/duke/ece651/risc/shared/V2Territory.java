@@ -4,8 +4,40 @@ import java.util.HashMap;
 
 public class V2Territory<T> extends V1Territory<T> {
 
-  public V2Territory(int id, String name, int group, int[] adjacentList) {
+  /** The size of this territory */
+  int size;
+
+  /**
+   * The amount of food resource this territory can produce to its owner per turn
+   */
+  int foodProductivity;
+
+  /**
+   * The amount of technology resource this territory can produce to its owner per
+   * turn
+   */
+  int techProductivity;
+
+  /**
+   * COnstructor that will initailize fields with corresponding parameters, except
+   * the currOwner will be initialized with -1 (the territory should not have a
+   * owner when just created.).
+   * 
+   * This constuctor will also put a instance of army of the corresponding type
+   * (here is the V2Army) with commanderId equals -1 into a currDefenderArmy. This
+   * instance will help to display the amount of unit at the start of the game.
+   * 
+   * @param id           the id of the territory.
+   * @param name         the name of the territory
+   * @param group        the group this territory belongs to
+   * @param adjacentList the ids of territories which this territory adjacent to
+   */
+  public V2Territory(int id, String name, int group, int[] adjacentList, int size, int foodProductivity,
+      int techProductivity) {
     super(id, name, group, adjacentList);
+    this.size = size;
+    this.foodProductivity = foodProductivity;
+    this.techProductivity = techProductivity;
   }
 
   /**
@@ -86,6 +118,17 @@ public class V2Territory<T> extends V1Territory<T> {
   /**
    * This method will add the specified amount of units with specified level into
    * the army which belongs to the player, who has the specified player id
+   * 
+   * 
+   * Note: this method will automatically find the army which belongs to the
+   * player, and add units into it. It will not create a new army each time
+   * called.
+   * 
+   * @since evolution 2
+   * 
+   * @param playerId the player id which the unit(army) belongs to
+   * @param level    the level of the units
+   * @param amt      the amount of the units to add
    */
   @Override
   public void addEnemy(int playerId, int level, int amt) {
@@ -112,6 +155,11 @@ public class V2Territory<T> extends V1Territory<T> {
 
   /**
    * Add specified amount of units with specified level to the defender army
+   * 
+   * @since evolution 2
+   * 
+   * @param level the level of the units to add
+   * @param amt   the amount of units to add
    */
   @Override
   public void addDefendUnits(int level, int amt) {
@@ -120,9 +168,48 @@ public class V2Territory<T> extends V1Territory<T> {
 
   /**
    * Remove specified amount of units with specified level from the defender army
+   * 
+   * @since evolution 2
+   * 
+   * @param level the level of the units to remove
+   * @param amt   the amount of units to remove
    */
   @Override
   public void removeDefendUnits(int level, int amt) {
     currDefenderArmy.get(0).removeUnit(level, amt);
+  }
+
+  /**
+   * Return the amount of technology resources produced in one turn
+   * 
+   * @since evolution 2
+   * 
+   * @return the amount of technology resource
+   */
+  @Override
+  public int getFoodProduction() {
+    return this.foodProductivity;
+  }
+
+  /**
+   * Return the amount of technology resources produced in one turn
+   * 
+   * @since evolution 2
+   * 
+   * @return the amount of technology resource
+   */
+  @Override
+  public int getTechProduction() {
+    return this.techProductivity;
+  }
+
+  /**
+   * Get the size of this territory.
+   * 
+   * @return the size of this territory
+   */
+  @Override
+  public int getSize() {
+    return this.size;
   }
 }

@@ -7,7 +7,10 @@ import org.junit.jupiter.api.Test;
 public class V2TerritoryTest {
   @Test
   public void test_V2Territory() {
-    V2Territory<String> test = new V2Territory<>(0, "test", 0, new int[] { 1, 1, 1, 1, 1, 1 });
+    int size = 5;
+    int foodProductivity = 10;
+    int techProductivity = 10;
+    V2Territory<String> test = new V2Territory<>(0, "test", 0, new int[] { 1, 1, 1, 1, 1, 1 }, size, foodProductivity, techProductivity);
     HashMap<Integer, Integer> army = new HashMap<>();
     
     // for(int i = 0 ; i <= 6 ; i++){
