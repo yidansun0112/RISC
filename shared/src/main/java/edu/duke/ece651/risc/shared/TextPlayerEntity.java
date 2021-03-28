@@ -36,8 +36,8 @@ public class TextPlayerEntity<T> extends PlayerEntity<T> {
   }
 
   @Override
-  public Resource getFoodResource() {
-    return null;
+  public int getFoodResourceAmount() {
+    return 0;
   }
 
   @Override
@@ -46,8 +46,8 @@ public class TextPlayerEntity<T> extends PlayerEntity<T> {
   }
 
   @Override
-  public Resource getTechResource() {
-    return null;
+  public int getTechResourceAmount() {
+    return 0;
   }
 
   @Override

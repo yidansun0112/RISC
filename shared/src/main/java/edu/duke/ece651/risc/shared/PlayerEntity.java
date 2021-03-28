@@ -55,7 +55,7 @@ public abstract class PlayerEntity<T> {
    * @return Resource object which contains the information about the current
    *         amount of this kind of resource.
    */
-  public abstract Resource getFoodResource();
+  public abstract int getFoodResourceAmount();
 
   /**
    * This method will decrease the food resources by specified amount
@@ -70,7 +70,7 @@ public abstract class PlayerEntity<T> {
    * @return Resource object which contains the information about the current
    *         amount of this kind of resource.
    */
-  public abstract Resource getTechResource();
+  public abstract int getTechResourceAmount();
 
   /**
    * This method will decrease the tech resources by specified amount

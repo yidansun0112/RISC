@@ -12,26 +12,26 @@ public class GUIPlayerEntityTest {
    * getTechResource, consumeTechResource, getTechLevel.
    */
   @Test
-  public void test_getter__and_consume_methods() {
+  public void test_getter_and_consume_methods() {
     GUIPlayerEntity<String> gp = new GUIPlayerEntity<String>(null, null, 0, "Red", 0,
         Constant.SELF_NOT_LOSE_NO_ONE_WIN_STATUS);
 
-    assertEquals(Constant.INIT_FOOD_RESOURCE, gp.getFoodResource().getResourceAmt());
+    assertEquals(Constant.INIT_FOOD_RESOURCE, gp.getFoodResourceAmount());
 
-    gp.getFoodResource().addResource(10); // add some resource to consume
-    assertEquals(10, gp.getFoodResource().getResourceAmt());
+    gp.foodResource.addResource(10); // add some resource to consume
+    assertEquals(10, gp.getFoodResourceAmount());
 
     gp.consumeFoodResource(2);
-    assertEquals(8, gp.getFoodResource().getResourceAmt());
+    assertEquals(8, gp.getFoodResourceAmount());
 
     gp.consumeFoodResource(5);
-    assertEquals(3, gp.getFoodResource().getResourceAmt());
+    assertEquals(3, gp.getFoodResourceAmount());
 
-    gp.getTechResource().addResource(30); // add some resource to consume
-    assertEquals(30, gp.getTechResource().getResourceAmt());
+    gp.techResource.addResource(30); // add some resource to consume
+    assertEquals(30, gp.getTechResourceAmount());
 
     gp.consumeTechResource(2);
-    assertEquals(28, gp.getTechResource().getResourceAmt());
+    assertEquals(28, gp.getTechResourceAmount());
 
     assertEquals(Constant.INIT_MAX_TECH_LEVEL, gp.getTechLevel());
   }

@@ -41,8 +41,8 @@ public class GUIPlayerEntity<T> extends PlayerEntity<T> {
   }
 
   @Override
-  public Resource getFoodResource() {
-    return foodResource;
+  public int getFoodResourceAmount() {
+    return foodResource.getResourceAmt();
   }
 
   @Override
@@ -51,8 +51,8 @@ public class GUIPlayerEntity<T> extends PlayerEntity<T> {
   }
 
   @Override
-  public Resource getTechResource() {
-    return techResource;
+  public int getTechResourceAmount() {
+    return techResource.getResourceAmt();
   }
 
   @Override

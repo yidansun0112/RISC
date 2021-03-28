@@ -162,11 +162,11 @@ public class TextPlayerEntityTest {
 
       p.harvestAllResource(); // this method has no actual action, no need to assert here
 
-      assertNull(p.getFoodResource());
+      assertEquals(0, p.getFoodResourceAmount());
 
       p.consumeFoodResource(0); // this method has no actual action, no need to assert here
 
-      assertNull(p.getTechResource());
+      assertEquals(0, p.getTechResourceAmount());
 
       p.consumeTechResource(0);
 
