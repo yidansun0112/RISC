@@ -12,7 +12,7 @@ public class AttackOrderEffectCheckerTest {
     OrderRuleChecker<String> r = new AttackOrderPathChecker<String>(new AttackOrderEffectChecker<String>(null));
     b.occupyTerritory(0, 0);
     b.occupyTerritory(1, 1);
-    b.addOwnUnits(0, 3);
+    b.addBasicDefendUnitsTo(0, 3);
     Order<String> o1 = new AttackOrder<String>("0 3 2");
     assertEquals(r.checkOrder(0, o1, b), null);
     Order<String> o2 = new AttackOrder<String>("0 3 4");

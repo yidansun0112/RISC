@@ -144,7 +144,7 @@ public abstract class GameRoom<T> {
   public void incrementUnits() {
     int size = gameBoard.getTerritories().size();
     for (int i = 0; i < size; i++) {
-      gameBoard.addOwnUnits(i, 1);
+      gameBoard.addBasicDefendUnitsTo(i, 1);
     }
   }
 

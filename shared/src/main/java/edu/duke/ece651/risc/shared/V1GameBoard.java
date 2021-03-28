@@ -166,7 +166,7 @@ public class V1GameBoard<T> implements Board<T> {
     Territory<T> territory = territories.get(territoryId);
     int owner = territory.getOwner();
     if (owner == player) {
-      addOwnUnits(territoryId, amount);
+      addBasicDefendUnitsTo(territoryId, amount);
       return true;
     }
     return false;
@@ -181,8 +181,8 @@ public class V1GameBoard<T> implements Board<T> {
    * @param amount
    */
   @Override
-  public void addOwnUnits(int territoryId, int amount) {
-    addOwnUnits(territoryId, 0, amount);
+  public void addBasicDefendUnitsTo(int territoryId, int amount) {
+    addDefendUnitsTo(territoryId, 0, amount);
   }
 
   /**
@@ -195,8 +195,8 @@ public class V1GameBoard<T> implements Board<T> {
    * 
    */
   @Override
-  public void removeUnits(int territoryId, int amount) {
-    removeUnits(territoryId, 0, amount);
+  public void removeBasicDefendUnitsFrom(int territoryId, int amount) {
+    removeDefendUnitsFrom(territoryId, 0, amount);
   }
 
   /**
@@ -209,8 +209,8 @@ public class V1GameBoard<T> implements Board<T> {
    * @param playerId
    */
   @Override
-  public void addEnemyUnits(int territoryId, int amount, int playerId) {
-    addEnemyUnits(territoryId, 0, amount, playerId);
+  public void addBasicEnemyUnitsTo(int territoryId, int amount, int playerId) {
+    addEnemyUnitsTo(territoryId, 0, amount, playerId);
   }
 
   /**
@@ -233,21 +233,21 @@ public class V1GameBoard<T> implements Board<T> {
    *****************************************************************************/
 
   @Override
-  public void addOwnUnits(int territoryId, int level, int amount) {
+  public void addDefendUnitsTo(int territoryId, int level, int amount) {
     Territory<T> territory = territories.get(territoryId);
     int curr = territory.getBasicDefendUnitAmount();
     territory.setBasicDefendUnitAmount(amount + curr);
   }
 
   @Override
-  public void removeUnits(int territoryId, int level, int amount) {
+  public void removeDefendUnitsFrom(int territoryId, int level, int amount) {
     Territory<T> territory = territories.get(territoryId);
     int curr = territory.getBasicDefendUnitAmount();
     territory.setBasicDefendUnitAmount(curr - amount);
   }
 
   @Override
-  public void addEnemyUnits(int territoryId, int level, int amount, int playerId) {
+  public void addEnemyUnitsTo(int territoryId, int level, int amount, int playerId) {
     Territory<T> territory = territories.get(territoryId);
     territory.addBasicEnemy(playerId, amount);
   }

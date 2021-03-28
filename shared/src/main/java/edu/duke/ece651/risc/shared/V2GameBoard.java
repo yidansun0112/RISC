@@ -16,19 +16,19 @@ public class V2GameBoard<T> extends V1GameBoard<T> {
    **************************************************/
 
   @Override
-  public void addOwnUnits(int territoryId, int level, int amount) {
+  public void addDefendUnitsTo(int territoryId, int level, int amount) {
     Territory<T> toAddTo = territories.get(0);
     toAddTo.addDefendUnits(level, amount);
   }
 
   @Override
-  public void removeUnits(int territoryId, int level, int amount) {
+  public void removeDefendUnitsFrom(int territoryId, int level, int amount) {
     Territory<T> toRemoveFrom = territories.get(territoryId);
     toRemoveFrom.removeDefendUnits(level, amount);
   }
 
   @Override
-  public void addEnemyUnits(int territoryId, int playerId, int level, int amt) {
+  public void addEnemyUnitsTo(int territoryId, int playerId, int level, int amt) {
     Territory<T> territory = territories.get(territoryId);
     territory.addEnemy(playerId, level, amt);
   }

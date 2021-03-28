@@ -55,8 +55,6 @@ public interface Board<T> {
    */
   public boolean deployUnits(int territoryId, int amount, int player);
 
-  // TODO: after fixing all syntax errors, rename this method to
-  // addDefendBasicUnitsTo
   /**
    * Add own units for a territory
    * 
@@ -65,10 +63,8 @@ public interface Board<T> {
    * @param territoryId
    * @param amount
    */
-  public void addOwnUnits(int territoryId, int amount);
+  public void addBasicDefendUnitsTo(int territoryId, int amount);
 
-  // TODO: after fixing all syntax errors, rename this method to
-  // removeDefendBasicUnitsFrom
   /**
    * Remove units from one territory
    * 
@@ -78,10 +74,8 @@ public interface Board<T> {
    * @param amount
    * 
    */
-  public void removeUnits(int territory, int amount);
+  public void removeBasicDefendUnitsFrom(int territory, int amount);
 
-  // TODO: after fixing all syntax errors, rename this method to
-  // addEnemyBasicUnitsTo
   /**
    * Add enemy units for a territory
    * 
@@ -91,7 +85,7 @@ public interface Board<T> {
    * @param amount
    * @param playerId
    */
-  public void addEnemyUnits(int territoryId, int amount, int playerId);
+  public void addBasicEnemyUnitsTo(int territoryId, int amount, int playerId);
 
   /**
    * Update previous defenders for all territories on the board
@@ -104,7 +98,6 @@ public interface Board<T> {
    * Below are the methods introduced in evolution 2
    **************************************************/
 
-  // TODO: after fixing all syntax errors, rename this method to addDefendUnitsTo
   /**
    * @since evolution 2
    * 
@@ -112,10 +105,8 @@ public interface Board<T> {
    * @param level       the level of the units which to be added
    * @param amount      the amount of units to add
    */
-  public void addOwnUnits(int territoryId, int level, int amount);
+  public void addDefendUnitsTo(int territoryId, int level, int amount);
 
-  // TODO: after fixing all syntax errors, rename this method to
-  // removeDefendUnitsFrom
   /**
    * Remove the specified amount of units with specified level from the specified
    * territory's defender army.
@@ -126,9 +117,8 @@ public interface Board<T> {
    * @param level       the level of the units which to be removed
    * @param amount      the amount of units to remove
    */
-  public void removeUnits(int territoryId, int level, int amount);
+  public void removeDefendUnitsFrom(int territoryId, int level, int amount);
 
-  // TODO: after fixing all syntax errors, rename this method to addEnemyUnitsTo
   // TODO: adjust the parameter order in the end? terr id, player id, level, amt?
   /**
    * This method will add specified amount of units with specified level into the
@@ -143,5 +133,5 @@ public interface Board<T> {
    * @param level       the level of the units
    * @param amt         the amount of the units to add
    */
-  public void addEnemyUnits(int territoryId, int level, int amount, int playerId);
+  public void addEnemyUnitsTo(int territoryId, int level, int amount, int playerId);
 }

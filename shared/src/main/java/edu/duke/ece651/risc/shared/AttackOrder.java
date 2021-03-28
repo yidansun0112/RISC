@@ -45,8 +45,8 @@ public class AttackOrder<T> implements Order<T> {
     try {
       Territory<T> src = board.getTerritories().get(srcTerritory);
       int attackerId = src.getOwner();
-      board.addEnemyUnits(destTerritory, unitAmount, attackerId);
-      board.removeUnits(srcTerritory, unitAmount);
+      board.addBasicEnemyUnitsTo(destTerritory, unitAmount, attackerId);
+      board.removeBasicDefendUnitsFrom(srcTerritory, unitAmount);
     } catch (Exception e) {
       return false;
     }

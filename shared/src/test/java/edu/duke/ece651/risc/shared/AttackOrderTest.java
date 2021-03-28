@@ -28,7 +28,7 @@ public class AttackOrderTest {
     Board<String> b = f.makeGameBoard(2);
     b.occupyTerritory(0, 0);
     b.occupyTerritory(1, 1);
-    b.addOwnUnits(0, 3);
+    b.addBasicDefendUnitsTo(0, 3);
     AttackOrder<String> a2 = new AttackOrder<>("7 7 7");
     assertEquals(false, a2.execute(b));
     assertEquals(true, a1.execute(b));

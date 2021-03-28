@@ -42,8 +42,8 @@ public class MoveOrder<T> implements Order<T> {
   public boolean execute(Board<T> board) {
     // Remove the units of Srouce and add Units in the Destination.
     try {
-      board.removeUnits(srcTerritory, unitAmount);
-      board.addOwnUnits(destTerritory, unitAmount);
+      board.removeBasicDefendUnitsFrom(srcTerritory, unitAmount);
+      board.addBasicDefendUnitsTo(destTerritory, unitAmount);
       return true;
     } catch (Exception e) {
       return false;

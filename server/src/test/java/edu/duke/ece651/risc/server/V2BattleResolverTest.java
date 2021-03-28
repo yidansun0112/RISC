@@ -32,9 +32,9 @@ public class V2BattleResolverTest {
     b.occupyTerritory(0, 0);
     b.occupyTerritory(1, 1);
     b.occupyTerritory(2, 2);
-    b.addOwnUnits(1, 4);
-    b.addEnemyUnits(1, 2, 0);
-    b.addEnemyUnits(1, 4, 2);
+    b.addBasicDefendUnitsTo(1, 4);
+    b.addBasicEnemyUnitsTo(1, 2, 0);
+    b.addBasicEnemyUnitsTo(1, 4, 2);
     Resolver<String> resolver = new V2BattleResolver<String>(new Random(10));
 
     resolver.combineEnemyArmy(b);
