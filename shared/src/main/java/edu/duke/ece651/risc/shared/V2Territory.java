@@ -4,8 +4,6 @@ import java.util.HashMap;
 
 public class V2Territory<T> extends V1Territory<T> {
 
-  // TODO: pay the technical debt here... see the todo at the second constructor
-  // of V1Territory..
   public V2Territory(int id, String name, int group, int[] adjacentList) {
     super(id, name, group, adjacentList);
   }
