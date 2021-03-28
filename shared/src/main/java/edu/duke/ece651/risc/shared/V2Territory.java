@@ -119,9 +119,9 @@ public class V2Territory<T> extends V1Territory<T> {
    * This method will add the specified amount of units with specified level into
    * the army which belongs to the player, who has the specified player id
    * 
-   * 
    * Note: this method will automatically find the army which belongs to the
-   * player, and add units into it. It will not create a new army each time
+   * player, and add units into it. Only if army is not exist will this method
+   * create an army for this player. It will not create a new army each time
    * called.
    * 
    * @since evolution 2
