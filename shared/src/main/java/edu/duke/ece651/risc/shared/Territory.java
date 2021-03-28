@@ -4,7 +4,8 @@ import java.util.*;
 
 public interface Territory<T> {
   /**
-   * This function gets the amount of units in each army of current defender
+   * This function gets the amount of units in defender army of current defender
+   * (when display for self) or prev defender (when display to enemy players)
    * 
    * @return HashMap<String, Integer> that records the amount of units in each
    *         army of current defender.
@@ -64,9 +65,9 @@ public interface Territory<T> {
   public Vector<Army<T>> getEnemyArmy();
 
   /**
-   * This add an army of enemy in the territory
+   * This add an army of enemy which only contains basic units, into the territory
    */
-  public void addEnemy(int playerId, int amount);
+  public void addBasicEnemy(int playerId, int amount);
 
   /**
    * This update the previous defender army to be the same with current defender
@@ -90,25 +91,43 @@ public interface Territory<T> {
    *************************************/
 
   /**
-   * This add an army of enemy in the territory For Evolution 2
+   * Add the specified amount of units with specified level, into the army which
+   * belongs to the specified player.
+   * 
+   * Note: this method will automatically find the army which belongs to the
+   * player, and add units into it. It will not create a new army each time called
+   * 
+   * @since evolution 2
+   * 
+   * @param playerId the player id which the unit(army) belongs to
+   * @param level    the level of the units
+   * @param amt      the amount of the units to add
    */
-  public void addEnemy(int playerId, HashMap<Integer, Integer> army);
-
-  /**
-   * This will get The Evol 2 Unit with a HashMap<Level, Amount>
-   */
-  public HashMap<Integer, Integer> getUnitAmountV2();
-
-  /**
-   * This will help to remove the Unit in the Current Defender Army
-   */
+  public void addEnemy(int playerId, int level, int amt);
 
   /**
    * This pair of Function will replace the setDefendUnitAmount in Evol1 to add or
    * remove units from the army.
    */
-  public void removeUnitAmount(HashMap<Integer, Integer> army);
 
-  public void addUnitAmount(HashMap<Integer, Integer> army);
+  /**
+   * Add the specified amount of units with specifed level to the defender army
+   * 
+   * @since evolution 2
+   * 
+   * @param level the level of the units to add
+   * @param am    the amount of units to add
+   */
+  public void addUnitAmount(int level, int amt);
 
+  /**
+   * This will remove the specifed amount of units with spcified level from the
+   * Current Defender Army
+   * 
+   * @since evolution 2
+   * 
+   * @param level the level of the units to remove
+   * @param am    the amount of units to remove
+   */
+  public void removeUnitAmount(int level, int amt);
 }

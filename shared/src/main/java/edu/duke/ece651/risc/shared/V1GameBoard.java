@@ -23,8 +23,12 @@ public class V1GameBoard<T> implements Board<T> {
   }
 
   /**
-   * This function is used to display the name of the territories and all of its
-   * neighbors
+   * This helper function is used to display the name of the territories and all
+   * of its neighbors.
+   * 
+   * Called by whatIsIn()
+   * 
+   * @since evolution 1
    * 
    * @return String in the format like Narnia(0) (next to: Oz, Mordor, Roshar)
    */
@@ -45,8 +49,12 @@ public class V1GameBoard<T> implements Board<T> {
   }
 
   /**
-   * This function is used to display amount of each types of units in the
-   * territory
+   * This helper function is used to display amount of each types of units in the
+   * territory.
+   * 
+   * Called by whatIsIn()
+   * 
+   * @since evolution 1
    * 
    * @return String is either in the format like: 10 units in or just a ""
    */
@@ -73,6 +81,8 @@ public class V1GameBoard<T> implements Board<T> {
   /**
    * Display the info of one territory
    * 
+   * @since evolution 1
+   * 
    * @return String in the format like: 3 units in Roshar (next to: Hogwarts,
    *         Scadrial, Elantris) or Roshar (next to: Hogwarts, Scadrial, Elantris)
    */
@@ -92,7 +102,33 @@ public class V1GameBoard<T> implements Board<T> {
   }
 
   /**
+   * Getter for territories
+   * 
+   * @since evolution 1
+   * 
+   * @return territories
+   */
+  @Override
+  public ArrayList<Territory<T>> getTerritories() {
+    return territories;
+  }
+
+  /**
+   * Getter for worldMap
+   * 
+   * @since evolution 1
+   * 
+   * @return worldMap
+   */
+  @Override
+  public int[][] getWorldMap() {
+    return worldMap;
+  }
+
+  /**
    * Occupy a group a territories for the owner
+   * 
+   * @since evolution 1
    * 
    * @param groupNum is the group number of the territories to be assigned
    * @param owner    is the owner of the group
@@ -118,10 +154,12 @@ public class V1GameBoard<T> implements Board<T> {
   /**
    * Deploy certain amount of units on a territory for a player
    * 
+   * @since evolution 1
+   * 
    * @param territoryId is the id of the territory to be deployed
    * @param amount      is the amount of units to be deployed
    * @param player      is the player id
-   * @return true if deploy units succeed, othereise false
+   * @return true if deploy units succeed, otherwise false
    */
   @Override
   public boolean deployUnits(int territoryId, int amount, int player) {
@@ -135,33 +173,22 @@ public class V1GameBoard<T> implements Board<T> {
   }
 
   /**
-   * Add own units for a territory
+   * Add own units (with level 0) for a territory
+   * 
+   * @since evolution 1
    * 
    * @param territoryId
    * @param amount
    */
   @Override
   public void addOwnUnits(int territoryId, int amount) {
-    Territory<T> territory = territories.get(territoryId);
-    int curr = territory.getDefendUnitAmount();
-    territory.setDefendUnitAmount(amount + curr);
-  }
-
-  /**
-   * Add enemy units for a territory
-   * 
-   * @param territoryId
-   * @param amount
-   * @param playerId
-   */
-  @Override
-  public void addEnemyUnits(int territoryId, int amount, int playerId) {
-    Territory<T> territory = territories.get(territoryId);
-    territory.addEnemy(playerId, amount);
+    addOwnUnits(territoryId, 0, amount);
   }
 
   /**
    * Remove units from one territory
+   * 
+   * @since evolution 1
    * 
    * @param territory
    * @param amount
@@ -169,10 +196,21 @@ public class V1GameBoard<T> implements Board<T> {
    */
   @Override
   public void removeUnits(int territoryId, int amount) {
-    Territory<T> territory = territories.get(territoryId);
-    int curr = territory.getDefendUnitAmount();
-    territory.setDefendUnitAmount(curr - amount);
+    removeUnits(territoryId, 0, amount);
+  }
 
+  /**
+   * Add enemy units for a territory
+   * 
+   * @since evolution 1
+   * 
+   * @param territoryId
+   * @param amount
+   * @param playerId
+   */
+  @Override
+  public void addEnemyUnits(int territoryId, int amount, int playerId) {
+    addEnemyUnits(territoryId, 0, amount, playerId);
   }
 
   /**
@@ -187,39 +225,30 @@ public class V1GameBoard<T> implements Board<T> {
     }
   }
 
-  /**
-   * Getter for territories
+  /*****************************************************************************
+   * Below are the methods introduced in evolution 2
    * 
-   * @return territories
-   */
-  @Override
-  public ArrayList<Territory<T>> getTerritories() {
-    return territories;
-  }
+   * To satisfy LSP, here are the implementation suitable for evolution 1, which
+   * ignore the parameter level
+   *****************************************************************************/
 
-  /**
-   * Getter for worldMap
-   * 
-   * @return worldMap
-   */
   @Override
-  public int[][] getWorldMap() {
-    return worldMap;
+  public void addOwnUnits(int territoryId, int level, int amount) {
+    Territory<T> territory = territories.get(territoryId);
+    int curr = territory.getDefendUnitAmount();
+    territory.setDefendUnitAmount(amount + curr);
   }
 
   @Override
-  public void addOwnUnits(int territoryId, HashMap<Integer, Integer> army) {
-
+  public void removeUnits(int territoryId, int level, int amount) {
+    Territory<T> territory = territories.get(territoryId);
+    int curr = territory.getDefendUnitAmount();
+    territory.setDefendUnitAmount(curr - amount);
   }
 
   @Override
-  public void addEnemyUnits(int territoryId, HashMap<Integer, Integer> amount, int playerId) {
-
+  public void addEnemyUnits(int territoryId, int level, int amount, int playerId) {
+    Territory<T> territory = territories.get(territoryId);
+    territory.addBasicEnemy(playerId, amount);
   }
-
-  @Override
-  public void removeUnits(int territoryId, HashMap<Integer, Integer> army) {
-
-  }
-
 }

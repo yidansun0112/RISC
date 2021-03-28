@@ -7,19 +7,29 @@ public class V2GameBoard<T> extends V1GameBoard<T> {
     super(territories, worldMap);
   }
 
-  public void addOwnUnits(int territoryId, HashMap<Integer, Integer> army) {
-    Territory<T> territory = territories.get(territoryId);
-    territory.addUnitAmount(army);
+  // TODO: whatIsIn maybe deprecated in evolution 2 ?
+
+  /**************************************************
+   * Below are the methods introduced in evolution 2
+   * 
+   * The Javadoc is same with those in the Board.java
+   **************************************************/
+
+  @Override
+  public void addOwnUnits(int territoryId, int level, int amount) {
+    Territory<T> toAddTo = territories.get(0);
+    toAddTo.addUnitAmount(level, amount);
   }
 
-  public void addEnemyUnits(int territoryId, HashMap<Integer, Integer> army, int playerId) {
-    Territory<T> territory = territories.get(territoryId);
-    territory.addEnemy(playerId, army);
+  @Override
+  public void removeUnits(int territoryId, int level, int amount) {
+    Territory<T> toRemoveFrom = territories.get(territoryId);
+    toRemoveFrom.removeUnitAmount(level, amount);
   }
 
-  public void removeUnits(int territoryId, HashMap<Integer, Integer> army) {
+  @Override
+  public void addEnemyUnits(int territoryId, int playerId, int level, int amt) {
     Territory<T> territory = territories.get(territoryId);
-    territory.removeUnitAmount(army);
+    territory.addEnemy(playerId, level, amt);
   }
-
 }

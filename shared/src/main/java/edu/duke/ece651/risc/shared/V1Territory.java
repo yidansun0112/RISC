@@ -31,6 +31,9 @@ public class V1Territory<T> implements Territory<T> {
     }
   }
 
+  // TODO: pay the technical debt here... after finish all refactoring...
+  // do not add an army when create a territory, and before get curr defender army
+  // we first check whether currDefender.size == 0
   V1Territory(int id, String name, int group, int[] adjacentList, int currOwner) {
     this.id = id;
     this.name = name;
@@ -51,7 +54,8 @@ public class V1Territory<T> implements Territory<T> {
   }
 
   /**
-   * This function gets the amount of units in each army of current defender
+   * This function gets the amount of units in defender army of current defender
+   * (when display for self) or prev defender (when display to enemy players)
    * 
    * @return HashMap<String, Integer> that records the amount of units in each
    *         army of current defender.
@@ -67,16 +71,15 @@ public class V1Territory<T> implements Territory<T> {
     return res;
   }
 
-  /*
+  /**
    * Set the Owner
    */
   @Override
   public void setOwner(int owner) {
     currOwner = owner;
-
   }
 
-  /*
+  /**
    * Return the Territory Owner.
    */
   @Override
@@ -84,15 +87,19 @@ public class V1Territory<T> implements Territory<T> {
     return currOwner;
   }
 
+  // TODO: after fix all syntax error, rename this method into setBasicDefendUnit
   /**
    * Set the amount of units in first army of current Defender Army (Actually in
    * evol1, there would be and only be 1 army in current defender army)
    */
   @Override
   public void setDefendUnitAmount(int amount) {
-    currDefenderArmy.get(0).setBasicUnits(amount);
+    Army<T> armyToSet = currDefenderArmy.get(0);
+    armyToSet.setBasicUnits(0);
+    addUnitAmount(0, amount);
   }
 
+  // TODO: after fix all syntax error, rename this method into getBasicDefendUnit
   /**
    * get the amount of units in first army of current Defender Army (Actually in
    * evol1, there would be and only be 1 army in current defender army)
@@ -103,15 +110,6 @@ public class V1Territory<T> implements Territory<T> {
   }
 
   /**
-   * This will be the Evolution2 getUnitAmount(), this is just a piece of Code.
-   */
-
-  public HashMap<Integer, Integer> getUnitAmountV2() {
-    HashMap<Integer, Integer> res = new HashMap<>();
-    return res;
-  }
-
-  /*
    * return id
    */
   @Override
@@ -119,7 +117,7 @@ public class V1Territory<T> implements Territory<T> {
     return id;
   }
 
-  /*
+  /**
    * return name.
    */
   @Override
@@ -127,7 +125,7 @@ public class V1Territory<T> implements Territory<T> {
     return name;
   }
 
-  /*
+  /**
    * return Group Num.
    */
   @Override
@@ -135,7 +133,7 @@ public class V1Territory<T> implements Territory<T> {
     return group;
   }
 
-  /*
+  /**
    * Return neighbor Vectore
    */
   @Override
@@ -144,15 +142,15 @@ public class V1Territory<T> implements Territory<T> {
   }
 
   /*
-   * return DefenderArmy Vectore
+   * return DefenderArmy Vector
    */
   @Override
   public Vector<Army<T>> getCurrDefenderArmy() {
     return this.currDefenderArmy;
   }
 
-  /*
-   * return enemyArmy Vectore
+  /**
+   * return enemyArmy Vector
    */
   @Override
   public Vector<Army<T>> getEnemyArmy() {
@@ -163,18 +161,10 @@ public class V1Territory<T> implements Territory<T> {
    * This add an army of enemy in the territory For Evolution 1
    */
   @Override
-  public void addEnemy(int playerId, int amount) {
-    Army<T> temp = new Army<T>(playerId, amount);
-    this.enemyArmy.add(temp);
+  public void addBasicEnemy(int playerId, int amount) {
+    addEnemy(playerId, 0, amount);
   }
-
-  /**
-   * This add an army of enemy in the territory For Evolution 2
-   */
-  @Override
-  public void addEnemy(int playerId, HashMap<Integer, Integer> army) {
-  }
-
+  
   /**
    * This update the previous defender army to be the same with current defender
    * army after all the combat ends.
@@ -185,9 +175,8 @@ public class V1Territory<T> implements Territory<T> {
     for (Army<T> a : currDefenderArmy) {
       prevDefenderArmy.add(new Army<T>(a.getCommanderId(), a.getBasicUnits()));
     }
-
   }
-
+  
   /**
    * Set units number of each army in current defender army to be 0 only call this
    * when one territory is assigned an owner
@@ -198,10 +187,9 @@ public class V1Territory<T> implements Territory<T> {
       army.setBasicUnits(0);
       army.setCommanderId(owner);
     }
-
   }
-
-  /*
+  
+  /**
    * Combine the Army with the same Commander.
    */
   @Override
@@ -221,21 +209,37 @@ public class V1Territory<T> implements Territory<T> {
     for (Integer key : enemy.keySet()) {
       enemyArmy.add(enemy.get(key));
     }
-
+  }
+  
+  /**
+   * This method is the impementation suitable for evo1, which will ignore the
+   * level, and just create an army, add the specified amount of units into it.
+   */
+  @Override
+  public void addEnemy(int playerId, int level, int amt) {
+    Army<T> temp = new Army<T>(playerId, amt);
+    this.enemyArmy.add(temp);
   }
 
+  // TODO: after fix all syntax error, rename this method into removeDefendUnit
   /**
    * This will help to remove the Unit in the Current Defender Army Evol2
+   * 
+   * Provide implementation in evo1 for LSP satisfaction
    */
   @Override
-  public void removeUnitAmount(HashMap<Integer, Integer> army) {
+  public void removeUnitAmount(int level, int amt) {
+    currDefenderArmy.get(0).removeUnit(level, amt);
   }
 
+  // TODO: after fix all syntax error, rename this method into addDefendUnit
   /**
    * This will help to add the Unit in the Current Defender Army Evol2
+   * 
+   * Provide implementation in evo1 for LSP satisfaction
    */
   @Override
-  public void addUnitAmount(HashMap<Integer, Integer> army) {
+  public void addUnitAmount(int level, int amt) {
+    currDefenderArmy.get(0).addUnit(level, amt);
   }
-
 }

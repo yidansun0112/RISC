@@ -22,14 +22,15 @@ public class V2AttackOrder<T> implements Order<T> {
 
   @Override
   public boolean execute(Board<T> board) {
-    try {
-      Territory<T> src = board.getTerritories().get(srcTerritory);
-      int attackerId = src.getOwner();
-      board.addEnemyUnits(destTerritory, unitAmount, attackerId);
-      board.removeUnits(srcTerritory, unitAmount);
-    } catch (Exception e) {
-      return false;
-    }
+    // TODO: finish this after testing the v2 board and v2 territory!
+    // try {
+    //   Territory<T> src = board.getTerritories().get(srcTerritory);
+    //   int attackerId = src.getOwner();
+    //   board.addEnemyUnits(destTerritory, unitAmount, attackerId);
+    //   board.removeUnits(srcTerritory, unitAmount);
+    // } catch (Exception e) {
+    //   return false;
+    // }
     return true;
   }
 

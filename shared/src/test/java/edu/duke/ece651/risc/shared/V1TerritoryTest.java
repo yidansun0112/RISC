@@ -9,19 +9,13 @@ public class V1TerritoryTest {
   public void test_v1territory() {
     Territory<String> t = new V1Territory<String>(0, "test", 0, new int[] { 1, 1, 1, 1, 1, 1 });
     t.setOwner(0);
-    t.addEnemy(1, 2);
-    t.addEnemy(1, 1);
-    t.addEnemy(2, 3);
+    t.addBasicEnemy(1, 2);
+    t.addBasicEnemy(1, 1);
+    t.addBasicEnemy(2, 3);
     t.combineEnemyArmy();
     assertEquals(2, t.getEnemyArmy().size());
     assertEquals(3, t.getEnemyArmy().get(0).getBasicUnits());
     assertEquals(3, t.getEnemyArmy().get(1).getBasicUnits());
-  }
-
-  @Test
-  public void test_getUnitAmountV2() {
-  Territory<String> t = new V1Territory<String>(0, "test", 0, new int[] { 1, 1, 1, 1, 1, 1 });
-  assertEquals(null, t.getUnitAmountV2().get(0));
   }
 }
 
