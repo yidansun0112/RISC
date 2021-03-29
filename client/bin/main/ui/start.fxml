@@ -8,9 +8,9 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
-<AnchorPane prefHeight="400.0" prefWidth="600.0" style="-fx-border-color: lightskyblue; -fx-border-width: 10;" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.duke.ece651.client.StartController">
+<AnchorPane prefHeight="400.0" prefWidth="600.0" style="-fx-border-color: lightskyblue; -fx-border-width: 10;" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.duke.ece651.risc.client.StartController">
    <children>
-      <Button fx:id="StartBtn" layoutX="344.0" layoutY="257.0" mnemonicParsing="false" onAction="#StartGame" style="-fx-background-color: lightskyblue; -fx-border-color: black;" text="Start Game">
+      <Button fx:id="StartBtn" layoutX="240.0" layoutY="257.0" mnemonicParsing="false" onAction="#startGame" style="-fx-background-color: lightskyblue; -fx-border-color: black;" text="Start Game">
          <font>
             <Font size="19.0" />
          </font>
@@ -22,7 +22,7 @@
             <Font name="System Bold" size="30.0" />
          </font>
       </Label>
-      <Label layoutX="376.0" layoutY="191.0" text="Team 3">
+      <Label layoutX="280.0" layoutY="191.0" text="Team 3">
          <font>
             <Font size="15.0" />
          </font>

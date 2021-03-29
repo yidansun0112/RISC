@@ -22,21 +22,29 @@ public class App extends Application{
   public void start(Stage primaryStage) throws Exception {
     this.Window = primaryStage;
     //this.client= new SocketClient(12345,"127.0.0.1");
+    showStartView(Window);
   }
-
-
-
 
   public void showStartView(Stage Window) throws IOException {
     //load the start game page
     FXMLLoader loaderStart = new FXMLLoader(getClass().getResource("/ui/start.fxml"));
     loaderStart.setControllerFactory(c->{
-      return new StartController(player, Window);
+      return new StartController(Window);
     });
     Scene scene = new Scene(loaderStart.load());
     Window.setScene(scene);
     Window.show();
   }
 
+  public static void main(String[] args) {
+    launch(args);
+  }
+
   
 }
+
+
+
+
+
+

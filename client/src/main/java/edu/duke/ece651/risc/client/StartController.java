@@ -10,10 +10,15 @@ import javafx.util.Pair;
 import java.io.IOException;
 
 public class StartController {
-
+  @FXML private Button Start;
+  private Stage Window;
+  public StartController( Stage Window){
+        this.Window = Window;
+        System.out.println("[DEBUG] Inside Start Controller Constructor");
+  }
 
   @FXML
-  public viod startGame(){
+  public void startGame() throws IOException, ClassNotFoundException{
     SocketClient client=new SocketClient(12345,"127.0.0.1");
     int playerId=recvID(client);
   }
@@ -30,3 +35,11 @@ public class StartController {
   }
 
 }
+
+
+
+
+
+
+
+
