@@ -7,7 +7,7 @@ public class V2AttackOrder<T> implements Order<T> {
   /**
    * Fields required by Serializable
    */
-  static final long serialVersionUID = 2L;
+  private static final long serialVersionUID = 4L;
 
   private int srcTerritory;
   private int destTerritory;

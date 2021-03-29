@@ -5,7 +5,7 @@ public class AttackOrder<T> implements Order<T> {
   /**
    * Fields required by Serializable
    */
-  static final long serialVersionUID = 2L;
+  private static final long serialVersionUID = 2L;
 
   public int srcTerritory;
   public int destTerritory;

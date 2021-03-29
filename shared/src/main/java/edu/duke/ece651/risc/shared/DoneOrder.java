@@ -4,7 +4,7 @@ public class DoneOrder<T> implements Order<T> {
   /**
    * Fields required by Serializable
    */
-  static final long serialVersionUID = 0L;
+  private static final long serialVersionUID = 0L;
 
   private String msg;
 

@@ -4,7 +4,7 @@ public class MoveOrder<T> implements Order<T> {
   /**
    * Fields required by Serializable
    */
-  static final long serialVersionUID = 1L;
+  private static final long serialVersionUID = 1L;
 
   private final int srcTerritory;
   private final int destTerritory;
