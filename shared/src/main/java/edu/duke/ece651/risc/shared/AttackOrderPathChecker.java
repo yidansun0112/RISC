@@ -46,4 +46,5 @@ public class AttackOrderPathChecker<T> extends OrderRuleChecker<T> {
   protected String checkMyRule(int playerId, Order<T> order, GameStatus<T> gs) {
     return checkMyRule(playerId, order, gs.getGameBoard());
   }
+
 }

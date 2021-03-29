@@ -14,7 +14,7 @@ public class DoneOrder<T> implements Order<T> {
 
   @Override
   public boolean execute(Board<T> board) {
-    return false;
+    return true;
   }
 
   /*
@@ -53,6 +53,6 @@ public class DoneOrder<T> implements Order<T> {
    */
   @Override
   public boolean execute(GameStatus<T> gs) {
-    return false;
+    return true;
   }
 }

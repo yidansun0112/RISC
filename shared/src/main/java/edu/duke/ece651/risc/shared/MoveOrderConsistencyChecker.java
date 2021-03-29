@@ -35,8 +35,8 @@ public class MoveOrderConsistencyChecker<T> extends OrderRuleChecker<T> {
    * Provide this for LSP satisfaction
    */
   @Override
-  protected String checkMyRule(int playerId, Order<T> order, GameStatus<T> gs) {
-    return checkMyRule(playerId, order, gs.getGameBoard());
+  protected String checkMyRule(int playerId, Order<T> order, GameStatus<T> gs) { 
+   return checkMyRule(playerId, order, gs.getGameBoard());
   }
 }
 

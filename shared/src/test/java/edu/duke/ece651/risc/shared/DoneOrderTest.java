@@ -10,7 +10,12 @@ public class DoneOrderTest {
     Order<String> order = new DoneOrder<String>();
     BoardFactory<String> f = new V1BoardFactory<String>();
     Board<String> b = f.makeGameBoard(2);
-    assertEquals(order.execute(b), false);
+
+    GameStatus<String> gs = new GameStatus<>(null, b);
+
+    assertEquals(true, order.execute(b));
+    assertEquals(true, order.execute(gs));
+
     assertEquals(order.getSrcTerritory(), -1);
     assertEquals(order.getDestTerritory(), -1);
     assertEquals(order.getUnitAmount(), -1);
