@@ -144,13 +144,11 @@ public class V2Territory<T> extends V1Territory<T> {
     // If there is no army belongs to the player yet, created one
     if (armyToAdd == null) {
       armyToAdd = new V2Army<>(playerId);
+      enemyArmy.add(armyToAdd);
     }
 
-    // Now add the units into this army
+    // Finally add the units into this army
     armyToAdd.addUnit(level, amt);
-
-    // Finally remember to put this army into enemyArmy field
-    enemyArmy.add(armyToAdd);
   }
 
   /**
