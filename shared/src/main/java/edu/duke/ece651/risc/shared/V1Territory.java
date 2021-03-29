@@ -149,7 +149,7 @@ public class V1Territory<T> implements Territory<T> {
    * This add an army of enemy in the territory For Evolution 1
    */
   @Override
-  public void addBasicEnemy(int playerId, int amount) {
+  public synchronized void addBasicEnemy(int playerId, int amount) {
     addEnemy(playerId, 0, amount);
   }
   
@@ -212,7 +212,7 @@ public class V1Territory<T> implements Territory<T> {
    * level, and just create an army, add the specified amount of units into it.
    */
   @Override
-  public void addEnemy(int playerId, int level, int amt) {
+  public synchronized void addEnemy(int playerId, int level, int amt) {
     Army<T> temp = new Army<T>(playerId, amt);
     this.enemyArmy.add(temp);
   }

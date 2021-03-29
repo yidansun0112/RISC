@@ -124,6 +124,9 @@ public class V2Territory<T> extends V1Territory<T> {
    * create an army for this player. It will not create a new army each time
    * called.
    * 
+   * This method is synchronized since multiple player may add their attacking
+   * army into the same territory.
+   * 
    * @since evolution 2
    * 
    * @param playerId the player id which the unit(army) belongs to
@@ -131,7 +134,7 @@ public class V2Territory<T> extends V1Territory<T> {
    * @param amt      the amount of the units to add
    */
   @Override
-  public void addEnemy(int playerId, int level, int amt) {
+  public synchronized void addEnemy(int playerId, int level, int amt) {
     // First we will find the army which matches the player id
     Army<T> armyToAdd = null;
     for (Army<T> army : enemyArmy) {
