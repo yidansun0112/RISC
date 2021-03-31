@@ -77,7 +77,7 @@ public class V2Territory<T> extends V1Territory<T> {
    * version implementation.
    */
   @Override
-  public void combineEnemyArmy() {
+  public synchronized void combineEnemyArmy() {
     HashMap<Integer, Army<T>> commanderToArmy = new HashMap<Integer, Army<T>>();
     for (Army<T> a : enemyArmy) {
       int commander = a.getCommanderId();
