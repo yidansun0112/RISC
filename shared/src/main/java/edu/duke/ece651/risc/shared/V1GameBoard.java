@@ -253,7 +253,7 @@ public class V1GameBoard<T> implements Board<T> {
   }
 
   @Override
-  public int findMinPathDistance(int srcTerritoryId, int destTerritoryId){
+  public int findMinPathDistance(int srcTerritoryId, int destTerritoryId, int playerId){
     // Warning, this class will never call this function.
     return -1;
   }

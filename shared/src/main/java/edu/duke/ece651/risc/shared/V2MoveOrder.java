@@ -33,7 +33,16 @@ public class V2MoveOrder<T> implements Order<T> {
   public boolean execute(GameStatus<T> gs) {
     // TODO finish this method when move the BFS/Dijkstra method into Board.java
     // This is the advice given by TA in the feedback of evo1 - I think this is reasonable.
-    return false;
+    Board<T> board = gs.getGameBoard();
+    // Don't Know the serialVersionUID represent, so I just use it as the User ID(which is playerID in Evol1)
+    int pathLength = board.findMinPathDistance(this.srcTerritory, this.destTerritory, (int)serialVersionUID);
+    if(pathLength == Integer.MAX_VALUE){
+      return false;
+    }
+    else{
+      gs.allPlayers.get((int)serialVersionUID).consumeFoodResource(pathLength);
+    }
+    return pathLength > 0;
   }
 
   @Override
