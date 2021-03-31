@@ -48,7 +48,7 @@ public class V2UpgradeUnitOrder<T> implements Order<T> {
   @Override
   public boolean execute(GameStatus<T> gs) {
     Territory<T> toModify = gs.getGameBoard().getTerritories().get(targetTerritory);
-    PlayerEntity<T> playerWhoWantUpgrade = gs.getAllPlayers().get(toModify.getOwner());
+    PlayerEntity<T> playerWhoWantUpgrade = gs.getCurrPlayer();
     
     // First we remove the amount of units on the same level with levelFrom
     toModify.removeDefendUnits(levelFrom, howMany);

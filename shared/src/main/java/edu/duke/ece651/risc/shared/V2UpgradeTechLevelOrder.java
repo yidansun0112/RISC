@@ -30,7 +30,7 @@ public class V2UpgradeTechLevelOrder<T> implements Order<T> {
     // playerEntity, and let the game room to really do the final step (i.e., call
     // the upgradeTechLevel method) after resolving
     // all battles.
-    PlayerEntity<T> playerWhoWantUpgrade = gs.getAllPlayers().get(playerId);
+    PlayerEntity<T> playerWhoWantUpgrade = gs.getCurrPlayer();
     playerWhoWantUpgrade.setNeedUpTechLv();
     return true;
   }

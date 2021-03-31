@@ -47,9 +47,9 @@ public class V2AttackOrder<T> implements Order<T> {
     Territory<T> leaveFrom = gs.getGameBoard().getTerritories().get(srcTerritory);
     Territory<T> attackOn = gs.getGameBoard().getTerritories().get(destTerritory);
 
-    PlayerEntity<T> attacker = gs.getAllPlayers().get(leaveFrom.getOwner()); // note the player id who issues this order
-                                                                             // should be same with the owner id of
-                                                                             // the source territory.
+    PlayerEntity<T> attacker = gs.getCurrPlayer(); // note the player id who issues this order
+                                                   // should be same with the owner id of
+                                                   // the source territory.
 
     // First, we need to remove the units with corresponding level and amount out of
     // the currDefenderArmy in source territory, and add them into the target
