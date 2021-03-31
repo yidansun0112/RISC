@@ -1,5 +1,7 @@
 package edu.duke.ece651.risc.shared;
 
+import java.util.HashMap;
+
 /**
  * This class is a set of message content that the server and client agree with,
  * as a protocol to indicate the game flow.
@@ -68,6 +70,38 @@ public class Constant {
   public static final int SELF_LOSE_OTHER_WIN_STATUS = 3; // the player lose the game, and some one win, the game will
                                                           // be end
 
-  /** Indicate the total level numbers */                                                      
+  /** Indicate the total level numbers */
   public static final int TOTAL_LEVELS = 6;
+  /** Indicate the initial max tech level at the beginning of the game */
+  public static final int INIT_MAX_TECH_LEVEL = 1; // note it starts at 1 (pdf2 7 a.)
+
+  /**
+   * Indicate the initial amount of food resource that each player can have at the
+   * beginning
+   */
+  public static final int INIT_FOOD_RESOURCE = 0;
+
+  /**
+   * Indicate the initial amount of technology resource that each player can have
+   * at the beginning
+   */
+  public static final int INIT_TECH_RESOURCE = 0;
+
+  /**
+   * Store the cost of technology resource of upgrading some amount of units. Key
+   * is the level, value is the cost. Same with that in pdf 7.(e).
+   */
+  public static final HashMap<Integer, Integer> UP_UNIT_COST;
+  // Here we use a static block to initialize the map. If we can use Java9, there
+  // is a factory can do this job, which is nicer.
+  static {
+    UP_UNIT_COST = new HashMap<Integer, Integer>();
+    UP_UNIT_COST.put(0, 0);
+    UP_UNIT_COST.put(1, 3);
+    UP_UNIT_COST.put(2, 11);
+    UP_UNIT_COST.put(3, 30);
+    UP_UNIT_COST.put(4, 55);
+    UP_UNIT_COST.put(5, 90);
+    UP_UNIT_COST.put(6, 140);
+  }
 }

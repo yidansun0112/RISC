@@ -6,6 +6,8 @@ public interface Board<T> {
   /**
    * Return the units deployment on a teritory based on if from self view
    * 
+   * @since evolution 1
+   * 
    * @param territory is the Territory to be operated on
    * @param isSelf    is to indicate if forom self view
    * @return String that show the deploment info of a territory
@@ -13,7 +15,27 @@ public interface Board<T> {
   public String whatIsIn(Territory<T> territory, boolean isSelf);
 
   /**
+   * Getter for territories
+   * 
+   * @since evolution 1
+   * 
+   * @return territories
+   */
+  public ArrayList<Territory<T>> getTerritories();
+
+  /**
+   * Getter for worldMap
+   * 
+   * @since evolution 1
+   * 
+   * @return worldMap
+   */
+  public int[][] getWorldMap();
+
+  /**
    * Occupy a group a territories for the owner
+   * 
+   * @since evolution 1
    * 
    * @param groupNum is the group number of the territories to be assigned
    * @param owner    is the owner of the group
@@ -24,63 +46,92 @@ public interface Board<T> {
   /**
    * Deploy certain amount of units on a territory for a player
    * 
+   * @since evolution 1
+   * 
    * @param territoryId is the id of the territory to be deployed
    * @param amount      is the amount of units to be deployed
    * @param player      is the player id
-   * @return true if deploy units succeed, othereise false
+   * @return true if deploy units succeed, otherwise false
    */
   public boolean deployUnits(int territoryId, int amount, int player);
 
   /**
    * Add own units for a territory
    * 
-   * @param territoryId
-   * @param amount
-   */
-  public void addOwnUnits(int territoryId, int amount);
-  
-  public void addOwnUnits(int territoryId, HashMap<Integer, Integer> army);
-  /**
-   * Add enemy units for a territory
+   * @since evolution 1
    * 
    * @param territoryId
    * @param amount
-   * @param playerId
    */
-  public void addEnemyUnits(int territoryId, int amount, int playerId);
+  public void addBasicDefendUnitsTo(int territoryId, int amount);
 
-  public void addEnemyUnits(int territoryId, HashMap<Integer, Integer> amount, int playerId);
   /**
    * Remove units from one territory
+   * 
+   * @since evolution 1
    * 
    * @param territory
    * @param amount
    * 
    */
-  public void removeUnits(int territory, int amount);
-  
-  public void removeUnits(int territoryId, HashMap<Integer, Integer> army);
+  public void removeBasicDefendUnitsFrom(int territory, int amount);
+
   /**
-   * Getter for territories
+   * Add enemy units for a territory
    * 
-   * @return territories
-   */
-
-  public ArrayList<Territory<T>> getTerritories();
-
-  /**
-   * Getter for worldMap
+   * @since evolution 1
    * 
-   * @return worldMap
+   * @param territoryId
+   * @param amount
+   * @param playerId
    */
-  public int[][] getWorldMap();
+  public void addBasicEnemyUnitsTo(int territoryId, int amount, int playerId);
 
   /**
-   * update previous defenders for all terriotories on the board
+   * Update previous defenders for all territories on the board
+   * 
+   * @since evolution 1
    */
   abstract public void updateAllPrevDefender();
-  // public String unitsInfo(HashMap<String, Integer> infoMap);
 
-  // public String whatisInTerritory(String name, int territoryId, Vector<Integer>
-  // neigh);
+  /**************************************************
+   * Below are the methods introduced in evolution 2
+   **************************************************/
+
+  /**
+   * @since evolution 2
+   * 
+   * @param territoryId the territory id to add units to
+   * @param level       the level of the units which to be added
+   * @param amount      the amount of units to add
+   */
+  public void addDefendUnitsTo(int territoryId, int level, int amount);
+
+  /**
+   * Remove the specified amount of units with specified level from the specified
+   * territory's defender army.
+   * 
+   * @since evolution 2
+   * 
+   * @param territoryId the territory id to remove units from
+   * @param level       the level of the units which to be removed
+   * @param amount      the amount of units to remove
+   */
+  public void removeDefendUnitsFrom(int territoryId, int level, int amount);
+
+  // TODO: adjust the parameter order in the end? terr id, player id, level, amt?
+  /**
+   * This method will add specified amount of units with specified level into the
+   * enemy army, which is on the specified territory and belongs to the specified
+   * player.
+   * 
+   * @since evolution 2
+   * 
+   * @param territoryId the territory id to add the units to
+   * @param playerId    the player who wants to attack this territory (add enemy
+   *                    into it)
+   * @param level       the level of the units
+   * @param amt         the amount of the units to add
+   */
+  public void addEnemyUnitsTo(int territoryId, int level, int amount, int playerId);
 }

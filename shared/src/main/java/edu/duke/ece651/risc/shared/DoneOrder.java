@@ -1,12 +1,10 @@
 package edu.duke.ece651.risc.shared;
 
-import java.util.HashMap;
-
 public class DoneOrder<T> implements Order<T> {
   /**
    * Fields required by Serializable
    */
-  static final long serialVersionUID = 0L;
+  private static final long serialVersionUID = 0L;
 
   private String msg;
 
@@ -16,7 +14,7 @@ public class DoneOrder<T> implements Order<T> {
 
   @Override
   public boolean execute(Board<T> board) {
-    return false;
+    return true;
   }
 
   /*
@@ -43,4 +41,18 @@ public class DoneOrder<T> implements Order<T> {
     return -1;
   }
 
+  /********************************
+   * New method used in evolution 2
+   ********************************/
+
+  /**
+   * Provide the dummy implementation here. This method should not be used in evo1
+   * code.
+   * 
+   * Provided for LSP satisfaction.
+   */
+  @Override
+  public boolean execute(GameStatus<T> gs) {
+    return true;
+  }
 }

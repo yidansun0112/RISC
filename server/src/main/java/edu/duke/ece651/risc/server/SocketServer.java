@@ -10,6 +10,8 @@ import java.util.Vector;
 import java.util.concurrent.BrokenBarrierException;
 
 import edu.duke.ece651.risc.shared.Constant;
+import edu.duke.ece651.risc.shared.PlayerEntity;
+import edu.duke.ece651.risc.shared.TextPlayerEntity;
 
 public class SocketServer<T> implements GameServer<T> {
   /** The symbol used to represent all players */

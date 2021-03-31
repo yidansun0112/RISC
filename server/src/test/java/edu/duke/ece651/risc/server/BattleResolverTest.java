@@ -18,9 +18,9 @@ public class BattleResolverTest {
     b.occupyTerritory(0, 0);
     b.occupyTerritory(1, 1);
     b.occupyTerritory(2, 2);
-    b.addOwnUnits(1, 0);
-    b.addEnemyUnits(1, 2, 0);
-    b.addEnemyUnits(1, 4, 2);
+    b.addBasicDefendUnitsTo(1, 0);
+    b.addBasicEnemyUnitsTo(1, 2, 0);
+    b.addBasicEnemyUnitsTo(1, 4, 2);
     Resolver<String> resolver = new BattleResolver<String>(new Random(10));
 
     resolver.combineEnemyArmy(b);
@@ -32,7 +32,7 @@ public class BattleResolverTest {
     resolver.executeAllBattle(b);
     ArrayList<Territory<String>> territory = b.getTerritories();
     assertEquals(territory.get(1).getOwner(), 2);
-    assertEquals(territory.get(1).getUnitAmount(), 3);
+    assertEquals(territory.get(1).getBasicDefendUnitAmount(), 3);
   }
 
 }

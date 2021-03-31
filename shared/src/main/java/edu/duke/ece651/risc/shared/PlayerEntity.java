@@ -1,4 +1,4 @@
-package edu.duke.ece651.risc.server;
+package edu.duke.ece651.risc.shared;
 
 import java.io.IOException;
 import java.io.ObjectInputStream;
@@ -8,6 +8,7 @@ import java.io.ObjectOutputStream;
  * This class is to represent a player that in a game room in server side.
  */
 public abstract class PlayerEntity<T> {
+  // TODO: two fields below (object input/output streams) may need to be @Transit
   /** Send data to player */
   protected ObjectOutputStream toPlayer;
   /** Read data from player */
@@ -41,6 +42,83 @@ public abstract class PlayerEntity<T> {
     this.ownedGroup = ownedGroup;
     this.playerStatus = playerStatus;
   }
+
+  /**
+   * This method will harvest various kinds of resources for the player, which are
+   * currently allowed to be harvested according to the game rules
+   * 
+   * @since evolution 2
+   * 
+   * @param gs the GameStatus object which contains all the territory
+   */
+  public abstract void harvestAllResource(GameStatus<T> gs);
+
+  /**
+   * This method will return the food resource possessed by this player.
+   * 
+   * @return the amount of the food resource that this player currently has
+   */
+  public abstract int getFoodResourceAmount();
+
+  /**
+   * This method will decrease the food resources by specified amount
+   * 
+   * @param amt the amount of food resources to be consumed
+   */
+  public abstract void consumeFoodResource(int amt);
+
+  /**
+   * This method will return the technology resource possessed by this player.
+   * 
+   * @return the amount of the technology resource that this player currently has
+   */
+  public abstract int getTechResourceAmount();
+
+  /**
+   * This method will decrease the tech resources by specified amount
+   * 
+   * @param amt the amount of tech resources to be consumed
+   */
+  public abstract void consumeTechResource(int amt);
+
+  /**
+   * This method will return the current max tech level of this player
+   * 
+   * @return the value max technology level
+   */
+  public abstract int getTechLevel();
+
+  /**
+   * This method will set boolean needUpTechLv to true
+   */
+  public abstract void setNeedUpTechLv();
+
+  /**
+   * Getter for needUpTechLv
+   * 
+   * @return needUpTechLv
+   */
+  public abstract boolean getNeedUpTechLv();
+
+  /**
+   * This method is used to upgrade max tech level.
+   * 
+   * @apiNote note that this method can only be called after passed the
+   *          corresponding order rule checker!
+   */
+  public abstract void upgradeTechLevel();
+
+  // /**
+  //  * This method can be used in order rule checker for a more concise code in rule
+  //  * checker. Also add this method for better support LSP principle.
+  //  * 
+  //  * You can also write your own rule checking code in rule checker and not use
+  //  * this method, if more easy to implementation without technical debt.
+  //  * 
+  //  * @return {@code true} if the player can upgrade his/her max tech level;
+  //  *         {@code false} if cannot upgrade tech level currently.
+  //  */
+  // public abstract boolean canUpTechLevel();
 
   /**
    * Send an object to the player via ObjectOutputStream. This method is used to

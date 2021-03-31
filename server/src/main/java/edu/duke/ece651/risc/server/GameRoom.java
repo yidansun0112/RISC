@@ -144,7 +144,7 @@ public abstract class GameRoom<T> {
   public void incrementUnits() {
     int size = gameBoard.getTerritories().size();
     for (int i = 0; i < size; i++) {
-      gameBoard.addOwnUnits(i, 1);
+      gameBoard.addBasicDefendUnitsTo(i, 1);
     }
   }
 
@@ -193,7 +193,7 @@ public abstract class GameRoom<T> {
   public boolean checkEnd() {
     updatePlayerStatus();
     for (PlayerEntity<T> player : players) {
-      if (player.playerStatus == Constant.SELF_WIN_STATUS) {
+      if (player.getPlayerStatus() == Constant.SELF_WIN_STATUS) {
         return true;
       }
     }

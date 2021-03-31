@@ -28,11 +28,16 @@ public class AttackOrderTest {
     Board<String> b = f.makeGameBoard(2);
     b.occupyTerritory(0, 0);
     b.occupyTerritory(1, 1);
-    b.addOwnUnits(0, 3);
+    b.addBasicDefendUnitsTo(0, 3);
     AttackOrder<String> a2 = new AttackOrder<>("7 7 7");
     assertEquals(false, a2.execute(b));
-    assertEquals(true, a1.execute(b));
-    assertEquals(1, b.getTerritories().get(a1.getSrcTerritory()).getUnitAmount());
+    // assertEquals(true, a1.execute(b));
+
+    // Test execute method which takes in a game status, even if this method is not used in evo 2
+    GameStatus<String> gs = new GameStatus<>(null, b); // player entity is not used in attack order in evo 1
+    assertEquals(true, a1.execute(gs));
+
+    assertEquals(1, b.getTerritories().get(a1.getSrcTerritory()).getBasicDefendUnitAmount());
     Vector<Army<String>> a = b.getTerritories().get(3).getEnemyArmy();
     assertEquals(a.get(0).getBasicUnits(), 2);
   }

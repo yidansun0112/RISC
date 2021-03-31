@@ -8,10 +8,12 @@ public class MoveOrderPathCheckerTest {
   @Test
   public void test_MoveOrderPathChecker() {
 
-    BoardFactory<String> f = new V1BoardFactory();
+    BoardFactory<String> f = new V1BoardFactory<String>();
     Board<String> b = f.makeGameBoard(2);
     assertEquals(b.occupyTerritory(0, 0), false); // group 0 owner is 0
     assertEquals(b.occupyTerritory(1, 1), false); // group 1 owner is 1
+
+    GameStatus<String> gs = new GameStatus<>(null, b); // player is not used in this checker in evo 1
 
     MoveOrder<String> m1 = new MoveOrder<>("0 1 2");
     MoveOrder<String> m2 = new MoveOrder<>("1 4 3");
@@ -23,6 +25,7 @@ public class MoveOrderPathCheckerTest {
 
     // Now the player 0 has 0,1,2, all of them are connected to each other.
     assertEquals(null, checker.checkOrder(0, m1, b));
+    assertEquals(null, checker.checkOrder(0, m1, gs)); // test evo 2 execute method, even it is not used in evo 1
 
     // Now make the Territory 0 belongs to player1 and make the Territory 4 belongs
     // to player0
@@ -32,6 +35,11 @@ public class MoveOrderPathCheckerTest {
     assertEquals(s1, checker.checkOrder(0, m2, b));
     assertEquals(null, checker.checkOrder(0, m3, b));
     assertEquals(null, checker.checkOrder(1, m4, b));
+
+    // test evo 2 execute method, even it is not used in evo 1
+    assertEquals(s1, checker.checkOrder(0, m2, gs));
+    assertEquals(null, checker.checkOrder(0, m3, gs));
+    assertEquals(null, checker.checkOrder(1, m4, gs));
   }
 
 }

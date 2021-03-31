@@ -1,37 +1,35 @@
 package edu.duke.ece651.risc.shared;
+
 import java.util.*;
 
 public class V2GameBoard<T> extends V1GameBoard<T> {
-  public V2GameBoard(ArrayList<Territory<T>> territories, int[][] worldMap){
+  public V2GameBoard(ArrayList<Territory<T>> territories, int[][] worldMap) {
     super(territories, worldMap);
   }
 
-  public void addOwnUnits(int territoryId, HashMap<Integer, Integer> army) {
-    Territory<T> territory = territories.get(territoryId);
-    territory.addUnitAmount(army);
+  // TODO: whatIsIn maybe deprecated in evolution 2 ?
+
+  /**************************************************
+   * Below are the methods introduced in evolution 2
+   * 
+   * The Javadoc is same with those in the Board.java
+   **************************************************/
+
+  @Override
+  public void addDefendUnitsTo(int territoryId, int level, int amount) {
+    Territory<T> toAddTo = territories.get(0);
+    toAddTo.addDefendUnits(level, amount);
   }
 
-  public void addEnemyUnits(int territoryId, HashMap<Integer, Integer> army, int playerId) {
-    Territory<T> territory = territories.get(territoryId);
-    territory.addEnemy(playerId, army);
+  @Override
+  public void removeDefendUnitsFrom(int territoryId, int level, int amount) {
+    Territory<T> toRemoveFrom = territories.get(territoryId);
+    toRemoveFrom.removeDefendUnits(level, amount);
   }
 
-
-  public void removeUnits(int territoryId, HashMap<Integer, Integer> army) {
+  @Override
+  public void addEnemyUnitsTo(int territoryId, int playerId, int level, int amt) {
     Territory<T> territory = territories.get(territoryId);
-    territory.removeUnitAmount(army);
+    territory.addEnemy(playerId, level, amt);
   }
-
 }
-
-
-
-
-
-
-
-
-
-
-
-
