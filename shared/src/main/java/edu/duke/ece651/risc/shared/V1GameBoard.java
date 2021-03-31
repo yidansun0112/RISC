@@ -251,4 +251,10 @@ public class V1GameBoard<T> implements Board<T> {
     Territory<T> territory = territories.get(territoryId);
     territory.addBasicEnemy(playerId, amount);
   }
+
+  @Override
+  public int findMinPathDistance(int srcTerritoryId, int destTerritoryId){
+    // Warning, this class will never call this function.
+    return -1;
+  }
 }
