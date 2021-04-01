@@ -134,4 +134,5 @@ public class Constant {
   public static final String FAIL_REASON_INVALID_USER_NAME = "Your user name is invalid.";
   public static final String FAIL_REASON_SAME_USER_NAME = "Your user name already exists. Please choose a different one.";
   public static final String FAIL_REASON_HAS_NOT_REGISTERED = "You need to register first.";
+  public static final String FAIL_REASON_WRONG_PASSWORD = "Your password is incorrect.";
 }

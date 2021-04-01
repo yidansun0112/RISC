@@ -237,7 +237,11 @@ public class V2GameServer {
     // Then check whether this user has registered before
     for (RISCUser user : userList) {
       if (user.getUserName().equals(userInputedName)) {
-        return null;
+        if (user.getPassword().equals(requestJSON.getString(Constant.KEY_PASSWORD))) {
+          return null;
+        } else {
+          return Constant.FAIL_REASON_WRONG_PASSWORD;
+        }
       }
     }
 
