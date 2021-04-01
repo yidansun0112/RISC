@@ -82,9 +82,10 @@ public class StartController {
     //System.out.println(mapinfo);
     //player.sendObject(0);
     //player.receiveObject();
-    FXMLLoader loaderStart = new FXMLLoader(getClass().getResource("/ui/choosePlayerNum.fxml"));
+    FXMLLoader loaderStart = new FXMLLoader(getClass().getResource("/ui/deployUnits.fxml"));
     loaderStart.setControllerFactory(c -> {
-      return new StartController(Window,player);
+      return new DeployUnitsController(Window);
+      //return new MapLinkController();
     });
     Scene scene = new Scene(loaderStart.load());
     Window.setScene(scene);

@@ -1,0 +1,134 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.image.*?>
+<?import javafx.scene.text.*?>
+<?import java.lang.*?>
+<?import java.util.*?>
+<?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<AnchorPane prefHeight="700.0" prefWidth="600.0" style="-fx-border-color: lightskyblue; -fx-border-width: 10;" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.duke.ece651.risc.client.TerrInfoController">
+   <children>
+      <Label alignment="CENTER" layoutX="100.0" layoutY="50.0" text="Territory Info:" textFill="DARKBLUE">
+         <font>
+            <Font name="System Bold" size="12.0" />
+         </font>
+      </Label>
+      <Label alignment="CENTER" layoutX="100.0" layoutY="100.0" text="Owner: " textFill="DARKBLUE">
+         <font>
+            <Font name="System Bold" size="12.0" />
+         </font>
+      </Label>
+      <Label fx:id="ownerValue" alignment="CENTER" layoutX="150.0" layoutY="100.0" text="" textFill="DARKBLUE">
+         <font>
+            <Font name="System Bold" size="12.0" />
+         </font>
+      </Label>
+      <Label alignment="CENTER" layoutX="100.0" layoutY="150.0" text="Name: " textFill="DARKBLUE">
+         <font>
+            <Font name="System Bold" size="12.0" />
+         </font>
+      </Label>
+      <Label fx:id="nameValue" alignment="CENTER" layoutX="150.0" layoutY="150.0" text="" textFill="DARKBLUE">
+         <font>
+            <Font name="System Bold" size="12.0" />
+         </font>
+      </Label>
+      <Label alignment="CENTER" layoutX="100.0" layoutY="200.0" text="Food Production: " textFill="DARKBLUE">
+         <font>
+            <Font name="System Bold" size="12.0" />
+         </font>
+      </Label>
+      <Label fx:id="foodValue" alignment="CENTER" layoutX="150.0" layoutY="200.0" text="" textFill="DARKBLUE">
+         <font>
+            <Font name="System Bold" size="12.0" />
+         </font>
+      </Label>
+      <Label alignment="CENTER" layoutX="100.0" layoutY="250.0" text="Technology Production: " textFill="DARKBLUE">
+         <font>
+            <Font name="System Bold" size="12.0" />
+         </font>
+      </Label>
+      <Label fx:id="techValue" alignment="CENTER" layoutX="150.0" layoutY="250.0" text="" textFill="DARKBLUE">
+         <font>
+            <Font name="System Bold" size="12.0" />
+         </font>
+      </Label>
+      <Label alignment="CENTER" layoutX="100.0" layoutY="300.0" text="Army: " textFill="DARKBLUE">
+         <font>
+            <Font name="System Bold" size="12.0" />
+         </font>
+      </Label>
+      <Label alignment="CENTER" layoutX="100.0" layoutY="350.0" text="Level 0: " textFill="DARKBLUE">
+         <font>
+            <Font name="System Bold" size="12.0" />
+         </font>
+      </Label>
+      <Label fx:id="lv0Value" alignment="CENTER" layoutX="150.0" layoutY="350.0" text="" textFill="DARKBLUE">
+         <font>
+            <Font name="System Bold" size="12.0" />
+         </font>
+      </Label>
+      <Label alignment="CENTER" layoutX="100.0" layoutY="400.0" text="Level 1: " textFill="DARKBLUE">
+         <font>
+            <Font name="System Bold" size="12.0" />
+         </font>
+      </Label>
+      <Label fx:id="lv1Value" alignment="CENTER" layoutX="150.0" layoutY="400.0" text="" textFill="DARKBLUE">
+         <font>
+            <Font name="System Bold" size="12.0" />
+         </font>
+      </Label>
+      <Label alignment="CENTER" layoutX="100.0" layoutY="450.0" text="Level 2: " textFill="DARKBLUE">
+         <font>
+            <Font name="System Bold" size="12.0" />
+         </font>
+      </Label>
+      <Label fx:id="lv2Value" alignment="CENTER" layoutX="150.0" layoutY="450.0" text="" textFill="DARKBLUE">
+         <font>
+            <Font name="System Bold" size="12.0" />
+         </font>
+      </Label>
+      <Label alignment="CENTER" layoutX="100.0" layoutY="500.0" text="Level 3: " textFill="DARKBLUE">
+         <font>
+            <Font name="System Bold" size="12.0" />
+         </font>
+      </Label>
+      <Label fx:id="lv3Value" alignment="CENTER" layoutX="150.0" layoutY="500.0" text="" textFill="DARKBLUE">
+         <font>
+            <Font name="System Bold" size="12.0" />
+         </font>
+      </Label>
+      <Label alignment="CENTER" layoutX="100.0" layoutY="550.0" text="Level 4: " textFill="DARKBLUE">
+         <font>
+            <Font name="System Bold" size="12.0" />
+         </font>
+      </Label>
+      <Label fx:id="lv4Value" alignment="CENTER" layoutX="150.0" layoutY="550.0" text="" textFill="DARKBLUE">
+         <font>
+            <Font name="System Bold" size="12.0" />
+         </font>
+      </Label>
+      <Label alignment="CENTER" layoutX="100.0" layoutY="600.0" text="Level 5: " textFill="DARKBLUE">
+         <font>
+            <Font name="System Bold" size="12.0" />
+         </font>
+      </Label>
+      <Label fx:id="lv5Value" alignment="CENTER" layoutX="150.0" layoutY="600.0" text="" textFill="DARKBLUE">
+         <font>
+            <Font name="System Bold" size="12.0" />
+         </font>
+      </Label>
+      <Label alignment="CENTER" layoutX="100.0" layoutY="650.0" text="Level 6: " textFill="DARKBLUE">
+         <font>
+            <Font name="System Bold" size="12.0" />
+         </font>
+      </Label>
+      <Label fx:id="lv6Value" alignment="CENTER" layoutX="150.0" layoutY="650.0" text="" textFill="DARKBLUE">
+         <font>
+            <Font name="System Bold" size="12.0" />
+         </font>
+      </Label>
+   </children>
+</AnchorPane>
