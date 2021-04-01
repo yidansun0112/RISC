@@ -15,63 +15,73 @@ public class StartController {
   @FXML
   private Button Start;
   @FXML
-  private ChoiceBox<Integer> PlayerNumBox;
+  private ChoiceBox<String> PlayerNumBox;
   @FXML
   private Button ConfirmNumBtn;
+  @FXML
+  private ChoiceBox<String> MapBox;
+  @FXML
+  private Button ConfirmMapBtn;
   private Stage Window;
-  SocketClient client;
+  GUIPlayer player;
 
-  public StartController(Stage Window) {
+  public StartController(Stage Window, GUIPlayer player) {
     this.Window = Window;
     PlayerNumBox = new ChoiceBox<>();
+    MapBox = new ChoiceBox<>();
+    this.player=player;
     System.out.println("[DEBUG] Inside Start Controller Constructor");
   }
 
   @FXML
   public void initialize() {
-    PlayerNumBox.setValue(2);
-    ObservableList<Integer> ChoiceNumber = FXCollections.observableArrayList(2, 3, 4, 5);
+    PlayerNumBox.setValue("2");
+    ObservableList<String> ChoiceNumber = FXCollections.observableArrayList("2", "3", "4", "5");
     PlayerNumBox.setItems(ChoiceNumber);
+    MapBox.setValue("Map 0");
   }
 
   @FXML
-  public void startGame() throws IOException, ClassNotFoundException {
-    client = new SocketClient(12345, "127.0.0.1");
-    int playerId = recvID();
+  public void startGame() throws IOException, ClassNotFoundException{
+    player=new GUIPlayer(new SocketClient(12345,"127.0.0.1"));
+    int playerId = player.recvID();
     if (playerId == 0) {
       FXMLLoader loaderStart = new FXMLLoader(getClass().getResource("/ui/choosePlayerNum.fxml"));
       loaderStart.setControllerFactory(c -> {
-        return new StartController(Window);
+        return new StartController(Window,player);
       });
       Scene scene = new Scene(loaderStart.load());
-
       Window.setScene(scene);
       Window.show();
     }
   }
 
-  /**
-   * This method receive playerID from server. It sets the playerId field after
-   * receiving it, and print the ID to the command line. (This method is called by
-   * joinGame() and the player ID will be changed at that time.)
-   */
-  public int recvID() throws ClassNotFoundException, IOException {
-    String strID = (String) client.receiveObject();
-    int playerId = Integer.parseInt(strID);
-    return playerId;
-  }
-
   @FXML
   public void selectPlayerNum() throws ClassNotFoundException, IOException {
-    int num = PlayerNumBox.getValue();
-    client.sendObject(num);
-    FXMLLoader loaderStart = new FXMLLoader(getClass().getResource("/ui/choosePlayerNum.fxml"));
+    String num = PlayerNumBox.getValue();
+    player.sendObject(num);
+    FXMLLoader loaderStart = new FXMLLoader(getClass().getResource("/ui/chooseMap.fxml"));
     loaderStart.setControllerFactory(c -> {
-      return new StartController(Window);
+      return new StartController(Window,player);
     });
     Scene scene = new Scene(loaderStart.load());
-
     Window.setScene(scene);
     Window.show();
   }
+
+  @FXML
+  public void selectMap() throws ClassNotFoundException, IOException {
+    //String mapinfo=(String)player.receiveObject();
+    //System.out.println(mapinfo);
+    player.sendObject(0);
+    player.receiveObject();
+    FXMLLoader loaderStart = new FXMLLoader(getClass().getResource("/ui/choosePlayerNum.fxml"));
+    loaderStart.setControllerFactory(c -> {
+      return new StartController(Window,player);
+    });
+    Scene scene = new Scene(loaderStart.load());
+    Window.setScene(scene);
+    Window.show();
+  }
+
 }
