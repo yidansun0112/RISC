@@ -43,23 +43,30 @@ public class StartController {
 
   @FXML
   public void startGame() throws IOException, ClassNotFoundException{
-    player=new GUIPlayer(new SocketClient(12345,"127.0.0.1"));
-    int playerId = player.recvID();
-    if (playerId == 0) {
-      FXMLLoader loaderStart = new FXMLLoader(getClass().getResource("/ui/choosePlayerNum.fxml"));
-      loaderStart.setControllerFactory(c -> {
-        return new StartController(Window,player);
-      });
-      Scene scene = new Scene(loaderStart.load());
-      Window.setScene(scene);
-      Window.show();
-    }
+    // player=new GUIPlayer(new SocketClient(12345,"127.0.0.1"));
+    // int playerId = player.recvID();
+    // if (playerId == 0) {
+    //   FXMLLoader loaderStart = new FXMLLoader(getClass().getResource("/ui/registerLogin.fxml"));
+    //   loaderStart.setControllerFactory(c -> {
+    //     return new RegisterLoginController(Window);
+    //   });
+    //   Scene scene = new Scene(loaderStart.load());
+    //   Window.setScene(scene);
+    //   Window.show();
+    // }
+    FXMLLoader loaderStart = new FXMLLoader(getClass().getResource("/ui/registerLogin.fxml"));
+    loaderStart.setControllerFactory(c -> {
+      return new RegisterLoginController(Window);
+    });
+    Scene scene = new Scene(loaderStart.load());
+    Window.setScene(scene);
+    Window.show();
   }
 
   @FXML
   public void selectPlayerNum() throws ClassNotFoundException, IOException {
     String num = PlayerNumBox.getValue();
-    player.sendObject(num);
+    //player.sendObject(num);
     FXMLLoader loaderStart = new FXMLLoader(getClass().getResource("/ui/chooseMap.fxml"));
     loaderStart.setControllerFactory(c -> {
       return new StartController(Window,player);
@@ -73,8 +80,8 @@ public class StartController {
   public void selectMap() throws ClassNotFoundException, IOException {
     //String mapinfo=(String)player.receiveObject();
     //System.out.println(mapinfo);
-    player.sendObject(0);
-    player.receiveObject();
+    //player.sendObject(0);
+    //player.receiveObject();
     FXMLLoader loaderStart = new FXMLLoader(getClass().getResource("/ui/choosePlayerNum.fxml"));
     loaderStart.setControllerFactory(c -> {
       return new StartController(Window,player);

@@ -141,7 +141,6 @@ public class V2GameServer {
     // the request.
 
     String requestType = requestJSON.getString(Constant.KEY_REQUEST_TYPE);
-
     if (requestType.equals(Constant.VALUE_REQUEST_TYPE_REGISTER)) {
       String result = handleRegister(requestJSON);
       if (result == null) {
@@ -177,7 +176,7 @@ public class V2GameServer {
    */
   public String handleRegister(JSONObject requestJSON) {
     // First check whether the JSON has the keys we want
-    if (!requestJSON.has(Constant.KEY_USER_NAME) || requestJSON.has(Constant.KEY_PASSWORD)) {
+    if (!requestJSON.has(Constant.KEY_USER_NAME) || !requestJSON.has(Constant.KEY_PASSWORD)) {
       // Invalid JSON object - with no username or password field
       return Constant.FAIL_REASON_INVALID_JSON;
     }
@@ -221,7 +220,7 @@ public class V2GameServer {
    */
   public String handleLogin(JSONObject requestJSON) {
     // First check whether the JSON has the keys we want
-    if (!requestJSON.has(Constant.KEY_USER_NAME) || requestJSON.has(Constant.KEY_PASSWORD)) {
+    if (!requestJSON.has(Constant.KEY_USER_NAME) || !requestJSON.has(Constant.KEY_PASSWORD)) {
       // Invalid JSON object - with no username or password field
       return Constant.FAIL_REASON_INVALID_JSON;
     }
