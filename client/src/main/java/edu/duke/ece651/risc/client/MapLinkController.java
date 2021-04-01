@@ -21,9 +21,9 @@ public class MapLinkController implements Initializable{
   // @FXML
   // TerrInfoController terrInfoController;
   @FXML
-  Hyperlink terr0;
+  Button terr0;
   @FXML
-  Hyperlink terr1;
+  Button terr1;
   @FXML
   Hyperlink terr2;
   @FXML

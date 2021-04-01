@@ -16,16 +16,16 @@
             <Image url="@../map/map2.jpg" />
          </image>
       </ImageView>
-      <Hyperlink fx:id="terr0" alignment="CENTER" layoutX="200.0" layoutY="300.0" text="terr0" onAction="#linkZero" textFill="DARKBLUE">
+      <Button fx:id="terr0" alignment="CENTER" layoutX="200.0" layoutY="300.0" text="terr0" onAction="#linkZero">
          <font>
             <Font name="System Bold" size="12.0" />
          </font>
-      </Hyperlink>
-      <Hyperlink fx:id="terr1" alignment="CENTER" layoutX="150.0" layoutY="100.0" text="terr1" onAction="#linkOne" textFill="DARKBLUE">
+      </Button>
+      <Button fx:id="terr1" alignment="CENTER" layoutX="150.0" layoutY="100.0" text="terr1" onAction="#linkOne">
          <font>
             <Font name="System Bold" size="12.0" />
          </font>
-      </Hyperlink>
+      </Button>
       <Hyperlink fx:id="terr2" alignment="CENTER" layoutX="150.0" layoutY="200.0" text="terr2" textFill="DARKBLUE">
          <font>
             <Font name="System Bold" size="12.0" />

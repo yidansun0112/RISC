@@ -25,10 +25,10 @@ public class DeployUnitsController implements Initializable{
   private ChoiceBox<String> terrBox;
   @FXML
   private ChoiceBox<String> amountBox;
-  @FXML
-  Hyperlink terr0;
-  @FXML
-  Hyperlink terr1;
+  // @FXML
+  // Hyperlink terr0;
+  // @FXML
+  // Hyperlink terr1;
   private Stage Window;
 
   public DeployUnitsController(Stage Window) {
@@ -44,7 +44,7 @@ public class DeployUnitsController implements Initializable{
 
   
   public void initialize(URL url, ResourceBundle rb) {
-      mapLinkController.terr0=terr0;
-      mapLinkController.terr1=terr1;
+      // mapLinkController.terr0=terr0;
+      // mapLinkController.terr1=terr1;
   } 
 }
