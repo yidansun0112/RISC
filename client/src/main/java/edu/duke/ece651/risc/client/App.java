@@ -6,27 +6,43 @@ package edu.duke.ece651.risc.client;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
+import javafx.application.Application;
+import javafx.scene.Scene;
+import javafx.stage.Stage;
+import javafx.fxml.*;
 
 /**
  * This is the App class for client project
  */
-public class App {
-    /**
-     * This is the main method of the whole project.
-     * 
-     * A client is created to handle connection with server. A BufferedReader is
-     * created to handle input. A player is created for play logic.
-     * 
-     * @throws IOException
-     * @throws ClassNotFoundException
-     */
-    public static void main(String[] args) throws IOException, ClassNotFoundException {
-        SocketClient client = new SocketClient(12345, args[0]);
-        BufferedReader input = new BufferedReader(new InputStreamReader(System.in));
-        GamePlayer<String> player = new V1GamePlayer<String>(-1, client, input, System.out);
-        player.initGame();
-        player.pickTerritory();
-        player.deployUnits();
-        player.doPlayPhase();
-    }
+public class App extends Application{
+  private Stage Window;
+
+  @Override
+  public void start(Stage primaryStage) throws Exception {
+    this.Window = primaryStage;
+    showStartView(Window);
+  }
+
+  public void showStartView(Stage Window) throws IOException{
+    //load the start game page
+    FXMLLoader loaderStart = new FXMLLoader(getClass().getResource("/ui/start.fxml"));
+    loaderStart.setControllerFactory(c->{
+      return new StartController(Window,null);
+    });
+    Scene scene = new Scene(loaderStart.load());
+    Window.setScene(scene);
+    Window.show();
+  }
+
+  public static void main(String[] args) {
+    launch(args);
+  }
+
+  
 }
+
+
+
+
+
+

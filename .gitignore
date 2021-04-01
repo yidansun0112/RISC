@@ -55,3 +55,6 @@ shared/.project
 
 #Ignore .settings
 .settings/
+
+#Ignore gradle properties
+gradle/wrapper/gradle-wrapper.properties
