@@ -2,9 +2,6 @@ package edu.duke.ece651.risc.shared;
 
 import static org.junit.jupiter.api.Assertions.assertSame;
 
-import java.util.ArrayList;
-import java.util.List;
-
 import org.junit.jupiter.api.Test;
 
 public class GameStatusTest {
@@ -19,13 +16,12 @@ public class GameStatusTest {
     BoardFactory<String> f = new V1BoardFactory<>();
     Board<String> b = f.makeGameBoard(2);
 
-    List<PlayerEntity<String>> allPlayers = new ArrayList<>();
-    allPlayers.add(p0);
-    allPlayers.add(p1);
+    GameStatus<String> s0 = new GameStatus<String>(p0, b);
+    GameStatus<String> s1 = new GameStatus<String>(p1, b);
 
-    GameStatus<String> s = new GameStatus<String>(allPlayers, b);
-
-    assertSame(allPlayers, s.getAllPlayers());
-    assertSame(b, s.getGameBoard());
+    assertSame(p0, s0.getCurrPlayer());
+    assertSame(p1, s1.getCurrPlayer());
+    assertSame(b, s0.getGameBoard());
+    assertSame(b, s1.getGameBoard());
   }
 }
