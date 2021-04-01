@@ -1,5 +1,7 @@
 package edu.duke.ece651.risc.shared;
 
+import java.util.HashMap;
+
 /**
  * This class is a set of message content that the server and client agree with,
  * as a protocol to indicate the game flow.
@@ -67,4 +69,69 @@ public class Constant {
   public static final int SELF_WIN_STATUS = 2; // the player is the winner, the game will be end
   public static final int SELF_LOSE_OTHER_WIN_STATUS = 3; // the player lose the game, and some one win, the game will
                                                           // be end
+
+  /** Indicate the total level numbers */
+  public static final int TOTAL_LEVELS = 6;
+  /** Indicate the initial max tech level at the beginning of the game */
+  public static final int INIT_MAX_TECH_LEVEL = 1; // note it starts at 1 (pdf2 7 a.)
+
+  /**
+   * Indicate the initial amount of food resource that each player can have at the
+   * beginning
+   */
+  public static final int INIT_FOOD_RESOURCE = 0;
+
+  /**
+   * Indicate the initial amount of technology resource that each player can have
+   * at the beginning
+   */
+  public static final int INIT_TECH_RESOURCE = 0;
+
+  /**
+   * Store the cost of technology resource of upgrading some amount of units. Key
+   * is the level, value is the cost. Same with that in pdf 7.(e).
+   */
+  public static final HashMap<Integer, Integer> UP_UNIT_COST;
+  // Here we use a static block to initialize the map. If we can use Java9, there
+  // is a factory can do this job, which is nicer.
+  static {
+    UP_UNIT_COST = new HashMap<Integer, Integer>();
+    UP_UNIT_COST.put(0, 0);
+    UP_UNIT_COST.put(1, 3);
+    UP_UNIT_COST.put(2, 11);
+    UP_UNIT_COST.put(3, 30);
+    UP_UNIT_COST.put(4, 55);
+    UP_UNIT_COST.put(5, 90);
+    UP_UNIT_COST.put(6, 140);
+  }
+
+  // --- Below are JSON Key-Values as the Request protocol of the RISC Game --- //
+
+  /** The key that represents the type of the request */
+  public static final String KEY_REQUEST_TYPE = "RequestType";
+
+  /** The request type that will register a new user */
+  public static final String VALUE_REQUEST_TYPE_REGISTER = "Register";
+
+  /** The request type that will login a user */
+  public static final String VALUE_REQUEST_TYPE_LOGIN = "Login";
+
+  /** The request type that will create a room */
+  public static final String VALUE_REQUEST_TYPE_CREATE_ROOM = "CreateRoom";
+
+  /** The request type that will join a room that waiting for other players */
+  public static final String VALUE_REQUEST_TYPE_JOIN_ROOM = "JoinRoom";
+
+  /** The request json key which indicates a username field */
+  public static final String KEY_USER_NAME = "UserName";
+
+  /** The request json key which indicates a password field */
+  public static final String KEY_PASSWORD = "Password";
+
+  public static final String RESULT_SUCCEED_REQEUST = "Request Succeed.";
+
+  public static final String FAIL_REASON_INVALID_JSON = "The data from client is invalid in format.";
+  public static final String FAIL_REASON_INVALID_USER_NAME = "Your user name is invalid.";
+  public static final String FAIL_REASON_SAME_USER_NAME = "Your user name already exists. Please choose a different one.";
+  public static final String FAIL_REASON_HAS_NOT_REGISTERED = "You need to register first.";
 }

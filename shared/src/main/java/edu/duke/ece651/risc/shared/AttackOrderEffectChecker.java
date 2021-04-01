@@ -23,10 +23,24 @@ public class AttackOrderEffectChecker<T> extends OrderRuleChecker<T> {
   protected String checkMyRule(int playerId, Order<T> order, Board<T> board) {
     Territory<T> srcTerri = board.getTerritories().get(order.getSrcTerritory());
     int amount = order.getUnitAmount();
-    if (srcTerri.getUnitAmount() < amount) {
+    if (srcTerri.getBasicDefendUnitAmount() < amount) {
       return "invalid order: Units on your territory is not enough\n";
     }
     return null;
   }
 
+  /********************************
+   * New method used in evolution 2
+   ********************************/
+
+  /**
+   * Implementation which is suitable for evo 1, but this method should not be
+   * used in evo 1.
+   * 
+   * Provide this for LSP satisfaction
+   */
+  @Override
+  protected String checkMyRule(int playerId, Order<T> order, GameStatus<T> gs) {
+    return checkMyRule(playerId, order, gs.getGameBoard());
+  }
 }

@@ -14,7 +14,7 @@ import java.util.Vector;
 public class BattleResolver<T> implements Resolver<T> {
 
   /** The Random object to get random index when combating */
-  private Random rdm;
+  protected Random rdm;
 
   /**
    * Constructor for BattleResolver

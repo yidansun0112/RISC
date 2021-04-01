@@ -16,7 +16,7 @@ public class MoveOrderEffectChecker<T> extends OrderRuleChecker<T> {
 
     // Get the needed Information from the parameter.
     Territory<T> src = board.getTerritories().get(order.getSrcTerritory());
-    int srcNum = src.getUnitAmount();
+    int srcNum = src.getBasicDefendUnitAmount();
 
     int requiredNum = order.getUnitAmount();
 
@@ -25,5 +25,20 @@ public class MoveOrderEffectChecker<T> extends OrderRuleChecker<T> {
       return "Sorry, the source territory have " + srcNum + " units while we need " + requiredNum + " units.\n";
     }
     return null;
+  }
+
+  /********************************
+   * New method used in evolution 2
+   ********************************/
+
+  /**
+   * Implementation which is suitable for evo 1, but this method should not be
+   * used in evo 1.
+   * 
+   * Provide this for LSP satisfaction
+   */
+  @Override
+  protected String checkMyRule(int playerId, Order<T> order, GameStatus<T> gs) {
+    return checkMyRule(playerId, order, gs.getGameBoard());
   }
 }

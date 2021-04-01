@@ -135,8 +135,10 @@ public class V2Army<T> extends Army<T> {
    */
   @Override
   public void setBasicUnits(int units) {
-    // We might call this method on an empty army, so we need to call getOrDefault()
-    // rather than get() to avoid NullPointerException
+    if (!troop.containsKey(0)) {
+      ArrayList<Unit> lv0Units = new ArrayList<>();
+      troop.put(0, lv0Units);
+    }
     int basicUnitAmt = getUnitAmtByLevel(0);
     removeUnit(0, basicUnitAmt);
     addUnit(0, units);
@@ -157,5 +159,46 @@ public class V2Army<T> extends Army<T> {
   @Override
   public void minusBasicUnit(int amount) {
     removeUnit(0, amount);
+  }
+
+  /**
+   * This method will calculate the amount of units in all levels.
+   */
+  @Override
+  public int getTotalUnitAmount(){
+    int amount=0;
+    for(int i=0;i<=Constant.TOTAL_LEVELS;i++){
+      amount+=getUnitAmtByLevel(i);
+    }
+    return amount;
+  }
+
+  /**
+   * This method will return the max level of units in this army.
+   */
+  @Override
+  public int getMaxUnitLevel(){
+    int maxLevel=0;
+    for(int i=0;i<=Constant.TOTAL_LEVELS;i++){
+      if(getUnitAmtByLevel(i)>0){
+        maxLevel=i;
+      }
+    }
+    return maxLevel;
+  }
+
+  /**
+   * This method will return the min level of units in this army.
+   */
+  @Override
+  public int getMinUnitLevel(){
+    int minLevel=0;
+    for(int i=0;i<=Constant.TOTAL_LEVELS;i++){
+      if(getUnitAmtByLevel(i)>0){
+        minLevel=i;
+        break;
+      }
+    }
+    return minLevel;
   }
 }

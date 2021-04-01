@@ -9,6 +9,8 @@ import org.junit.jupiter.api.Test;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 
+import edu.duke.ece651.risc.shared.TextPlayerEntity;
+
 public class GameRoomTest {
   @Mock
   TextPlayerEntity<String> player1;

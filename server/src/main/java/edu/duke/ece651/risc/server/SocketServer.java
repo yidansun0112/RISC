@@ -10,6 +10,8 @@ import java.util.Vector;
 import java.util.concurrent.BrokenBarrierException;
 
 import edu.duke.ece651.risc.shared.Constant;
+import edu.duke.ece651.risc.shared.PlayerEntity;
+import edu.duke.ece651.risc.shared.TextPlayerEntity;
 
 public class SocketServer<T> implements GameServer<T> {
   /** The symbol used to represent all players */
@@ -89,7 +91,7 @@ public class SocketServer<T> implements GameServer<T> {
    * 
    * @throws IOException
    */
-  @Override
+  // @Override
   public void connectAll() throws IOException {
     GameRoom<T> currRoom = rooms.firstElement();
     for (int i = 0; i < rooms.elementAt(0).getPlayerNum() - 1; i++) {
@@ -127,7 +129,7 @@ public class SocketServer<T> implements GameServer<T> {
    * 
    * @throws IOException
    */
-  @Override
+  // @Override
   public void closeServer() throws IOException {
     for (Socket sock : playerSockets) {
       sock.close();

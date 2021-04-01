@@ -12,18 +12,13 @@ import org.mockito.Mock;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 
-import java.io.BufferedReader;
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
-import java.io.InputStreamReader;
 import java.io.PrintStream;
 import java.net.UnknownHostException;
 import java.util.Random;
 import java.util.concurrent.BrokenBarrierException;
-
-import edu.duke.ece651.risc.shared.*;
-import edu.duke.ece651.risc.client.*;
 
 class AppTest {
 
