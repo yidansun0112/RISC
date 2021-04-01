@@ -91,7 +91,7 @@ public class SocketServer<T> implements GameServer<T> {
    * 
    * @throws IOException
    */
-  @Override
+  // @Override
   public void connectAll() throws IOException {
     GameRoom<T> currRoom = rooms.firstElement();
     for (int i = 0; i < rooms.elementAt(0).getPlayerNum() - 1; i++) {
@@ -129,7 +129,7 @@ public class SocketServer<T> implements GameServer<T> {
    * 
    * @throws IOException
    */
-  @Override
+  // @Override
   public void closeServer() throws IOException {
     for (Socket sock : playerSockets) {
       sock.close();
