@@ -104,4 +104,34 @@ public class Constant {
     UP_UNIT_COST.put(5, 90);
     UP_UNIT_COST.put(6, 140);
   }
+
+  // --- Below are JSON Key-Values as the Request protocol of the RISC Game --- //
+
+  /** The key that represents the type of the request */
+  public static final String KEY_REQUEST_TYPE = "RequestType";
+
+  /** The request type that will register a new user */
+  public static final String VALUE_REQUEST_TYPE_REGISTER = "Register";
+
+  /** The request type that will login a user */
+  public static final String VALUE_REQUEST_TYPE_LOGIN = "Login";
+
+  /** The request type that will create a room */
+  public static final String VALUE_REQUEST_TYPE_CREATE_ROOM = "CreateRoom";
+
+  /** The request type that will join a room that waiting for other players */
+  public static final String VALUE_REQUEST_TYPE_JOIN_ROOM = "JoinRoom";
+
+  /** The request json key which indicates a username field */
+  public static final String KEY_USER_NAME = "UserName";
+
+  /** The request json key which indicates a password field */
+  public static final String KEY_PASSWORD = "Password";
+
+  public static final String RESULT_SUCCEED_REQEUST = "Request Succeed.";
+
+  public static final String FAIL_REASON_INVALID_JSON = "The data from client is invalid in format.";
+  public static final String FAIL_REASON_INVALID_USER_NAME = "Your user name is invalid.";
+  public static final String FAIL_REASON_SAME_USER_NAME = "Your user name already exists. Please choose a different one.";
+  public static final String FAIL_REASON_HAS_NOT_REGISTERED = "You need to register first.";
 }
