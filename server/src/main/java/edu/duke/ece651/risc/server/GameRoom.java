@@ -175,7 +175,7 @@ public abstract class GameRoom<T> {
   public void playGame() throws InterruptedException, BrokenBarrierException, IOException {
     barrier = new CyclicBarrier(playerNum + 1);
     for (int i = 0; i < playerNum; i++) {
-      Thread t = new GameHostThread<T>(players.get(i), Constant.TOTAL_UNITS, gameBoard, view, moveChecker,
+      Thread t = new V1GameHostThread<T>(players.get(i), Constant.TOTAL_UNITS, gameBoard, view, moveChecker,
           attackChecker, barrier);
       t.start();
     }

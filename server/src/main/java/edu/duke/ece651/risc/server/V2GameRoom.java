@@ -3,6 +3,7 @@ package edu.duke.ece651.risc.server;
 import java.io.IOException;
 import java.util.Random;
 import java.util.concurrent.BrokenBarrierException;
+import java.util.concurrent.CyclicBarrier;
 
 import edu.duke.ece651.risc.shared.AttackOrderConsistencyChecker;
 import edu.duke.ece651.risc.shared.AttackOrderEffectChecker;
@@ -130,7 +131,8 @@ public class V2GameRoom extends GameRoom<String> {
 
   public void addPlayerAndCheckToPlay(PlayerEntity<String> newPlayer) {
     if (roomStatus == Constant.ROOM_STATUS_WAITING_PLAYERS) {
-      players.add(newPlayer);
+      addPlayer(newPlayer); // simply add the player first
+      
       // Now we need to set the id of this player and send the id to this player
       int idForNewPlayer = players.size() - 1; // our player id starts from 0, so size - 1 here.
       newPlayer.setPlayerId(idForNewPlayer);
@@ -188,6 +190,43 @@ public class V2GameRoom extends GameRoom<String> {
     // In evo 2 we make the map choice be type of int
     String choice = (String) firstPlayer.receiveObject(); // not used in evolution 2, since there's only one map
     // firstPlayer.sendObject(Constant.VALID_MAP_CHOICE_INFO);
+  }
+
+  @Override
+  public void playGame() throws InterruptedException, BrokenBarrierException, IOException {
+    barrier = new CyclicBarrier(playerNum + 1);
+    for (int i = 0; i < playerNum; i++) {
+      // TODO: using V2GameHostThread here
+      Thread t = new V1GameHostThread<String>(players.get(i), Constant.TOTAL_UNITS, gameBoard, view, moveChecker,
+          attackChecker, barrier);
+      t.start();
+    }
+    // Wait all the player finishing their deployment
+    barrier.await();
+    while (true) {
+      barrier.await();
+
+      System.out.println("All players done with their orders");
+
+      resolver.executeAllBattle(gameBoard);
+      incrementUnits();
+      gameBoard.updateAllPrevDefender();
+      // TODO: update players resources here
+
+      System.out.println("Battle finished, now check anyone wins");
+
+      if (checkEnd()) {
+        barrier.await();
+        barrier.await();
+        // TODO: broad cast winner info here
+        // closeAllStreams();
+        break;
+      }
+      barrier.await();
+
+      System.out.println("No one wins, now waiting all players done again");
+
+    }
   }
 
   /**
