@@ -78,10 +78,6 @@ public class StartController {
 
   @FXML
   public void selectMap() throws ClassNotFoundException, IOException{
-    //String mapinfo=(String)player.receiveObject();
-    //System.out.println(mapinfo);
-    //player.sendObject(0);
-    //player.receiveObject();
     FXMLLoader loaderStart = new FXMLLoader(getClass().getResource("/ui/deployUnits.fxml"));
     loaderStart.setControllerFactory(c -> {
       if(c.equals(DeployUnitsController.class)){
