@@ -154,7 +154,7 @@ public class V2GameRoom extends GameRoom<String> {
         // We dont want to block the server code who call the addPlayerAndCheckToPlay()
         // method. We want the server code return from this method call quickly, so we
         // use a seperate thread to run the game.
-        Runnable gameRunner = () -> {
+        Runnable gameRunnable = () -> {
           try {
             chooseMap();
             playGame();
@@ -164,8 +164,8 @@ public class V2GameRoom extends GameRoom<String> {
             e.printStackTrace();
           }
         };
-        this.gameRunner = new Thread(gameRunner);
-
+        this.gameRunner = new Thread(gameRunnable);
+        gameRunner.start();
       }
     }
   }
