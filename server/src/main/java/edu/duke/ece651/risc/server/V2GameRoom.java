@@ -29,11 +29,9 @@ public class V2GameRoom extends GameRoom<String> {
   /** The id of this room in the sevrer */
   int roomId; // in evo2, we have multiple rooms now, so we need an id to name a room
 
-  /** 
-   * The status of this game room, will be one of the following:
-   * (a) waiting for players
-   * (b) running the game
-   * (c) game is finished
+  /**
+   * The status of this game room, will be one of the following: (a) waiting for
+   * players (b) running the game (c) game is finished
    */
   int roomStatus;
 
@@ -154,7 +152,13 @@ public class V2GameRoom extends GameRoom<String> {
         // We dont want to block the server code who call the addPlayerAndCheckToPlay()
         // method. We want the server code return from this method call quickly, so we
         // use a seperate thread to run the game.
-        Runnable gameRunnable = () -> {
+
+        // More concise code: using a lambda to create a anoyminous runnable and use
+        // this runnable to create a thread.
+        // Supported in java8.
+        // For more info, refer to:
+        // https://www.liaoxuefeng.com/wiki/1252599548343744/1306580710588449
+        this.gameRunner = new Thread(() -> {
           try {
             chooseMap();
             playGame();
@@ -163,8 +167,7 @@ public class V2GameRoom extends GameRoom<String> {
             // IOEception should be resolved here (i.e., mark the player disconnected ?)
             e.printStackTrace();
           }
-        };
-        this.gameRunner = new Thread(gameRunnable);
+        });
         gameRunner.start();
       }
     }
