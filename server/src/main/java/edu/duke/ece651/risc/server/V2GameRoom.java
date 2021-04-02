@@ -2,6 +2,7 @@ package edu.duke.ece651.risc.server;
 
 import java.io.IOException;
 import java.util.Random;
+import java.util.concurrent.BrokenBarrierException;
 
 import edu.duke.ece651.risc.shared.AttackOrderConsistencyChecker;
 import edu.duke.ece651.risc.shared.AttackOrderEffectChecker;
@@ -43,6 +44,20 @@ public class V2GameRoom extends GameRoom<String> {
   OrderRuleChecker<String> upgradeTechLevelChecker;
 
   /**
+   * The thread that will run the game (chooseMap(), playGame()) when we have
+   * enough players in this room. This thread is created and started by
+   * addPlayerAndCheckToPlay() method, which is called by the server.
+   * 
+   * Here we need a new thread to call chooseMap(), playGame(), because these two
+   * method will cost a long time (we return from these method only after the game
+   * ends), and we don't want the server be blocked. We want the server call the
+   * addPlayerAndCheckToPlay() and return quickly to give the resource back to the
+   * thread pool. So we use a seperate thread to run the whole game inside the
+   * addPlayerAndCheckToPlay() method.
+   */
+  Thread gameRunner;
+
+  /**
    * Constructor that initailizes fields with corresponding parameters. Note that
    * the board is initialized after the first player has decided the map, and the
    * view may not be used in evo2.
@@ -54,11 +69,13 @@ public class V2GameRoom extends GameRoom<String> {
     // TODO check this contructor again when most of other code are finished!!!
     super(0, Constant.TOTAL_UNITS, roomCreator);
     this.roomId = roomId;
+    this.roomStatus = Constant.ROOM_STATUS_WAITING_PLAYERS;
     this.moveChecker = makeMoveOrderRuleCheckerChain();
     this.attackChecker = makeAttackOrderRuleCheckerChain();
     this.upgradeUnitChecker = makeUpgradeUnitOrderRuleCheckerChain();
     this.upgradeTechLevelChecker = makeUpgradeTechLevelOrderRuleCheckerChain();
     this.resolver = makeBattleResolver();
+    this.gameRunner = null; // we will use this thread only after we have enough players
 
   }
 
@@ -91,15 +108,67 @@ public class V2GameRoom extends GameRoom<String> {
     return null;
   }
 
-
   /**
-   * This method will add a new player who wants to join in this game room. This method will first checker 
+   * This method will add a new player who wants to join in this game room, then
+   * check whether we have enough player to start the game (i.e., call the
+   * chooseMap() and playGame() method).
+   * 
+   * In ther server, if a player wish to join a room that is waiting for the rest
+   * of players, the corresponding handler will call this method.
+   * 
+   * In evolution 1, we make sure all players are in the room and then we call the
+   * chooseMap() method and playGame() method inside the sevrer code. But now we
+   * cannot let the server directly do this since the server needs to process
+   * other requests. So we add this new method in V2GameRoom to let the room be
+   * able to automatically launch the game at the appropriate time.
+   * 
+   * @since evolution 2
+   * 
+   * @apiNote This method should only be called AFTER the room creator has decided
+   *          the total number of players in this room.
+   * @param newPlayer the new PlayerEntity(actually should be GUIPlayerEntity)
+   *                  that joined in this game room
    */
-  
+
   public void addPlayerAndCheckToPlay(PlayerEntity<String> newPlayer) {
+    if (roomStatus == Constant.ROOM_STATUS_WAITING_PLAYERS) {
+      players.add(newPlayer);
+      // Now we need to set the id of this player and send the id to this player
+      int idForNewPlayer = players.size() - 1; // our player id starts from 0, so size - 1 here.
+      newPlayer.setPlayerId(idForNewPlayer);
+      try {
+        newPlayer.sendObject(idForNewPlayer);
+      } catch (IOException e) {
+        // TODO: here we don't want the exception propogate out to the server code, need
+        // a appropriate way to handle the IOException.
+        // One possible situation that will throw the exception is the player disconnect
+        // (want to switch to other game room so he needs to logout first), we need to
+        // do something here, rather than in the server.
+        e.printStackTrace();
+        // TODO: set a new field in player entity (like isOnline/isAbsent) be false/true
+        // here?
+      }
+      // Check whether we have enough players
+      if (players.size() == getPlayerNum()) { // the room has enough players, let's choose map and start the game
+        setRoomStatus(Constant.ROOM_STATUS_RUNNING_GAME);
+        // We dont want to block the server code who call the addPlayerAndCheckToPlay()
+        // method. We want the server code return from this method call quickly, so we
+        // use a seperate thread to run the game.
+        Runnable gameRunner = () -> {
+          try {
+            chooseMap();
+            playGame();
+          } catch (InterruptedException | BrokenBarrierException | IOException | ClassNotFoundException e) {
+            // TODO: see whether we need to do something here or just ignore it. The
+            // IOEception should be resolved here (i.e., mark the player disconnected ?)
+            e.printStackTrace();
+          }
+        };
+        this.gameRunner = new Thread(gameRunner);
 
+      }
+    }
   }
-
 
   /**
    * This method will let the first player (who create this game room) select the
