@@ -13,25 +13,39 @@ import javafx.scene.control.ChoiceBox;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
 
-public class DeployUnitsController implements Initializable{
+public class MoveAttackController implements Initializable{
   @FXML
   AnchorPane mapPane;
   @FXML
   AnchorPane rootPane;
   @FXML
+  private Button cancelBtn;
+  @FXML
   private Button confirmBtn;
   @FXML
-  private ChoiceBox<String> terrBox;
+  private ChoiceBox<String> sourceBox;
   @FXML
-  private ChoiceBox<String> amountBox;
+  private ChoiceBox<String> targetBox;
+  @FXML
+  private ChoiceBox<Integer> lv0Box;
+  @FXML
+  private ChoiceBox<Integer> lv1Box;
+  @FXML
+  private ChoiceBox<Integer> lv2Box;
+  @FXML
+  private ChoiceBox<Integer> lv3Box;
+  @FXML
+  private ChoiceBox<Integer> lv4Box;
+  @FXML
+  private ChoiceBox<Integer> lv5Box;
+  @FXML
+  private ChoiceBox<Integer> lv6Box;
   private Stage window;
   private GUIPlayer player;
 
-  public DeployUnitsController(Stage window,GUIPlayer player) {
+  public MoveAttackController(Stage window,GUIPlayer player) {
     this.window = window;
     this.player=player;
-    terrBox=new ChoiceBox<>();
-    amountBox=new ChoiceBox<>();
     FXMLLoader mapLoader = new FXMLLoader(getClass().getResource("/ui/map2link.fxml"));
     mapLoader.setControllerFactory(c -> {
       if(c.equals(MapLinkController.class)){
@@ -50,8 +64,16 @@ public class DeployUnitsController implements Initializable{
     }
   }
 
+  public void initialize(URL url, ResourceBundle rb){
+    rootPane.getChildren().add(mapPane);
+    AnchorPane.setTopAnchor(mapPane,0.0);
+    AnchorPane.setRightAnchor(mapPane,0.0);
+    AnchorPane.setLeftAnchor(mapPane,0.0);
+    AnchorPane.setBottomAnchor(mapPane,200.0);
+  }
+
   @FXML
-  public void deploy(){
+  public void cancel(){
     try{
       FXMLLoader loaderStart = new FXMLLoader(getClass().getResource("/ui/issueOrder.fxml"));
       loaderStart.setControllerFactory(c -> {
@@ -67,16 +89,14 @@ public class DeployUnitsController implements Initializable{
       Scene scene = new Scene(loaderStart.load());
       window.setScene(scene);
       window.show();
-  }catch(Exception e){
-    throw new RuntimeException(e);
-  }
+    }catch(Exception e){
+      throw new RuntimeException(e);
+    }
   }
 
-  public void initialize(URL url, ResourceBundle rb){
-    rootPane.getChildren().add(mapPane);
-    AnchorPane.setTopAnchor(mapPane,0.0);
-    AnchorPane.setRightAnchor(mapPane,0.0);
-    AnchorPane.setLeftAnchor(mapPane,0.0);
-    AnchorPane.setBottomAnchor(mapPane,200.0);
-  } 
+  @FXML
+  public void confirm(){
+    AlterBox alterBox=new AlterBox(window, player);
+    alterBox.display("orderConfirm", "Back", "Your order is legal");
+  }
 }
