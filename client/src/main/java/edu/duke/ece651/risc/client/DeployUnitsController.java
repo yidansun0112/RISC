@@ -15,11 +15,16 @@ import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.Hyperlink;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
+import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
 
 public class DeployUnitsController implements Initializable{
+  // @FXML
+  // MapLinkController mapLinkController;
   @FXML
-  MapLinkController mapLinkController;
+  AnchorPane mapPane;
+  @FXML
+  AnchorPane rootPane;
   @FXML
   private Button confirmBtn;
   @FXML
@@ -36,15 +41,38 @@ public class DeployUnitsController implements Initializable{
     this.window = window;
     terrBox=new ChoiceBox<>();
     amountBox=new ChoiceBox<>();
+    FXMLLoader mapLoader = new FXMLLoader(getClass().getResource("/ui/map2link.fxml"));
+    try{
+      mapPane=mapLoader.load();
+    }catch(Exception e){
+      throw new RuntimeException(e);
+    }
   }
 
   @FXML
   public void deploy(){
-
+    try{
+    FXMLLoader loaderStart = new FXMLLoader(getClass().getResource("/ui/chooseMap.fxml"));
+    loaderStart.setControllerFactory(c -> {
+      return new StartController(window,null);
+    });
+    Scene scene = new Scene(loaderStart.load());
+    window.setScene(scene);
+    window.show();
+  }catch(Exception e){
+    throw new RuntimeException(e);
+  }
   }
 
-  
-  public void initialize(URL url, ResourceBundle rb) {
-      
+  public void initialize(URL url, ResourceBundle rb){
+    // Button confirmBtn=new Button();
+    // confirmBtn.setOnAction(e->deploy());
+    // rootPane.getChildren().addAll(mapPane,confirmBtn);
+    rootPane.getChildren().add(mapPane);
+    AnchorPane.setTopAnchor(mapPane,0.0);
+    AnchorPane.setRightAnchor(mapPane,0.0);
+    AnchorPane.setLeftAnchor(mapPane,0.0);
+    AnchorPane.setBottomAnchor(mapPane,200.0);
+    //AnchorPane.setBottomAnchor(confirmBtn,100.0);
   } 
 }
