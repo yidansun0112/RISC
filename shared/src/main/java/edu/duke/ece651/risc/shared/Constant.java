@@ -1,7 +1,6 @@
 package edu.duke.ece651.risc.shared;
 
 import java.util.HashMap;
-import java.util.Random;
 
 /**
  * This class is a set of message content that the server and client agree with,
@@ -144,9 +143,33 @@ public class Constant {
   public static final String FAIL_REASON_HAS_NOT_REGISTERED = "You need to register first.";
   public static final String FAIL_REASON_WRONG_PASSWORD = "Your password is incorrect.";
 
+  // --- The status of a game room in evolution 2 --- //
+
   /**
-   * Public random seed that used in battle resolver for dependency injection
-   * in testing
+   * The game room is just created, or is waiting for the resrt of players come in
+   */
+  public static final int ROOM_STATUS_WAITING_PLAYERS = 0;
+ 
+  /**
+   * When all players come in the game room, the status will immediately be this
+   * value, and will keep on this value during hte process of picking territory,
+   * deploying unit, receving orders and combating in each turn, until there is a
+   * winner in this room.
+   * 
+   * If a player leave this room, the status will still be this value since the
+   * game has not finished (no one wins yet).
+   */
+  public static final int ROOM_STATUS_RUNNING_GAME = 1;
+
+  /**
+   * If a winner appears, the status of a room will immediately be this value, and
+   * this room can be removed by the server at some time.
+   */
+  public static final int ROOM_STATUS_GAME_FINISHED = 2;
+
+  /**
+   * Public random seed that used in battle resolver for dependency injection in
+   * testing
    */
   public static final int randomSeed = 42;
 }

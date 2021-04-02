@@ -28,6 +28,14 @@ public class V2GameRoom extends GameRoom<String> {
   /** The id of this room in the sevrer */
   int roomId; // in evo2, we have multiple rooms now, so we need an id to name a room
 
+  /** 
+   * The status of this game room, will be one of the following:
+   * (a) waiting for players
+   * (b) running the game
+   * (c) game is finished
+   */
+  int roomStatus;
+
   /** rule checker for upgrade unit order */
   OrderRuleChecker<String> upgradeUnitChecker;
 
@@ -107,7 +115,23 @@ public class V2GameRoom extends GameRoom<String> {
 
     // In evo 2 we make the map choice be type of int
     String choice = (String) firstPlayer.receiveObject(); // not used in evolution 2, since there's only one map
-    // firstPlayer.sendObject(Constant.VALID_MAP_CHOICE_INFO); // TODO: do we need to send this in evo2?
+    // firstPlayer.sendObject(Constant.VALID_MAP_CHOICE_INFO);
+  }
+
+  /**
+   * @return the roomStatus
+   */
+  @Override
+  public int getRoomStatus() {
+    return roomStatus;
+  }
+
+  /**
+   * @param roomStatus the roomStatus to set
+   */
+  @Override
+  public void setRoomStatus(int roomStatus) {
+    this.roomStatus = roomStatus;
   }
 
 }
