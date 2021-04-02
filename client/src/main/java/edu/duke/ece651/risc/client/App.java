@@ -25,9 +25,9 @@ public class App extends Application{
 
   public void showStartView(Stage window) throws IOException{
     //load the start game page
-    FXMLLoader loaderStart = new FXMLLoader(getClass().getResource("/ui/start.fxml"));
+    FXMLLoader loaderStart = new FXMLLoader(getClass().getResource("/ui/loseGame.fxml"));
     loaderStart.setControllerFactory(c->{
-      return new StartController(window,null);
+      return new LoseGameController(window,null);
     });
     Scene scene = new Scene(loaderStart.load());
     window.setScene(scene);
