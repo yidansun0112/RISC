@@ -42,10 +42,11 @@ public class LoseGameController{
         loaderStart.setControllerFactory(c -> {
             return new LoseGameController(window,player);
         });
+        textArea.appendText("adksahdahsufdhlshjfakhflkdjhflahdkjahsjlahldfasdljashdkjlfhajhdslfjjah");
         Scene scene = new Scene(loaderStart.load());
         window.setScene(scene);
         window.show();
-        textArea.appendText("adksahdahsufdhlshjfakhflkdjhflahdkjahsjlahldfasdljashdkjlfhajhdslfjjah");
+        //textArea.appendText("adksahdahsufdhlshjfakhflkdjhflahdkjahsjlahldfasdljashdkjlfhajhdslfjjah");
     }
 
     @FXML
