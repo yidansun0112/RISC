@@ -36,7 +36,7 @@ public class AlterBox {
       chooseActions(button, type,alterWindow);
       VBox layout = new VBox(10);
       layout.getChildren().addAll(label,button);
-      Labeled position;
+
       layout.setAlignment(Pos.CENTER);
       Scene scene = new Scene (layout);
       alterWindow.setScene(scene);

@@ -71,33 +71,31 @@ public class UpgradeUnitsController implements Initializable{
   public void confirm(){
     // pop up a alert box, saying if the order is legal
     //back button of the window would go back to issue order scene whether legal or illegal
-    try{
-    FXMLLoader loaderStart = new FXMLLoader(getClass().getResource("/ui/chooseMap.fxml"));
-    loaderStart.setControllerFactory(c -> {
-      return new StartController(window,null);
-    });
-    Scene scene = new Scene(loaderStart.load());
-    window.setScene(scene);
-    window.show();
-  }catch(Exception e){
-    throw new RuntimeException(e);
-  }
+    AlterBox alterBox=new AlterBox(window, player);
+    alterBox.display("orderConfirm", "Back", "Your order is legal");
   }
 
   @FXML
   public void cancel(){
     //go back to issue order scene
     try{
-    FXMLLoader loaderStart = new FXMLLoader(getClass().getResource("/ui/chooseMap.fxml"));
-    loaderStart.setControllerFactory(c -> {
-      return new StartController(window,null);
-    });
-    Scene scene = new Scene(loaderStart.load());
-    window.setScene(scene);
-    window.show();
-  }catch(Exception e){
-    throw new RuntimeException(e);
-  }
+      FXMLLoader loaderStart = new FXMLLoader(getClass().getResource("/ui/issueOrder.fxml"));
+      loaderStart.setControllerFactory(c -> {
+        if(c.equals(IssueOrderController.class)){
+          return new IssueOrderController(window,player);
+        }
+        try{
+          return c.getConstructor().newInstance();
+        }catch(Exception e){
+          throw new RuntimeException(e);
+        }
+      });
+      Scene scene = new Scene(loaderStart.load());
+      window.setScene(scene);
+      window.show();
+    }catch(Exception e){
+      throw new RuntimeException(e);
+    }
   }
 
   public void initialize(URL url, ResourceBundle rb){

@@ -105,7 +105,8 @@ public class IssueOrderController implements Initializable{
 
   @FXML
   public void upgrade(){
-    
+    ChooseBox chooseBox = new ChooseBox(window, player);
+    chooseBox.display("Please choose one to upgrade");
   }
 
   @FXML
@@ -113,3 +114,10 @@ public class IssueOrderController implements Initializable{
     
   }
 }
+
+
+
+
+
+
+

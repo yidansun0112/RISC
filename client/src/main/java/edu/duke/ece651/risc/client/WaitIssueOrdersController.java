@@ -18,7 +18,7 @@ import javafx.scene.control.TextField;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
 
-public class WaitController implements Initializable{
+public class WaitIssueOrdersController implements Initializable{
 // @FXML
   // MapLinkController mapLinkController;
   @FXML
@@ -29,7 +29,7 @@ public class WaitController implements Initializable{
   private Stage window;
   private GUIPlayer player;
 
-  public WaitController(Stage window,GUIPlayer player)  {
+  public WaitIssueOrdersController(Stage window,GUIPlayer player)  {
     this.window = window;
     this.player=player;
     FXMLLoader mapLoader = new FXMLLoader(getClass().getResource("/ui/map2link.fxml"));

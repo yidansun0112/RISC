@@ -11,6 +11,7 @@
 <AnchorPane prefHeight="400.0" prefWidth="300.0" style="-fx-border-color: lightskyblue; -fx-border-width: 10;" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.duke.ece651.risc.client.MapLinkController">
    <children>
       <fx:include fx:id="terrInfo" source="terrInfo.fxml" layoutX="200.0" layoutY="50.0" prefHeight="230.0" prefWidth="100.0" AnchorPane.bottomAnchor="70" AnchorPane.topAnchor="0" AnchorPane.rightAnchor="0"/>
+      <fx:include fx:id="playerInfo" source="playerInfo.fxml" layoutX="200.0" layoutY="300.0" prefHeight="80.0" prefWidth="100.0" AnchorPane.bottomAnchor="0" AnchorPane.topAnchor="300" AnchorPane.rightAnchor="0"/>
       <ImageView fx:id="map2" fitHeight="300.0" fitWidth="300.0" layoutX="84.0" layoutY="211.0" pickOnBounds="true" preserveRatio="true" AnchorPane.rightAnchor="100" AnchorPane.leftAnchor="0" AnchorPane.bottomAnchor="0" AnchorPane.topAnchor="0">
          <image>
             <Image url="@../map/map2.jpg" />
