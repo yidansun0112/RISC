@@ -31,6 +31,7 @@ public class V2GameServer {
    * All the sockets that connected to each player on this server. In evolution 1,
    * all the player will in the same game room
    */
+  // TODO: decide do we still need this field in evo2 later!!!
   List<Socket> playerSockets;
 
   /**
@@ -99,8 +100,9 @@ public class V2GameServer {
         try {
           handleRequest(sock);
         } catch (IOException | ClassNotFoundException e) {
-          // We print the stack trace before try to close the server socket, which is also
-          // possible for throwing an exception
+          // We need to print the stack trace before we try to close the server socket,
+          // since closing a server socket may also
+          // possible for throwing an new exception
           e.printStackTrace();
         }
       });
