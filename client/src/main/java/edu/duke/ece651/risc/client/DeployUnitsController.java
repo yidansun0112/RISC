@@ -1,5 +1,6 @@
 package edu.duke.ece651.risc.client;
 
+import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
 
@@ -20,7 +21,7 @@ public class DeployUnitsController implements Initializable{
   @FXML
   MapLinkController mapLinkController;
   @FXML
-  private Button ConfirmBtn;
+  private Button confirmBtn;
   @FXML
   private ChoiceBox<String> terrBox;
   @FXML
@@ -29,10 +30,10 @@ public class DeployUnitsController implements Initializable{
   // Hyperlink terr0;
   // @FXML
   // Hyperlink terr1;
-  private Stage Window;
+  private Stage window;
 
-  public DeployUnitsController(Stage Window) {
-    this.Window = Window;
+  public DeployUnitsController(Stage window) {
+    this.window = window;
     terrBox=new ChoiceBox<>();
     amountBox=new ChoiceBox<>();
   }
@@ -44,7 +45,6 @@ public class DeployUnitsController implements Initializable{
 
   
   public void initialize(URL url, ResourceBundle rb) {
-      // mapLinkController.terr0=terr0;
-      // mapLinkController.terr1=terr1;
+      
   } 
 }

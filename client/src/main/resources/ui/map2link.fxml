@@ -10,22 +10,22 @@
 
 <AnchorPane prefHeight="400.0" prefWidth="600.0" style="-fx-border-color: lightskyblue; -fx-border-width: 10;" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.duke.ece651.risc.client.MapLinkController">
    <children>
-      <!--<fx:include fx:id="terrInfo" source="terrInfo.fxml" layoutX="200.0" layoutY="50.0" prefHeight="300.0" prefWidth="400.0"/>-->
+      <fx:include fx:id="terrInfo" source="terrInfo.fxml" layoutX="200.0" layoutY="50.0" prefHeight="300.0" prefWidth="400.0"/>
       <ImageView fx:id="map2" fitHeight="115.0" fitWidth="91.0" layoutX="84.0" layoutY="211.0" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@../map/map2.jpg" />
          </image>
       </ImageView>
-      <Button fx:id="terr0" alignment="CENTER" layoutX="200.0" layoutY="300.0" text="terr0" onAction="#linkZero">
+      <Hyperlink fx:id="terr0" alignment="CENTER" layoutX="200.0" layoutY="300.0" text="terr0" onAction="#linkZero">
          <font>
             <Font name="System Bold" size="12.0" />
          </font>
-      </Button>
-      <Button fx:id="terr1" alignment="CENTER" layoutX="150.0" layoutY="100.0" text="terr1" onAction="#linkOne">
+      </Hyperlink>
+      <Hyperlink fx:id="terr1" alignment="CENTER" layoutX="150.0" layoutY="100.0" text="terr1" onAction="#linkOne">
          <font>
             <Font name="System Bold" size="12.0" />
          </font>
-      </Button>
+      </Hyperlink>
       <Hyperlink fx:id="terr2" alignment="CENTER" layoutX="150.0" layoutY="200.0" text="terr2" textFill="DARKBLUE">
          <font>
             <Font name="System Bold" size="12.0" />

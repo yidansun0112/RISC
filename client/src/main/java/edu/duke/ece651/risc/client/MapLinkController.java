@@ -18,12 +18,12 @@ import javafx.stage.Stage;
 import javafx.event.ActionEvent;
 
 public class MapLinkController implements Initializable{
-  // @FXML
-  // TerrInfoController terrInfoController;
   @FXML
-  Button terr0;
+  TerrInfoController terrInfoController;
   @FXML
-  Button terr1;
+  Hyperlink terr0;
+  @FXML
+  Hyperlink terr1;
   @FXML
   Hyperlink terr2;
   @FXML
@@ -51,14 +51,15 @@ public class MapLinkController implements Initializable{
   @FXML
   Hyperlink terr14;
 
+  @FXML
   public void setTerrInfo(int index){
-    // if(index==0){
-    //   terrInfoController.nameValue.setText("Narnia");
-    // }
-    // else{
-    //   terrInfoController.nameValue.setText("Oz");
-    // }
-    // terrInfoController.ownerValue.setText("Player 0");
+    if(index==0){
+      terrInfoController.nameValue.setText("Narnia");
+    }
+    else{
+      terrInfoController.nameValue.setText("Oz");
+    }
+    terrInfoController.ownerValue.setText("Player 0");
   }
 
   @FXML

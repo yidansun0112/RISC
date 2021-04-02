@@ -17,19 +17,19 @@ import javafx.stage.Stage;
 
 public class RegisterLoginController {
   @FXML
-  private Button RegisterBtn;
+  private Button registerBtn;
   @FXML
-  private Button LoginBtn;
+  private Button loginBtn;
   @FXML
   private Label info;
   @FXML
   private TextField usernameField;
   @FXML
   private TextField passwordField;
-  private Stage Window;
+  private Stage window;
   
-  public RegisterLoginController(Stage Window) {
-    this.Window = Window;
+  public RegisterLoginController(Stage window) {
+    this.window = window;
     usernameField=new TextField();
     passwordField=new TextField();
   }
@@ -62,11 +62,11 @@ public class RegisterLoginController {
     if(result.equals(Constant.RESULT_SUCCEED_REQEUST)){
         FXMLLoader loaderStart = new FXMLLoader(getClass().getResource("/ui/choosePlayerNum.fxml"));
       loaderStart.setControllerFactory(c->{
-        return new StartController(Window,null);
+        return new StartController(window,null);
       });
       Scene scene = new Scene(loaderStart.load());
-      Window.setScene(scene);
-      Window.show();
+      window.setScene(scene);
+      window.show();
     }else{
       info.setText(result);
       usernameField.setText("");

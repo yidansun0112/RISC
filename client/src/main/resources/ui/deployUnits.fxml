@@ -18,6 +18,6 @@
       </Label>
       <ChoiceBox fx:id = "terrBox" layoutX="400.0" layoutY="150.0" prefHeight="27.0" prefWidth="81.0"/>
       <ChoiceBox fx:id = "amountBox" layoutX="400.0" layoutY="150.0" prefHeight="27.0" prefWidth="81.0"/>
-      <Button fx:id="ConfirmBtn" layoutX="400.0" layoutY="350.0" mnemonicParsing="false" onAction="#deploy" style="-fx-background-color: lightskyblue; -fx-border-color: black;" text="Confirm"/>
+      <Button fx:id="confirmBtn" layoutX="400.0" layoutY="350.0" mnemonicParsing="false" onAction="#deploy" style="-fx-background-color: lightskyblue; -fx-border-color: black;" text="Confirm"/>
     </children>
 </AnchorPane>
