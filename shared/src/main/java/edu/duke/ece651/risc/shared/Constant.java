@@ -1,6 +1,7 @@
 package edu.duke.ece651.risc.shared;
 
 import java.util.HashMap;
+import java.util.Random;
 
 /**
  * This class is a set of message content that the server and client agree with,
@@ -128,11 +129,24 @@ public class Constant {
   /** The request json key which indicates a password field */
   public static final String KEY_PASSWORD = "Password";
 
+  /**
+   * The request json key which indicates the total number of players in a game
+   * room
+   */
+  public static final String KEY_NUM_PLAYER = "PlayerNum";
+
   public static final String RESULT_SUCCEED_REQEUST = "Request Succeed.";
 
+  /** Some possible reasons of a failed register/login */
   public static final String FAIL_REASON_INVALID_JSON = "The data from client is invalid in format.";
   public static final String FAIL_REASON_INVALID_USER_NAME = "Your user name is invalid.";
   public static final String FAIL_REASON_SAME_USER_NAME = "Your user name already exists. Please choose a different one.";
   public static final String FAIL_REASON_HAS_NOT_REGISTERED = "You need to register first.";
   public static final String FAIL_REASON_WRONG_PASSWORD = "Your password is incorrect.";
+
+  /**
+   * Public random seed that used in battle resolver for dependency injection
+   * in testing
+   */
+  public static final int randomSeed = 42;
 }

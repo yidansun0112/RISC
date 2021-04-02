@@ -3,6 +3,8 @@ package edu.duke.ece651.risc.server;
 import org.json.JSONObject;
 
 import edu.duke.ece651.risc.shared.Constant;
+import edu.duke.ece651.risc.shared.GUIPlayerEntity;
+import edu.duke.ece651.risc.shared.PlayerEntity;
 
 import java.io.IOException;
 import java.io.ObjectInputStream;
@@ -30,10 +32,13 @@ public class V2GameServer {
    * all the player will in the same game room
    */
   List<Socket> playerSockets;
+
   /**
-   * All the game room on this server. In evo2, we will have multiple game room,
-   * and their id may not consistant with their index in evo1's vector. Here we
-   * use a thread-safe map, which will be more convenient.
+   * All the game room on this server. In evo2, we will have multiple game rooms,
+   * and their id may not consistant with their index in evo1's vector. What's
+   * more, we need to use a room id to remove a game room if its game is end. It
+   * would be cubersome if we still use a vector to store all rooms. Here we use a
+   * thread-safe map, which will be more convenient.
    */
   Map<Integer, GameRoom<String>> gameRooms;
 
@@ -66,7 +71,10 @@ public class V2GameServer {
      */
     this.userList = new Vector<RISCUser>();
 
-    /** Generally we want to keep not too many threads since it will occupy OS's resources */
+    /**
+     * Generally we want to keep not too many threads since it will occupy OS's
+     * resources
+     */
     this.threadPool = new ThreadPoolExecutor(4, 8, 3, TimeUnit.SECONDS, new LinkedBlockingQueue<Runnable>());
 
     // TODO: add some dummy user for the convenience of testing???
@@ -98,7 +106,7 @@ public class V2GameServer {
       });
     }
   }
-  
+
   /**
    * This method will check the type of the request, and call the corresponding
    * specific handler to process the request.
@@ -159,10 +167,30 @@ public class V2GameServer {
         oosForResult.writeObject(result);
       }
     }
-      
 
+    // The user wants to create a new game room and join in
     if (requestType.equals(Constant.VALUE_REQUEST_TYPE_CREATE_ROOM)) {
       // handleCreateGameRoom();
+      // Now we can sure this user want to start to play a game, we create a
+      // PlayerEntity here
+      String playerName = requestJSON.getString(Constant.KEY_USER_NAME); // we need the GUI client send a json including
+                                                                         // the request type and username
+                                                                         // Note: the client should also need to check
+                                                                         // whether the username is an empty string when
+                                                                         // register/login, otherwise here will throw an
+                                                                         // exception
+      PlayerEntity<String> roomCreator = new GUIPlayerEntity<String>(new ObjectOutputStream(sock.getOutputStream()),
+          new ObjectInputStream(sock.getInputStream()), 0, playerName, -1, Constant.SELF_NOT_LOSE_NO_ONE_WIN_STATUS);
+      handleCreateGameRoom(roomCreator);
+    }
+
+    // The user wants to join an existing game room which is waiting for the rest of
+    // players come in
+    if (requestType.equals(Constant.VALUE_REQUEST_TYPE_JOIN_ROOM)) {
+      String playerName = requestJSON.getString(Constant.KEY_USER_NAME);
+      PlayerEntity<String> followingPlayer = new GUIPlayerEntity<String>(new ObjectOutputStream(sock.getOutputStream()),
+      new ObjectInputStream(sock.getInputStream()), 0, playerName, -1, Constant.SELF_NOT_LOSE_NO_ONE_WIN_STATUS);
+      // TODO: finish this tomorrow!
     }
 
   }
@@ -177,7 +205,7 @@ public class V2GameServer {
    */
   public String handleRegister(JSONObject requestJSON) {
     // First check whether the JSON has the keys we want
-    if (!requestJSON.has(Constant.KEY_USER_NAME) || requestJSON.has(Constant.KEY_PASSWORD)) {
+    if (!requestJSON.has(Constant.KEY_USER_NAME) || !requestJSON.has(Constant.KEY_PASSWORD)) {
       // Invalid JSON object - with no username or password field
       return Constant.FAIL_REASON_INVALID_JSON;
     }
@@ -200,7 +228,7 @@ public class V2GameServer {
     // Check pass, now add a new RISCUser into userList
     String userInputedPassword = requestJSON.getString(Constant.KEY_PASSWORD);
     RISCUser newUser = new RISCUser(userInputedName, userInputedPassword);
-    
+
     // Here we need not to synchronize userList, since it is a thread-safe vector
     userList.add(newUser);
 
@@ -221,7 +249,7 @@ public class V2GameServer {
    */
   public String handleLogin(JSONObject requestJSON) {
     // First check whether the JSON has the keys we want
-    if (!requestJSON.has(Constant.KEY_USER_NAME) || requestJSON.has(Constant.KEY_PASSWORD)) {
+    if (!requestJSON.has(Constant.KEY_USER_NAME) || !requestJSON.has(Constant.KEY_PASSWORD)) {
       // Invalid JSON object - with no username or password field
       return Constant.FAIL_REASON_INVALID_JSON;
     }
@@ -252,23 +280,54 @@ public class V2GameServer {
   /**
    * This method will create a new game room and let the player who send this
    * request join this newly created game room.
+   * 
+   * @apiNote This method is synchronized: although the ConcurrentHashMap itself
+   *          is thead-safe, but here the operation on this map is not atomic,
+   *          i.e., we (a) get the size of the map, and then (b) add a new room
+   *          instance into this map. The operation (a) and (b) itself is atomic
+   *          and thread-safe, but the combination of these two are not. This is a
+   *          pitfall in Java that when you manipulate some thread-safe data
+   *          structure, you still need to be careful that whether your operations
+   *          are atomic as a whole.
+   * 
+   * @throws IOException
+   * @throws ClassNotFoundException
    */
-  public void handleCreateGameRoom() {
-    // TODO: finish this. The parameter maybe changed
+  public synchronized void handleCreateGameRoom(PlayerEntity<String> roomCreator)
+      throws ClassNotFoundException, IOException {
+
+    // TODO update the mapping between user(player) and rooms here, do this after
+    // decide how to store this map relationship!
+
+    // Basically same with evo1, we create a room, add this player into this room,
+    // set this room's playerNum field based on the content in this request JSON
+    int idForTheNewRoom = gameRooms.size();
+    GameRoom<String> newRoom = new V2GameRoom(idForTheNewRoom, roomCreator);
+    gameRooms.put(idForTheNewRoom, newRoom);
+
+    // We need to send the player id to this player. Since he/she is the creator of
+    // a new game room, player id will be 0 (zero)
+    // NOTE: SEND String to client - player id
+    roomCreator.setPlayerId(0);
+    roomCreator.sendObject(new String("0"));
+
+    // Now receive the user decision about how many players should in this room
+    int totalPlayer = (int) roomCreator.receiveObject();
+    newRoom.setPlayerNum(totalPlayer);
   }
 
   // /**
-  //  * Try out some JSON API behaviors
-  //  */
+  // * Try out some JSON API behaviors
+  // */
   // public static void main(String[] args) {
-  //   JSONObject o = new JSONObject();
-  //   o.put("1", "");
-  //   o.put("2", " ");
-  //   String valueForKey3 = null;
-  //   o.put("3", valueForKey3);
-  //   System.out.println(o.toString());
-  //   System.out.println("<" + o.get("1") + ">");
-  //   System.out.println("<" + o.get("2") + ">");
-  //   // System.out.println("<" + o.get("3") + ">"); // throw exception here
+  // JSONObject o = new JSONObject();
+  // o.put("1", "");
+  // o.put("2", " ");
+  // String valueForKey3 = null;
+  // o.put("3", valueForKey3);
+  // System.out.println(o.toString());
+  // System.out.println("<" + o.get("1") + ">");
+  // System.out.println("<" + o.get("2") + ">");
+  // // System.out.println("<" + o.get("3") + ">"); // throw exception here
   // }
 }
