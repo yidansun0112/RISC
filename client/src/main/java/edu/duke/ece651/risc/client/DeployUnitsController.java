@@ -36,12 +36,24 @@ public class DeployUnitsController implements Initializable{
   // @FXML
   // Hyperlink terr1;
   private Stage window;
+  private GUIPlayer player;
 
-  public DeployUnitsController(Stage window) {
+  public DeployUnitsController(Stage window,GUIPlayer player) {
     this.window = window;
+    this.player=player;
     terrBox=new ChoiceBox<>();
     amountBox=new ChoiceBox<>();
     FXMLLoader mapLoader = new FXMLLoader(getClass().getResource("/ui/map2link.fxml"));
+    mapLoader.setControllerFactory(c -> {
+      if(c.equals(MapLinkController.class)){
+        return new MapLinkController(player);
+      }
+      try{
+        return c.getConstructor().newInstance();
+      }catch(Exception e){
+        throw new RuntimeException(e);
+      }
+    });
     try{
       mapPane=mapLoader.load();
     }catch(Exception e){

@@ -50,6 +50,11 @@ public class MapLinkController implements Initializable{
   Hyperlink terr13;
   @FXML
   Hyperlink terr14;
+  private GUIPlayer player;
+
+  public MapLinkController(GUIPlayer player){
+    this.player=player;
+  }
 
   @FXML
   public void setTerrInfo(int index){

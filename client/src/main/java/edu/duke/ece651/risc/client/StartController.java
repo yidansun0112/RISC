@@ -85,7 +85,7 @@ public class StartController {
     FXMLLoader loaderStart = new FXMLLoader(getClass().getResource("/ui/deployUnits.fxml"));
     loaderStart.setControllerFactory(c -> {
       if(c.equals(DeployUnitsController.class)){
-        return new DeployUnitsController(window);
+        return new DeployUnitsController(window,player);
       }
       try{
         return c.getConstructor().newInstance();
