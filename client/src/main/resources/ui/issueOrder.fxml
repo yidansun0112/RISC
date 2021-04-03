@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?import javafx.scene.image.*?>
+<?import javafx.scene.text.*?>
+<?import java.lang.*?>
+<?import java.util.*?>
+<?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<AnchorPane fx:id="rootPane" prefHeight="400.0" prefWidth="600.0" style="-fx-border-color: lightskyblue; -fx-border-width: 10;" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.duke.ece651.risc.client.IssueOrderController">
+    <children>
+      <Label alignment="CENTER" layoutX="300.0" layoutY="104.0" text="What would you like to do?" textFill="DARKBLUE" AnchorPane.bottomAnchor="100">
+         <font>
+            <Font name="System Bold" size="19.0" />
+         </font>
+      </Label>
+      <Button fx:id="moveBtn" layoutX="50.0" layoutY="350.0" mnemonicParsing="false" onAction="#move" style="-fx-background-color: lightskyblue; -fx-border-color: black;" text="Move" AnchorPane.bottomAnchor="70"/>
+      <Button fx:id="attackBtn" layoutX="150.0" layoutY="350.0" mnemonicParsing="false" onAction="#attack" style="-fx-background-color: lightskyblue; -fx-border-color: black;" text="Attack" AnchorPane.bottomAnchor="70"/>
+      <Button fx:id="upgradeBtn" layoutX="250.0" layoutY="350.0" mnemonicParsing="false" onAction="#upgrade" style="-fx-background-color: lightskyblue; -fx-border-color: black;" text="Upgrade" AnchorPane.bottomAnchor="70"/>
+      <Button fx:id="doneBtn" layoutX="350.0" layoutY="350.0" mnemonicParsing="false" onAction="#done" style="-fx-background-color: lightskyblue; -fx-border-color: black;" text="Done" AnchorPane.bottomAnchor="70"/>
+    </children>
+</AnchorPane>
