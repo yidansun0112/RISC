@@ -139,11 +139,16 @@ public abstract class PlayerEntity<T> {
    * Send an object to the player via ObjectOutputStream. This method is used to
    * send self-defined object as well as simple String messages.
    * 
-   * @param o
-   * @throws IOException
+   * @param o the object to be sent to the client
    */
-  public void sendObject(Object o) throws IOException {
-    toPlayer.writeObject(o);
+  public void sendObject(Object o) {
+    try {
+      toPlayer.writeObject(o);
+    } catch (IOException e) {
+      e.printStackTrace();
+      setIsInRoomNow(false); // if an IOException throws here, it indicates that the
+                             // socket connection has closed at the client side.
+    }
   }
 
   /**
@@ -152,10 +157,17 @@ public abstract class PlayerEntity<T> {
    * 
    * @return the Object recieved
    * @throws ClassNotFoundException
-   * @throws IOException
    */
-  public Object receiveObject() throws ClassNotFoundException, IOException {
-    return fromPlayer.readObject();
+  public Object receiveObject() throws ClassNotFoundException {
+    Object data = null; // let the caller fail fast
+    try {
+      data = fromPlayer.readObject();
+    } catch (IOException e) {
+      e.printStackTrace();
+      setIsInRoomNow(false); // if an IOException throws here, it indicates that the
+                             // socket connection has closed at the client side.
+    }
+    return data;
   }
 
   /**
@@ -256,7 +268,7 @@ public abstract class PlayerEntity<T> {
    * 
    * @param isInRoomNow the isInRoomNow to set
    */
-  public void setInRoomNow(boolean isInRoomNow) {
+  public void setIsInRoomNow(boolean isInRoomNow) {
     this.isInRoomNow = isInRoomNow;
   }
 

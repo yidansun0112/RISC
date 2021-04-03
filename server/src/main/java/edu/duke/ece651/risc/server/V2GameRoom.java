@@ -136,18 +136,18 @@ public class V2GameRoom extends GameRoom<String> {
       // Now we need to set the id of this player and send the id to this player
       int idForNewPlayer = players.size() - 1; // our player id starts from 0, so size - 1 here.
       newPlayer.setPlayerId(idForNewPlayer);
-      try {
+      // try {
         newPlayer.sendObject(idForNewPlayer);
-      } catch (IOException e) {
+      // } catch (IOException e) {
         // TODO: here we don't want the exception propogate out to the server code, need
-        // a appropriate way to handle the IOException.
+        // a appropriate way to handle the IOException. -- done
         // One possible situation that will throw the exception is the player disconnect
         // (want to switch to other game room so he needs to logout first), we need to
         // do something here, rather than in the server.
-        e.printStackTrace();
-        // TODO: set a new field in player entity (like isOnline/isAbsent) be false/true
+        // e.printStackTrace();
+        // TODO: set a new field in player entity (like isOnline/isAbsent) be false/true -- done
         // here?
-      }
+      // }
       // Check whether we have enough players
       if (players.size() == getPlayerNum()) { // the room has enough players, let's choose map and start the game
         setRoomStatus(Constant.ROOM_STATUS_RUNNING_GAME);
