@@ -135,7 +135,7 @@ public class V2GameRoom extends GameRoom<String> {
       // Now we need to set the id of this player and send the id to this player
       int idForNewPlayer = players.size() - 1; // our player id starts from 0, so size - 1 here.
       newPlayer.setPlayerId(idForNewPlayer);
-      newPlayer.sendObject(idForNewPlayer);
+      newPlayer.sendObject("" + idForNewPlayer); // NOTE: SEND String to client - send the player id to this player
       // Check whether we have enough players
       if (players.size() == getPlayerNum()) { // the room has enough players, let's choose map and start the game
         setRoomStatus(Constant.ROOM_STATUS_RUNNING_GAME);
@@ -151,6 +151,7 @@ public class V2GameRoom extends GameRoom<String> {
         this.gameRunner = new Thread(() -> {
           try {
             chooseMap();
+            // TODO: SEND totalPlayer to client: int
             playGame();
           } catch (InterruptedException | BrokenBarrierException | ClassNotFoundException e) {
             // TODO: see whether we need to do something here or just ignore it.
@@ -197,13 +198,13 @@ public class V2GameRoom extends GameRoom<String> {
       resolver.executeAllBattle(gameBoard);
       incrementUnits();
       gameBoard.updateAllPrevDefender();
-      updateAllPlayerResource(); // we need to update resources AFTER all combats finished
+      updateAllPlayer(); // we need to update AFTER all combats finished
       System.out.println("Battle finished, now check anyone wins");
 
       if (checkEnd()) {
         barrier.await();
         barrier.await();
-        // TODO: broad cast winner info here
+        // TODO: broad cast winner info here + send string of winner name directly
         // closeAllStreams();
         break;
       }
@@ -221,6 +222,33 @@ public class V2GameRoom extends GameRoom<String> {
     for (PlayerEntity<String> p : players) {
       p.harvestAllResource(gameBoard);
     }
+  }
+
+  /**
+   * This method will deal with all the UpgradeTechLevelOrder if a player has
+   * issued one in this turn, which will increment the max tech level by one for
+   * those player who issued this order, and reset the needUpTechLv field to
+   * false. These are done by calling upgradeTechLevel() method for each player.
+   */
+  protected void updateAllPlayerMaxTechLevel() {
+    for (PlayerEntity<String> p : players) {
+      if (p.getNeedUpTechLv()) {
+        p.upgradeTechLevel();
+      }
+    }
+  }
+
+  /**
+   * A wrapper method to update various status of each player based on the game
+   * rule. In evo2, it will update the resources and the max tech level (if needed
+   * to upgrade) for each player.
+   * 
+   * @apiNote This method can only be called AFTER resolved all combats.
+   * @since evolution 2
+   */
+  protected void updateAllPlayer() {
+    updateAllPlayerResource();
+    updateAllPlayerMaxTechLevel();
   }
 
   /**

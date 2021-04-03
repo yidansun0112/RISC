@@ -82,7 +82,8 @@ public class GUIPlayerEntity<T> extends PlayerEntity<T> {
   }
 
   /**
-   * This method is used to try to upgrade max tech level.
+   * This method is used to try to upgrade max tech level, i.e., increment max
+   * tech level by 1 (one)
    * 
    * @apiNote this method can only be called when all players are done with their
    *          orders in the game room, not by the execute method of
@@ -108,16 +109,6 @@ public class GUIPlayerEntity<T> extends PlayerEntity<T> {
     techLevel++;
     needUpTechLv = false;
   }
-
-  // /**
-  // * Add this method in prevention of LSP issues in evo3...
-  // * The rule checker can call this method
-  // */
-  // @Override
-  // public boolean canUpTechLevel() {
-  // // TODO: when finished v2 territory and cost calculation, finish this method!
-  // return needUpTechLv;
-  // }
 
   @Override
   public void setNeedUpTechLv() {
