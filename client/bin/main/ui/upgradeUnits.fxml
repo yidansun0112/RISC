@@ -12,16 +12,36 @@
       <!--<fx:include fx:id="mapLink" source="map2link.fxml"
                   prefHeight="300.0" prefWidth="400.0"/>-->
       <!--<AnchorPane fx:id="mapPane" prefHeight="200.0" prefWidth="300.0" layoutX="300.0" layoutY="104.0"/>-->
-      <Label alignment="CENTER" layoutX="300.0" layoutY="104.0" text="Now please deploy your units" textFill="DARKBLUE" AnchorPane.bottomAnchor="100">
+      <Label alignment="CENTER" layoutX="200.0" layoutY="104.0" text="Now please upgrade your units" textFill="DARKBLUE" AnchorPane.bottomAnchor="150">
          <font>
             <Font name="System Bold" size="19.0" />
          </font>
       </Label>
-      <ChoiceBox fx:id = "terrBox" layoutX="100.0" layoutY="350.0" prefHeight="27.0" prefWidth="81.0" AnchorPane.bottomAnchor="70"/>
-      <ChoiceBox fx:id = "fromBox" layoutX="150.0" layoutY="350.0" prefHeight="27.0" prefWidth="81.0" AnchorPane.bottomAnchor="70"/>
-      <ChoiceBox fx:id = "toBox" layoutX="200.0" layoutY="350.0" prefHeight="27.0" prefWidth="81.0" AnchorPane.bottomAnchor="70"/>
-      <ChoiceBox fx:id = "amountBox" layoutX="250.0" layoutY="350.0" prefHeight="27.0" prefWidth="81.0" AnchorPane.bottomAnchor="70"/>
-      <Button fx:id="confirmBtn" layoutX="400.0" layoutY="350.0" mnemonicParsing="false" onAction="#confirm" style="-fx-background-color: lightskyblue; -fx-border-color: black;" text="Confirm" AnchorPane.bottomAnchor="70"/>
-      <Button fx:id="cancelBtn" layoutX="500.0" layoutY="350.0" mnemonicParsing="false" onAction="#cancel" style="-fx-background-color: lightskyblue; -fx-border-color: black;" text="Cancel" AnchorPane.bottomAnchor="70"/>
+      <Label alignment="CENTER" layoutX="20.0" layoutY="300.0" text="Territory" textFill="DARKBLUE" AnchorPane.bottomAnchor="110">
+         <font>
+            <Font name="System Bold" size="10.0" />
+         </font>
+      </Label>
+      <Label alignment="CENTER" layoutX="160.0" layoutY="300.0" text="From which level" textFill="DARKBLUE" AnchorPane.bottomAnchor="110">
+         <font>
+            <Font name="System Bold" size="10.0" />
+         </font>
+      </Label>
+      <Label alignment="CENTER" layoutX="300.0" layoutY="300.0" text="To which level" textFill="DARKBLUE" AnchorPane.bottomAnchor="110">
+         <font>
+            <Font name="System Bold" size="10.0" />
+         </font>
+      </Label>
+      <Label alignment="CENTER" layoutX="440.0" layoutY="300.0" text="Amount to upgrade" textFill="DARKBLUE" AnchorPane.bottomAnchor="110">
+         <font>
+            <Font name="System Bold" size="10.0" />
+         </font>
+      </Label>
+      <ChoiceBox fx:id = "terrBox" layoutX="20.0" layoutY="350.0" prefHeight="27.0" prefWidth="60.0" AnchorPane.bottomAnchor="70"/>
+      <ChoiceBox fx:id = "fromBox" layoutX="160.0" layoutY="350.0" prefHeight="27.0" prefWidth="60.0" AnchorPane.bottomAnchor="70"/>
+      <ChoiceBox fx:id = "toBox" layoutX="300.0" layoutY="350.0" prefHeight="27.0" prefWidth="60.0" AnchorPane.bottomAnchor="70"/>
+      <ChoiceBox fx:id = "amountBox" layoutX="440.0" layoutY="350.0" prefHeight="27.0" prefWidth="60.0" AnchorPane.bottomAnchor="70"/>
+      <Button fx:id="confirmBtn" layoutX="400.0" layoutY="350.0" mnemonicParsing="false" onAction="#confirm" style="-fx-background-color: lightskyblue; -fx-border-color: black;" text="Confirm" AnchorPane.bottomAnchor="30"/>
+      <Button fx:id="cancelBtn" layoutX="200.0" layoutY="350.0" mnemonicParsing="false" onAction="#cancel" style="-fx-background-color: lightskyblue; -fx-border-color: black;" text="Cancel" AnchorPane.bottomAnchor="30"/>
     </children>
 </AnchorPane>
