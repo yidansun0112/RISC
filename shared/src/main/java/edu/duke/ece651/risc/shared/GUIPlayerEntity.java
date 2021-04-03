@@ -41,7 +41,7 @@ public class GUIPlayerEntity<T> extends PlayerEntity<T> {
    * 
    * @since evolution 2
    * 
-   * @param gs the GameStatus object which contains all the territory
+   * @param board the Board object which contains all the territories
    */
   @Override
   public void harvestAllResource(Board<T> board) {

@@ -64,7 +64,7 @@ public abstract class PlayerEntity<T> {
    * 
    * @since evolution 2
    * 
-   * @param gs the GameStatus object which contains all the territory
+   * @param board the Board object which contains all the territories
    */
   public abstract void harvestAllResource(Board<T> board);
 
