@@ -24,6 +24,19 @@ public abstract class PlayerEntity<T> {
   protected int playerStatus;
 
   /**
+   * Indicate whether the player is currently in this game room. True if the
+   * player is in the current game room; False if the player disconnect and leave
+   * the game room (may comeback later)
+   * 
+   * Note that in evolution 1 this field is NOT USED, since there is only one room
+   * in evo1 and all players keep in the room until the game ends and the room is
+   * deleted along with the server is closed.
+   * 
+   * @since evolution 2
+   */
+  boolean isInRoomNow;
+
+  /**
    * Constructor that initialize corresponding fields with parameters.
    * 
    * @param toPlayer     the ObjectOutputStream that sends data to this player
@@ -41,6 +54,8 @@ public abstract class PlayerEntity<T> {
     this.playerSymbol = playerSymbol;
     this.ownedGroup = ownedGroup;
     this.playerStatus = playerStatus;
+    this.isInRoomNow = true; // in evo1, the player entity will be in the room in the whole game process,
+                             // since there is no option to leave the room in evo1.
   }
 
   /**
@@ -225,6 +240,24 @@ public abstract class PlayerEntity<T> {
    */
   public ObjectInputStream getFromPlayer() {
     return fromPlayer;
+  }
+
+  /**
+   * @since evolution 2. This method IS NOT USED in evo1.
+   * 
+   * @return the isInRoomNow
+   */
+  public boolean getIsInRoomNow() {
+    return isInRoomNow;
+  }
+
+  /**
+   * @since evolution 2. This method IS NOT USED in evo1.
+   * 
+   * @param isInRoomNow the isInRoomNow to set
+   */
+  public void setInRoomNow(boolean isInRoomNow) {
+    this.isInRoomNow = isInRoomNow;
   }
 
 }
