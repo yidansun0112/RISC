@@ -46,7 +46,7 @@ public class V2Territory<T> extends V1Territory<T> {
    */
   @Override
   public void updatePrevDefender() {
-    if (currDefenderArmy.isEmpty()) { // will only this if-clause once at the beginning of the game before
+    if (currDefenderArmy.isEmpty()) { // will only enter this if-clause once at the beginning of the game before
                                       // pickTerritory
       Army<T> helperArmy = new V2Army<T>(-1); // helper instance
       currDefenderArmy.add(helperArmy);
