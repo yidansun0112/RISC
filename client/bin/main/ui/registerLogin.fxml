@@ -8,43 +8,43 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
-<AnchorPane prefHeight="400.0" prefWidth="600.0" style="-fx-border-color: lightskyblue; -fx-border-width: 10;" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.duke.ece651.risc.client.RegisterLoginController">
+<AnchorPane prefHeight="480.0" prefWidth="800.0" style="-fx-border-color: lightskyblue; -fx-border-width: 10;" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.duke.ece651.risc.client.RegisterLoginController">
    <children>
-      <Button fx:id="registerBtn" layoutX="150.0" layoutY="257.0" mnemonicParsing="false" onAction="#register" style="-fx-background-color: lightskyblue; -fx-border-color: black;" text="Register">
+      <Button fx:id="registerBtn" layoutX="214.0" layoutY="314.0" mnemonicParsing="false" onAction="#register" style="-fx-background-color: lightskyblue; -fx-border-color: black;" text="Register">
          <font>
             <Font size="19.0" />
          </font>
          <cursor>
             <Cursor fx:constant="HAND" />
          </cursor></Button>
-      <Button fx:id="loginBtn" layoutX="250.0" layoutY="257.0" mnemonicParsing="false" onAction="#login" style="-fx-background-color: lightskyblue; -fx-border-color: black;" text="Login">
+      <Button fx:id="loginBtn" layoutX="536.0" layoutY="314.0" mnemonicParsing="false" onAction="#login" style="-fx-background-color: lightskyblue; -fx-border-color: black;" text="Login">
          <font>
             <Font size="19.0" />
          </font>
          <cursor>
             <Cursor fx:constant="HAND" />
          </cursor></Button>
-      <Label alignment="CENTER" layoutX="268.0" layoutY="104.0" text="Please register or login to the game" textFill="DARKBLUE">
+      <Label alignment="CENTER" layoutX="214.0" layoutY="108.0" text="Please register or login to the game" textFill="DARKBLUE">
          <font>
             <Font name="System Bold" size="20.0" />
          </font>
       </Label>
-      <Label fx:id="info" layoutX="280.0" layoutY="250.0" text="">
+      <Label fx:id="info" layoutX="280.0" layoutY="254.0" text="">
          <font>
             <Font size="15.0" />
          </font>
       </Label>
-      <Label layoutX="280.0" layoutY="150.0" text="Username">
+      <Label layoutX="177.0" layoutY="164.0" text="Username">
          <font>
             <Font size="15.0" />
          </font>
       </Label>
-      <Label layoutX="280.0" layoutY="200.0" text="Password">
+      <Label layoutX="179.0" layoutY="214.0" text="Password">
          <font>
             <Font size="15.0" />
          </font>
       </Label>
-      <TextField fx:id="usernameField" layoutX="13.0" layoutY="150.0" prefHeight="27.0" prefWidth="281.0" />
-      <TextField fx:id="passwordField" layoutX="13.0" layoutY="200.0" prefHeight="27.0" prefWidth="281.0" />
+      <TextField fx:id="usernameField" layoutX="308.0" layoutY="159.0" prefHeight="27.0" prefWidth="281.0" />
+      <TextField fx:id="passwordField" layoutX="308.0" layoutY="209.0" prefHeight="27.0" prefWidth="281.0" />
    </children>
 </AnchorPane>
