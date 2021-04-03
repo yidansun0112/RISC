@@ -18,7 +18,7 @@ import java.lang.Thread;
  * 
  * @param T String for Version 1.
  */
-public class GameHostThread<T> extends Thread {
+public class V1GameHostThread<T> extends Thread {
 
   /** The player to serve with */
   private PlayerEntity<T> player;
@@ -46,7 +46,7 @@ public class GameHostThread<T> extends Thread {
    * @param OrderRuleChecker<T> attackChecker
    * @param CyclicBarrier       barrier
    */
-  public GameHostThread(PlayerEntity<T> player, int units, Board<T> board, BoardView<T> view,
+  public V1GameHostThread(PlayerEntity<T> player, int units, Board<T> board, BoardView<T> view,
       OrderRuleChecker<T> moveChecker, OrderRuleChecker<T> attackChecker, CyclicBarrier barrier) {
     this.player = player;
     this.remainedUnits = units;

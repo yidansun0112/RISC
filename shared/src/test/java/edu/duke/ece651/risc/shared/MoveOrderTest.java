@@ -33,7 +33,7 @@ public class MoveOrderTest {
     // assertEquals(true, m1.execute(b));
 
     // Test execute method which takes in a game status, even if this method is not used in evo 2
-    GameStatus<String> gs = new GameStatus<>(null, b); // player entity is not used in move order in evo 1
+    GameStatus<String> gs = new GameStatus<>(null, b, false); // player entity is not used in move order in evo 1
     assertEquals(true, m1.execute(gs));
 
     assertThrows(IllegalArgumentException.class, () -> new MoveOrder<>("0 1 -1"));

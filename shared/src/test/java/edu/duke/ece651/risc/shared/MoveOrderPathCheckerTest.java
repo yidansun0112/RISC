@@ -13,7 +13,7 @@ public class MoveOrderPathCheckerTest {
     assertEquals(b.occupyTerritory(0, 0), false); // group 0 owner is 0
     assertEquals(b.occupyTerritory(1, 1), false); // group 1 owner is 1
 
-    GameStatus<String> gs = new GameStatus<>(null, b); // player is not used in this checker in evo 1
+    GameStatus<String> gs = new GameStatus<>(null, b, false); // player is not used in this checker in evo 1
 
     MoveOrder<String> m1 = new MoveOrder<>("0 1 2");
     MoveOrder<String> m2 = new MoveOrder<>("1 4 3");

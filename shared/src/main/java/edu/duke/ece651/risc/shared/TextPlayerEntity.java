@@ -31,7 +31,7 @@ public class TextPlayerEntity<T> extends PlayerEntity<T> {
    ******************************************************************************/
 
   @Override
-  public void harvestAllResource(GameStatus<T> gs) {
+  public void harvestAllResource(Board<T> board) {
     return;
   }
 

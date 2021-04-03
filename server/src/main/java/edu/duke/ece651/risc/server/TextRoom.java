@@ -45,4 +45,15 @@ public class TextRoom extends GameRoom<String> {
     firstPlayer.sendObject(Constant.VALID_MAP_CHOICE_INFO);
   }
 
+  /**
+   * This method is NOT USED in evolution 1! Will only provide a dummy
+   * implementation for LSP aspect.
+   * 
+   * You should not call this method in the code in evolution 1.
+   */
+  @Override
+  public void addPlayerAndCheckToPlay(PlayerEntity<String> newPlayer) {
+    addPlayer(newPlayer);
+  }
+
 }

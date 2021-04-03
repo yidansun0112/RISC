@@ -36,7 +36,7 @@ public class MoveOrderConsistencyCheckerTest {
     assertEquals(s2, checker.checkOrder(0, m2, b));
 
     // Test evo 2 execute method, even it is not used in evo 1
-    GameStatus<String> gs = new GameStatus<>(null, b);
+    GameStatus<String> gs = new GameStatus<>(null, b, false);
     assertEquals(null, checker.checkOrder(0, m1, gs));
     assertEquals(null, checker.checkOrder(1, m4, gs));
     assertEquals(s1, checker.checkOrder(0, m3, gs));

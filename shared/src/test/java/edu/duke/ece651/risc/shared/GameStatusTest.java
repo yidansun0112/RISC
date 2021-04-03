@@ -16,8 +16,11 @@ public class GameStatusTest {
     BoardFactory<String> f = new V1BoardFactory<>();
     Board<String> b = f.makeGameBoard(2);
 
-    GameStatus<String> s0 = new GameStatus<String>(p0, b);
-    GameStatus<String> s1 = new GameStatus<String>(p1, b);
+    GameStatus<String> s0 = new GameStatus<String>(p0, b, false);
+    GameStatus<String> s1 = new GameStatus<String>(p1, b, true);
+
+    assertSame(false, s0.getCanShowLatest());
+    assertSame(true, s1.getCanShowLatest());
 
     assertSame(p0, s0.getCurrPlayer());
     assertSame(p1, s1.getCurrPlayer());

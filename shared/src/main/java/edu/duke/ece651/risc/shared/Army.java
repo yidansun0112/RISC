@@ -1,7 +1,13 @@
 package edu.duke.ece651.risc.shared;
 
-public class Army<T> {
-  private int commanderId;
+import java.io.Serializable;
+
+public class Army<T> implements Serializable{
+ /**
+   * Fields required by Serializable
+   */
+  private static final long serialVersionUID = 15L;
+ private int commanderId;
   private int units;
 
   /**
