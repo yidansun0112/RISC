@@ -15,25 +15,46 @@ package edu.duke.ece651.risc.shared;
 public class GameStatus<T> {
   /** The player in the game host thread */
   PlayerEntity<T> currPlayer;
-
+  
   // we might need this field in evo3, for now, we remove it.
-
+  
   // /** All players in the current game room */
   // List<PlayerEntity<T>> allPlayers;
-
+  
   /** The whole game board which contains all territories */
   Board<T> gameBoard;
 
   /**
+   * The GUI will check this boolean to decide whether show prevDefenderArmy or
+   * currDefenderArmy to the GUI player.
+   * 
+   * When displaying the territory belongs to myself, always show the
+   * currDefenderArmy.
+   * 
+   * WHen displaying the territory that does not belongs to myself, which to show
+   * depends on the value of canShowLatest:
+   * 
+   * a) If true, then GUI will show currDefenderArmy to GUI (i.e., the latest
+   * territory status).
+   * 
+   * b) If false, then GUI will show prevDefenderArmy to GUI
+   * 
+   */
+  boolean canShowLatest;
+
+  /**
    * Constructor that initializes the fields with corresponding parameters
    * 
-   * @param currPlayer the PlayerEntity object that represent a specific player in
-   *                   a game host thread
-   * @param gameBoard  the GameBoard object that players are playing in
+   * @param currPlayer    the PlayerEntity object that represent a specific player
+   *                      in a game host thread
+   * @param gameBoard     the GameBoard object that players are playing in
+   * @param canShowLatest whether can show the latest territory status (i.e.,
+   *                      currDefenderArmy) to show to the client
    */
-  public GameStatus(PlayerEntity<T> currPlayer, Board<T> gameBoard) {
+  public GameStatus(PlayerEntity<T> currPlayer, Board<T> gameBoard, boolean canShowLatest) {
     this.currPlayer = currPlayer;
     this.gameBoard = gameBoard;
+    this.canShowLatest = canShowLatest;
   }
 
   /**

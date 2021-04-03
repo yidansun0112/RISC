@@ -79,8 +79,8 @@ public class V2GameHostThread<T> extends Thread {
    *         entity and the current board (which contains all the latest
    *         territories).
    */
-  protected GameStatus<T> makeLatestGameStatus() {
-    return new GameStatus<>(player, board);
+  protected GameStatus<T> makeLatestGameStatus(boolean canShowLatest) {
+    return new GameStatus<T>(player, board, canShowLatest);
   }
 
   /**
@@ -100,7 +100,7 @@ public class V2GameHostThread<T> extends Thread {
   public void pickTerritory() throws IOException, ClassNotFoundException {
     // NOTE: SEND GameStatus to client - used to show the board when picking
     // territory
-    player.sendObject(makeLatestGameStatus()); // this line is different with evo 1
+    player.sendObject(makeLatestGameStatus(true)); // this line is different with evo 1
     while (true) {
       // NOTE: RECEIVE String from client - used to try to occupy the specified
       // territory
@@ -140,7 +140,7 @@ public class V2GameHostThread<T> extends Thread {
       // player.sendObject(msg);
       // NOTE: SEND GameStatus to client - used to show the self group of territory
       // when deploying units
-      player.sendObject(makeLatestGameStatus()); // this line is different with evo 1
+      player.sendObject(makeLatestGameStatus(false)); // this line is different with evo 1
       // NOTE: SEND int to client - used to show the scentence "You have XXX unit
       // remained" in GUI window
       player.sendObject(remainedUnits); // this line is new in evo 2
@@ -196,7 +196,7 @@ public class V2GameHostThread<T> extends Thread {
     while (true) {
       // NOTE: SEND GameStatus to client - used to show the board after the player
       // issued an order each time
-      GameStatus<T> latestStatus = makeLatestGameStatus(); // this line is different with evo 1
+      GameStatus<T> latestStatus = makeLatestGameStatus(false); // this line is different with evo 1
       player.sendObject(latestStatus);
       Order<T> order = (Order<T>) player.receiveObject();
       String message = null;
@@ -226,7 +226,7 @@ public class V2GameHostThread<T> extends Thread {
     }
     // NOTE: SEND GameStatus to client - used to show the board after the player
     // issued an order each time
-    player.sendObject(makeLatestGameStatus()); // this line is different with evo 1
+    player.sendObject(makeLatestGameStatus(false)); // this line is different with evo 1
   }
 
   /**
@@ -316,7 +316,7 @@ public class V2GameHostThread<T> extends Thread {
     while (true) {
       barrier.await();
       barrier.await();
-      player.sendObject(makeLatestGameStatus()); // this line is different with evo 1
+      player.sendObject(makeLatestGameStatus(true)); // this line is different with evo 1
       if (player.getPlayerStatus() == Constant.SELF_LOSE_OTHER_WIN_STATUS) {
         player.sendObject(Constant.GAME_END_INFO);
         break;
@@ -387,7 +387,7 @@ public class V2GameHostThread<T> extends Thread {
         // System.out.println(player.playerId + " " + player.playerStatus);
         // }
 
-        player.sendObject(makeLatestGameStatus()); // this line is different with evo 1
+        player.sendObject(makeLatestGameStatus(true)); // this line is different with evo 1
         if (checkWinLose()) {
           break;
         }
