@@ -41,6 +41,14 @@ public class PageLoader {
     showPage(loader);
   }
 
+  public void showChoosePlayerNum(){
+    FXMLLoader loader = new FXMLLoader(getClass().getResource("/ui/choosePlayerNum.fxml"));
+      loader.setControllerFactory(c->{
+        return new StartController(window,player);
+      });
+      showPage(loader);
+  }
+
   public void showChooseMapPage(){
     FXMLLoader loader = new FXMLLoader(getClass().getResource("/ui/chooseMap.fxml"));
     loader.setControllerFactory(c -> {
@@ -145,6 +153,14 @@ public class PageLoader {
         }
       });
       showPage(loader);
+  }
+
+  public void showWatchGame(){
+    FXMLLoader loader = new FXMLLoader(getClass().getResource("/ui/watchGame.fxml"));
+        loader.setControllerFactory(c -> {
+            return new LoseGameController(window,player);
+        });
+    showPage(loader);
   }
 
   public void showPage(FXMLLoader loader){

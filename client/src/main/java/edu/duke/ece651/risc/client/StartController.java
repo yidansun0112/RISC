@@ -43,24 +43,6 @@ public class StartController {
 
   @FXML
   public void startGame() throws IOException, ClassNotFoundException{
-    // player=new GUIPlayer(new SocketClient(12345,"127.0.0.1"));
-    // int playerId = player.recvID();
-    // if (playerId == 0) {
-    //   FXMLLoader loaderStart = new FXMLLoader(getClass().getResource("/ui/registerLogin.fxml"));
-    //   loaderStart.setControllerFactory(c -> {
-    //     return new RegisterLoginController(Window);
-    //   });
-    //   Scene scene = new Scene(loaderStart.load());
-    //   Window.setScene(scene);
-    //   Window.show();
-    // }
-    // FXMLLoader loaderStart = new FXMLLoader(getClass().getResource("/ui/registerLogin.fxml"));
-    // loaderStart.setControllerFactory(c -> {
-    //   return new RegisterLoginController(window);
-    // });
-    // Scene scene = new Scene(loaderStart.load());
-    // window.setScene(scene);
-    // window.show();
     PageLoader loader=new PageLoader(window,null);
     loader.showRegLogPage();
   }
@@ -68,34 +50,12 @@ public class StartController {
   @FXML
   public void selectPlayerNum() throws ClassNotFoundException, IOException {
     String num = playerNumBox.getValue();
-    //player.sendObject(num);
-    // FXMLLoader loaderStart = new FXMLLoader(getClass().getResource("/ui/chooseMap.fxml"));
-    // loaderStart.setControllerFactory(c -> {
-    //   return new StartController(window,player);
-    // });
-    // Scene scene = new Scene(loaderStart.load());
-    // window.setScene(scene);
-    // window.show();
     PageLoader loader=new PageLoader(window, player);
     loader.showChooseMapPage();
   }
 
   @FXML
   public void selectMap() throws ClassNotFoundException, IOException{
-    // FXMLLoader loaderStart = new FXMLLoader(getClass().getResource("/ui/pickTerritory.fxml"));
-    // loaderStart.setControllerFactory(c -> {
-    //   //if(c.equals(PickTerritoryController.class)){
-    //     return new PickTerritoryController(window,player);
-    //   //}
-    //   // try{
-    //   //   return c.getConstructor().newInstance();
-    //   // }catch(Exception e){
-    //   //   throw new RuntimeException(e);
-    //   // }
-    // });
-    // Scene scene = new Scene(loaderStart.load());
-    // window.setScene(scene);
-    // window.show();
     PageLoader loader=new PageLoader(window, player);
     loader.showPickTerritoryPage();
   }

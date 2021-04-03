@@ -49,22 +49,24 @@ public class UpgradeUnitsController implements Initializable{
     fromBox=new ChoiceBox<>();
     toBox=new ChoiceBox<>();
     amountBox=new ChoiceBox<>();
-    FXMLLoader mapLoader = new FXMLLoader(getClass().getResource("/ui/map2link.fxml"));
-    mapLoader.setControllerFactory(c -> {
-      if(c.equals(MapLinkController.class)){
-        return new MapLinkController(player);
-      }
-      try{
-        return c.getConstructor().newInstance();
-      }catch(Exception e){
-        throw new RuntimeException(e);
-      }
-    });
-    try{
-      mapPane=mapLoader.load();
-    }catch(Exception e){
-      throw new RuntimeException(e);
-    }
+    // FXMLLoader mapLoader = new FXMLLoader(getClass().getResource("/ui/map2link.fxml"));
+    // mapLoader.setControllerFactory(c -> {
+    //   if(c.equals(MapLinkController.class)){
+    //     return new MapLinkController(player);
+    //   }
+    //   try{
+    //     return c.getConstructor().newInstance();
+    //   }catch(Exception e){
+    //     throw new RuntimeException(e);
+    //   }
+    // });
+    // try{
+    //   mapPane=mapLoader.load();
+    // }catch(Exception e){
+    //   throw new RuntimeException(e);
+    // }
+    PageLoader loader=new PageLoader(window,player);
+    mapPane=loader.loadMap("/ui/map2link.fxml");
   }
 
   @FXML
@@ -77,37 +79,13 @@ public class UpgradeUnitsController implements Initializable{
 
   @FXML
   public void cancel(){
-    //go back to issue order scene
-    try{
-      FXMLLoader loaderStart = new FXMLLoader(getClass().getResource("/ui/issueOrder.fxml"));
-      loaderStart.setControllerFactory(c -> {
-        if(c.equals(IssueOrderController.class)){
-          return new IssueOrderController(window,player);
-        }
-        try{
-          return c.getConstructor().newInstance();
-        }catch(Exception e){
-          throw new RuntimeException(e);
-        }
-      });
-      Scene scene = new Scene(loaderStart.load());
-      window.setScene(scene);
-      window.show();
-    }catch(Exception e){
-      throw new RuntimeException(e);
-    }
+    PageLoader loader=new PageLoader(window,player);
+    loader.showIssueOrderPage();
   }
 
   public void initialize(URL url, ResourceBundle rb){
-    // Button confirmBtn=new Button();
-    // confirmBtn.setOnAction(e->deploy());
-    // rootPane.getChildren().addAll(mapPane,confirmBtn);
-    rootPane.getChildren().add(mapPane);
-    AnchorPane.setTopAnchor(mapPane,0.0);
-    AnchorPane.setRightAnchor(mapPane,0.0);
-    AnchorPane.setLeftAnchor(mapPane,0.0);
-    AnchorPane.setBottomAnchor(mapPane,200.0);
-    //AnchorPane.setBottomAnchor(confirmBtn,100.0);
+    PageLoader loader=new PageLoader(window,player);
+    loader.putMap(rootPane, mapPane);
   } 
 }
 

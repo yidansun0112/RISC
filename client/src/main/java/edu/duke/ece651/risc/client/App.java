@@ -24,14 +24,6 @@ public class App extends Application{
   }
 
   public void showStartView(Stage window) throws IOException{
-    //load the start game page
-    // FXMLLoader loaderStart = new FXMLLoader(getClass().getResource("/ui/start.fxml"));
-    // loaderStart.setControllerFactory(c->{
-    //   return new StartController(window,null);
-    // });
-    // Scene scene = new Scene(loaderStart.load());
-    // window.setScene(scene);
-    // window.show();
     PageLoader loader=new PageLoader(window,null);
     loader.showStartPage();
   }

@@ -3,6 +3,7 @@
  */
 package edu.duke.ece651.risc.server;
 
+import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.parallel.ResourceAccessMode;
 import org.junit.jupiter.api.parallel.ResourceLock;
@@ -27,6 +28,7 @@ class AppTest {
 
   @Test
   @ResourceLock(value = Resources.SYSTEM_OUT, mode = ResourceAccessMode.READ_WRITE)
+  @Disabled
   public void test_App()
       throws UnknownHostException, IOException, ClassNotFoundException, InterruptedException, BrokenBarrierException {
     ByteArrayOutputStream bytes = new ByteArrayOutputStream();
@@ -115,6 +117,7 @@ class AppTest {
   }
 
   @Test
+  @Disabled
   public void test_main() throws InterruptedException {
     // Start a new TestLoopBackServer in a separate thread
     Thread server = make_server_thread_helper();

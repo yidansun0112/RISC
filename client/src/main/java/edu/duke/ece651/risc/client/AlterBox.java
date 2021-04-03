@@ -32,7 +32,6 @@ public class AlterBox {
       Label label = new Label();
       label.setText(message);
       Button button = new Button (buttonInfo);
-      //button.setOnAction(e->alterWindow.close());
       chooseActions(button, type,alterWindow);
       VBox layout = new VBox(10);
       layout.getChildren().addAll(label,button);
@@ -62,50 +61,14 @@ public class AlterBox {
    */
   public void jumpIssueOrderPage(Stage alterWindow){
     alterWindow.close();
-    // try{
-    //   FXMLLoader loaderStart = new FXMLLoader(getClass().getResource("/ui/issueOrder.fxml"));
-    //   loaderStart.setControllerFactory(c -> {
-    //     if(c.equals(IssueOrderController.class)){
-    //       return new IssueOrderController(window,player);
-    //     }
-    //     try{
-    //       return c.getConstructor().newInstance();
-    //     }catch(Exception e){
-    //       throw new RuntimeException(e);
-    //     }
-    //   });
-    //   Scene scene = new Scene(loaderStart.load());
-    //   window.setScene(scene);
-    //   window.show();
-    // }catch(Exception e){
-    //   throw new RuntimeException(e);
-    // }
     PageLoader loader=new PageLoader(window, player);
     loader.showIssueOrderPage();
   }
 
   public void jumpDeployUnitsPage(Stage alterWindow){
     alterWindow.close();
-  //   try{
-  //   FXMLLoader loaderStart = new FXMLLoader(getClass().getResource("/ui/deployUnits.fxml"));
-  //   loaderStart.setControllerFactory(c -> {
-  //     if(c.equals(DeployUnitsController.class)){
-  //       return new DeployUnitsController(window,player);
-  //     }
-  //     try{
-  //       return c.getConstructor().newInstance();
-  //     }catch(Exception e){
-  //       throw new RuntimeException(e);
-  //     }
-  //   });
-  //   Scene scene = new Scene(loaderStart.load());
-  //   window.setScene(scene);
-  //   window.show();
-  // }catch(Exception e){
-  //   throw new RuntimeException(e);
-  // }
-  PageLoader loader=new PageLoader(window,player);
-  loader.showDeployUnitsPage();
+    PageLoader loader=new PageLoader(window,player);
+    loader.showDeployUnitsPage();
   }
   
 }

@@ -38,25 +38,22 @@ public class LoseGameController{
     @FXML
     public void watchGame() throws ClassNotFoundException, IOException {
         //Load FXML
-        FXMLLoader loaderStart = new FXMLLoader(getClass().getResource("/ui/watchGame.fxml"));
-        loaderStart.setControllerFactory(c -> {
-            return new LoseGameController(window,player);
-        });
-        textArea.appendText("adksahdahsufdhlshjfakhflkdjhflahdkjahsjlahldfasdljashdkjlfhajhdslfjjah");
-        Scene scene = new Scene(loaderStart.load());
-        window.setScene(scene);
-        window.show();
+        // FXMLLoader loaderStart = new FXMLLoader(getClass().getResource("/ui/watchGame.fxml"));
+        // loaderStart.setControllerFactory(c -> {
+        //     return new LoseGameController(window,player);
+        // });
+        // textArea.appendText("adksahdahsufdhlshjfakhflkdjhflahdkjahsjlahldfasdljashdkjlfhajhdslfjjah");
+        // Scene scene = new Scene(loaderStart.load());
+        // window.setScene(scene);
+        // window.show();
         //textArea.appendText("adksahdahsufdhlshjfakhflkdjhflahdkjahsjlahldfasdljashdkjlfhajhdslfjjah");
+        PageLoader loader=new PageLoader(window,player);
+        loader.showWatchGame();
     }
 
     @FXML
     public void quitGame() throws ClassNotFoundException, IOException{
-        FXMLLoader loaderStart = new FXMLLoader(getClass().getResource("/ui/start.fxml"));
-        loaderStart.setControllerFactory(c->{
-            return new StartController(window,player);
-        });
-        Scene scene = new Scene(loaderStart.load());
-        window.setScene(scene);
-        window.show();
+        PageLoader loader=new PageLoader(window,player);
+        loader.showStartPage();
     }
 }

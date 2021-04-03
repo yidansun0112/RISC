@@ -60,13 +60,8 @@ public class RegisterLoginController {
     System.out.println("in register");
     System.out.println(result);
     if(result.equals(Constant.RESULT_SUCCEED_REQEUST)){
-        FXMLLoader loaderStart = new FXMLLoader(getClass().getResource("/ui/choosePlayerNum.fxml"));
-      loaderStart.setControllerFactory(c->{
-        return new StartController(window,null);
-      });
-      Scene scene = new Scene(loaderStart.load());
-      window.setScene(scene);
-      window.show();
+      PageLoader loader=new PageLoader(window,null);
+      loader.showChoosePlayerNum();
     }else{
       info.setText(result);
       usernameField.setText("");
