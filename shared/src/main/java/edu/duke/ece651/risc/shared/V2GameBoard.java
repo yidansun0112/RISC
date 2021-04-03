@@ -17,7 +17,7 @@ public class V2GameBoard<T> extends V1GameBoard<T> {
 
   @Override
   public void addDefendUnitsTo(int territoryId, int level, int amount) {
-    Territory<T> toAddTo = territories.get(0);
+    Territory<T> toAddTo = territories.get(territoryId);
     toAddTo.addDefendUnits(level, amount);
   }
 
