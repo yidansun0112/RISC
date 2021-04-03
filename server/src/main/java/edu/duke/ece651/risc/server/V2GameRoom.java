@@ -1,6 +1,5 @@
 package edu.duke.ece651.risc.server;
 
-import java.io.IOException;
 import java.util.Random;
 import java.util.concurrent.BrokenBarrierException;
 import java.util.concurrent.CyclicBarrier;
@@ -132,22 +131,11 @@ public class V2GameRoom extends GameRoom<String> {
   public void addPlayerAndCheckToPlay(PlayerEntity<String> newPlayer) {
     if (roomStatus == Constant.ROOM_STATUS_WAITING_PLAYERS) {
       addPlayer(newPlayer); // simply add the player first
-      
+
       // Now we need to set the id of this player and send the id to this player
       int idForNewPlayer = players.size() - 1; // our player id starts from 0, so size - 1 here.
       newPlayer.setPlayerId(idForNewPlayer);
-      // try {
-        newPlayer.sendObject(idForNewPlayer);
-      // } catch (IOException e) {
-        // TODO: here we don't want the exception propogate out to the server code, need
-        // a appropriate way to handle the IOException. -- done
-        // One possible situation that will throw the exception is the player disconnect
-        // (want to switch to other game room so he needs to logout first), we need to
-        // do something here, rather than in the server.
-        // e.printStackTrace();
-        // TODO: set a new field in player entity (like isOnline/isAbsent) be false/true -- done
-        // here?
-      // }
+      newPlayer.sendObject(idForNewPlayer);
       // Check whether we have enough players
       if (players.size() == getPlayerNum()) { // the room has enough players, let's choose map and start the game
         setRoomStatus(Constant.ROOM_STATUS_RUNNING_GAME);
@@ -164,9 +152,8 @@ public class V2GameRoom extends GameRoom<String> {
           try {
             chooseMap();
             playGame();
-          } catch (InterruptedException | BrokenBarrierException | IOException | ClassNotFoundException e) {
-            // TODO: see whether we need to do something here or just ignore it. The
-            // IOEception should be resolved here (i.e., mark the player disconnected ?)
+          } catch (InterruptedException | BrokenBarrierException | ClassNotFoundException e) {
+            // TODO: see whether we need to do something here or just ignore it.
             e.printStackTrace();
           }
         });
@@ -180,7 +167,7 @@ public class V2GameRoom extends GameRoom<String> {
    * map. This method should be called only after all players have in the room.
    */
   @Override
-  public void chooseMap() throws IOException, ClassNotFoundException {
+  public void chooseMap() throws ClassNotFoundException {
     PlayerEntity<String> firstPlayer = players.get(0);
     // TODO: replace V1BoardFactory with V2BoardFactory later!
     BoardFactory<String> factory = new V1BoardFactory<String>();
@@ -193,12 +180,12 @@ public class V2GameRoom extends GameRoom<String> {
   }
 
   @Override
-  public void playGame() throws InterruptedException, BrokenBarrierException, IOException {
+  public void playGame() throws InterruptedException, BrokenBarrierException {
     barrier = new CyclicBarrier(playerNum + 1);
     for (int i = 0; i < playerNum; i++) {
-      Thread t2 = new V2GameHostThread<>(players.get(i), Constant.TOTAL_UNITS, gameBoard, moveChecker, attackChecker,
+      Thread t = new V2GameHostThread<>(players.get(i), Constant.TOTAL_UNITS, gameBoard, moveChecker, attackChecker,
           upgradeUnitChecker, upgradeTechLevelChecker, barrier);
-      t2.start();
+      t.start();
     }
     // Wait all the player finishing their deployment
     barrier.await();
