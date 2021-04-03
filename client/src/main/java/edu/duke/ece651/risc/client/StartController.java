@@ -13,75 +13,51 @@ import javafx.stage.Stage;
 
 public class StartController {
   @FXML
-  private Button Start;
+  private Button startBtn;
   @FXML
-  private ChoiceBox<String> PlayerNumBox;
+  private ChoiceBox<String> playerNumBox;
   @FXML
-  private Button ConfirmNumBtn;
+  private Button confirmNumBtn;
   @FXML
-  private ChoiceBox<String> MapBox;
+  private ChoiceBox<String> mapBox;
   @FXML
-  private Button ConfirmMapBtn;
-  private Stage Window;
+  private Button confirmMapBtn;
+  private Stage window;
   GUIPlayer player;
 
-  public StartController(Stage Window, GUIPlayer player) {
-    this.Window = Window;
-    PlayerNumBox = new ChoiceBox<>();
-    MapBox = new ChoiceBox<>();
+  public StartController(Stage window, GUIPlayer player) {
+    this.window = window;
+    playerNumBox = new ChoiceBox<>();
+    mapBox = new ChoiceBox<>();
     this.player=player;
     System.out.println("[DEBUG] Inside Start Controller Constructor");
   }
 
   @FXML
   public void initialize() {
-    PlayerNumBox.setValue("2");
+    playerNumBox.setValue("2");
     ObservableList<String> ChoiceNumber = FXCollections.observableArrayList("2", "3", "4", "5");
-    PlayerNumBox.setItems(ChoiceNumber);
-    MapBox.setValue("Map 0");
+    playerNumBox.setItems(ChoiceNumber);
+    mapBox.setValue("Map 0");
   }
 
   @FXML
   public void startGame() throws IOException, ClassNotFoundException{
-    player=new GUIPlayer(new SocketClient(12345,"127.0.0.1"));
-    int playerId = player.recvID();
-    if (playerId == 0) {
-      FXMLLoader loaderStart = new FXMLLoader(getClass().getResource("/ui/choosePlayerNum.fxml"));
-      loaderStart.setControllerFactory(c -> {
-        return new StartController(Window,player);
-      });
-      Scene scene = new Scene(loaderStart.load());
-      Window.setScene(scene);
-      Window.show();
-    }
+    PageLoader loader=new PageLoader(window,null);
+    loader.showRegLogPage();
   }
 
   @FXML
   public void selectPlayerNum() throws ClassNotFoundException, IOException {
-    String num = PlayerNumBox.getValue();
-    player.sendObject(num);
-    FXMLLoader loaderStart = new FXMLLoader(getClass().getResource("/ui/chooseMap.fxml"));
-    loaderStart.setControllerFactory(c -> {
-      return new StartController(Window,player);
-    });
-    Scene scene = new Scene(loaderStart.load());
-    Window.setScene(scene);
-    Window.show();
+    String num = playerNumBox.getValue();
+    PageLoader loader=new PageLoader(window, player);
+    loader.showChooseMapPage();
   }
 
   @FXML
-  public void selectMap() throws ClassNotFoundException, IOException {
-    //String mapinfo=(String)player.receiveObject();
-    //System.out.println(mapinfo);
-    player.sendObject(0);
-    player.receiveObject();
-    FXMLLoader loaderStart = new FXMLLoader(getClass().getResource("/ui/choosePlayerNum.fxml"));
-    loaderStart.setControllerFactory(c -> {
-      return new StartController(Window,player);
-    });
-    Scene scene = new Scene(loaderStart.load());
-    Window.setScene(scene);
-    Window.show();
+  public void selectMap() throws ClassNotFoundException, IOException{
+    PageLoader loader=new PageLoader(window, player);
+    loader.showPickTerritoryPage();
   }
 
 }

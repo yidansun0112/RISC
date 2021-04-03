@@ -158,7 +158,6 @@ public class V2GameServer {
     // the request.
 
     String requestType = requestJSON.getString(Constant.KEY_REQUEST_TYPE);
-
     if (requestType.equals(Constant.VALUE_REQUEST_TYPE_REGISTER)) {
       String result = handleRegister(requestJSON);
       if (result == null) {

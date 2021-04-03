@@ -15,23 +15,17 @@ import javafx.fxml.*;
  * This is the App class for client project
  */
 public class App extends Application{
-  private Stage Window;
+  private Stage window;
 
   @Override
   public void start(Stage primaryStage) throws Exception {
-    this.Window = primaryStage;
-    showStartView(Window);
+    this.window = primaryStage;
+    showStartView(window);
   }
 
-  public void showStartView(Stage Window) throws IOException{
-    //load the start game page
-    FXMLLoader loaderStart = new FXMLLoader(getClass().getResource("/ui/start.fxml"));
-    loaderStart.setControllerFactory(c->{
-      return new StartController(Window,null);
-    });
-    Scene scene = new Scene(loaderStart.load());
-    Window.setScene(scene);
-    Window.show();
+  public void showStartView(Stage window) throws IOException{
+    PageLoader loader=new PageLoader(window,null);
+    loader.showStartPage();
   }
 
   public static void main(String[] args) {
