@@ -27,9 +27,6 @@ public class PageLoader {
     loaderStart.setControllerFactory(c->{
       return new StartController(window,player);
     });
-    // Scene scene = new Scene(loaderStart.load());
-    // window.setScene(scene);
-    // window.show();
     showPage(loaderStart);
   }
 
@@ -37,6 +34,14 @@ public class PageLoader {
     FXMLLoader loader = new FXMLLoader(getClass().getResource("/ui/registerLogin.fxml"));
     loader.setControllerFactory(c -> {
       return new RegisterLoginController(window);
+    });
+    showPage(loader);
+  }
+
+  public void showChooseGamePage(){
+    FXMLLoader loader = new FXMLLoader(getClass().getResource("/ui/chooseGame.fxml"));
+    loader.setControllerFactory(c -> {
+      return new ChooseGameController(window,player);
     });
     showPage(loader);
   }

@@ -180,4 +180,9 @@ public class Constant {
    * testing
    */
   public static final int randomSeed = 42;
+
+  /**
+   * Server ip
+   */
+  public static final String ipaddress="127.0.0.1";
 }
