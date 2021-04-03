@@ -119,6 +119,11 @@ public class Constant {
   /** The request type that will create a room */
   public static final String VALUE_REQUEST_TYPE_CREATE_ROOM = "CreateRoom";
 
+  /**
+   * The request type that client requests a room list that is waiting for players
+   */
+  public static final String VALUE_REQUEST_TYPE_GET_WATING_ROOM_LIST = "GetWaitingRoomList";
+
   /** The request type that will join a room that waiting for other players */
   public static final String VALUE_REQUEST_TYPE_JOIN_ROOM = "JoinRoom";
 
@@ -127,6 +132,9 @@ public class Constant {
 
   /** The request json key which indicates a password field */
   public static final String KEY_PASSWORD = "Password";
+
+  /** The request json key which indicates the room id to join in */
+  public static final String KEY_ROOM_ID_TO_JOIN = "RoomIdToJoin";
 
   /**
    * The request json key which indicates the total number of players in a game

@@ -120,6 +120,16 @@ public abstract class GameRoom<T> {
     return playerNum;
   }
 
+  
+
+  /**
+   * @since evolution 2. This method is NOT USED in evolution 1!
+   * @return the room id for this room
+   */
+  public int getRoomId() {
+    return 0;
+  }
+
   /**
    * Get the room status of this game room.
    * 
@@ -279,6 +289,14 @@ public abstract class GameRoom<T> {
       player.getFromPlayer().close();
       player.getToPlayer().close();
     }
+  }
+
+  /**
+   * @return the creator of this room, which is the first player entity in the
+   *         list of players
+   */
+  public PlayerEntity<T> getRoomOwner() {
+    return players.get(0);
   }
 
 }

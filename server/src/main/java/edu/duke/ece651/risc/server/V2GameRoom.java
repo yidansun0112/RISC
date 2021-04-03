@@ -106,6 +106,11 @@ public class V2GameRoom extends GameRoom<String> {
     return null;
   }
 
+  @Override
+  public int getRoomId() {
+    return this.roomId;
+  }
+
   /**
    * This method will add a new player who wants to join in this game room, then
    * check whether we have enough player to start the game (i.e., call the
@@ -161,6 +166,9 @@ public class V2GameRoom extends GameRoom<String> {
         });
         gameRunner.start();
       }
+    } else {
+      // The room is fulled just now. Send String -1 to indicate the join is failed.
+      newPlayer.sendObject("-1");
     }
   }
 
@@ -203,6 +211,7 @@ public class V2GameRoom extends GameRoom<String> {
       System.out.println("Battle finished, now check anyone wins");
 
       if (checkEnd()) {
+        setRoomStatus(Constant.ROOM_STATUS_GAME_FINISHED);
         barrier.await();
         sendToAllPlayer(getWinnerId()); // send the player id of the winner to all players
         barrier.await();
