@@ -3,6 +3,11 @@ package edu.duke.ece651.risc.shared;
 import java.util.*;
 
 public class V2GameBoard<T> extends V1GameBoard<T> {
+  /**
+   * Fields required by Serializable
+   */
+  private static final long serialVersionUID = 12L;
+
   public V2GameBoard(ArrayList<Territory<T>> territories, int[][] worldMap) {
     super(territories, worldMap);
   }

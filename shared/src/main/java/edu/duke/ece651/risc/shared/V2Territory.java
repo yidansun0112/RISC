@@ -4,6 +4,11 @@ import java.util.HashMap;
 
 public class V2Territory<T> extends V1Territory<T> {
 
+  /**
+   * Fields required by Serializable
+   */
+  private static final long serialVersionUID = 14L;
+
   /** The size of this territory */
   int size;
 

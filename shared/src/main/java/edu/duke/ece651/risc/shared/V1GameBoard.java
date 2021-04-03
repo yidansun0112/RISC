@@ -3,6 +3,11 @@ package edu.duke.ece651.risc.shared;
 import java.util.*;
 
 public class V1GameBoard<T> implements Board<T> {
+  /**
+   * Fields required by Serializable
+   */
+  private static final long serialVersionUID = 11L;
+
   ArrayList<Territory<T>> territories;
   int[][] worldMap;
 

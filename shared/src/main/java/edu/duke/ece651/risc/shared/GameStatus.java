@@ -1,5 +1,7 @@
 package edu.duke.ece651.risc.shared;
 
+import java.io.Serializable;
+
 /**
  * This is a new class introduced in evolution 2 to wrap and represent all the
  * infomation in the current game, including a specific player entitiy in a game
@@ -12,7 +14,12 @@ package edu.duke.ece651.risc.shared;
  * 
  * @author zl246
  */
-public class GameStatus<T> {
+public class GameStatus<T> implements Serializable{
+  /**
+   * Fields required by Serializable
+   */
+  private static final long serialVersionUID = 8L;
+
   /** The player in the game host thread */
   PlayerEntity<T> currPlayer;
   

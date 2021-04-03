@@ -3,11 +3,16 @@ package edu.duke.ece651.risc.shared;
 import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
+import java.io.Serializable;
 
 /**
  * This class is to represent a player that in a game room in server side.
  */
-public abstract class PlayerEntity<T> {
+public abstract class PlayerEntity<T> implements Serializable{
+  /**
+   * Fields required by Serializable
+   */
+  private static final long serialVersionUID = 9;
   // TODO: two fields below (object input/output streams) may need to be @Transit
   /** Send data to player */
   protected ObjectOutputStream toPlayer;

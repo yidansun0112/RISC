@@ -6,6 +6,11 @@ import java.util.ArrayList;
 
 public class GUIPlayerEntity<T> extends PlayerEntity<T> {
 
+  /**
+   * Fields required by Serializable
+   */
+  private static final long serialVersionUID = 10L;
+
   /** The food resource that a player currently has */
   Resource foodResource;
 

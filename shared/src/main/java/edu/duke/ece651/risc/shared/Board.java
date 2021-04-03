@@ -1,8 +1,9 @@
 package edu.duke.ece651.risc.shared;
 
+import java.io.Serializable;
 import java.util.*;
 
-public interface Board<T> {
+public interface Board<T> extends Serializable {
   /**
    * Return the units deployment on a teritory based on if from self view
    * 

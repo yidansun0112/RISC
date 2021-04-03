@@ -3,6 +3,10 @@ package edu.duke.ece651.risc.shared;
 import java.util.*;
 
 public class V1Territory<T> implements Territory<T> {
+  /**
+   * Fields required by Serializable
+   */
+  private static final long serialVersionUID = 13L;
   protected int group;
   protected int id;
   protected int currOwner;
