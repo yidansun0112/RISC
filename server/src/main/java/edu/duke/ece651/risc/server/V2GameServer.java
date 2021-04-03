@@ -149,30 +149,31 @@ public class V2GameServer {
 
     // Got the short connection for sending-receiving a request, now we receive the
     // JSON string.
-    ObjectInputStream oisForJSON = new ObjectInputStream(sock.getInputStream());
-    ObjectOutputStream oosForResult = new ObjectOutputStream(sock.getOutputStream());
-    String jsonString = (String) oisForJSON.readObject();
+    ObjectInputStream oisFromClient = new ObjectInputStream(sock.getInputStream());
+    ObjectOutputStream oosToClient = new ObjectOutputStream(sock.getOutputStream());
+    String jsonString = (String) oisFromClient.readObject();
     JSONObject requestJSON = new JSONObject(jsonString);
 
     // Check what type of the request is, then do the appropriate work to process
     // the request.
 
     String requestType = requestJSON.getString(Constant.KEY_REQUEST_TYPE);
+    System.out.println(requestType);
     if (requestType.equals(Constant.VALUE_REQUEST_TYPE_REGISTER)) {
       String result = handleRegister(requestJSON);
       if (result == null) {
-        oosForResult.writeObject(Constant.RESULT_SUCCEED_REQEUST);
+        oosToClient.writeObject(Constant.RESULT_SUCCEED_REQEUST);
       } else {
-        oosForResult.writeObject(result);
+        oosToClient.writeObject(result);
       }
     }
 
     if (requestType.equals(Constant.VALUE_REQUEST_TYPE_LOGIN)) {
       String result = handleLogin(requestJSON);
       if (result == null) {
-        oosForResult.writeObject(Constant.RESULT_SUCCEED_REQEUST);
+        oosToClient.writeObject(Constant.RESULT_SUCCEED_REQEUST);
       } else {
-        oosForResult.writeObject(result);
+        oosToClient.writeObject(result);
       }
     }
 
@@ -187,13 +188,19 @@ public class V2GameServer {
                                                                          // whether the username is an empty string when
                                                                          // register/login, otherwise here will throw an
                                                                          // exception
-      PlayerEntity<String> roomCreator = new GUIPlayerEntity<String>(new ObjectOutputStream(sock.getOutputStream()),
-          new ObjectInputStream(sock.getInputStream()), 0, playerName, -1, Constant.SELF_NOT_LOSE_NO_ONE_WIN_STATUS);
+      System.out.println(playerName);
+      // PlayerEntity<String> roomCreator = new GUIPlayerEntity<String>(new
+      // ObjectOutputStream(sock.getOutputStream()),
+      // new ObjectInputStream(sock.getInputStream()), 0, playerName, -1,
+      // Constant.SELF_NOT_LOSE_NO_ONE_WIN_STATUS);
+      PlayerEntity<String> roomCreator = new GUIPlayerEntity<String>(oosToClient, oisFromClient, 0, playerName, -1,
+          Constant.SELF_NOT_LOSE_NO_ONE_WIN_STATUS);
+      System.out.println("after create player entity");
       handleCreateGameRoom(roomCreator);
     }
 
     if (requestType.equals(Constant.VALUE_REQUEST_TYPE_GET_WATING_ROOM_LIST)) {
-      oosForResult.writeObject(getWaitingRoomList()); // we directly send the list here.
+      oosToClient.writeObject(getWaitingRoomList()); // we directly send the list here.
     }
 
     // The user wants to join an existing game room which is waiting for the rest of
@@ -201,8 +208,8 @@ public class V2GameServer {
     if (requestType.equals(Constant.VALUE_REQUEST_TYPE_JOIN_ROOM)) {
       String playerName = requestJSON.getString(Constant.KEY_USER_NAME);
       int roomIdToJoin = Integer.parseInt(requestJSON.getString(Constant.KEY_ROOM_ID_TO_JOIN).trim());
-      PlayerEntity<String> followingPlayer = new GUIPlayerEntity<String>(new ObjectOutputStream(sock.getOutputStream()),
-          new ObjectInputStream(sock.getInputStream()), 0, playerName, -1, Constant.SELF_NOT_LOSE_NO_ONE_WIN_STATUS);
+      PlayerEntity<String> followingPlayer = new GUIPlayerEntity<String>(oosToClient, oisFromClient, 0, playerName, -1,
+          Constant.SELF_NOT_LOSE_NO_ONE_WIN_STATUS);
       handleJoinGameRoom(followingPlayer, roomIdToJoin);
     }
 
@@ -314,16 +321,21 @@ public class V2GameServer {
 
     // Basically same with evo1, we create a room, add this player into this room,
     // set this room's playerNum field based on the content in this request JSON
+    System.out.println("in hancle create game room");
     int idForTheNewRoom = nextRoomId;
     this.nextRoomId++;
+    System.out.println("before create room");
     GameRoom<String> newRoom = new V2GameRoom(idForTheNewRoom, roomCreator);
+    System.out.println("after create room");
     gameRooms.put(idForTheNewRoom, newRoom);
 
     // We need to send the player id to this player. Since he/she is the creator of
     // a new game room, player id will be 0 (zero)
     // NOTE: SEND String to client - player id
     roomCreator.setPlayerId(0);
+    System.out.println("before send");
     roomCreator.sendObject(new String("0"));
+    System.out.println("after send");
 
     // Now receive the user decision about how many players should in this room
     int totalPlayer = (int) roomCreator.receiveObject();
