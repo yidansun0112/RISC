@@ -196,10 +196,9 @@ public class V2GameRoom extends GameRoom<String> {
   public void playGame() throws InterruptedException, BrokenBarrierException, IOException {
     barrier = new CyclicBarrier(playerNum + 1);
     for (int i = 0; i < playerNum; i++) {
-      // TODO: using V2GameHostThread here
-      Thread t = new V1GameHostThread<String>(players.get(i), Constant.TOTAL_UNITS, gameBoard, view, moveChecker,
-          attackChecker, barrier);
-      t.start();
+      Thread t2 = new V2GameHostThread<>(players.get(i), Constant.TOTAL_UNITS, gameBoard, moveChecker, attackChecker,
+          upgradeUnitChecker, upgradeTechLevelChecker, barrier);
+      t2.start();
     }
     // Wait all the player finishing their deployment
     barrier.await();
