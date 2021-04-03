@@ -32,75 +32,83 @@ public class IssueOrderController implements Initializable{
   public IssueOrderController(Stage window,GUIPlayer player) {
     this.window = window;
     this.player=player;
-    FXMLLoader mapLoader = new FXMLLoader(getClass().getResource("/ui/map2link.fxml"));
-    mapLoader.setControllerFactory(c -> {
-      if(c.equals(MapLinkController.class)){
-        return new MapLinkController(player);
-      }
-      try{
-        return c.getConstructor().newInstance();
-      }catch(Exception e){
-        throw new RuntimeException(e);
-      }
-    });
-    try{
-      mapPane=mapLoader.load();
-    }catch(Exception e){
-      throw new RuntimeException(e);
-    }
+    // FXMLLoader mapLoader = new FXMLLoader(getClass().getResource("/ui/map2link.fxml"));
+    // mapLoader.setControllerFactory(c -> {
+    //   if(c.equals(MapLinkController.class)){
+    //     return new MapLinkController(player);
+    //   }
+    //   try{
+    //     return c.getConstructor().newInstance();
+    //   }catch(Exception e){
+    //     throw new RuntimeException(e);
+    //   }
+    // });
+    // try{
+    //   mapPane=mapLoader.load();
+    // }catch(Exception e){
+    //   throw new RuntimeException(e);
+    // }
+    PageLoader loader=new PageLoader(window, player);
+    mapPane=loader.loadMap("/ui/map2link.fxml");
   }
 
 
   public void initialize(URL url, ResourceBundle rb){
-    rootPane.getChildren().add(mapPane);
-    AnchorPane.setTopAnchor(mapPane,0.0);
-    AnchorPane.setRightAnchor(mapPane,0.0);
-    AnchorPane.setLeftAnchor(mapPane,0.0);
-    AnchorPane.setBottomAnchor(mapPane,200.0);
+    // rootPane.getChildren().add(mapPane);
+    // AnchorPane.setTopAnchor(mapPane,0.0);
+    // AnchorPane.setRightAnchor(mapPane,0.0);
+    // AnchorPane.setLeftAnchor(mapPane,0.0);
+    // AnchorPane.setBottomAnchor(mapPane,200.0);
+    PageLoader loader=new PageLoader(window, player);
+    loader.putMap(rootPane, mapPane);
   } 
 
   @FXML
   public void move(){
-    try{
-      FXMLLoader loaderStart = new FXMLLoader(getClass().getResource("/ui/moveAttack.fxml"));
-      loaderStart.setControllerFactory(c -> {
-        if(c.equals(MoveAttackController.class)){
-          return new MoveAttackController(window,player);
-        }
-        try{
-          return c.getConstructor().newInstance();
-        }catch(Exception e){
-          throw new RuntimeException(e);
-        }
-      });
-      Scene scene = new Scene(loaderStart.load());
-      window.setScene(scene);
-      window.show();
-  }catch(Exception e){
-    throw new RuntimeException(e);
-  }
+  //   try{
+  //     FXMLLoader loaderStart = new FXMLLoader(getClass().getResource("/ui/moveAttack.fxml"));
+  //     loaderStart.setControllerFactory(c -> {
+  //       if(c.equals(MoveAttackController.class)){
+  //         return new MoveAttackController(window,player);
+  //       }
+  //       try{
+  //         return c.getConstructor().newInstance();
+  //       }catch(Exception e){
+  //         throw new RuntimeException(e);
+  //       }
+  //     });
+  //     Scene scene = new Scene(loaderStart.load());
+  //     window.setScene(scene);
+  //     window.show();
+  // }catch(Exception e){
+  //   throw new RuntimeException(e);
+  // }
+    PageLoader loader=new PageLoader(window,player);
+    loader.showMoveAttack();
   }
 
   @FXML
   public void attack(){
-    try{
-      FXMLLoader loaderStart = new FXMLLoader(getClass().getResource("/ui/moveAttack.fxml"));
-      loaderStart.setControllerFactory(c -> {
-        if(c.equals(MoveAttackController.class)){
-          return new MoveAttackController(window,player);
-        }
-        try{
-          return c.getConstructor().newInstance();
-        }catch(Exception e){
-          throw new RuntimeException(e);
-        }
-      });
-      Scene scene = new Scene(loaderStart.load());
-      window.setScene(scene);
-      window.show();
-  }catch(Exception e){
-    throw new RuntimeException(e);
-  }
+  //   try{
+  //     FXMLLoader loaderStart = new FXMLLoader(getClass().getResource("/ui/moveAttack.fxml"));
+  //     loaderStart.setControllerFactory(c -> {
+  //       if(c.equals(MoveAttackController.class)){
+  //         return new MoveAttackController(window,player);
+  //       }
+  //       try{
+  //         return c.getConstructor().newInstance();
+  //       }catch(Exception e){
+  //         throw new RuntimeException(e);
+  //       }
+  //     });
+  //     Scene scene = new Scene(loaderStart.load());
+  //     window.setScene(scene);
+  //     window.show();
+  // }catch(Exception e){
+  //   throw new RuntimeException(e);
+  // }
+    PageLoader loader=new PageLoader(window,player);
+    loader.showMoveAttack();
   }
 
   @FXML

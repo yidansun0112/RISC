@@ -44,6 +44,6 @@ public class PickTerritoryController {
     @FXML
     public void selectGroup() throws ClassNotFoundException, IOException{
         AlterBox alterBox=new AlterBox(this.window, this.player);
-        alterBox.display("orderConfirm", "Back", "Successfully pick this group territories");
+        alterBox.display("pickConfirm", "OK", "Successfully pick this group territories");
     }
 }

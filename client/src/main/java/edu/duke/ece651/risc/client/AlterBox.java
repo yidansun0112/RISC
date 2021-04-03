@@ -48,6 +48,9 @@ public class AlterBox {
       case "orderConfirm":
         button.setOnAction(e->jumpIssueOrderPage(alterWindow));
         return;
+      case "pickConfirm":
+        button.setOnAction(e->jumpDeployUnitsPage(alterWindow));
+        return;
       default:
         throw new IllegalArgumentException("We don't have this type button");
       }
@@ -59,24 +62,50 @@ public class AlterBox {
    */
   public void jumpIssueOrderPage(Stage alterWindow){
     alterWindow.close();
-    try{
-      FXMLLoader loaderStart = new FXMLLoader(getClass().getResource("/ui/issueOrder.fxml"));
-      loaderStart.setControllerFactory(c -> {
-        if(c.equals(IssueOrderController.class)){
-          return new IssueOrderController(window,player);
-        }
-        try{
-          return c.getConstructor().newInstance();
-        }catch(Exception e){
-          throw new RuntimeException(e);
-        }
-      });
-      Scene scene = new Scene(loaderStart.load());
-      window.setScene(scene);
-      window.show();
-    }catch(Exception e){
-      throw new RuntimeException(e);
-    }
+    // try{
+    //   FXMLLoader loaderStart = new FXMLLoader(getClass().getResource("/ui/issueOrder.fxml"));
+    //   loaderStart.setControllerFactory(c -> {
+    //     if(c.equals(IssueOrderController.class)){
+    //       return new IssueOrderController(window,player);
+    //     }
+    //     try{
+    //       return c.getConstructor().newInstance();
+    //     }catch(Exception e){
+    //       throw new RuntimeException(e);
+    //     }
+    //   });
+    //   Scene scene = new Scene(loaderStart.load());
+    //   window.setScene(scene);
+    //   window.show();
+    // }catch(Exception e){
+    //   throw new RuntimeException(e);
+    // }
+    PageLoader loader=new PageLoader(window, player);
+    loader.showIssueOrderPage();
+  }
+
+  public void jumpDeployUnitsPage(Stage alterWindow){
+    alterWindow.close();
+  //   try{
+  //   FXMLLoader loaderStart = new FXMLLoader(getClass().getResource("/ui/deployUnits.fxml"));
+  //   loaderStart.setControllerFactory(c -> {
+  //     if(c.equals(DeployUnitsController.class)){
+  //       return new DeployUnitsController(window,player);
+  //     }
+  //     try{
+  //       return c.getConstructor().newInstance();
+  //     }catch(Exception e){
+  //       throw new RuntimeException(e);
+  //     }
+  //   });
+  //   Scene scene = new Scene(loaderStart.load());
+  //   window.setScene(scene);
+  //   window.show();
+  // }catch(Exception e){
+  //   throw new RuntimeException(e);
+  // }
+  PageLoader loader=new PageLoader(window,player);
+  loader.showDeployUnitsPage();
   }
   
 }

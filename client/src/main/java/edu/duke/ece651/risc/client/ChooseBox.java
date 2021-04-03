@@ -52,24 +52,26 @@ public class ChooseBox {
 
   public void jumpUpgradeUnitsrPage(Stage alterWindow){
     alterWindow.close();
-    try{
-      FXMLLoader loaderStart = new FXMLLoader(getClass().getResource("/ui/upgradeUnits.fxml"));
-      loaderStart.setControllerFactory(c -> {
-          if(c.equals(UpgradeUnitsController.class)){
-          return new UpgradeUnitsController(window,player);
-        }
-        try{
-          return c.getConstructor().newInstance();
-        }catch(Exception e){
-          throw new RuntimeException(e);
-        }
-      });
-      Scene scene = new Scene(loaderStart.load());
-      window.setScene(scene);
-      window.show();
-    }catch(Exception e){
-      throw new RuntimeException(e);
-    }
+    // try{
+    //   FXMLLoader loaderStart = new FXMLLoader(getClass().getResource("/ui/upgradeUnits.fxml"));
+    //   loaderStart.setControllerFactory(c -> {
+    //       if(c.equals(UpgradeUnitsController.class)){
+    //       return new UpgradeUnitsController(window,player);
+    //     }
+    //     try{
+    //       return c.getConstructor().newInstance();
+    //     }catch(Exception e){
+    //       throw new RuntimeException(e);
+    //     }
+    //   });
+    //   Scene scene = new Scene(loaderStart.load());
+    //   window.setScene(scene);
+    //   window.show();
+    // }catch(Exception e){
+    //   throw new RuntimeException(e);
+    // }
+    PageLoader loader=new PageLoader(window,player);
+    loader.showUpgradePage();
   }
 
 }
