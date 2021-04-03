@@ -44,8 +44,8 @@ public class GUIPlayerEntity<T> extends PlayerEntity<T> {
    * @param gs the GameStatus object which contains all the territory
    */
   @Override
-  public void harvestAllResource(GameStatus<T> gs) {
-    ArrayList<Territory<T>> territories = gs.getGameBoard().getTerritories();
+  public void harvestAllResource(Board<T> board) {
+    ArrayList<Territory<T>> territories = board.getTerritories();
     // Iterate all the territories, if the territory is owned by the current player,
     // then get the resource production and add them to the current player.
     for (Territory<T> t : territories) {

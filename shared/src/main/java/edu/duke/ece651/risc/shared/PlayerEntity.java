@@ -66,7 +66,7 @@ public abstract class PlayerEntity<T> {
    * 
    * @param gs the GameStatus object which contains all the territory
    */
-  public abstract void harvestAllResource(GameStatus<T> gs);
+  public abstract void harvestAllResource(Board<T> board);
 
   /**
    * This method will return the food resource possessed by this player.

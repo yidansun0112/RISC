@@ -197,8 +197,7 @@ public class V2GameRoom extends GameRoom<String> {
       resolver.executeAllBattle(gameBoard);
       incrementUnits();
       gameBoard.updateAllPrevDefender();
-      // TODO: update players resources here
-
+      updateAllPlayerResource(); // we need to update resources AFTER all combats finished
       System.out.println("Battle finished, now check anyone wins");
 
       if (checkEnd()) {
@@ -212,6 +211,15 @@ public class V2GameRoom extends GameRoom<String> {
 
       System.out.println("No one wins, now waiting all players done again");
 
+    }
+  }
+
+  /**
+   * This method will add resources (food and tech) to each player.
+   */
+  protected void updateAllPlayerResource() {
+    for (PlayerEntity<String> p : players) {
+      p.harvestAllResource(gameBoard);
     }
   }
 
