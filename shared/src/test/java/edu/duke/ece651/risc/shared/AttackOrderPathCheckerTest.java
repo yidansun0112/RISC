@@ -14,7 +14,7 @@ public class AttackOrderPathCheckerTest {
     b.occupyTerritory(1, 1);
 
     // Build a gamestatus to test the evo 2 execution
-    GameStatus<String> gs = new GameStatus<>(null, b);
+    GameStatus<String> gs = new GameStatus<>(null, b, false);
 
     Order<String> o1 = new AttackOrder<String>("0 3 2");
     assertEquals(null, r.checkOrder(0, o1, b));

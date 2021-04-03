@@ -77,4 +77,12 @@ public class GameStatus<T> {
   public void setCurrPlayer(PlayerEntity<T> currPlayer) {
     this.currPlayer = currPlayer;
   }
+
+  /**
+   * @return the canShowLatest
+   */
+  public boolean getCanShowLatest() {
+    return canShowLatest;
+  }
+  
 }

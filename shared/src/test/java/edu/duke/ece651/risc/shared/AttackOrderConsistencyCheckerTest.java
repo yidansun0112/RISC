@@ -16,7 +16,7 @@ public class AttackOrderConsistencyCheckerTest {
     int dest = o1.getDestTerritory();
 
     // Test checkOrder method which takes in a game status, even if this method is not used in evo 2
-    GameStatus<String> gs = new GameStatus<>(null, b); // player entity is not used in attack order in evo 1
+    GameStatus<String> gs = new GameStatus<>(null, b, false); // player entity is not used in attack order in evo 1
 
     assertEquals(dest, 3);
     assertEquals(b.getTerritories().get(3).getOwner(), 1);

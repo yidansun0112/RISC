@@ -14,7 +14,7 @@ public class MoveOrderEffectCheckerTest {
     assertEquals(b.occupyTerritory(1, 1), false); // group 1 owner is 1
 
     // Make a game status instance to test the evo2 checkOrder, altought it is not used in evo 1
-    GameStatus<String> gs = new GameStatus<>(null, b);
+    GameStatus<String> gs = new GameStatus<>(null, b, false);
 
     MoveOrder<String> m1 = new MoveOrder<>("0 1 5");
     MoveOrder<String> m2 = new MoveOrder<>("0 2 6");
