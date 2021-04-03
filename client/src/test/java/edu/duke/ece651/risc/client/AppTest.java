@@ -33,7 +33,6 @@ class AppTest {
   @ResourceLock(value = Resources.SYSTEM_OUT, mode = ResourceAccessMode.READ_WRITE)
   @Disabled
   @Test
-  @Disabled
   public void test_main() throws UnknownHostException, IOException, InterruptedException, ClassNotFoundException {
     // set up
     ByteArrayOutputStream bytes = new ByteArrayOutputStream();
