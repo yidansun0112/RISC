@@ -151,7 +151,8 @@ public class V2GameRoom extends GameRoom<String> {
         this.gameRunner = new Thread(() -> {
           try {
             chooseMap();
-            // TODO: SEND totalPlayer to client: int
+            // NOTE: SEND int to client - the number of total player in this game room
+            sendToAllPlayer(playerNum);
             playGame();
           } catch (InterruptedException | BrokenBarrierException | ClassNotFoundException e) {
             // TODO: see whether we need to do something here or just ignore it.
@@ -203,8 +204,8 @@ public class V2GameRoom extends GameRoom<String> {
 
       if (checkEnd()) {
         barrier.await();
+        sendToAllPlayer(getWinnerId()); // send the player id of the winner to all players
         barrier.await();
-        // TODO: broad cast winner info here + send string of winner name directly
         // closeAllStreams();
         break;
       }
@@ -213,6 +214,27 @@ public class V2GameRoom extends GameRoom<String> {
       System.out.println("No one wins, now waiting all players done again");
 
     }
+  }
+
+  /**
+   * Note that this method should only be called AFTER a player won the game!
+   * 
+   * @since evolution 2
+   * @return the player id of the winner
+   * @throws IllegalStateException if there is no winner in this game yet.
+   */
+  protected int getWinnerId() {
+    int winnerId = -1;
+    for (PlayerEntity<String> p : players) {
+      if (p.getPlayerStatus() == Constant.SELF_WIN_STATUS) {
+        winnerId = p.getPlayerId();
+        break;
+      }
+    }
+    if (winnerId == -1) { // should not happen
+      throw new IllegalStateException("There is no winner yet!"); // fail fast. May remove after finished.
+    }
+    return winnerId;
   }
 
   /**
@@ -249,6 +271,17 @@ public class V2GameRoom extends GameRoom<String> {
   protected void updateAllPlayer() {
     updateAllPlayerResource();
     updateAllPlayerMaxTechLevel();
+  }
+
+  /**
+   * Send an object to all the players in this game room.
+   * 
+   * @param o the object to be sent
+   */
+  protected void sendToAllPlayer(Object o) {
+    for (PlayerEntity<String> p : players) {
+      p.sendObject(o);
+    }
   }
 
   /**
