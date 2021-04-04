@@ -1,4 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
+
 <?import javafx.scene.image.*?>
 <?import javafx.scene.text.*?>
 <?import java.lang.*?>
@@ -7,68 +8,68 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
-<AnchorPane fx:id="rootPane" prefHeight="400.0" prefWidth="600.0" style="-fx-border-color: lightskyblue; -fx-border-width: 10;" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.duke.ece651.risc.client.MoveAttackController">
+<AnchorPane fx:id="rootPane" prefHeight="747.0" prefWidth="993.0" style="-fx-border-color: lightskyblue; -fx-border-width: 10;" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.duke.ece651.risc.client.MoveAttackController">
     <children>
-      <Label alignment="CENTER" layoutX="300.0" layoutY="104.0" text="What would you like to do?" textFill="DARKBLUE" AnchorPane.bottomAnchor="150">
+      <Label alignment="CENTER" layoutX="608.0" layoutY="411.0" text="What would you like to do?" textFill="DARKBLUE" AnchorPane.bottomAnchor="311.0">
          <font>
             <Font name="System Bold" size="19.0" />
          </font>
       </Label>
-      <Label alignment="CENTER" layoutX="100.0" layoutY="100.0" text="Source Territory:" textFill="DARKBLUE" AnchorPane.bottomAnchor="130">
+      <Label alignment="CENTER" layoutX="608.0" layoutY="452.0" text="Source Territory:" textFill="DARKBLUE" AnchorPane.bottomAnchor="277.0">
          <font>
-            <Font name="System Bold" size="19.0" />
+            <Font name="System Bold" size="13.0" />
          </font>
       </Label>
-      <ChoiceBox fx:id = "sourceBox" layoutX="200.0" layoutY="100.0" prefHeight="27.0" prefWidth="81.0" AnchorPane.bottomAnchor="110"/>
-      <Label alignment="CENTER" layoutX="300.0" layoutY="100.0" text="Target Territory:" textFill="DARKBLUE" AnchorPane.bottomAnchor="110">
+      <ChoiceBox fx:id="sourceBox" layoutX="653.0" layoutY="472.0" prefHeight="18.0" prefWidth="60.0" AnchorPane.bottomAnchor="245.0" />
+      <Label alignment="CENTER" layoutX="781.0" layoutY="451.0" text="Target Territory:" textFill="DARKBLUE" AnchorPane.bottomAnchor="278.0">
          <font>
-            <Font name="System Bold" size="19.0" />
+            <Font name="System Bold" size="13.0" />
          </font>
       </Label>
-      <ChoiceBox fx:id = "targeBox" layoutX="400.0" layoutY="150.0" prefHeight="27.0" prefWidth="81.0" AnchorPane.bottomAnchor="110"/>
-      <Label alignment="CENTER" layoutX="0.0" layoutY="200.0" text="Level 0:" textFill="DARKBLUE" AnchorPane.bottomAnchor="90">
+      <ChoiceBox fx:id="targeBox" layoutX="820.0" layoutY="467.0" prefHeight="8.0" prefWidth="60.0" AnchorPane.bottomAnchor="250.0" />
+      <Label alignment="CENTER" layoutX="587.0" layoutY="470.0" text="Level 0:" textFill="DARKBLUE" AnchorPane.bottomAnchor="202.0">
          <font>
-            <Font name="System Bold" size="19.0" />
+            <Font name="System Bold" size="11.0" />
          </font>
       </Label>
-      <ChoiceBox fx:id = "lv0Box" layoutX="0.0" layoutY="250.0" prefHeight="27.0" prefWidth="40.0" AnchorPane.bottomAnchor="70"/>
-      <Label alignment="CENTER" layoutX="50.0" layoutY="200.0" text="Level 1:" textFill="DARKBLUE" AnchorPane.bottomAnchor="90">
+      <ChoiceBox fx:id="lv0Box" layoutX="663.0" layoutY="460.0" prefHeight="0.0" prefWidth="9.0" AnchorPane.bottomAnchor="197.0" />
+      <Label alignment="CENTER" layoutX="589.0" layoutY="505.0" text="Level 1:" textFill="DARKBLUE" AnchorPane.bottomAnchor="167.0">
          <font>
-            <Font name="System Bold" size="19.0" />
+            <Font name="System Bold" size="11.0" />
          </font>
       </Label>
-      <ChoiceBox fx:id = "lv1Box" layoutX="50.0" layoutY="250.0" prefHeight="27.0" prefWidth="40.0" AnchorPane.bottomAnchor="70"/>
-      <Label alignment="CENTER" layoutX="100.0" layoutY="200.0" text="Level 2:" textFill="DARKBLUE" AnchorPane.bottomAnchor="90">
+      <ChoiceBox fx:id="lv1Box" layoutX="663.0" layoutY="495.0" prefHeight="5.0" prefWidth="40.0" scaleShape="false" AnchorPane.bottomAnchor="162.0" />
+      <Label alignment="CENTER" layoutX="587.0" layoutY="531.0" text="Level 2:" textFill="DARKBLUE" AnchorPane.bottomAnchor="141.0">
          <font>
-            <Font name="System Bold" size="19.0" />
+            <Font name="System Bold" size="11.0" />
          </font>
       </Label>
-      <ChoiceBox fx:id = "lv2Box" layoutX="100.0" layoutY="250.0" prefHeight="27.0" prefWidth="40.0" AnchorPane.bottomAnchor="70"/>
-      <Label alignment="CENTER" layoutX="150.0" layoutY="200.0" text="Level 3:" textFill="DARKBLUE" AnchorPane.bottomAnchor="90">
+      <ChoiceBox fx:id="lv2Box" layoutX="663.0" layoutY="533.0" prefHeight="27.0" prefWidth="40.0" AnchorPane.bottomAnchor="124.0" />
+      <Label alignment="CENTER" layoutX="589.0" layoutY="571.0" text="Level 3:" textFill="DARKBLUE" AnchorPane.bottomAnchor="101.0">
          <font>
-            <Font name="System Bold" size="19.0" />
+            <Font name="System Bold" size="11.0" />
          </font>
       </Label>
-      <ChoiceBox fx:id = "lv3Box" layoutX="150.0" layoutY="250.0" prefHeight="27.0" prefWidth="40.0" AnchorPane.bottomAnchor="70"/>
-      <Label alignment="CENTER" layoutX="200.0" layoutY="200.0" text="Level 4:" textFill="DARKBLUE" AnchorPane.bottomAnchor="90">
+      <ChoiceBox fx:id="lv3Box" layoutX="663.0" layoutY="566.0" prefHeight="27.0" prefWidth="40.0" AnchorPane.bottomAnchor="91.0" />
+      <Label alignment="CENTER" layoutX="749.0" layoutY="568.0" text="Level 4:" textFill="DARKBLUE" AnchorPane.bottomAnchor="164.0">
          <font>
-            <Font name="System Bold" size="19.0" />
+            <Font name="System Bold" size="11.0" />
          </font>
       </Label>
-      <ChoiceBox fx:id = "lv4Box" layoutX="200.0" layoutY="250.0" prefHeight="27.0" prefWidth="40.0" AnchorPane.bottomAnchor="70"/>
-      <Label alignment="CENTER" layoutX="250.0" layoutY="200.0" text="Level 5:" textFill="DARKBLUE" AnchorPane.bottomAnchor="90">
+      <ChoiceBox fx:id="lv4Box" layoutX="815.0" layoutY="556.0" prefHeight="27.0" prefWidth="40.0" AnchorPane.bottomAnchor="161.0" />
+      <Label alignment="CENTER" layoutX="749.0" layoutY="606.0" text="Level 5:" textFill="DARKBLUE" AnchorPane.bottomAnchor="126.0">
          <font>
-            <Font name="System Bold" size="19.0" />
+            <Font name="System Bold" size="11.0" />
          </font>
       </Label>
-      <ChoiceBox fx:id = "lv5Box" layoutX="250.0" layoutY="250.0" prefHeight="27.0" prefWidth="40.0" AnchorPane.bottomAnchor="70"/>
-      <Label alignment="CENTER" layoutX="300.0" layoutY="200.0" text="Level 6:" textFill="DARKBLUE" AnchorPane.bottomAnchor="90">
+      <ChoiceBox fx:id="lv5Box" layoutX="815.0" layoutY="596.0" prefHeight="27.0" prefWidth="40.0" AnchorPane.bottomAnchor="121.0" />
+      <Label alignment="CENTER" layoutX="749.0" layoutY="639.0" text="Level 6:" textFill="DARKBLUE" AnchorPane.bottomAnchor="93.0">
          <font>
-            <Font name="System Bold" size="19.0" />
+            <Font name="System Bold" size="11.0" />
          </font>
       </Label>
-      <ChoiceBox fx:id = "lv6Box" layoutX="300.0" layoutY="250.0" prefHeight="27.0" prefWidth="40.0" AnchorPane.bottomAnchor="70"/>
-      <Button fx:id="cancelBtn" layoutX="200.0" layoutY="350.0" mnemonicParsing="false" onAction="#cancel" style="-fx-background-color: lightskyblue; -fx-border-color: black;" text="Cancel" AnchorPane.bottomAnchor="50"/>
-      <Button fx:id="confirmBtn" layoutX="400.0" layoutY="350.0" mnemonicParsing="false" onAction="#confirm" style="-fx-background-color: lightskyblue; -fx-border-color: black;" text="Confirm" AnchorPane.bottomAnchor="50"/>
+      <ChoiceBox fx:id="lv6Box" layoutX="815.0" layoutY="631.0" prefHeight="27.0" prefWidth="40.0" AnchorPane.bottomAnchor="86.0" />
+      <Button fx:id="cancelBtn" layoutX="603.0" layoutY="632.0" mnemonicParsing="false" onAction="#cancel" style="-fx-background-color: lightskyblue; -fx-border-color: black;" text="Cancel" AnchorPane.bottomAnchor="30.0" />
+      <Button fx:id="confirmBtn" layoutX="770.0" layoutY="629.0" mnemonicParsing="false" onAction="#confirm" style="-fx-background-color: lightskyblue; -fx-border-color: black;" text="Confirm" AnchorPane.bottomAnchor="33.0" />
     </children>
 </AnchorPane>
