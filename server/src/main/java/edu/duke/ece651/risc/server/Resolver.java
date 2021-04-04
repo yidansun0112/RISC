@@ -1,5 +1,7 @@
 package edu.duke.ece651.risc.server;
 
+import java.util.ArrayList;
+
 import edu.duke.ece651.risc.shared.Board;
 import edu.duke.ece651.risc.shared.Territory;
 
@@ -24,10 +26,13 @@ public interface Resolver<T> {
    */
   public void executeAllBattle(Board<T> board);
 
+  public void executeAllBattle(Board<T> board, ArrayList<String> combatInfo);
+
+
   /**
    * Execute all th battle on a territory.
    * 
    * @param battleField
    */
-  public void combatOnTerritory(Territory<T> battleField);
+  public void combatOnTerritory(Territory<T> battleField, ArrayList<String> combatInfo);
 }

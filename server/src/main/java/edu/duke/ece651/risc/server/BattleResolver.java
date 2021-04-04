@@ -50,12 +50,14 @@ public class BattleResolver<T> implements Resolver<T> {
   public void executeAllBattle(Board<T> board) {
     combineEnemyArmy(board);
     // go through territory and combatOnTerritory
+    ArrayList<String> combatInfo = new ArrayList<>();
     ArrayList<Territory<T>> territories = board.getTerritories();
     for (int i = 0; i < territories.size(); i++) {
-      combatOnTerritory(territories.get(i));
+      combatOnTerritory(territories.get(i), combatInfo);
     }
   }
 
+  
   /**
    * Execute combat on one territory
    * 
@@ -64,7 +66,7 @@ public class BattleResolver<T> implements Resolver<T> {
    * 
    * @param Territory<T> battleField
    */
-  public void combatOnTerritory(Territory<T> battleField) {
+  public void combatOnTerritory(Territory<T> battleField, ArrayList<String> combatInfo) {
     Vector<Army<T>> currDefender = battleField.getCurrDefenderArmy();
     Vector<Army<T>> enemyArmy = battleField.getEnemyArmy();
     // while loop until enemyArmy is empty
@@ -73,10 +75,13 @@ public class BattleResolver<T> implements Resolver<T> {
       int index = rdm.nextInt(enemyArmy.size());
       Army<T> defender = currDefender.get(0);
       Army<T> attacker = enemyArmy.get(index);
-      // winner = conbatBetween return
-      currDefender.set(0, combatBetween(defender, attacker));
+      Army<T> winner = combatBetween(defender, attacker);
+      currDefender.set(0, winner);
       // delete enemy
       enemyArmy.remove(index);
+      String newspaper = "In Territory "+battleField.getName()+", Defender "+defender.getCommanderId()+"(id) fight with Attacker"
+                        +attacker.getCommanderId()+"(id) and the Winner is " + winner.getCommanderId()+"(id).";
+      combatInfo.add(newspaper);
     }
     battleField.setOwner(currDefender.get(0).getCommanderId());
   }
@@ -109,6 +114,18 @@ public class BattleResolver<T> implements Resolver<T> {
       return defender;
     } else {
       return attacker;
+    }
+  }
+
+  // For Evol1 nothing will be executed.
+  @Override
+  public void executeAllBattle(Board<T> board, ArrayList<String> combatInfo) {
+    // TODO Auto-generated method stub
+    combineEnemyArmy(board);
+    // go through territory and combatOnTerritory
+    ArrayList<Territory<T>> territories = board.getTerritories();
+    for (int i = 0; i < territories.size(); i++) {
+      combatOnTerritory(territories.get(i), combatInfo);
     }
   }
 }
