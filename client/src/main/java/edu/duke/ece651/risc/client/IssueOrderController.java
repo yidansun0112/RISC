@@ -45,13 +45,13 @@ public class IssueOrderController implements Initializable{
   @FXML
   public void move(){
     PageLoader loader=new PageLoader(window,player);
-    loader.showMoveAttack();
+    loader.showMoveAttack("move");
   }
 
   @FXML
   public void attack(){
     PageLoader loader=new PageLoader(window,player);
-    loader.showMoveAttack();
+    loader.showMoveAttack("attack");
   }
 
   @FXML

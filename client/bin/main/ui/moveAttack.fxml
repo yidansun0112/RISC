@@ -25,7 +25,7 @@
             <Font name="System Bold" size="19.0" />
          </font>
       </Label>
-      <ChoiceBox fx:id = "targeBox" layoutX="400.0" layoutY="150.0" prefHeight="27.0" prefWidth="81.0" AnchorPane.bottomAnchor="110"/>
+      <ChoiceBox fx:id = "targetBox" layoutX="400.0" layoutY="150.0" prefHeight="27.0" prefWidth="81.0" AnchorPane.bottomAnchor="110"/>
       <Label alignment="CENTER" layoutX="0.0" layoutY="200.0" text="Level 0:" textFill="DARKBLUE" AnchorPane.bottomAnchor="90">
          <font>
             <Font name="System Bold" size="19.0" />

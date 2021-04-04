@@ -27,22 +27,22 @@
             <Font name="System Bold" size="12.0" />
          </font>
       </Hyperlink>
-      <Hyperlink fx:id="terr2" alignment="CENTER" layoutX="150.0" layoutY="200.0" text="terr2" textFill="DARKBLUE">
+      <Hyperlink fx:id="terr2" alignment="CENTER" layoutX="150.0" layoutY="200.0" text="terr2" onAction="#linkTwo">
          <font>
             <Font name="System Bold" size="12.0" />
          </font>
       </Hyperlink>
-      <Hyperlink fx:id="terr3" alignment="CENTER" layoutX="100.0" layoutY="150.0" text="terr3" textFill="DARKBLUE">
+      <Hyperlink fx:id="terr3" alignment="CENTER" layoutX="100.0" layoutY="150.0" text="terr3" onAction="#linkThree">
          <font>
             <Font name="System Bold" size="12.0" />
          </font>
       </Hyperlink>
-      <Hyperlink fx:id="terr4" alignment="CENTER" layoutX="100.0" layoutY="50.0" text="terr4" textFill="DARKBLUE">
+      <Hyperlink fx:id="terr4" alignment="CENTER" layoutX="100.0" layoutY="50.0" text="terr4" onAction="#linkFour">
          <font>
             <Font name="System Bold" size="12.0" />
          </font>
       </Hyperlink>
-      <Hyperlink fx:id="terr5" alignment="CENTER" layoutX="100.0" layoutY="200.0" text="terr5" textFill="DARKBLUE">
+      <Hyperlink fx:id="terr5" alignment="CENTER" layoutX="100.0" layoutY="200.0" text="terr5" onAction="#linkFive">
          <font>
             <Font name="System Bold" size="12.0" />
          </font>

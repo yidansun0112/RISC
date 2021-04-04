@@ -14,6 +14,7 @@ import javafx.fxml.Initializable;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.ChoiceBox;
+import javafx.scene.control.Label;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
 
@@ -26,6 +27,8 @@ public class DeployUnitsController implements Initializable{
   private Button confirmBtn;
   @FXML
   private ChoiceBox<String> terrBox;
+  @FXML
+  private Label waitLabel;
   @FXML
   private ChoiceBox<Integer> amountBox;
   private Stage window;
@@ -58,10 +61,17 @@ public class DeployUnitsController implements Initializable{
     box.display("stay", "Ok", deployResult);
     Object obj=player.receiveObject();
     if(obj instanceof String){
+      waitLabel.setText("Finished! Please wait for other players to deploy!");
+      player.gameStatus=(GameStatus<String>)player.receiveObject();
       PageLoader loader=new PageLoader(window, player);
       loader.showIssueOrderPage();
     }else{
-      player.gameStatus=(GameStatus)obj;
+      GameStatus<String> status=(GameStatus<String>)obj;
+      int amount=status.getGameBoard().getTerritories().get(0).getCurrDefenderArmy().get(0).getUnitAmtByLevel(0);
+      System.out.println(amount);
+      player.gameStatus=(GameStatus<String>)obj;
+      amount=player.gameStatus.getGameBoard().getTerritories().get(0).getCurrDefenderArmy().get(0).getUnitAmtByLevel(0);
+      System.out.println(amount);
       int remainedUnits=(int)player.receiveObject();
       setAmountBox(remainedUnits);
     }
@@ -70,7 +80,7 @@ public class DeployUnitsController implements Initializable{
   public void initialize(URL url, ResourceBundle rb){
     PageLoader loader=new PageLoader(window, player);
     loader.putMap(rootPane, mapPane);
-    player.gameStatus=(GameStatus)player.receiveObject();
+    //player.gameStatus=(GameStatus<String>)player.receiveObject();
     int remainedUnits=(int)player.receiveObject();
     setTerrBox();
     setAmountBox(remainedUnits);

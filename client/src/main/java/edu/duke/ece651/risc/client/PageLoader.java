@@ -149,11 +149,11 @@ public class PageLoader {
     AnchorPane.setBottomAnchor(mapPane,200.0);
   }
 
-  public void showMoveAttack(){
+  public void showMoveAttack(String type){
     FXMLLoader loader = new FXMLLoader(getClass().getResource("/ui/moveAttack.fxml"));
       loader.setControllerFactory(c -> {
         if(c.equals(MoveAttackController.class)){
-          return new MoveAttackController(window,player);
+          return new MoveAttackController(window,player,type);
         }
         try{
           return c.getConstructor().newInstance();
