@@ -100,7 +100,7 @@ public class V2GameHostThread<T> extends Thread {
   public void pickTerritory() throws IOException, ClassNotFoundException {
     // NOTE: SEND GameStatus to client - used to show the board when picking
     // territory
-    player.sendObject(makeLatestGameStatus(true)); // this line is different with evo 1
+    // player.sendObject(makeLatestGameStatus(true)); // this line is different with evo 1
     while (true) {
       // NOTE: RECEIVE String from client - used to try to occupy the specified
       // territory
