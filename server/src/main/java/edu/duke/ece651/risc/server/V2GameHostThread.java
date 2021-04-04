@@ -110,7 +110,7 @@ public class V2GameHostThread<T> extends Thread {
         player.setOwnedGroup(Integer.parseInt(choice));
         player.sendObject(Constant.VALID_MAP_CHOICE_INFO);
         //wait for all players finish pick territory
-        barrier.await();
+        //barrier.await();
         break;
       } else {
         player.sendObject(Constant.INVALID_MAP_CHOICE_INFO);

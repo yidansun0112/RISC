@@ -36,7 +36,7 @@ public class IssueOrderController implements Initializable{
     this.window = window;
     this.player=player;
     PageLoader loader=new PageLoader(window, player);
-    mapPane=loader.loadMap("/ui/map2link.fxml");
+    mapPane=loader.loadMap();
   }
 
 

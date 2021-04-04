@@ -12,9 +12,14 @@ import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.Label;
+import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
 
 public class PickTerritoryController {
+    @FXML
+    AnchorPane mapPane;
+    @FXML
+    AnchorPane rootPane;
     @FXML
     private ChoiceBox<String> groupNumBox;
     @FXML
@@ -26,10 +31,14 @@ public class PickTerritoryController {
       this.window = window;
       this.player=player;
       groupNumBox = new ChoiceBox<>();
+      PageLoader loader=new PageLoader(window,player);
+      mapPane=loader.loadPureMap();
     }
 
     @FXML
     public void initialize() {
+        PageLoader loader=new PageLoader(window,player);
+        loader.putMap(rootPane, mapPane);
         groupNumBox.setValue("0");
         for(int i=0;i<player.playerNum;i++){
             groupNumBox.getItems().add(Integer.toString(i));

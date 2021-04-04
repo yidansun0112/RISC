@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.image.*?>
+<?import javafx.scene.text.*?>
+<?import java.lang.*?>
+<?import java.util.*?>
+<?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<AnchorPane prefHeight="528.0" prefWidth="693.0" style="-fx-border-color: lightskyblue; -fx-border-width: 10;" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.duke.ece651.risc.client.MapLinkController">
+   <children>
+      <fx:include fx:id="terrInfo" layoutX="200.0" layoutY="50.0" prefHeight="230.0" prefWidth="100.0" source="terrInfo.fxml" AnchorPane.bottomAnchor="70" AnchorPane.rightAnchor="0" AnchorPane.topAnchor="0" />
+      <fx:include fx:id="playerInfo" layoutX="200.0" layoutY="300.0" prefHeight="80.0" prefWidth="100.0" source="playerInfo.fxml" AnchorPane.bottomAnchor="0" AnchorPane.rightAnchor="0" AnchorPane.topAnchor="300" />
+      <ImageView fx:id="map4" fitHeight="300.0" fitWidth="300.0" layoutX="7.0" layoutY="29.0" pickOnBounds="true" preserveRatio="true" AnchorPane.bottomAnchor="227.75912475585938" AnchorPane.leftAnchor="7.0" AnchorPane.rightAnchor="406.0" AnchorPane.topAnchor="29.0">
+         <image>
+            <Image url="@../map/map4.jpg" />
+         </image>
+      </ImageView>
+      <Hyperlink fx:id="terr0" alignment="CENTER" layoutX="150.0" layoutY="190.0" onAction="#linkZero" text="terr0">
+         <font>
+            <Font name="System Bold" size="12.0" />
+         </font>
+      </Hyperlink>
+      <Hyperlink fx:id="terr1" alignment="CENTER" layoutX="254.0" layoutY="190.0" onAction="#linkOne" text="terr1">
+         <font>
+            <Font name="System Bold" size="12.0" />
+         </font>
+      </Hyperlink>
+      <Hyperlink fx:id="terr2" alignment="CENTER" layoutX="150.0" layoutY="200.0" text="terr2" onAction="#linkTwo">
+         <font>
+            <Font name="System Bold" size="12.0" />
+         </font>
+      </Hyperlink>
+      <Hyperlink fx:id="terr3" alignment="CENTER" layoutX="100.0" layoutY="150.0" text="terr3" onAction="#linkThree">
+         <font>
+            <Font name="System Bold" size="12.0" />
+         </font>
+      </Hyperlink>
+      <Hyperlink fx:id="terr4" alignment="CENTER" layoutX="100.0" layoutY="50.0" text="terr4" onAction="#linkFour">
+         <font>
+            <Font name="System Bold" size="12.0" />
+         </font>
+      </Hyperlink>
+      <Hyperlink fx:id="terr5" alignment="CENTER" layoutX="100.0" layoutY="200.0" text="terr5" onAction="#linkFive">
+         <font>
+            <Font name="System Bold" size="12.0" />
+         </font>
+      </Hyperlink>
+      <Hyperlink fx:id="terr6" alignment="CENTER" layoutX="100.0" layoutY="250.0" text="terr6" onAction="#linkSix">
+         <font>
+            <Font name="System Bold" size="12.0" />
+         </font>
+      </Hyperlink>
+      <Hyperlink fx:id="terr7" alignment="CENTER" layoutX="100.0" layoutY="300.0" text="terr7" onAction="#linkSeven">
+         <font>
+            <Font name="System Bold" size="12.0" />
+         </font>
+      </Hyperlink>
+      <Hyperlink fx:id="terr8" alignment="CENTER" layoutX="100.0" layoutY="350.0" text="terr8" onAction="#linkEight">
+         <font>
+            <Font name="System Bold" size="12.0" />
+         </font>
+      </Hyperlink>
+      <Hyperlink fx:id="terr9" alignment="CENTER" layoutX="150.0" layoutY="250.0" text="terr9" onAction="#linkNine">
+         <font>
+            <Font name="System Bold" size="12.0" />
+         </font>
+      </Hyperlink>
+      <Hyperlink fx:id="terr10" alignment="CENTER" layoutX="150.0" layoutY="300.0" text="terr10" onAction="#linkTen">
+         <font>
+            <Font name="System Bold" size="12.0" />
+         </font>
+      </Hyperlink>
+      <Hyperlink fx:id="terr11" alignment="CENTER" layoutX="150.0" layoutY="350.0" text="terr11" onAction="#linkEleven">
+         <font>
+            <Font name="System Bold" size="12.0" />
+         </font>
+      </Hyperlink>
+   </children>
+</AnchorPane>

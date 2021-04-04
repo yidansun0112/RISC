@@ -40,7 +40,7 @@ public class DeployUnitsController implements Initializable{
     terrBox=new ChoiceBox<>();
     amountBox=new ChoiceBox<>();
     PageLoader loader=new PageLoader(window, player);
-    mapPane=loader.loadMap("/ui/map2link.fxml");
+    mapPane=loader.loadMap();
   }
 
   public void sendDeployment(){

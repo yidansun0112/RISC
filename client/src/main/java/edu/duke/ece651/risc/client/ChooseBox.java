@@ -32,6 +32,7 @@ public class ChooseBox {
     label.setText(message);
     Button levelButton = new Button("upgrade Tech level");
     Button unitsButton = new Button("upgrade units");
+    Button cancelButton=new Button("Cancel");
     levelButton.setOnAction( e -> {
       alterWindow.close();
       sendUpgradeTechLevel();
@@ -41,8 +42,12 @@ public class ChooseBox {
         alterWindow.close();
         jumpUpgradeUnitsrPage(alterWindow);
     });
+
+    cancelButton.setOnAction(
+      e->alterWindow.close()
+    );
     VBox layout = new VBox(10);
-    layout.getChildren().addAll(label, levelButton, unitsButton);
+    layout.getChildren().addAll(label, levelButton, unitsButton,cancelButton);
     Scene scene = new Scene(layout);
     alterWindow.setScene(scene);
     alterWindow.showAndWait();

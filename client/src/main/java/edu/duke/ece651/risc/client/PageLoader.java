@@ -76,7 +76,7 @@ public class PageLoader {
   public void showChooseMapPage(){
     FXMLLoader loader = new FXMLLoader(getClass().getResource("/ui/chooseMap.fxml"));
     loader.setControllerFactory(c -> {
-      return new StartController(window,player);
+      return new ChooseMapController(window,player);
     });
     showPage(loader);
   }
@@ -104,9 +104,33 @@ public class PageLoader {
     showPage(loader);
   }
 
-  public AnchorPane loadMap(String resource){
+
+  public AnchorPane loadPureMap(){
+    String mapResource="/ui/map"+Integer.toString(player.playerNum)+".fxml";
     AnchorPane mapPane;
-    FXMLLoader mapLoader = new FXMLLoader(getClass().getResource(resource));
+    FXMLLoader mapLoader = new FXMLLoader(getClass().getResource(mapResource));
+    mapLoader.setControllerFactory(c -> {
+      if(c.equals(StartController.class)){
+        return new StartController(window,player);
+      }
+      try{
+        return c.getConstructor().newInstance();
+      }catch(Exception e){
+        throw new RuntimeException(e);
+      }
+    });
+    try{
+      mapPane=mapLoader.load();
+    }catch(Exception e){
+      throw new RuntimeException(e);
+    }
+    return mapPane;
+  }
+
+  public AnchorPane loadMap(){
+    String mapResource="/ui/map"+Integer.toString(player.playerNum)+"link.fxml";
+    AnchorPane mapPane;
+    FXMLLoader mapLoader = new FXMLLoader(getClass().getResource(mapResource));
     mapLoader.setControllerFactory(c -> {
       if(c.equals(MapLinkController.class)){
         return new MapLinkController(player);

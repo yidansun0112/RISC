@@ -57,7 +57,7 @@ public class UpgradeUnitsController implements Initializable{
     toBox=new ChoiceBox<>();
     amountBox=new ChoiceBox<>();
     PageLoader loader=new PageLoader(window,player);
-    mapPane=loader.loadMap("/ui/map2link.fxml");
+    mapPane=loader.loadMap();
   }
 
   @FXML

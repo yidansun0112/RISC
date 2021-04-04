@@ -149,8 +149,8 @@ public abstract class PlayerEntity<T> implements Serializable{
    */
   public void sendObject(Object o) {
     try {
+      toPlayer.reset();
       toPlayer.writeObject(o);
-      toPlayer.flush();
     } catch (IOException e) {
       e.printStackTrace();
       setIsInRoomNow(false); // if an IOException throws here, it indicates that the

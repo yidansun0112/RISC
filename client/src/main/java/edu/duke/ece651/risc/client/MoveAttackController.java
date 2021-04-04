@@ -58,7 +58,7 @@ public class MoveAttackController implements Initializable{
     this.player=player;
     this.type=type;
     PageLoader loader=new PageLoader(window,player);
-    mapPane=loader.loadMap("/ui/map2link.fxml");
+    mapPane=loader.loadMap();
     this.sourceBox=new ChoiceBox<String>();
     this.targetBox=new ChoiceBox<String>();
     this.lv0Box=new ChoiceBox<Integer>();
