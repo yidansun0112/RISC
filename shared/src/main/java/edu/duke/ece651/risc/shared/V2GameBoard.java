@@ -44,7 +44,7 @@ public class V2GameBoard<T> extends V1GameBoard<T> {
     // For the int[], int[0] is the territory ID, int[1] is the previour Territory Id, int[2] is the value.
     PriorityQueue<int[]> priorityQ = new PriorityQueue<int[]>(new Comparator<int[]>(){
       public int compare(int[] edge1, int[] edge2){
-        return edge1[3]- edge2[3];
+        return edge1[2]- edge2[2];
       }
     });
     // Iterate Over all of the territories to add the Player's Territory to the PriorityQueue.
@@ -57,11 +57,11 @@ public class V2GameBoard<T> extends V1GameBoard<T> {
       }
     }
 
-    priorityQ.offer(new int[]{srcTerritoryId, srcTerritoryId, 0});
+    priorityQ.offer(new int[]{srcTerritoryId, srcTerritoryId, 5});
     while(!priorityQ.isEmpty()){
       int[] u = priorityQ.poll();
       // As s alway maintain the minPathSet. So if we encounter the srcTerritoryId, we can just return the value;
-      if(u[0] == srcTerritoryId){
+      if(u[0] == destTerritoryId){
         return u[2];
       }
       s.add(u[0]);
@@ -69,9 +69,9 @@ public class V2GameBoard<T> extends V1GameBoard<T> {
       for(int[] terr : priorityQ){
         // If the terr is the Player's terr and adjacent, we relax
         if(worldMap[u[0]][terr[0]] > 0){
-          if(terr[2] > u[2] + worldMap[u[0]][terr[0]]){
+          if(terr[2] > u[2] + territories.get(terr[0]).getSize()){
             terr[1] = u[0];
-            terr[2] = u[2] + worldMap[u[0]][terr[0]];
+            terr[2] = u[2] + territories.get(terr[0]).getSize();
           }
         }else{
           continue;
