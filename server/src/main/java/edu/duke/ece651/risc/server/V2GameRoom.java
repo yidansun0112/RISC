@@ -205,6 +205,7 @@ public class V2GameRoom extends GameRoom<String> {
       System.out.println("All players done with their orders");
 
       resolver.executeAllBattle(gameBoard);
+      // TODO: broadcast all battle reuslts to all players here - use sendToAllPlayer()
       incrementUnits();
       gameBoard.updateAllPrevDefender();
       updateAllPlayer(); // we need to update AFTER all combats finished

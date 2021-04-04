@@ -380,13 +380,14 @@ public class V2GameHostThread<T> extends Thread {
       barrier.await();
       while (true) {
         receiveOrder();
-        barrier.await();
-        barrier.await();
+        barrier.await(); // waiting for other players done
+        barrier.await(); // waiting for the server finish all the battle and other stuff
 
         // synchronized(System.in){
         // System.out.println(player.playerId + " " + player.playerStatus);
         // }
 
+        // One turn is done, now send the latest game status to player
         player.sendObject(makeLatestGameStatus(true)); // this line is different with evo 1
         if (checkWinLose()) {
           break;
