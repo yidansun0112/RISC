@@ -32,6 +32,8 @@ subprojects{
 
     dependencies {
         implementation 'com.google.guava:guava:28.0-jre'
+        // JSON library to build/send/receive JSON strings
+        implementation 'org.json:json:20190722'
         testImplementation 'org.junit.jupiter:junit-jupiter-api:5.5.1'
         testRuntimeOnly 'org.junit.jupiter:junit-jupiter-engine:5.5.1'
         clover 'org.openclover:clover:4.3.1'

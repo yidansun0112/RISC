@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.image.*?>
+<?import javafx.scene.text.*?>
+<?import java.lang.*?>
+<?import java.util.*?>
+<?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<AnchorPane prefHeight="400.0" prefWidth="600.0" style="-fx-border-color: lightskyblue; -fx-border-width: 10;" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.duke.ece651.risc.client.RegisterLoginController">
+   <children>
+      <Button fx:id="registerBtn" layoutX="150.0" layoutY="257.0" mnemonicParsing="false" onAction="#register" style="-fx-background-color: lightskyblue; -fx-border-color: black;" text="Register">
+         <font>
+            <Font size="19.0" />
+         </font>
+         <cursor>
+            <Cursor fx:constant="HAND" />
+         </cursor></Button>
+      <Button fx:id="loginBtn" layoutX="250.0" layoutY="257.0" mnemonicParsing="false" onAction="#login" style="-fx-background-color: lightskyblue; -fx-border-color: black;" text="Login">
+         <font>
+            <Font size="19.0" />
+         </font>
+         <cursor>
+            <Cursor fx:constant="HAND" />
+         </cursor></Button>
+      <Label alignment="CENTER" layoutX="268.0" layoutY="104.0" text="Please register or login to the game" textFill="DARKBLUE">
+         <font>
+            <Font name="System Bold" size="20.0" />
+         </font>
+      </Label>
+      <Label fx:id="info" layoutX="280.0" layoutY="250.0" text="">
+         <font>
+            <Font size="15.0" />
+         </font>
+      </Label>
+      <Label layoutX="280.0" layoutY="150.0" text="Username">
+         <font>
+            <Font size="15.0" />
+         </font>
+      </Label>
+      <Label layoutX="280.0" layoutY="200.0" text="Password">
+         <font>
+            <Font size="15.0" />
+         </font>
+      </Label>
+      <TextField fx:id="usernameField" layoutX="13.0" layoutY="150.0" prefHeight="27.0" prefWidth="281.0" />
+      <TextField fx:id="passwordField" layoutX="13.0" layoutY="200.0" prefHeight="27.0" prefWidth="281.0" />
+   </children>
+</AnchorPane>

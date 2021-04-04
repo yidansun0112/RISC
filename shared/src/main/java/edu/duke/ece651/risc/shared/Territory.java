@@ -1,8 +1,9 @@
 package edu.duke.ece651.risc.shared;
 
+import java.io.Serializable;
 import java.util.*;
 
-public interface Territory<T> {
+public interface Territory<T> extends Serializable{
   /**
    * This function gets the amount of units in defender army of current defender
    * (when display for self) or prev defender (when display to enemy players)

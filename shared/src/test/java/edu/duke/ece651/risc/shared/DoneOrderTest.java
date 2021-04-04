@@ -11,7 +11,7 @@ public class DoneOrderTest {
     BoardFactory<String> f = new V1BoardFactory<String>();
     Board<String> b = f.makeGameBoard(2);
 
-    GameStatus<String> gs = new GameStatus<>(null, b);
+    GameStatus<String> gs = new GameStatus<>(null, b, false);
 
     assertEquals(true, order.execute(b));
     assertEquals(true, order.execute(gs));

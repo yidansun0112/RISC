@@ -8,6 +8,6 @@ import java.io.IOException;
  */
 
 public interface GameServer<T> {
-  public void connectAll() throws IOException;
-  public void closeServer() throws IOException;
+  // public void connectAll() throws IOException;
+  // public void closeServer() throws IOException;
 }

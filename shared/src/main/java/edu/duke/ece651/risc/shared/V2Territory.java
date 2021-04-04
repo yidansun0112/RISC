@@ -4,6 +4,11 @@ import java.util.HashMap;
 
 public class V2Territory<T> extends V1Territory<T> {
 
+  /**
+   * Fields required by Serializable
+   */
+  private static final long serialVersionUID = 14L;
+
   /** The size of this territory */
   int size;
 
@@ -46,7 +51,7 @@ public class V2Territory<T> extends V1Territory<T> {
    */
   @Override
   public void updatePrevDefender() {
-    if (currDefenderArmy.isEmpty()) { // will only this if-clause once at the beginning of the game before
+    if (currDefenderArmy.isEmpty()) { // will only enter this if-clause once at the beginning of the game before
                                       // pickTerritory
       Army<T> helperArmy = new V2Army<T>(-1); // helper instance
       currDefenderArmy.add(helperArmy);
@@ -77,7 +82,7 @@ public class V2Territory<T> extends V1Territory<T> {
    * version implementation.
    */
   @Override
-  public void combineEnemyArmy() {
+  public synchronized void combineEnemyArmy() {
     HashMap<Integer, Army<T>> commanderToArmy = new HashMap<Integer, Army<T>>();
     for (Army<T> a : enemyArmy) {
       int commander = a.getCommanderId();

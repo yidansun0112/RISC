@@ -3,11 +3,16 @@ package edu.duke.ece651.risc.shared;
 import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
+import java.io.Serializable;
 
 /**
  * This class is to represent a player that in a game room in server side.
  */
-public abstract class PlayerEntity<T> {
+public abstract class PlayerEntity<T> implements Serializable{
+  /**
+   * Fields required by Serializable
+   */
+  private static final long serialVersionUID = 9;
   // TODO: two fields below (object input/output streams) may need to be @Transit
   /** Send data to player */
   protected ObjectOutputStream toPlayer;
@@ -22,6 +27,19 @@ public abstract class PlayerEntity<T> {
   protected int ownedGroup; // before picking any territory group, this is -1
   /** An integer indicating the status of player, defined in Constant class */
   protected int playerStatus;
+
+  /**
+   * Indicate whether the player is currently in this game room. True if the
+   * player is in the current game room; False if the player disconnect and leave
+   * the game room (may comeback later)
+   * 
+   * Note that in evolution 1 this field is NOT USED, since there is only one room
+   * in evo1 and all players keep in the room until the game ends and the room is
+   * deleted along with the server is closed.
+   * 
+   * @since evolution 2
+   */
+  boolean isInRoomNow;
 
   /**
    * Constructor that initialize corresponding fields with parameters.
@@ -41,6 +59,8 @@ public abstract class PlayerEntity<T> {
     this.playerSymbol = playerSymbol;
     this.ownedGroup = ownedGroup;
     this.playerStatus = playerStatus;
+    this.isInRoomNow = true; // in evo1, the player entity will be in the room in the whole game process,
+                             // since there is no option to leave the room in evo1.
   }
 
   /**
@@ -49,9 +69,9 @@ public abstract class PlayerEntity<T> {
    * 
    * @since evolution 2
    * 
-   * @param gs the GameStatus object which contains all the territory
+   * @param board the Board object which contains all the territories
    */
-  public abstract void harvestAllResource(GameStatus<T> gs);
+  public abstract void harvestAllResource(Board<T> board);
 
   /**
    * This method will return the food resource possessed by this player.
@@ -124,11 +144,16 @@ public abstract class PlayerEntity<T> {
    * Send an object to the player via ObjectOutputStream. This method is used to
    * send self-defined object as well as simple String messages.
    * 
-   * @param o
-   * @throws IOException
+   * @param o the object to be sent to the client
    */
-  public void sendObject(Object o) throws IOException {
-    toPlayer.writeObject(o);
+  public void sendObject(Object o) {
+    try {
+      toPlayer.writeObject(o);
+    } catch (IOException e) {
+      e.printStackTrace();
+      setIsInRoomNow(false); // if an IOException throws here, it indicates that the
+                             // socket connection has closed at the client side.
+    }
   }
 
   /**
@@ -137,10 +162,17 @@ public abstract class PlayerEntity<T> {
    * 
    * @return the Object recieved
    * @throws ClassNotFoundException
-   * @throws IOException
    */
-  public Object receiveObject() throws ClassNotFoundException, IOException {
-    return fromPlayer.readObject();
+  public Object receiveObject() throws ClassNotFoundException {
+    Object data = null; // let the caller fail fast
+    try {
+      data = fromPlayer.readObject();
+    } catch (IOException e) {
+      e.printStackTrace();
+      setIsInRoomNow(false); // if an IOException throws here, it indicates that the
+                             // socket connection has closed at the client side.
+    }
+    return data;
   }
 
   /**
@@ -225,6 +257,24 @@ public abstract class PlayerEntity<T> {
    */
   public ObjectInputStream getFromPlayer() {
     return fromPlayer;
+  }
+
+  /**
+   * @since evolution 2. This method IS NOT USED in evo1.
+   * 
+   * @return the isInRoomNow
+   */
+  public boolean getIsInRoomNow() {
+    return isInRoomNow;
+  }
+
+  /**
+   * @since evolution 2. This method IS NOT USED in evo1.
+   * 
+   * @param isInRoomNow the isInRoomNow to set
+   */
+  public void setIsInRoomNow(boolean isInRoomNow) {
+    this.isInRoomNow = isInRoomNow;
   }
 
 }

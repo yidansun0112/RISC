@@ -29,6 +29,10 @@ import java.util.Map;
  */
 public class V2Army<T> extends Army<T> {
   /**
+   * Fields required by Serializable
+   */
+  private static final long serialVersionUID = 16L;
+  /**
    * The key is unit level, the value is an arraylist that contains all the units
    * at this level.
    */

@@ -55,3 +55,6 @@ shared/.project
 
 #Ignore .settings
 .settings/
+
+#Don't ignore gradle/wrapper/
+!gradle/wrapper/gradle-6.3-bin.zip

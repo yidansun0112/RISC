@@ -13,12 +13,12 @@ import java.util.concurrent.CyclicBarrier;
 
 import edu.duke.ece651.risc.shared.*;
 
-public class GameHostThreadTest {
+public class V1GameHostThreadTest {
 
   @Mock
   private PlayerEntity<String> playerMock;
 
-  private GameHostThread<String> createGameHostThread(int num) {
+  private V1GameHostThread<String> createGameHostThread(int num) {
     BoardFactory<String> factory = new V1BoardFactory<String>();
     Board<String> board = factory.makeGameBoard(num);
     board.updateAllPrevDefender();
@@ -28,7 +28,7 @@ public class GameHostThreadTest {
     OrderRuleChecker<String> attackChecker = new AttackOrderConsistencyChecker<String>(
         new AttackOrderPathChecker<String>(new AttackOrderEffectChecker<String>(null)));
     CyclicBarrier barrier = new CyclicBarrier(num + 1);
-    return new GameHostThread<String>(playerMock, Constant.TOTAL_UNITS, board, view, moveChecker, attackChecker,
+    return new V1GameHostThread<String>(playerMock, Constant.TOTAL_UNITS, board, view, moveChecker, attackChecker,
         barrier);
   }
 
@@ -37,7 +37,7 @@ public class GameHostThreadTest {
     MockitoAnnotations.initMocks(this);
     when(playerMock.getPlayerId()).thenReturn(0);
     when(playerMock.receiveObject()).thenReturn("4", "0");
-    GameHostThread<String> gameThread = createGameHostThread(2);
+    V1GameHostThread<String> gameThread = createGameHostThread(2);
     gameThread.pickTerritory();
   }
 
@@ -50,7 +50,7 @@ public class GameHostThreadTest {
     ArrayList<Integer> d2 = createArrayList(0, 20);
     ArrayList<Integer> d3 = createArrayList(0, 15);
     when(playerMock.receiveObject()).thenReturn("0", d0, d1, d2, d3);
-    GameHostThread<String> gameThread = createGameHostThread(2);
+    V1GameHostThread<String> gameThread = createGameHostThread(2);
     gameThread.pickTerritory();
     gameThread.deployUnits();
   }
@@ -72,7 +72,7 @@ public class GameHostThreadTest {
     Order<String> attackOrder = new AttackOrder<String>("0 3 5");
     Order<String> doneOrder = new DoneOrder<String>();
     when(playerMock.receiveObject()).thenReturn("0", deploy, illegalMoveOrder, legalMoveOrder, attackOrder, doneOrder);
-    GameHostThread<String> gameThread = createGameHostThread(2);
+    V1GameHostThread<String> gameThread = createGameHostThread(2);
     gameThread.pickTerritory();
     gameThread.deployUnits();
     gameThread.receiveOrder();
@@ -83,7 +83,7 @@ public class GameHostThreadTest {
       throws IOException, ClassNotFoundException, InterruptedException, BrokenBarrierException {
     MockitoAnnotations.initMocks(this);
     when(playerMock.getPlayerStatus()).thenReturn(Constant.SELF_NOT_LOSE_NO_ONE_WIN_STATUS, 5);
-    GameHostThread<String> gameThread = createGameHostThread(2);
+    V1GameHostThread<String> gameThread = createGameHostThread(2);
     assertEquals(false, gameThread.checkWinLose());
     assertEquals(false, gameThread.checkWinLose());
   }

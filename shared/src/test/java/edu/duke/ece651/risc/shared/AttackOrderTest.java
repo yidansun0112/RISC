@@ -34,7 +34,7 @@ public class AttackOrderTest {
     // assertEquals(true, a1.execute(b));
 
     // Test execute method which takes in a game status, even if this method is not used in evo 2
-    GameStatus<String> gs = new GameStatus<>(null, b); // player entity is not used in attack order in evo 1
+    GameStatus<String> gs = new GameStatus<>(null, b, false); // player entity is not used in attack order in evo 1
     assertEquals(true, a1.execute(gs));
 
     assertEquals(1, b.getTerritories().get(a1.getSrcTerritory()).getBasicDefendUnitAmount());
