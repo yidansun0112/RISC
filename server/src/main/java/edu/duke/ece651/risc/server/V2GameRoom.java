@@ -1,5 +1,6 @@
 package edu.duke.ece651.risc.server;
 
+import java.util.ArrayList;
 import java.util.Random;
 import java.util.concurrent.BrokenBarrierException;
 import java.util.concurrent.CyclicBarrier;
@@ -204,8 +205,9 @@ public class V2GameRoom extends GameRoom<String> {
 
       System.out.println("All players done with their orders");
 
-      resolver.executeAllBattle(gameBoard);
-      // TODO: broadcast all battle reuslts to all players here - use sendToAllPlayer()
+      ArrayList<String> combatInfo = new ArrayList<>();
+      resolver.executeAllBattle(gameBoard,combatInfo);
+
       incrementUnits();
       gameBoard.updateAllPrevDefender();
       updateAllPlayer(); // we need to update AFTER all combats finished

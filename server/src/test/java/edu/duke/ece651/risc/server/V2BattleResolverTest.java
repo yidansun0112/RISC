@@ -42,8 +42,10 @@ public class V2BattleResolverTest {
      * Territory<String> t = territory.get(1); resolver.combatOnTerritory(t);
      * assertEquals(t.getOwner(),2); assertEquals(t.getUnitAmount(),3);
      */
-
-    resolver.executeAllBattle(b);
+    ArrayList<String> combatInfo = new ArrayList<>();
+    resolver.executeAllBattle(b, combatInfo);
+    //resolver.executeAllBattle(b);
+    //assertEquals(null, combatInfo.get(0));
     ArrayList<Territory<String>> territory = b.getTerritories();
     assertEquals(0,territory.get(1).getOwner());
   }
