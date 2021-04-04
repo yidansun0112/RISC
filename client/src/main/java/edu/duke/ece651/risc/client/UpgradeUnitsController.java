@@ -2,8 +2,15 @@ package edu.duke.ece651.risc.client;
 
 import java.io.IOException;
 import java.net.URL;
+import java.util.ArrayList;
 import java.util.ResourceBundle;
 
+import edu.duke.ece651.risc.shared.Army;
+import edu.duke.ece651.risc.shared.Constant;
+import edu.duke.ece651.risc.shared.GameStatus;
+import edu.duke.ece651.risc.shared.Order;
+import edu.duke.ece651.risc.shared.Territory;
+import edu.duke.ece651.risc.shared.V2UpgradeUnitOrder;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
@@ -30,11 +37,11 @@ public class UpgradeUnitsController implements Initializable{
   @FXML
   private ChoiceBox<String> terrBox;
   @FXML
-  private ChoiceBox<String> fromBox;
+  private ChoiceBox<Integer> fromBox;
   @FXML
-  private ChoiceBox<String> toBox;
+  private ChoiceBox<Integer> toBox;
   @FXML
-  private ChoiceBox<String> amountBox;
+  private ChoiceBox<Integer> amountBox;
   // @FXML
   // Hyperlink terr0;
   // @FXML
@@ -49,22 +56,6 @@ public class UpgradeUnitsController implements Initializable{
     fromBox=new ChoiceBox<>();
     toBox=new ChoiceBox<>();
     amountBox=new ChoiceBox<>();
-    // FXMLLoader mapLoader = new FXMLLoader(getClass().getResource("/ui/map2link.fxml"));
-    // mapLoader.setControllerFactory(c -> {
-    //   if(c.equals(MapLinkController.class)){
-    //     return new MapLinkController(player);
-    //   }
-    //   try{
-    //     return c.getConstructor().newInstance();
-    //   }catch(Exception e){
-    //     throw new RuntimeException(e);
-    //   }
-    // });
-    // try{
-    //   mapPane=mapLoader.load();
-    // }catch(Exception e){
-    //   throw new RuntimeException(e);
-    // }
     PageLoader loader=new PageLoader(window,player);
     mapPane=loader.loadMap("/ui/map2link.fxml");
   }
@@ -73,8 +64,16 @@ public class UpgradeUnitsController implements Initializable{
   public void confirm(){
     // pop up a alert box, saying if the order is legal
     //back button of the window would go back to issue order scene whether legal or illegal
+    int terrId=Constant.terrNameToId.get(terrBox.getValue());
+    int fromLevel=fromBox.getValue();
+    int toLevel=toBox.getValue();
+    int amount=amountBox.getValue();
+    Order<String> order=new V2UpgradeUnitOrder<String>(terrId, fromLevel, toLevel, amount);
+    player.sendObject(order);
+    String result=(String)player.receiveObject();
+    player.gameStatus=(GameStatus<String>)player.receiveObject();
     AlterBox alterBox=new AlterBox(window, player);
-    alterBox.display("orderConfirm", "Back", "Your order is legal");
+    alterBox.display("orderConfirm", "Back", result);
   }
 
   @FXML
@@ -86,6 +85,44 @@ public class UpgradeUnitsController implements Initializable{
   public void initialize(URL url, ResourceBundle rb){
     PageLoader loader=new PageLoader(window,player);
     loader.putMap(rootPane, mapPane);
+    setSelfTerr(terrBox);
+    setLevelAmount(fromBox,0,Constant.TOTAL_LEVELS-1);
+    setLevelAmount(toBox, 1,Constant.TOTAL_LEVELS);
+    setLevelAmount(amountBox, 0, 0);
+    terrBox.getSelectionModel().selectedItemProperty().addListener((v, oldValue, newValue) -> {
+      int terrId=Constant.terrNameToId.get(newValue);
+      ArrayList<Territory<String>> territories=player.gameStatus.getGameBoard().getTerritories();
+      Territory<String> terr=territories.get(terrId);
+      Army<String> currDefenderArmy=terr.getCurrDefenderArmy().get(0);
+      setLevelAmount(amountBox, 0, currDefenderArmy.getUnitAmtByLevel(fromBox.getValue()));
+    } );
+    fromBox.getSelectionModel().selectedItemProperty().addListener((v, oldValue, newValue) -> {
+      setLevelAmount(toBox, newValue+1, Constant.TOTAL_LEVELS);
+      int terrId=Constant.terrNameToId.get(terrBox.getValue());
+      ArrayList<Territory<String>> territories=player.gameStatus.getGameBoard().getTerritories();
+      Territory<String> terr=territories.get(terrId);
+      Army<String> currDefenderArmy=terr.getCurrDefenderArmy().get(0);
+      setLevelAmount(amountBox, 0, currDefenderArmy.getUnitAmtByLevel(newValue));
+    } );
   } 
+
+  public void setSelfTerr(ChoiceBox<String> box){
+    ArrayList<Territory<String>> territories=player.gameStatus.getGameBoard().getTerritories();
+    for(int i=0;i<territories.size();i++){
+      if(territories.get(i).getOwner()==player.playerId){
+        box.getItems().add(territories.get(i).getName());
+        box.setValue(territories.get(i).getName());
+      }
+    }
+  }
+
+  public void setLevelAmount(ChoiceBox<Integer> box,int fromAmount,int toAmount){
+    box.getItems().clear();
+    box.setValue(fromAmount);
+    for(int i=fromAmount;i<=toAmount;i++){
+      box.getItems().add(i);
+    }
+  }
+
 }
 

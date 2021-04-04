@@ -3,9 +3,16 @@ package edu.duke.ece651.risc.client;
 import java.io.IOException;
 import java.net.URL;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.ResourceBundle;
 
+import edu.duke.ece651.risc.shared.Army;
+import edu.duke.ece651.risc.shared.Constant;
+import edu.duke.ece651.risc.shared.GameStatus;
+import edu.duke.ece651.risc.shared.Order;
 import edu.duke.ece651.risc.shared.Territory;
+import edu.duke.ece651.risc.shared.V2AttackOrder;
+import edu.duke.ece651.risc.shared.V2MoveOrder;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
@@ -73,36 +80,54 @@ public class MoveAttackController implements Initializable{
       setSelfTerr(sourceBox);
       setEnemyTerr(targetBox);
     }
+    String terrName=sourceBox.getValue();
+    int terrIndex=Constant.terrNameToId.get(terrName);
+    setAllLevelBox(terrIndex);
+    sourceBox.getSelectionModel().selectedItemProperty().addListener((v, oldValue, newValue) -> {
+      int terrId=Constant.terrNameToId.get(newValue);
+      setAllLevelBox(terrId);
+    } );
+  }
+
+  public void setAllLevelBox(int terrId){
+      ArrayList<Territory<String>> territories=player.gameStatus.getGameBoard().getTerritories();
+      Territory<String> terr=territories.get(terrId);
+      Army<String> currDefenderArmy=terr.getCurrDefenderArmy().get(0);
+      setLevelBox(lv0Box, currDefenderArmy.getUnitAmtByLevel(0));
+      setLevelBox(lv1Box, currDefenderArmy.getUnitAmtByLevel(1));
+      setLevelBox(lv2Box, currDefenderArmy.getUnitAmtByLevel(2));
+      setLevelBox(lv3Box, currDefenderArmy.getUnitAmtByLevel(3));
+      setLevelBox(lv4Box, currDefenderArmy.getUnitAmtByLevel(4));
+      setLevelBox(lv5Box, currDefenderArmy.getUnitAmtByLevel(5));
+      setLevelBox(lv6Box, currDefenderArmy.getUnitAmtByLevel(6));
   }
 
   public void setSelfTerr(ChoiceBox<String> box){
     ArrayList<Territory<String>> territories=player.gameStatus.getGameBoard().getTerritories();
-    int ownedGroup=player.gameStatus.getCurrPlayer().getOwnedGroup();
-    box.setValue(findTerrName(territories, 3*ownedGroup+0));
-    for(int i=0;i<3;i++){
-      box.getItems().add(findTerrName(territories, 3*ownedGroup+i));
+    for(int i=0;i<territories.size();i++){
+      if(territories.get(i).getOwner()==player.playerId){
+        box.getItems().add(territories.get(i).getName());
+        box.setValue(territories.get(i).getName());
+      }
     }
   }
 
   public void setEnemyTerr(ChoiceBox<String> box){
     ArrayList<Territory<String>> territories=player.gameStatus.getGameBoard().getTerritories();
-    int ownedGroup=player.gameStatus.getCurrPlayer().getOwnedGroup();
-    ArrayList<Integer> groupList=new ArrayList<Integer>();
-    for(int i=0;i<player.playerNum;i++){
-      if(i!=ownedGroup){
-        groupList.add(i);
-      }
-    }
-    box.setValue(findTerrName(territories, 3*groupList.get(0)+0));
-    for(int i=0;i<groupList.size();i++){
-      for(int j=0;j<3;j++){
-        box.getItems().add(findTerrName(territories, 3*groupList.get(i)+j));
+    for(int i=0;i<territories.size();i++){
+      if(territories.get(i).getOwner()!=player.playerId){
+        box.getItems().add(territories.get(i).getName());
+        box.setValue(territories.get(i).getName());
       }
     }
   }
 
-  public String findTerrName(ArrayList<Territory<String>> territories,int index){
-    return territories.get(index).getName();
+  public void setLevelBox(ChoiceBox<Integer> box,int amount){
+    box.getItems().clear();
+    box.setValue(0);
+    for(int i=0;i<=amount;i++){
+      box.getItems().add(i);
+    }
   }
 
   @FXML
@@ -113,7 +138,44 @@ public class MoveAttackController implements Initializable{
 
   @FXML
   public void confirm(){
+    int sourceTerr=Constant.terrNameToId.get(sourceBox.getValue());
+    int targetTerr=Constant.terrNameToId.get(targetBox.getValue());
+    HashMap<Integer,Integer> unitsMap=new HashMap<Integer,Integer>();
+    setUnitsMap(unitsMap);
+    Order<String> order;
+    if(type=="move"){
+      order=new V2MoveOrder<String>(sourceTerr, targetTerr, unitsMap);
+    }else{
+      order=new V2AttackOrder<String>(sourceTerr, targetTerr, unitsMap);
+    }
+    player.sendObject(order);
+    String result=(String)player.receiveObject();
+    player.gameStatus=(GameStatus<String>)player.receiveObject();
     AlterBox alterBox=new AlterBox(window, player);
-    alterBox.display("orderConfirm", "Back", "Your order is legal");
+    alterBox.display("orderConfirm", "Back", result);
+  }
+
+  public void setUnitsMap(HashMap<Integer,Integer> unitsMap){
+    if(lv0Box.getValue()!=0){
+      unitsMap.put(0,lv0Box.getValue());
+    }
+    if(lv1Box.getValue()!=0){
+      unitsMap.put(1,lv1Box.getValue());
+    }
+    if(lv2Box.getValue()!=0){
+      unitsMap.put(2,lv2Box.getValue());
+    }
+    if(lv3Box.getValue()!=0){
+      unitsMap.put(3,lv3Box.getValue());
+    }
+    if(lv4Box.getValue()!=0){
+      unitsMap.put(4,lv4Box.getValue());
+    }
+    if(lv5Box.getValue()!=0){
+      unitsMap.put(5,lv5Box.getValue());
+    }
+    if(lv6Box.getValue()!=0){
+      unitsMap.put(6,lv6Box.getValue());
+    }
   }
 }

@@ -1,5 +1,8 @@
 package edu.duke.ece651.risc.client;
 
+import edu.duke.ece651.risc.shared.GameStatus;
+import edu.duke.ece651.risc.shared.Order;
+import edu.duke.ece651.risc.shared.V2UpgradeTechLevelOrder;
 import javafx.fxml.FXMLLoader;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
@@ -31,9 +34,7 @@ public class ChooseBox {
     Button unitsButton = new Button("upgrade units");
     levelButton.setOnAction( e -> {
       alterWindow.close();
-      AlterBox alterBox = new AlterBox(window, player);
-      //need more oprations to check is the order is legal
-      alterBox.display("orderConfirm", "Back", "Your order is legal");
+      sendUpgradeTechLevel();
      });
     
     unitsButton.setOnAction(e -> {
@@ -45,6 +46,15 @@ public class ChooseBox {
     Scene scene = new Scene(layout);
     alterWindow.setScene(scene);
     alterWindow.showAndWait();
+  }
+
+  public void sendUpgradeTechLevel(){
+    Order<String> order=new V2UpgradeTechLevelOrder<String>(player.playerId);
+    player.sendObject(order);
+    String result=(String)player.receiveObject();
+    player.gameStatus=(GameStatus<String>)player.receiveObject();
+    AlterBox alterBox = new AlterBox(window, player);
+    alterBox.display("orderConfirm", "Back", result); 
   }
 
   public void jumpUpgradeUnitsrPage(Stage alterWindow){
