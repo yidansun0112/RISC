@@ -2,8 +2,10 @@ package edu.duke.ece651.risc.client;
 
 import java.io.IOException;
 import java.net.URL;
+import java.util.List;
 import java.util.ResourceBundle;
 
+import edu.duke.ece651.risc.shared.GameRoomInfo;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
@@ -42,6 +44,23 @@ public class PageLoader {
     FXMLLoader loader = new FXMLLoader(getClass().getResource("/ui/chooseGame.fxml"));
     loader.setControllerFactory(c -> {
       return new ChooseGameController(window,player);
+    });
+    showPage(loader);
+  }
+
+  public void showJoinRoomPage(List<GameRoomInfo> roomList){
+    FXMLLoader loader = new FXMLLoader(getClass().getResource("/ui/joinRoom.fxml"));
+    loader.setControllerFactory(c -> {
+      return new JoinRoomController(window,player,roomList);
+    });
+    showPage(loader);
+  }
+
+  public void showWaitPlayerComingPage(){
+    System.out.println("in show wait page");
+    FXMLLoader loader = new FXMLLoader(getClass().getResource("/ui/waitPlayerComing.fxml"));
+    loader.setControllerFactory(c -> {
+      return new StartController(window,player);
     });
     showPage(loader);
   }
@@ -170,9 +189,11 @@ public class PageLoader {
 
   public void showPage(FXMLLoader loader){
     try{
+      System.out.println("to show page");
       Scene scene = new Scene(loader.load());
       window.setScene(scene);
       window.show();
+      System.out.println("page showed");
     }catch(Exception e){
       throw new RuntimeException(e);
     }

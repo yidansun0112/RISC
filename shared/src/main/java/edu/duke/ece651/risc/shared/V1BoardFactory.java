@@ -23,7 +23,7 @@ public class V1BoardFactory<T> implements BoardFactory<T> {
     terriName.put(6, "Gondor");
     terriName.put(7, "Mordor");
     terriName.put(8, "Hogwarts");
-    terriName.put(9, "Narnia");
+    terriName.put(9, "Landon");
     terriName.put(10, "Britt");
     terriName.put(11, "Calibre");
     terriName.put(12, "Elk");

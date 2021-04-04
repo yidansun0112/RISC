@@ -105,6 +105,32 @@ public class Constant {
     UP_UNIT_COST.put(6, 140);
   }
 
+  /**
+   * Store the cost of technology resource of upgrading some amount of units. Key
+   * is the level, value is the cost. Same with that in pdf 7.(e).
+   */
+  public static final HashMap<String, Integer> terrNameToId;
+  // Here we use a static block to initialize the map. If we can use Java9, there
+  // is a factory can do this job, which is nicer.
+  static {
+    terrNameToId = new HashMap<String, Integer>();
+    terrNameToId.put("Narnia", 0);
+    terrNameToId.put("Midkemia", 1);
+    terrNameToId.put("Oz", 2);
+    terrNameToId.put("Elantris", 3);
+    terrNameToId.put("Roshar", 4);
+    terrNameToId.put("Scadrial", 5);
+    terrNameToId.put("Gondor", 6);
+    terrNameToId.put("Mordor", 7);
+    terrNameToId.put("Hogwarts", 8);
+    terrNameToId.put("Landon", 9);
+    terrNameToId.put("Britt", 10);
+    terrNameToId.put("Calibre", 11);
+    terrNameToId.put("Elk", 12);
+    terrNameToId.put("Floyd", 13);
+    terrNameToId.put("Niflheim", 14);
+  }
+
   // --- Below are JSON Key-Values as the Request protocol of the RISC Game --- //
 
   /** The key that represents the type of the request */

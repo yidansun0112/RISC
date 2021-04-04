@@ -206,8 +206,12 @@ public class V2GameServer {
     if (requestType.equals(Constant.VALUE_REQUEST_TYPE_JOIN_ROOM)) {
       String playerName = requestJSON.getString(Constant.KEY_USER_NAME);
       int roomIdToJoin = Integer.parseInt(requestJSON.getString(Constant.KEY_ROOM_ID_TO_JOIN).trim());
-      PlayerEntity<String> followingPlayer = new GUIPlayerEntity<String>(new ObjectOutputStream(sock.getOutputStream()),
-          new ObjectInputStream(sock.getInputStream()), 0, playerName, -1, Constant.SELF_NOT_LOSE_NO_ONE_WIN_STATUS);
+      //PlayerEntity<String> followingPlayer = new GUIPlayerEntity<String>(new ObjectOutputStream(sock.getOutputStream()),
+          //new ObjectInputStream(sock.getInputStream()), 0, playerName, -1, Constant.SELF_NOT_LOSE_NO_ONE_WIN_STATUS);
+      System.out.println("before create player");
+          PlayerEntity<String> followingPlayer = new GUIPlayerEntity<String>(oosForResult,
+          oisForJSON, 0, playerName, -1, Constant.SELF_NOT_LOSE_NO_ONE_WIN_STATUS);
+      System.out.println("after create player");
       handleJoinGameRoom(followingPlayer, roomIdToJoin);
     }
 

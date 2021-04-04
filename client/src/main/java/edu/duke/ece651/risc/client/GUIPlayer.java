@@ -11,18 +11,27 @@ public class GUIPlayer {
   protected int playerNum;
   protected String username;
   protected GameStatus<String> gameStatus;
+  protected int playerId;
 
   public GUIPlayer(GameClient client){
     this.client=client;
   }
 
 
-  public void sendObject(Object o) throws IOException {
-    client.sendObject(o);
+  public void sendObject(Object o) {
+    try{
+      client.sendObject(o);
+    }catch(Exception e){
+      throw new RuntimeException(e);
+    }
   }
 
-  public Object receiveObject() throws ClassNotFoundException, IOException {
-    return client.receiveObject();
+  public Object receiveObject(){
+    try{
+      return client.receiveObject();
+    }catch(Exception e){
+      throw new RuntimeException(e);
+    }
   }
 
   public int recvID() throws ClassNotFoundException, IOException{
@@ -31,11 +40,19 @@ public class GUIPlayer {
     return playerId;
   }
 
-  public void connect() throws UnknownHostException,IOException{
-    client=new SocketClient(12345,Constant.ipaddress);
+  public void connect() {
+    try{
+      client=new SocketClient(12345,Constant.ipaddress);
+    }catch(Exception e){
+      throw new RuntimeException(e);
+    }
   }
 
-  public void disconnect() throws IOException{
-    client.disconnectServer();
+  public void disconnect(){
+    try{
+      client.disconnectServer();
+    }catch(Exception e){
+      throw new RuntimeException(e);
+    }
   }
 }
