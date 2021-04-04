@@ -5,6 +5,7 @@ import java.util.List;
 import java.util.concurrent.BrokenBarrierException;
 import java.util.concurrent.CyclicBarrier;
 import java.util.Random;
+import java.util.Vector;
 
 import edu.duke.ece651.risc.shared.*;
 
@@ -58,9 +59,43 @@ public abstract class GameRoom<T> {
   }
 
   /**
+   * Constructor that initialize fields with corresponding parameters, and add the
+   * first player (who create this game room) into field players. The gameBoard
+   * and view are left unintialized, as well as various checkers, since the
+   * gameBoard will decided by the first player, the view may not be used in evo2,
+   * and we need new version of checker in evo 2.
+   * 
+   * @since evolution 2. This constructor is called by the constructor of
+   *        V2GameRoom
+   * 
+   * @param playerNum   the total number of players in this room, decide by the
+   *                    first player
+   * @param totalUnits  the number of units that each player can deploy at start
+   * @param roomCreator the player who creates this game room. His/her player id
+   *                    will be 0 (zero)
+   */
+  public GameRoom(int playerNum, int totalUnits, PlayerEntity<T> roomCreator) {
+    this.playerNum = playerNum;
+    this.totalUnits = totalUnits;
+
+    this.players = new Vector<PlayerEntity<T>>();
+    this.players.add(roomCreator);
+  }
+
+  /**
    * Let the first player to choose a map for this room
    */
   public abstract void chooseMap() throws IOException, ClassNotFoundException;
+
+  /**
+   * This method will add a player into the room and check whether we have enough
+   * player to begin the game (i.e., pick territory (if needed), deploy units (if
+   * needed), and start each turns)
+   * 
+   * @since evolution 2
+   * @param newPlayer the player who newly joins this room
+   */
+  public abstract void addPlayerAndCheckToPlay(PlayerEntity<String> newPlayer);
 
   /**
    * Add a new player to this room.
@@ -85,6 +120,49 @@ public abstract class GameRoom<T> {
     return playerNum;
   }
 
+  
+
+  /**
+   * @since evolution 2. This method is NOT USED in evolution 1!
+   * @return the room id for this room
+   */
+  public int getRoomId() {
+    return 0;
+  }
+
+  /**
+   * Get the room status of this game room.
+   * 
+   * Note that this method is NOT USED in evo 1 code, and in evo 1 if the game is
+   * finished the server will immediately close so the room will be removed as the
+   * server closed. So the third status (the game is end, the room is waiting for
+   * the server to delete it) is not useful in evo 1. This implementation is only
+   * for the LSP satisfaction for evo 1 code.
+   * 
+   * @since evolution 2
+   * 
+   * @return Constant.ROOM_STATUS_RUNNING_GAME if we have enough players in this
+   *         room. Otherwise return Constant.ROOM_STATUS_WAITING_PLAYERS since we
+   *         have not enough players to start the game.
+   */
+  public int getRoomStatus() {
+    return (players.size() == playerNum ? Constant.ROOM_STATUS_RUNNING_GAME : Constant.ROOM_STATUS_WAITING_PLAYERS);
+  }
+
+  /**
+   * This implementation is only for the LSP satisfaction for evo 1 code. In evo 1
+   * game room there is no field storing the status of the room, and the server
+   * does not need this status to do some judge. So we provide a dummy
+   * implementation here.
+   * 
+   * That this method is NOT USED in evo 1 code.
+   * 
+   * @param status the status to be set to
+   */
+  public void setRoomStatus(int status) {
+    return;
+  }
+
   /**
    * Play the game.
    * 
@@ -107,7 +185,7 @@ public abstract class GameRoom<T> {
   public void playGame() throws InterruptedException, BrokenBarrierException, IOException {
     barrier = new CyclicBarrier(playerNum + 1);
     for (int i = 0; i < playerNum; i++) {
-      Thread t = new GameHostThread<T>(players.get(i), Constant.TOTAL_UNITS, gameBoard, view, moveChecker,
+      Thread t = new V1GameHostThread<T>(players.get(i), Constant.TOTAL_UNITS, gameBoard, view, moveChecker,
           attackChecker, barrier);
       t.start();
     }
@@ -212,4 +290,13 @@ public abstract class GameRoom<T> {
       player.getToPlayer().close();
     }
   }
+
+  /**
+   * @return the creator of this room, which is the first player entity in the
+   *         list of players
+   */
+  public PlayerEntity<T> getRoomOwner() {
+    return players.get(0);
+  }
+
 }

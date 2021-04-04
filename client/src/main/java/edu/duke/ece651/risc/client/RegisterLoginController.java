@@ -37,7 +37,7 @@ public class RegisterLoginController {
   @FXML
   public void register() throws IOException,ClassNotFoundException{
     String userInput=getUserInput(Constant.VALUE_REQUEST_TYPE_REGISTER);
-    SocketClient client=new SocketClient(12345,"127.0.0.1");
+    SocketClient client=new SocketClient(12345,Constant.ipaddress);
     client.sendObject(userInput);
     String result=(String)client.receiveObject();
     System.out.println("in register");
@@ -49,19 +49,21 @@ public class RegisterLoginController {
       usernameField.setText("");
       passwordField.setText("");
     }
+    client.disconnectServer();
   }
 
   @FXML
   public void login() throws IOException,ClassNotFoundException{
     String userInput=getUserInput(Constant.VALUE_REQUEST_TYPE_LOGIN);
-    SocketClient client=new SocketClient(12345,"127.0.0.1");
+    SocketClient client=new SocketClient(12345,Constant.ipaddress);
     client.sendObject(userInput);
     String result=(String)client.receiveObject();
-    System.out.println("in register");
-    System.out.println(result);
+    client.disconnectServer();
+    GUIPlayer player=new GUIPlayer(null);
     if(result.equals(Constant.RESULT_SUCCEED_REQEUST)){
-      PageLoader loader=new PageLoader(window,null);
-      loader.showChoosePlayerNum();
+      player.username=usernameField.getText();
+      PageLoader loader=new PageLoader(window,player);
+      loader.showChooseGamePage();
     }else{
       info.setText(result);
       usernameField.setText("");

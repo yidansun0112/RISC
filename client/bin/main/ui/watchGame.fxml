@@ -1,5 +1,4 @@
 <?xml version="1.0" encoding="UTF-8"?>
-
 <?import javafx.scene.image.*?>
 <?import javafx.scene.text.*?>
 <?import java.lang.*?>
@@ -8,9 +7,12 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
-<AnchorPane prefHeight="479.0" prefWidth="720.0" style="-fx-border-color: lightskyblue; -fx-border-width: 10;" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.duke.ece651.risc.client.LoseGameController">
+
+
+<AnchorPane prefHeight="400.0" prefWidth="600.0" style="-fx-border-color: lightskyblue; -fx-border-width: 10;" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.duke.ece651.risc.client.LoseGameController">
     <children>
-      <fx:include prefHeight="300.0" prefWidth="400.0" source="map2.fxml" />
-      <ListView fx:id="listView" layoutX="435.0" layoutY="48.0" nodeOrientation="LEFT_TO_RIGHT" prefHeight="247.0" prefWidth="245.0" />
+      <fx:include source="map2.fxml"
+                  prefHeight="300.0" prefWidth="400.0"/>
+      <TextArea fx:id="textArea" layoutX="00.0" layoutY="104.0" prefHeight="215.0" prefWidth="457.0"/>
     </children>
 </AnchorPane>

@@ -105,6 +105,32 @@ public class Constant {
     UP_UNIT_COST.put(6, 140);
   }
 
+  /**
+   * Store the cost of technology resource of upgrading some amount of units. Key
+   * is the level, value is the cost. Same with that in pdf 7.(e).
+   */
+  public static final HashMap<String, Integer> terrNameToId;
+  // Here we use a static block to initialize the map. If we can use Java9, there
+  // is a factory can do this job, which is nicer.
+  static {
+    terrNameToId = new HashMap<String, Integer>();
+    terrNameToId.put("Narnia", 0);
+    terrNameToId.put("Midkemia", 1);
+    terrNameToId.put("Oz", 2);
+    terrNameToId.put("Elantris", 3);
+    terrNameToId.put("Roshar", 4);
+    terrNameToId.put("Scadrial", 5);
+    terrNameToId.put("Gondor", 6);
+    terrNameToId.put("Mordor", 7);
+    terrNameToId.put("Hogwarts", 8);
+    terrNameToId.put("Landon", 9);
+    terrNameToId.put("Britt", 10);
+    terrNameToId.put("Calibre", 11);
+    terrNameToId.put("Elk", 12);
+    terrNameToId.put("Floyd", 13);
+    terrNameToId.put("Niflheim", 14);
+  }
+
   // --- Below are JSON Key-Values as the Request protocol of the RISC Game --- //
 
   /** The key that represents the type of the request */
@@ -119,6 +145,11 @@ public class Constant {
   /** The request type that will create a room */
   public static final String VALUE_REQUEST_TYPE_CREATE_ROOM = "CreateRoom";
 
+  /**
+   * The request type that client requests a room list that is waiting for players
+   */
+  public static final String VALUE_REQUEST_TYPE_GET_WATING_ROOM_LIST = "GetWaitingRoomList";
+
   /** The request type that will join a room that waiting for other players */
   public static final String VALUE_REQUEST_TYPE_JOIN_ROOM = "JoinRoom";
 
@@ -128,10 +159,56 @@ public class Constant {
   /** The request json key which indicates a password field */
   public static final String KEY_PASSWORD = "Password";
 
+  /** The request json key which indicates the room id to join in */
+  public static final String KEY_ROOM_ID_TO_JOIN = "RoomIdToJoin";
+
+  /**
+   * The request json key which indicates the total number of players in a game
+   * room
+   */
+  public static final String KEY_NUM_PLAYER = "PlayerNum";
+
   public static final String RESULT_SUCCEED_REQEUST = "Request Succeed.";
 
+  /** Some possible reasons of a failed register/login */
   public static final String FAIL_REASON_INVALID_JSON = "The data from client is invalid in format.";
   public static final String FAIL_REASON_INVALID_USER_NAME = "Your user name is invalid.";
   public static final String FAIL_REASON_SAME_USER_NAME = "Your user name already exists. Please choose a different one.";
   public static final String FAIL_REASON_HAS_NOT_REGISTERED = "You need to register first.";
+  public static final String FAIL_REASON_WRONG_PASSWORD = "Your password is incorrect.";
+
+  // --- The status of a game room in evolution 2 --- //
+
+  /**
+   * The game room is just created, or is waiting for the resrt of players come in
+   */
+  public static final int ROOM_STATUS_WAITING_PLAYERS = 0;
+ 
+  /**
+   * When all players come in the game room, the status will immediately be this
+   * value, and will keep on this value during hte process of picking territory,
+   * deploying unit, receving orders and combating in each turn, until there is a
+   * winner in this room.
+   * 
+   * If a player leave this room, the status will still be this value since the
+   * game has not finished (no one wins yet).
+   */
+  public static final int ROOM_STATUS_RUNNING_GAME = 1;
+
+  /**
+   * If a winner appears, the status of a room will immediately be this value, and
+   * this room can be removed by the server at some time.
+   */
+  public static final int ROOM_STATUS_GAME_FINISHED = 2;
+
+  /**
+   * Public random seed that used in battle resolver for dependency injection in
+   * testing
+   */
+  public static final int randomSeed = 42;
+
+  /**
+   * Server ip
+   */
+  public static final String ipaddress="127.0.0.1";
 }

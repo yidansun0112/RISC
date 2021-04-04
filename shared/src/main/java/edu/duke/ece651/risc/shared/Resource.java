@@ -1,5 +1,7 @@
 package edu.duke.ece651.risc.shared;
 
+import java.io.Serializable;
+
 /**
  * This class is used to represent various kinds of resources that a player can
  * have in a game. In evolution 2, there are two kinds of resources, the food
@@ -12,8 +14,9 @@ package edu.duke.ece651.risc.shared;
  * @since evolution2
  * @author zl246
  */
-public class Resource {
+public class Resource implements Serializable{
   int resourceAmt;
+  private static final long serialVersionUID = 18L;
 
   /**
    * Constructor that initialize field with corresponding parameter.

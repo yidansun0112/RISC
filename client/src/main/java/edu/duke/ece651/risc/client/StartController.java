@@ -15,7 +15,7 @@ public class StartController {
   @FXML
   private Button startBtn;
   @FXML
-  private ChoiceBox<String> playerNumBox;
+  private ChoiceBox<Integer> playerNumBox;
   @FXML
   private Button confirmNumBtn;
   @FXML
@@ -35,8 +35,8 @@ public class StartController {
 
   @FXML
   public void initialize() {
-    playerNumBox.setValue("2");
-    ObservableList<String> ChoiceNumber = FXCollections.observableArrayList("2", "3", "4", "5");
+    playerNumBox.setValue(2);
+    ObservableList<Integer> ChoiceNumber = FXCollections.observableArrayList(2,3, 4, 5);
     playerNumBox.setItems(ChoiceNumber);
     mapBox.setValue("Map 0");
   }
@@ -49,14 +49,21 @@ public class StartController {
 
   @FXML
   public void selectPlayerNum() throws ClassNotFoundException, IOException {
-    String num = playerNumBox.getValue();
+    int num = playerNumBox.getValue();
+    player.sendObject(num);
     PageLoader loader=new PageLoader(window, player);
     loader.showChooseMapPage();
   }
 
   @FXML
   public void selectMap() throws ClassNotFoundException, IOException{
+    String mapChoice=mapBox.getValue();
+    player.sendObject(mapChoice);
     PageLoader loader=new PageLoader(window, player);
+    System.out.println("to show wait page");
+    loader.showWaitPlayerComingPage();
+    int playerNum=(int)player.receiveObject();//receive player number, indicate all players arrived
+    player.playerNum=playerNum; 
     loader.showPickTerritoryPage();
   }
 

@@ -50,6 +50,12 @@ public class AlterBox {
       case "pickConfirm":
         button.setOnAction(e->jumpDeployUnitsPage(alterWindow));
         return;
+      case "stay":
+        button.setOnAction(e->alterWindow.close());
+        return;
+      case "backChooseGame":
+        button.setOnAction(e->jumpChooseGamePage(alterWindow));
+        return;
       default:
         throw new IllegalArgumentException("We don't have this type button");
       }
@@ -69,6 +75,12 @@ public class AlterBox {
     alterWindow.close();
     PageLoader loader=new PageLoader(window,player);
     loader.showDeployUnitsPage();
+  }
+
+  public void jumpChooseGamePage(Stage alterWindow){
+    alterWindow.close();
+    PageLoader loader=new PageLoader(window,player);
+    loader.showChooseGamePage();
   }
   
 }

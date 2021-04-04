@@ -4,3 +4,6 @@
 # Ignore Gradle build output directory
 build
 
+# Ignore the .jar file for my local vscode environment supporting
+lib/*
+

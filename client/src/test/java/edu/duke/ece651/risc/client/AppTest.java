@@ -3,6 +3,7 @@
  */
 package edu.duke.ece651.risc.client;
 
+import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.Disabled;
 import static org.junit.jupiter.api.Assertions.*;
@@ -30,8 +31,8 @@ class AppTest {
    * @throws ClassNotFoundException
    */
   @ResourceLock(value = Resources.SYSTEM_OUT, mode = ResourceAccessMode.READ_WRITE)
-  @Test
   @Disabled
+  @Test
   public void test_main() throws UnknownHostException, IOException, InterruptedException, ClassNotFoundException {
     // set up
     ByteArrayOutputStream bytes = new ByteArrayOutputStream();
