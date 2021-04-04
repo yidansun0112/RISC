@@ -21,32 +21,32 @@
             <Rectangle2D />
          </viewport>
       </ImageView>
-      <Hyperlink fx:id="terr0" alignment="CENTER" layoutX="222.0" layoutY="236.0" onAction="#linkZero" prefHeight="34.0" prefWidth="56.0" text="Info">
+      <Hyperlink fx:id="terr0" alignment="CENTER" layoutX="186.0" layoutY="209.0" onAction="#linkZero" prefHeight="34.0" prefWidth="56.0" text="Info">
          <font>
             <Font name="System Bold" size="12.0" />
          </font>
       </Hyperlink>
-      <Hyperlink fx:id="terr1" alignment="CENTER" layoutX="415.0" layoutY="253.0" onAction="#linkOne" text="Info">
+      <Hyperlink fx:id="terr1" alignment="CENTER" layoutX="367.0" layoutY="226.0" onAction="#linkOne" text="Info">
          <font>
             <Font name="System Bold" size="12.0" />
          </font>
       </Hyperlink>
-      <Hyperlink fx:id="terr2" alignment="CENTER" layoutX="330.0" layoutY="398.0" onAction="#linkTwo" text="Info">
+      <Hyperlink fx:id="terr2" alignment="CENTER" layoutX="290.0" layoutY="362.0" onAction="#linkTwo" text="Info">
          <font>
             <Font name="System Bold" size="12.0" />
          </font>
       </Hyperlink>
-      <Hyperlink fx:id="terr3" alignment="CENTER" layoutX="112.0" layoutY="362.0" onAction="#linkThree" text="Info">
+      <Hyperlink fx:id="terr3" alignment="CENTER" layoutX="103.0" layoutY="329.0" onAction="#linkThree" text="Info">
          <font>
             <Font name="System Bold" size="12.0" />
          </font>
       </Hyperlink>
-      <Hyperlink fx:id="terr4" alignment="CENTER" layoutX="76.0" layoutY="188.0" onAction="#linkFour" text="Info">
+      <Hyperlink fx:id="terr4" alignment="CENTER" layoutX="73.0" layoutY="166.0" onAction="#linkFour" text="Info">
          <font>
             <Font name="System Bold" size="12.0" />
          </font>
       </Hyperlink>
-      <Hyperlink fx:id="terr5" alignment="CENTER" layoutX="242.0" layoutY="80.0" onAction="#linkFive" text="Info">
+      <Hyperlink fx:id="terr5" alignment="CENTER" layoutX="214.0" layoutY="71.0" onAction="#linkFive" text="Info">
          <font>
             <Font name="System Bold" size="12.0" />
          </font>
