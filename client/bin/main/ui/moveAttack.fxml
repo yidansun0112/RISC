@@ -10,7 +10,7 @@
 
 <AnchorPane fx:id="rootPane" prefHeight="747.0" prefWidth="993.0" style="-fx-border-color: lightskyblue; -fx-border-width: 10;" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.duke.ece651.risc.client.MoveAttackController">
     <children>
-      <Label alignment="CENTER" layoutX="608.0" layoutY="411.0" text="What would you like to do?" textFill="DARKBLUE" AnchorPane.bottomAnchor="311.0">
+      <Label alignment="CENTER" layoutX="616.0" layoutY="351.0" prefHeight="100.0" prefWidth="275.0" text="What would you like to do?" textAlignment="CENTER" textFill="DARKBLUE" AnchorPane.bottomAnchor="306.0">
          <font>
             <Font name="System Bold" size="19.0" />
          </font>
@@ -26,8 +26,8 @@
             <Font name="System Bold" size="13.0" />
          </font>
       </Label>
-      <ChoiceBox fx:id = "targetBox" layoutX="400.0" layoutY="150.0" prefHeight="27.0" prefWidth="81.0" AnchorPane.bottomAnchor="110"/>
-      <Label alignment="CENTER" layoutX="0.0" layoutY="200.0" text="Level 0:" textFill="DARKBLUE" AnchorPane.bottomAnchor="90">
+      <ChoiceBox fx:id="targetBox" layoutX="790.0" layoutY="466.0" prefHeight="27.0" prefWidth="81.0" AnchorPane.bottomAnchor="254.0" />
+      <Label alignment="CENTER" layoutX="565.0" layoutY="519.0" text="Level 0:" textFill="DARKBLUE" AnchorPane.bottomAnchor="214.0">
          <font>
             <Font name="System Bold" size="11.0" />
          </font>
@@ -38,7 +38,7 @@
             <Font name="System Bold" size="11.0" />
          </font>
       </Label>
-      <ChoiceBox fx:id="lv1Box" layoutX="663.0" layoutY="495.0" prefHeight="5.0" prefWidth="40.0" scaleShape="false" AnchorPane.bottomAnchor="162.0" />
+      <ChoiceBox fx:id="lv1Box" layoutX="668.0" layoutY="552.0" prefHeight="5.0" prefWidth="40.0" scaleShape="false" AnchorPane.bottomAnchor="168.0" />
       <Label alignment="CENTER" layoutX="587.0" layoutY="531.0" text="Level 2:" textFill="DARKBLUE" AnchorPane.bottomAnchor="141.0">
          <font>
             <Font name="System Bold" size="11.0" />
@@ -69,7 +69,7 @@
          </font>
       </Label>
       <ChoiceBox fx:id="lv6Box" layoutX="815.0" layoutY="631.0" prefHeight="27.0" prefWidth="40.0" AnchorPane.bottomAnchor="86.0" />
-      <Button fx:id="cancelBtn" layoutX="603.0" layoutY="632.0" mnemonicParsing="false" onAction="#cancel" style="-fx-background-color: lightskyblue; -fx-border-color: black;" text="Cancel" AnchorPane.bottomAnchor="30.0" />
-      <Button fx:id="confirmBtn" layoutX="770.0" layoutY="629.0" mnemonicParsing="false" onAction="#confirm" style="-fx-background-color: lightskyblue; -fx-border-color: black;" text="Confirm" AnchorPane.bottomAnchor="33.0" />
+      <Button fx:id="cancelBtn" layoutX="600.0" layoutY="670.0" mnemonicParsing="false" onAction="#cancel" style="-fx-background-color: lightskyblue; -fx-border-color: black;" text="Cancel" AnchorPane.bottomAnchor="47.0" />
+      <Button fx:id="confirmBtn" layoutX="760.0" layoutY="670.0" mnemonicParsing="false" onAction="#confirm" prefHeight="31.0" prefWidth="72.0" style="-fx-background-color: lightskyblue; -fx-border-color: black;" text="Confirm" AnchorPane.bottomAnchor="35.0" />
     </children>
 </AnchorPane>
