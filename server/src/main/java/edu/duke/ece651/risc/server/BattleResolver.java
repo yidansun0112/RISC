@@ -79,7 +79,7 @@ public class BattleResolver<T> implements Resolver<T> {
       currDefender.set(0, winner);
       // delete enemy
       enemyArmy.remove(index);
-      String newspaper = "In Territory "+battleField.getName()+", Defender "+defender.getCommanderId()+"(id) fight with Attacker"
+      String newspaper = "In Territory "+battleField.getName()+", Defender "+defender.getCommanderId()+"(id) fight with Attacker "
                         +attacker.getCommanderId()+"(id) and the Winner is " + winner.getCommanderId()+"(id).";
       combatInfo.add(newspaper);
     }
