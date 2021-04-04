@@ -35,12 +35,13 @@ public class V2MoveOrder<T> implements Order<T> {
     // This is the advice given by TA in the feedback of evo1 - I think this is reasonable.
     Board<T> board = gs.getGameBoard();
     // Don't Know the serialVersionUID represent, so I just use it as the User ID(which is playerID in Evol1)
-    int pathLength = board.findMinPathDistance(this.srcTerritory, this.destTerritory, (int)serialVersionUID);
+    PlayerEntity<T> currPlayer = gs.currPlayer;
+    int pathLength = board.findMinPathDistance(this.srcTerritory, this.destTerritory, currPlayer.getPlayerId());
     if(pathLength == Integer.MAX_VALUE){
       return false;
     }
     else{
-      gs.allPlayers.get((int)serialVersionUID).consumeFoodResource(pathLength);
+      currPlayer.consumeFoodResource(pathLength);
     }
     return pathLength > 0;
   }
