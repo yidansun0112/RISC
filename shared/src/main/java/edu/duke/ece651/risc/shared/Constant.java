@@ -138,6 +138,15 @@ public class Constant {
   /** The request type that will join a room that waiting for other players */
   public static final String VALUE_REQUEST_TYPE_JOIN_ROOM = "JoinRoom";
 
+  /**
+   * The request type that client requests a room list with an unfinished game,
+   * which the player left before
+   */
+  public static final String VALUE_REQUEST_TYPE_GET_LEAVING_ROOM_LIST = "GetLeavingRoomList";
+
+  /** The request type that will back to a room that he leaves before */
+  public static final String VALUE_REQUEST_TYPE_RETURN_ROOM = "ReturnRoom";
+
   /** The request json key which indicates a username field */
   public static final String KEY_USER_NAME = "UserName";
 
@@ -146,6 +155,11 @@ public class Constant {
 
   /** The request json key which indicates the room id to join in */
   public static final String KEY_ROOM_ID_TO_JOIN = "RoomIdToJoin";
+
+  /**
+   * The request json key which indicates the room id to back to (i.e., return)
+   */
+  public static final String KEY_ROOM_ID_TO_RETURN = "RoomIdToReturn";
 
   /**
    * The request json key which indicates the total number of players in a game
@@ -162,6 +176,12 @@ public class Constant {
   public static final String FAIL_REASON_HAS_NOT_REGISTERED = "You need to register first.";
   public static final String FAIL_REASON_WRONG_PASSWORD = "Your password is incorrect.";
 
+  // /**
+  //  * If we allow a player can leave the room after done the order, it is possible
+  //  * that the room finishes the game in the turn that the player leaves
+  //  */
+  // public static final String FAIL_REASON_ROOM_ALREADY_END = "The game in this room has already ended since you leave!";
+  
   // --- The status of a game room in evolution 2 --- //
 
   /**

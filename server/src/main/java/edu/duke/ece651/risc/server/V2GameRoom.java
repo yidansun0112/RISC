@@ -201,12 +201,15 @@ public class V2GameRoom extends GameRoom<String> {
     // Wait all the player finishing their deployment
     barrier.await();
     while (true) {
-      barrier.await();
+      barrier.await(); // wait for all players done their order
 
       System.out.println("All players done with their orders");
 
       ArrayList<String> combatInfo = new ArrayList<>();
       resolver.executeAllBattle(gameBoard,combatInfo);
+      
+      // NOTE: SEND ArrayList to all players - the results of combat
+      sendToAllPlayer(combatInfo); // broadcast the battle results in this turn
 
       incrementUnits();
       gameBoard.updateAllPrevDefender();
@@ -214,17 +217,20 @@ public class V2GameRoom extends GameRoom<String> {
       System.out.println("Battle finished, now check anyone wins");
 
       if (checkEnd()) {
-        setRoomStatus(Constant.ROOM_STATUS_GAME_FINISHED);
         barrier.await();
-        sendToAllPlayer(getWinnerId()); // send the player id of the winner to all players
+        // NOTE: SEND int to all players - the player id of the winner
+        sendToAllPlayer(getWinnerId());
         barrier.await();
         // closeAllStreams();
         break;
       }
-      barrier.await();
+      barrier.await(); // room finished battle stuff, enable each player issue order again
 
       System.out.println("No one wins, now waiting all players done again");
 
+      setRoomStatus(Constant.ROOM_STATUS_GAME_FINISHED); // we update the room status at last, to avoid the room being
+                                                         // removed by the clearFinishedGameRoom() before finishing
+                                                         // broadcasting the winner info.
     }
   }
 

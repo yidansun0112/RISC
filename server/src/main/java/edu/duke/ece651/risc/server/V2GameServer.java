@@ -126,7 +126,6 @@ public class V2GameServer {
    * @throws IOException
    */
   public void handleRequest(Socket sock) throws ClassNotFoundException, IOException {
-    // TODO: to myself: finish this with joinRoom, createRoom two requets soon!
 
     // Some notes and thoughts here:
     // We may create a playerEntity to reuse the receiveObject() method, but is that
@@ -213,6 +212,21 @@ public class V2GameServer {
       handleJoinGameRoom(followingPlayer, roomIdToJoin);
     }
 
+    // The user wants to get a list of game room which he left before (the game room
+    // should has no winner yet and this user(player) should not have lost the game)
+    if (requestType.equals(Constant.VALUE_REQUEST_TYPE_GET_LEAVING_ROOM_LIST)) {
+      String playerName = requestJSON.getString(Constant.KEY_USER_NAME);
+      oosToClient.writeObject(getLeavingRoomListByUsername(playerName)); // we directly send the list here.
+    }
+
+    // The user wants to return to a specified room he left before
+    if (requestType.equals(Constant.VALUE_REQUEST_TYPE_RETURN_ROOM)) {
+      String playerName = requestJSON.getString(Constant.KEY_USER_NAME);
+      int roomIdToBackTo = Integer.parseInt(requestJSON.getString(Constant.KEY_ROOM_ID_TO_RETURN).trim());
+      PlayerEntity<String> returnedPlayer = new GUIPlayerEntity<String>(oosToClient, oisFromClient, 0, playerName, -1,
+          Constant.SELF_NOT_LOSE_NO_ONE_WIN_STATUS);
+      handleBackToGameRoom(returnedPlayer, roomIdToBackTo);
+    }
   }
 
   /**
@@ -321,7 +335,7 @@ public class V2GameServer {
 
     // Basically same with evo1, we create a room, add this player into this room,
     // set this room's playerNum field based on the content in this request JSON
-    System.out.println("in hancle create game room");
+    System.out.println("in hancle create game room"); 
     int idForTheNewRoom = nextRoomId;
     this.nextRoomId++;
     System.out.println("before create room");
@@ -359,8 +373,26 @@ public class V2GameServer {
     roomWantToJoin.addPlayerAndCheckToPlay(followingPlayer);
   }
 
-  // public void handleGetWaitingRoomList() {
-  // }
+  /**
+   * This method handle the request of going back to the game room the player left
+   * before. What we do is that find the target room and the target original
+   * player entity, upadte the streams with the new one to enable communicating,
+   * and update the isInRoomNow status.
+   * 
+   * @param playerWhoComeBack the player entity which connect to the server again
+   *                          and want to back to the game room
+   * @param roomIdToBackTo    the room id the player wants to back to
+   */
+  public void handleBackToGameRoom(PlayerEntity<String> playerWhoComeBack, int roomIdToBackTo) {
+    GameRoom<String> roomToBackTo = gameRooms.get(roomIdToBackTo);
+    // Now find the corresponding player entity which has the same name in this
+    // room, set the Object In/Output Stream with the new one, and update the player
+    // entity's isInRoomNow status
+    PlayerEntity<String> originalPlayer = roomToBackTo.getPlayerByName(playerWhoComeBack.getPlayerSymbol());
+    originalPlayer.setToPlayer(playerWhoComeBack.getToPlayer());
+    originalPlayer.setFromPlayer(playerWhoComeBack.getFromPlayer());
+    originalPlayer.setIsInRoomNow(true);
+  }
 
   /**
    * We are using iterator to remove key-value pairs, the iterator may not be
@@ -374,17 +406,13 @@ public class V2GameServer {
     // I am sleepy to do this. And also check whether the synchronize is necessary
     // First we need to remove the rooms which the games in them have finished to
     // save some memory
-    for (Map.Entry<Integer, GameRoom<String>> e : gameRooms.entrySet()) {
-      if (e.getValue().getRoomStatus() == Constant.ROOM_STATUS_GAME_FINISHED) {
-        gameRooms.remove(e.getKey());
-      }
-    }
+    clearFinishedGameRoom();
 
     // Then build the list of GameRoomInfo of rooms that are waiting for the rest of
     // players
     List<GameRoomInfo> ans = new ArrayList<GameRoomInfo>();
     for (Map.Entry<Integer, GameRoom<String>> e : gameRooms.entrySet()) {
-      if (e.getValue().getRoomStatus() == Constant.ROOM_STATUS_WAITING_PLAYERS) {
+      if (e.getValue().getRoomStatus() == Constant.ROOM_STATUS_WAITING_PLAYERS /* && e.getValue().hasPlayer() */) {
         GameRoom<String> roomToAdd = e.getValue();
         ans.add(new GameRoomInfo(roomToAdd.getRoomId(), roomToAdd.getPlayerNum(),
             roomToAdd.getRoomOwner().getPlayerSymbol()));
@@ -392,6 +420,45 @@ public class V2GameServer {
     }
 
     return ans;
+  }
+
+  /**
+   * We only allow a player back to the room that he previously joined and no one
+   * wins yet. We not allow a player leave a room which is still waiting the rest
+   * of players, for the user experience consideration.
+   * 
+   * @param userName the user name who wants to back to the room he left before.
+   * @return a list contains all the rooms that this player left before, with a
+   *         unfinished game (no one wins yet) and this player has not lost the
+   *         game yet.
+   */
+  protected synchronized List<GameRoomInfo> getLeavingRoomListByUsername(String userName) {
+    // Clear the room with a finished game first
+    clearFinishedGameRoom();
+
+    List<GameRoomInfo> ans = new ArrayList<GameRoomInfo>();
+    for (Map.Entry<Integer, GameRoom<String>> e : gameRooms.entrySet()) {
+      if (e.getValue().getRoomStatus() == Constant.ROOM_STATUS_RUNNING_GAME && e.getValue().hasPlayer(userName)
+          && e.getValue().getPlayerByName(userName).getPlayerStatus() == Constant.SELF_NOT_LOSE_NO_ONE_WIN_STATUS) {
+        GameRoom<String> roomToAdd = e.getValue();
+        ans.add(new GameRoomInfo(roomToAdd.getRoomId(), roomToAdd.getPlayerNum(),
+            roomToAdd.getRoomOwner().getPlayerSymbol()));
+      }
+    }
+
+    return ans;
+  }
+
+  /**
+   * A helper method that will remove the game room instance, which the game in
+   * it has end (i.e., someone already wons)
+   */
+  protected void clearFinishedGameRoom() {
+    for (Map.Entry<Integer, GameRoom<String>> e : gameRooms.entrySet()) {
+      if (e.getValue().getRoomStatus() == Constant.ROOM_STATUS_GAME_FINISHED) {
+        gameRooms.remove(e.getKey());
+      }
+    }
   }
 
   // /**

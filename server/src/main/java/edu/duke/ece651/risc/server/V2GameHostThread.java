@@ -191,37 +191,61 @@ public class V2GameHostThread<T> extends Thread {
    * 
    * @throws IOException
    * @throws ClassNotFoundException
+   * @throws InterruptedException
    */
-  public void receiveOrder() throws IOException, ClassNotFoundException {
+  public void receiveOrder() throws IOException, ClassNotFoundException, InterruptedException {
+    boolean needLatestGameStauts = false; // false: the player keeps in the room, does not neet to send the latest
+                                          // GameStatus to the client.
+                                          // true: the player has leave the room and disconnect, need an extra sending
+                                          // the latest GameStatus to the client. Will set to false when player
+                                          // reconnect to the server and come back to this room.
     while (true) {
-      // NOTE: SEND GameStatus to client - used to show the board after the player
-      // issued an order each time
-      GameStatus<T> latestStatus = makeLatestGameStatus(false); // this line is different with evo 1
-      player.sendObject(latestStatus);
-      Order<T> order = (Order<T>) player.receiveObject();
-      String message = null;
-      if (order instanceof DoneOrder) {
-        player.sendObject(Constant.LEGAL_ORDER_INFO);
-        break;
-      }
-      // The lollowing lines are different with evo 1. Here we have new kinds of
-      // orders, and need to use the new checkOrder method in evo 2, which takes in a
-      // GameStatus
-      else if (order instanceof V2MoveOrder) {
-        message = moveChecker.checkOrder(player.getPlayerId(), order, latestStatus);
-      } else if (order instanceof V2AttackOrder) {
-        message = attackChecker.checkOrder(player.getPlayerId(), order, latestStatus);
-      } else if (order instanceof V2UpgradeTechLevelOrder) {
-        message = upgradeTechLevelChecker.checkOrder(player.getPlayerId(), order, latestStatus);
-      } else if (order instanceof V2UpgradeUnitOrder) {
-        message = upgradeUnitChecker.checkOrder(player.getPlayerId(), order, latestStatus);
-      }
+      if (player.getIsInRoomNow()) { // if the player still in the room and keep connected, receive order from this
+                                     // player
+        // The player just come back, send the latest GameStatus to the client.
+        if (needLatestGameStauts) {
+          GameStatus<T> latestStatus = makeLatestGameStatus(false); // this line is different with evo 1
+          player.sendObject(latestStatus);
+        }
 
-      if (message == null) {
-        order.execute(board);
-        player.sendObject(Constant.LEGAL_ORDER_INFO);
-      } else {
-        player.sendObject(message);
+        // NOTE: SEND GameStatus to client - used to show the board after the player
+        // issued an order each time
+        GameStatus<T> latestStatus = makeLatestGameStatus(false); // this line is different with evo 1
+        player.sendObject(latestStatus);
+        Order<T> order = (Order<T>) player.receiveObject();
+        if (order == null) { // if the player leave the room (i.e., disconnected), player.receiveObject()
+                             // will return null. We continue this while loop, in order to wait for the
+                             // player comeback and continue issue order
+          continue;
+        }
+        String message = null;
+        if (order instanceof DoneOrder) {
+          player.sendObject(Constant.LEGAL_ORDER_INFO);
+          break;
+        }
+        // The lollowing lines are different with evo 1. Here we have new kinds of
+        // orders, and need to use the new checkOrder method in evo 2, which takes in a
+        // GameStatus
+        else if (order instanceof V2MoveOrder) {
+          message = moveChecker.checkOrder(player.getPlayerId(), order, latestStatus);
+        } else if (order instanceof V2AttackOrder) {
+          message = attackChecker.checkOrder(player.getPlayerId(), order, latestStatus);
+        } else if (order instanceof V2UpgradeTechLevelOrder) {
+          message = upgradeTechLevelChecker.checkOrder(player.getPlayerId(), order, latestStatus);
+        } else if (order instanceof V2UpgradeUnitOrder) {
+          message = upgradeUnitChecker.checkOrder(player.getPlayerId(), order, latestStatus);
+        }
+
+        if (message == null) {
+          order.execute(board);
+          player.sendObject(Constant.LEGAL_ORDER_INFO);
+        } else {
+          player.sendObject(message);
+        }
+      } else { // the player leave the room for now and disconnect, we let this thread sleep
+               // for 1 second to wait for this player come back
+        needLatestGameStauts = true;
+        Thread.sleep(1000);
       }
     }
     // NOTE: SEND GameStatus to client - used to show the board after the player
@@ -288,7 +312,11 @@ public class V2GameHostThread<T> extends Thread {
     case Constant.TO_WATCH_INFO:
       doWatchPhase();
       return;
-    case Constant.TO_QUIT_INFO:
+    case Constant.TO_QUIT_INFO: // TODO: if we allow player leave the room after he's done the order, add "||
+                                // null" here, since the receiveObject will return null if the player is
+                                // disconnected, and directly enter the doEndPahse since we regard that if the
+                                // player done the order and leave the room, if he lose in this turn, this is
+                                // same as he will not watch the game and directly quit.
       doEndPhase();
       return;
     default:
@@ -407,4 +435,17 @@ public class V2GameHostThread<T> extends Thread {
       return;
     }
   }
+  
+  // public static void main(String[] args) {
+  //   Order<String> a = (Order<String>) foo();
+  //   if (a == null) {
+  //     System.out.println("a = null");
+  //   } else {
+  //     System.out.println("not here");
+  //   }
+  // }
+
+  // static Object foo(){
+  //   return null;
+  // }
 }
