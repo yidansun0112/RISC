@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.image.*?>
+<?import javafx.scene.text.*?>
+<?import java.lang.*?>
+<?import java.util.*?>
+<?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<AnchorPane prefHeight="400.0" prefWidth="600.0" style="-fx-border-color: lightskyblue; -fx-border-width: 10;" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.duke.ece651.risc.client.CombatInfoController">
+    <children>
+      <!--<fx:include prefHeight="300.0" prefWidth="400.0" source="map2.fxml" />-->
+      <ListView fx:id="listView" layoutX="435.0" layoutY="48.0" nodeOrientation="LEFT_TO_RIGHT" prefHeight="247.0" prefWidth="245.0" />
+      <Button fx:id="confirmBtn" layoutX="470.0" layoutY="337.0" mnemonicParsing="false" onAction="#confirm" prefHeight="30.0" prefWidth="60.0" style="-fx-background-color: lightskyblue; -fx-border-color: black;" text="Confirm" />
+    </children>
+</AnchorPane>
