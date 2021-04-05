@@ -8,86 +8,86 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
-<AnchorPane prefHeight="528.0" prefWidth="693.0" style="-fx-border-color: lightskyblue; -fx-border-width: 10;" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.duke.ece651.risc.client.MapLinkController">
+<AnchorPane prefWidth="689.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.duke.ece651.risc.client.MapLinkController">
    <children>
-      <fx:include fx:id="terrInfo" layoutX="200.0" layoutY="50.0" prefHeight="230.0" prefWidth="100.0" source="terrInfo.fxml" AnchorPane.bottomAnchor="70" AnchorPane.rightAnchor="0" AnchorPane.topAnchor="0" />
-      <fx:include fx:id="playerInfo" layoutX="200.0" layoutY="300.0" prefHeight="80.0" prefWidth="100.0" source="playerInfo.fxml" AnchorPane.bottomAnchor="0" AnchorPane.rightAnchor="0" AnchorPane.topAnchor="300" />
-      <ImageView fx:id="map5" fitHeight="300.0" fitWidth="300.0" layoutX="7.0" layoutY="29.0" pickOnBounds="true" preserveRatio="true" AnchorPane.bottomAnchor="227.75912475585938" AnchorPane.leftAnchor="7.0" AnchorPane.rightAnchor="406.0" AnchorPane.topAnchor="29.0">
+      <fx:include fx:id="terrInfo" layoutX="200.0" layoutY="50.0" prefHeight="230.0" prefWidth="100.0" source="terrInfo.fxml" AnchorPane.bottomAnchor="70" AnchorPane.rightAnchor="75" AnchorPane.topAnchor="0" />
+      <fx:include fx:id="playerInfo" layoutX="200.0" layoutY="300.0" prefHeight="80.0" prefWidth="100.0" source="playerInfo.fxml" AnchorPane.rightAnchor="80" AnchorPane.topAnchor="300" />
+      <ImageView fx:id="map5" fitHeight="450.0" fitWidth="450.0" layoutX="7.0" layoutY="29.0" pickOnBounds="true" preserveRatio="true" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
          <image>
             <Image url="@../map/map5.jpg" />
          </image>
       </ImageView>
-      <Hyperlink fx:id="terr0" alignment="CENTER" layoutX="150.0" layoutY="190.0" onAction="#linkZero" text="terr0">
+      <Hyperlink fx:id="terr0" alignment="CENTER" layoutX="235.0" layoutY="200.0" onAction="#linkZero" text="Info">
          <font>
             <Font name="System Bold" size="12.0" />
          </font>
       </Hyperlink>
-      <Hyperlink fx:id="terr1" alignment="CENTER" layoutX="254.0" layoutY="190.0" onAction="#linkOne" text="terr1">
+      <Hyperlink fx:id="terr1" alignment="CENTER" layoutX="244.0" layoutY="150.0" onAction="#linkOne" text="Info">
          <font>
             <Font name="System Bold" size="12.0" />
          </font>
       </Hyperlink>
-      <Hyperlink fx:id="terr2" alignment="CENTER" layoutX="150.0" layoutY="200.0" text="terr2" onAction="#linkTwo">
+      <Hyperlink fx:id="terr2" alignment="CENTER" layoutX="277.0" layoutY="108.0" onAction="#linkTwo" text="Info">
          <font>
             <Font name="System Bold" size="12.0" />
          </font>
       </Hyperlink>
-      <Hyperlink fx:id="terr3" alignment="CENTER" layoutX="100.0" layoutY="150.0" text="terr3" onAction="#linkThree">
+      <Hyperlink fx:id="terr3" alignment="CENTER" layoutX="252.0" layoutY="240.0" onAction="#linkThree" text="Info">
          <font>
             <Font name="System Bold" size="12.0" />
          </font>
       </Hyperlink>
-      <Hyperlink fx:id="terr4" alignment="CENTER" layoutX="100.0" layoutY="50.0" text="terr4" onAction="#linkFour">
+      <Hyperlink fx:id="terr4" alignment="CENTER" layoutX="295.0" layoutY="250.0" onAction="#linkFour" text="Info">
          <font>
             <Font name="System Bold" size="12.0" />
          </font>
       </Hyperlink>
-      <Hyperlink fx:id="terr5" alignment="CENTER" layoutX="100.0" layoutY="200.0" text="terr5" onAction="#linkFive">
+      <Hyperlink fx:id="terr5" alignment="CENTER" layoutX="355.0" layoutY="261.0" onAction="#linkFive" text="Info">
          <font>
             <Font name="System Bold" size="12.0" />
          </font>
       </Hyperlink>
-      <Hyperlink fx:id="terr6" alignment="CENTER" layoutX="100.0" layoutY="250.0" text="terr6" onAction="#linkSix">
+      <Hyperlink fx:id="terr6" alignment="CENTER" layoutX="210.0" layoutY="272.0" onAction="#linkSix" text="Info">
          <font>
             <Font name="System Bold" size="12.0" />
          </font>
       </Hyperlink>
-      <Hyperlink fx:id="terr7" alignment="CENTER" layoutX="100.0" layoutY="300.0" text="terr7" onAction="#linkSeven">
+      <Hyperlink fx:id="terr7" alignment="CENTER" layoutX="217.0" layoutY="311.0" onAction="#linkSeven" text="Info">
          <font>
             <Font name="System Bold" size="12.0" />
          </font>
       </Hyperlink>
-      <Hyperlink fx:id="terr8" alignment="CENTER" layoutX="100.0" layoutY="350.0" text="terr8" onAction="#linkEight">
+      <Hyperlink fx:id="terr8" alignment="CENTER" layoutX="207.0" layoutY="383.0" onAction="#linkEight" text="Info">
          <font>
             <Font name="System Bold" size="12.0" />
          </font>
       </Hyperlink>
-      <Hyperlink fx:id="terr9" alignment="CENTER" layoutX="150.0" layoutY="250.0" text="terr9" onAction="#linkNine">
+      <Hyperlink fx:id="terr9" alignment="CENTER" layoutX="168.0" layoutY="240.0" onAction="#linkNine" text="Info">
          <font>
             <Font name="System Bold" size="12.0" />
          </font>
       </Hyperlink>
-      <Hyperlink fx:id="terr10" alignment="CENTER" layoutX="150.0" layoutY="300.0" text="terr10" onAction="#linkTen">
+      <Hyperlink fx:id="terr10" alignment="CENTER" layoutX="122.0" layoutY="261.0" onAction="#linkTen" prefHeight="21.0" prefWidth="57.0" text="Info">
          <font>
             <Font name="System Bold" size="12.0" />
          </font>
       </Hyperlink>
-      <Hyperlink fx:id="terr11" alignment="CENTER" layoutX="150.0" layoutY="350.0" text="terr11" onAction="#linkEleven">
+      <Hyperlink fx:id="terr11" alignment="CENTER" layoutX="45.0" layoutY="250.0" onAction="#linkEleven" text="Info">
          <font>
             <Font name="System Bold" size="12.0" />
          </font>
       </Hyperlink>
-      <Hyperlink fx:id="terr12" alignment="CENTER" layoutX="200.0" layoutY="250.0" text="terr12" onAction="#linkTwelve">
+      <Hyperlink fx:id="terr12" alignment="CENTER" layoutX="184.0" layoutY="200.0" onAction="#linkTwelve" text="Info">
          <font>
             <Font name="System Bold" size="12.0" />
          </font>
       </Hyperlink>
-      <Hyperlink fx:id="terr13" alignment="CENTER" layoutX="200.0" layoutY="300.0" text="terr13" onAction="#linkThirteen">
+      <Hyperlink fx:id="terr13" alignment="CENTER" layoutX="183.0" layoutY="150.0" onAction="#linkThirteen" text="Info">
          <font>
             <Font name="System Bold" size="12.0" />
          </font>
       </Hyperlink>
-      <Hyperlink fx:id="terr14" alignment="CENTER" layoutX="200.0" layoutY="350.0" text="terr14" onAction="#linkFourteen">
+      <Hyperlink fx:id="terr14" alignment="CENTER" layoutX="122.0" layoutY="108.0" onAction="#linkFourteen" text="Info">
          <font>
             <Font name="System Bold" size="12.0" />
          </font>
