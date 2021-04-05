@@ -160,4 +160,6 @@ public interface Territory<T> extends Serializable{
    * @return the size of the territory
    */
   public int getSize();
+
+  public void setSize(int size);
 }

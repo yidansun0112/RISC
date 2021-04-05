@@ -218,4 +218,9 @@ public class V2Territory<T> extends V1Territory<T> {
   public int getSize() {
     return this.size;
   }
+
+  @Override
+  public void setSize(int size) {
+    this.size = size;
+  }
 }

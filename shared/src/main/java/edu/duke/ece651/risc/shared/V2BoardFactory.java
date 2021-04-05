@@ -31,7 +31,7 @@ public class V2BoardFactory<T> extends BoardFactory<T> {
                     Constant.TERRITORY_FOOD_PRODUCTIVITY, Constant.TERRITORY_TECH_PRODUCTIVITY));
 
         }
-        Board<T> b = new V2GameBoard<>(territories, worldMap2);
+        Board<T> b = new V2GameBoard<>(territories, worldMap3);
         return b;
     }
 
@@ -44,7 +44,7 @@ public class V2BoardFactory<T> extends BoardFactory<T> {
                     Constant.TERRITORY_FOOD_PRODUCTIVITY, Constant.TERRITORY_TECH_PRODUCTIVITY));
 
         }
-        Board<T> b = new V2GameBoard<>(territories, worldMap2);
+        Board<T> b = new V2GameBoard<>(territories, worldMap4);
         return b;
     }
 
@@ -57,7 +57,7 @@ public class V2BoardFactory<T> extends BoardFactory<T> {
                     Constant.TERRITORY_FOOD_PRODUCTIVITY, Constant.TERRITORY_TECH_PRODUCTIVITY));
 
         }
-        Board<T> b = new V2GameBoard<>(territories, worldMap2);
+        Board<T> b = new V2GameBoard<>(territories, worldMap5);
         return b;
     }
 
