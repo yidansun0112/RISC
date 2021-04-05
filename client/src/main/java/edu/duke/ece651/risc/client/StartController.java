@@ -43,7 +43,7 @@ public class StartController {
 
   @FXML
   public void startGame() {
-    PageLoader loader=new PageLoader(window,null);
+    PageLoader loader=new PageLoader(window,new GUIPlayer());
     loader.showRegLogPage();
   }
 

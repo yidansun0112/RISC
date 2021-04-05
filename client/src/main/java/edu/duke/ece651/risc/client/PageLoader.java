@@ -35,7 +35,7 @@ public class PageLoader {
   public void showRegLogPage(){
     FXMLLoader loader = new FXMLLoader(getClass().getResource("/ui/registerLogin.fxml"));
     loader.setControllerFactory(c -> {
-      return new RegisterLoginController(window);
+      return new RegisterLoginController(window,player);
     });
     showPage(loader);
   }

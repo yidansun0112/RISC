@@ -13,6 +13,11 @@ public class GUIPlayer {
   protected GameStatus<String> gameStatus;
   protected int playerId;
 
+
+  public GUIPlayer(){
+    playerId=-1;
+  }
+
   public GUIPlayer(GameClient client){
     this.client=client;
   }
