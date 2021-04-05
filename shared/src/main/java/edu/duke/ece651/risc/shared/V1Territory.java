@@ -273,4 +273,9 @@ public class V1Territory<T> implements Territory<T> {
   public int getSize() {
     return 0;
   }
+
+  @Override
+  public void setSize(int size) {
+    return;
+  }
 }
