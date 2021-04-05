@@ -22,7 +22,7 @@ public class V2UpgradeUnitOrderConsistencyCheckerTest {
     //     Constant.SELF_NOT_LOSE_NO_ONE_WIN_STATUS);
     V2UpgradeUnitOrderConsistencyChecker<String> checker = new V2UpgradeUnitOrderConsistencyChecker<String>(null);
   
-    String failReason = "Sorry, You are not allowed to Update other's Unit.";
+    String failReason = "Sorry, You are not allowed to update other's unit.";
 
     // Player 0 wants to upgrade the units in territory 1 and 2, which belongs to another
     // player.
