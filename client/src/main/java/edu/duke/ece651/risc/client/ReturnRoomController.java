@@ -24,7 +24,7 @@ import javafx.stage.Stage;
 
 public class ReturnRoomController {
   @FXML
-  private ChoiceBox<Integer> roomBox;
+  protected ChoiceBox<Integer> roomBox;
   private Stage window;
   private GUIPlayer player;
   private List<GameRoomInfo> roomList;
