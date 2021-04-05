@@ -13,11 +13,11 @@ public class V2AttackOrderConsistencyChecker<T> extends OrderRuleChecker<T>{
         int destTerritoryId = order.getDestTerritory();
         Territory<T> srcTerritory = board.getTerritories().get(srcTerritoryId);
         Territory<T> destTerritory = board.getTerritories().get(destTerritoryId);
-        if(srcTerritory.getOwner() == destTerritory.getOwner()){
-            return "Sorry, you are not allowed to attack your self.";
-        }
         if(srcTerritory.getOwner() != playerId){
             return "Sorry, you must attack from your own territory.";
+        }
+        if(destTerritory.getOwner() == playerId){
+            return "Sorry, you are not allowed to attack your self.";
         }
         int[][] map = board.getWorldMap();
         if(map[srcTerritoryId][destTerritoryId] == 0){
