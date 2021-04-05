@@ -33,8 +33,8 @@ public class V2GameServer {
    * All the sockets that connected to each player on this server. In evolution 1,
    * all the player will in the same game room
    */
-  // TODO: decide do we still need this field in evo2 later!!!
-  List<Socket> playerSockets;
+  // TODO: decide do we still need this field in evo2 later!!! -- we dont need this now
+  // List<Socket> playerSockets;
 
   /**
    * All the game room on this server. In evo2, we will have multiple game rooms,
@@ -65,7 +65,7 @@ public class V2GameServer {
    */
   public V2GameServer(ServerSocket serverSocket) {
     this.serverSocket = serverSocket;
-    this.playerSockets = new Vector<Socket>();
+    // this.playerSockets = new Vector<Socket>();
     /**
      * Here we need a thread-safe data sturcture, and ConcurrentHashMap is good at
      * your hand
@@ -329,9 +329,6 @@ public class V2GameServer {
    */
   public synchronized void handleCreateGameRoom(PlayerEntity<String> roomCreator)
       throws ClassNotFoundException, IOException {
-
-    // TODO update the mapping between user(player) and rooms here, do this after
-    // decide how to store this map relationship!
 
     // Basically same with evo1, we create a room, add this player into this room,
     // set this room's playerNum field based on the content in this request JSON
