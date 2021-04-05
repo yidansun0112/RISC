@@ -248,7 +248,7 @@ public class V2GameHostThread<T> extends Thread {
         }
 
         if (message == null) {
-          order.execute(board);
+          order.execute(makeLatestGameStatus(false));
           player.sendObject(Constant.LEGAL_ORDER_INFO);
         } else {
           player.sendObject(message);
