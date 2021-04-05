@@ -85,5 +85,19 @@ public class V1GameBoardTest {
     Board<String> b5 = f.makeGameBoard(5);
     ArrayList<Territory<String>> t5 = b5.getTerritories();
     assertEquals(t5.size(), 15);
+    assertEquals(b3.findMinPathDistance(0, 0, 0), -1);
+    b3.getTerritories().get(0).setSize(2);
   }
 }
+
+
+
+
+
+
+
+
+
+
+
+
