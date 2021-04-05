@@ -9,18 +9,16 @@ public class V2UpgradeMaxTechOrderLevelChecker<T> extends OrderRuleChecker<T> {
 
     @Override
     protected String checkMyRule(int playerId, Order<T> order, Board<T> board) {
-        // TODO Auto-generated method stub
         int techLevel = player.getTechLevel();
-        // That means the Max Max_Level is 6
+        // That means the Max_Level is 6
         if(techLevel >= Constant.TOTAL_LEVELS){
-            return "Sorry, You have been to the Max Max_level.";
+            return "Sorry, You have already on the Max Tech level, cannot upgrade anymore.";
         }
         return null;
     }
 
     @Override
     protected String checkMyRule(int playerId, Order<T> order, GameStatus<T> gs) {
-        // TODO Auto-generated method stub
         this.player = gs.getCurrPlayer();
         return checkMyRule(playerId, order, gs.getGameBoard());
     }

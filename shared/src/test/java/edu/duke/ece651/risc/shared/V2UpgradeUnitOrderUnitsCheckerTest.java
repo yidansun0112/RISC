@@ -19,11 +19,30 @@ public class V2UpgradeUnitOrderUnitsCheckerTest {
     GUIPlayerEntity<String> p0 = new GUIPlayerEntity<String>(null, null, 0, "lzy", 0,
         Constant.SELF_NOT_LOSE_NO_ONE_WIN_STATUS);
 
-    String failReason = "Sorry, You don't have enough basic unit which you would like to update.";
+    String failReason = "Sorry, You don't have enough units which you would like to update.";
 
     V2UpgradeUnitOrderUnitsChecker<String> checker = new V2UpgradeUnitOrderUnitsChecker<String>(null);
 
-    // assertEquals(failReason, checker.);
+    // Currently there is no units on territory 0
+    V2UpgradeUnitOrder<String> o0 = new V2UpgradeUnitOrder<String>(0, 0, 1, 1);
+    assertEquals(failReason, checker.checkMyRule(0, o0, new GameStatus<String>(p0, b, false)));
+
+    // Add some units to territory 0
+    b.getTerritories().get(0).addDefendUnits(0, 1);
+    V2UpgradeUnitOrder<String> o1 = new V2UpgradeUnitOrder<String>(0, 0, 1, 1);
+    assertNull(checker.checkMyRule(0, o1, new GameStatus<String>(p0, b, false)));
+    
+    V2UpgradeUnitOrder<String> o2 = new V2UpgradeUnitOrder<String>(0, 2, 4, 4);
+    assertEquals(failReason, checker.checkMyRule(0, o2, new GameStatus<String>(p0, b, false)));
+    
+    b.getTerritories().get(0).addDefendUnits(1, 4);
+    assertEquals(failReason, checker.checkMyRule(0, o2, new GameStatus<String>(p0, b, false)));
+    
+    b.getTerritories().get(0).addDefendUnits(2, 3);
+    assertEquals(failReason, checker.checkMyRule(0, o2, new GameStatus<String>(p0, b, false)));
+    
+    b.getTerritories().get(0).addDefendUnits(2, 1);
+    assertNull(checker.checkMyRule(0, o2, new GameStatus<String>(p0, b, false)));
   }
 
 }

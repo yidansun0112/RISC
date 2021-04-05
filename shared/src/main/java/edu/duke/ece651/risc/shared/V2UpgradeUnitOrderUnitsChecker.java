@@ -13,7 +13,7 @@ public class V2UpgradeUnitOrderUnitsChecker<T> extends OrderRuleChecker<T> {
         int unitsAlreadyHave = board.getTerritories().get(order.getSrcTerritory()).getCurrDefenderArmy().get(0)
                 .getUnitAmtByLevel(levelFrom);
         if (unitsAlreadyHave < howMany) {
-            return "Sorry, You don't have enough basic unit which you would like to update.";
+            return "Sorry, You don't have enough units which you would like to update.";
         }
         return null;
     }

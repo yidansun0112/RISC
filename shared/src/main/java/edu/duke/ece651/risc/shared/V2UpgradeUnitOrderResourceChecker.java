@@ -10,11 +10,14 @@ public class V2UpgradeUnitOrderResourceChecker<T> extends OrderRuleChecker<T> {
 
     @Override
     protected String checkMyRule(int playerId, Order<T> order, Board<T> board) {
-        int levelFrom = ((V2UpgradeUnitOrder<T>) order).levelFrom;
+        V2UpgradeUnitOrder<T> thisOrder = ((V2UpgradeUnitOrder<T>) order);
+        int levelFrom = thisOrder.levelFrom;
+        int levelTo = thisOrder.levelTo;
         int howMany = ((V2UpgradeUnitOrder<T>) order).howMany;
-        int resource = this.player.getTechResourceAmount();
-        int require = Constant.UP_UNIT_COST.get(levelFrom);
-        if (require * howMany > resource) {
+        int requiredResource = (Constant.UP_UNIT_COST.get(levelTo) - Constant.UP_UNIT_COST.get(levelFrom)) * howMany;
+
+        int resourceCurrentHave = this.player.getTechResourceAmount();
+        if (requiredResource > resourceCurrentHave) {
             return "Sorry, you don't have enough Tech resouce to update your units.";
         }
         return null;

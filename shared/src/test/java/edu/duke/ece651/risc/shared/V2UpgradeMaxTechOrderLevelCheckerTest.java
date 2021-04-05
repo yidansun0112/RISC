@@ -2,8 +2,6 @@ package edu.duke.ece651.risc.shared;
 
 import static org.junit.jupiter.api.Assertions.*;
 
-import java.util.HashMap;
-
 import org.junit.jupiter.api.Test;
 
 public class V2UpgradeMaxTechOrderLevelCheckerTest {
@@ -15,19 +13,21 @@ public class V2UpgradeMaxTechOrderLevelCheckerTest {
       b.getTerritories().get(i).setOwner(0);
     }
 
-    // V2MoveOrderConsistencyChecker<String> checker = new V2MoveOrderConsistencyChecker<String>(null);
     OrderRuleChecker<String> checker = new V2UpgradeMaxTechOrderLevelChecker<>(null);
-    GUIPlayerEntity<String> p = new GUIPlayerEntity<String>(null, null, 0, "lzy", 0, Constant.SELF_NOT_LOSE_NO_ONE_WIN_STATUS);
-    // 60 Food Resource. 
-    p.harvestAllResource(b);
- 
-    HashMap<Integer, Integer> army = new HashMap<Integer, Integer>();
+    GUIPlayerEntity<String> p0 = new GUIPlayerEntity<String>(null, null, 0, "lzy", 0,
+        Constant.SELF_NOT_LOSE_NO_ONE_WIN_STATUS);
+    // 60 Food Resource.
+    p0.harvestAllResource(b);
+
     Order<String> o1 = new V2UpgradeTechLevelOrder<>(0);
-    assertNull(checker.checkMyRule(0, o1, new GameStatus(p,b, false)));
-    p.techLevel = 6;
-    String s1 =  "Sorry, You have been to the Max Max_level.";
-    assertEquals(s1, checker.checkMyRule(0, o1, new GameStatus(p,b, false)));
-    
+    assertNull(checker.checkMyRule(0, o1, new GameStatus<String>(p0, b, false)));
+    p0.techLevel = 2;
+    assertNull(checker.checkMyRule(0, o1, new GameStatus<String>(p0, b, false)));
+
+    p0.techLevel = 6;
+    String s1 = "Sorry, You have already on the Max Tech level, cannot upgrade anymore.";
+    assertEquals(s1, checker.checkMyRule(0, o1, new GameStatus<String>(p0, b, false)));
+
   }
 
 }

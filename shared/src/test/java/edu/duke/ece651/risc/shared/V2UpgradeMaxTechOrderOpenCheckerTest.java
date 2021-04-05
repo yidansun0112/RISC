@@ -15,17 +15,17 @@ public class V2UpgradeMaxTechOrderOpenCheckerTest {
       b.getTerritories().get(i).setOwner(0);
     }
 
-    // V2MoveOrderConsistencyChecker<String> checker = new V2MoveOrderConsistencyChecker<String>(null);
-    // OrderRuleChecker<String> checker = new V2UpgradeMaxTechOrderOpenChecker<>(null);
-    // GUIPlayerEntity<String> p = new GUIPlayerEntity<String>(null, null, 0, "lzy", 0, Constant.SELF_NOT_LOSE_NO_ONE_WIN_STATUS);
-    // // 60 Food Resource. 
-    // p.harvestAllResource(b);
-    // HashMap<Integer, Integer> army = new HashMap<Integer, Integer>();
-    // Order<String> o1 = new V2UpgradeTechLevelOrder<>(0);
-    // // assertNull(checker.checkMyRule(0, o1, b));
-    // p.upgradeTechLevel();
-    // String s1 = "Sorry, you have updated your Max Tech Level in this round.";
-    // assertEquals(s1, checker.checkMyRule(0, o1, b));
+    OrderRuleChecker<String> checker = new V2UpgradeMaxTechOrderOpenChecker<>(null);
+    String failReason = "Sorry, you have already issued Upgrade Max Tech Level order in this round.";
+    GUIPlayerEntity<String> p0 = new GUIPlayerEntity<String>(null, null, 0, "lzy", 0, Constant.SELF_NOT_LOSE_NO_ONE_WIN_STATUS);
+
+    Order<String> o1 = new V2UpgradeTechLevelOrder<>(0);
+    p0.needUpTechLv = false;
+    assertEquals(null, checker.checkMyRule(0, o1, new GameStatus<String>(p0, b, false)));
+    
+    p0.setNeedUpTechLv();
+    assertEquals(failReason, checker.checkMyRule(0, o1, new GameStatus<String>(p0, b, false)));
+
   }
 
 }
