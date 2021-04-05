@@ -194,7 +194,7 @@ public class V2GameHostThread<T> extends Thread {
    * @throws InterruptedException
    */
   public void receiveOrder() throws IOException, ClassNotFoundException, InterruptedException {
-    boolean needLatestGameStauts = false; // false: the player keeps in the room, does not neet to send the latest
+    // boolean needLatestGameStauts = false; // false: the player keeps in the room, does not neet to send the latest
                                           // GameStatus to the client.
                                           // true: the player has leave the room and disconnect, need an extra sending
                                           // the latest GameStatus to the client. Will set to false when player
@@ -203,10 +203,10 @@ public class V2GameHostThread<T> extends Thread {
       if (player.getIsInRoomNow()) { // if the player still in the room and keep connected, receive order from this
                                      // player
         // The player just come back, send the latest GameStatus to the client.
-        if (needLatestGameStauts) {
-          GameStatus<T> latestStatus = makeLatestGameStatus(false); // this line is different with evo 1
-          player.sendObject(latestStatus);
-        }
+        // if (needLatestGameStauts) {
+        //   GameStatus<T> latestStatus = makeLatestGameStatus(false); // this line is different with evo 1
+        //   player.sendObject(latestStatus);
+        // }
 
         // NOTE: SEND GameStatus to client - used to show the board after the player
         // issued an order each time
@@ -244,7 +244,7 @@ public class V2GameHostThread<T> extends Thread {
         }
       } else { // the player leave the room for now and disconnect, we let this thread sleep
                // for 1 second to wait for this player come back
-        needLatestGameStauts = true;
+        // needLatestGameStauts = true;
         Thread.sleep(1000);
       }
     }
