@@ -15,7 +15,7 @@ public class StartController {
   @FXML
   private Button startBtn;
   @FXML
-  private ChoiceBox<Integer> playerNumBox;
+  protected ChoiceBox<Integer> playerNumBox;
   @FXML
   private Button confirmNumBtn;
   // @FXML
@@ -42,13 +42,13 @@ public class StartController {
   }
 
   @FXML
-  public void startGame() throws IOException, ClassNotFoundException{
+  public void startGame() {
     PageLoader loader=new PageLoader(window,null);
     loader.showRegLogPage();
   }
 
   @FXML
-  public void selectPlayerNum() throws ClassNotFoundException, IOException {
+  public void selectPlayerNum() {
     int num = playerNumBox.getValue();
     player.playerNum=num;
     player.sendObject(num);
