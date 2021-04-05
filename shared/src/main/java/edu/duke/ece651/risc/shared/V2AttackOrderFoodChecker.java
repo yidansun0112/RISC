@@ -9,7 +9,6 @@ public class V2AttackOrderFoodChecker<T> extends OrderRuleChecker<T> {
 
     @Override
     protected String checkMyRule(int playerId, Order<T> order, Board<T> board) {
-        // TODO Auto-generated method stub
         if(order.getUnitAmount() > this.foodResource){
             return "Sorry, you don't have enough food to attack.";
         }
@@ -18,7 +17,6 @@ public class V2AttackOrderFoodChecker<T> extends OrderRuleChecker<T> {
 
     @Override
     protected String checkMyRule(int playerId, Order<T> order, GameStatus<T> gs) {
-        // TODO Auto-generated method stub
         this.foodResource = gs.getCurrPlayer().getFoodResourceAmount();
         return checkMyRule(playerId, order, gs.getGameBoard());
     }

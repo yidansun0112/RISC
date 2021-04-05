@@ -8,11 +8,11 @@ public class V2UpgradeUnitOrderUnitsChecker<T> extends OrderRuleChecker<T> {
 
     @Override
     protected String checkMyRule(int playerId, Order<T> order, Board<T> board) {
-        // TODO Auto-generated method stub
-        int levelFrom = ((V2UpgradeUnitOrder)order).levelFrom;
-        int howMany = ((V2UpgradeUnitOrder)order).howMany;
-        int armyLevelFrom = board.getTerritories().get(order.getSrcTerritory()).getCurrDefenderArmy().get(0).getUnitAmtByLevel(levelFrom);
-        if(armyLevelFrom > howMany){
+        int levelFrom = ((V2UpgradeUnitOrder<T>) order).levelFrom;
+        int howMany = ((V2UpgradeUnitOrder<T>) order).howMany;
+        int unitsAlreadyHave = board.getTerritories().get(order.getSrcTerritory()).getCurrDefenderArmy().get(0)
+                .getUnitAmtByLevel(levelFrom);
+        if (unitsAlreadyHave < howMany) {
             return "Sorry, You don't have enough basic unit which you would like to update.";
         }
         return null;
@@ -20,7 +20,6 @@ public class V2UpgradeUnitOrderUnitsChecker<T> extends OrderRuleChecker<T> {
 
     @Override
     protected String checkMyRule(int playerId, Order<T> order, GameStatus<T> gs) {
-        // TODO Auto-generated method stub
         return checkMyRule(playerId, order, gs.getGameBoard());
     }
 }

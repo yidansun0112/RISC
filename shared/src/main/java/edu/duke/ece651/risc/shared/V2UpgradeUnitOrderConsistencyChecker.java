@@ -8,7 +8,6 @@ public class V2UpgradeUnitOrderConsistencyChecker<T> extends OrderRuleChecker<T>
 
     @Override
     protected String checkMyRule(int playerId, Order<T> order, Board<T> board) {
-        // TODO Auto-generated method stub
         Territory<T> srcTerritory = board.getTerritories().get(order.getSrcTerritory());
         if(srcTerritory.getOwner() != playerId){
             return "Sorry, You are not allowed to Update other's Unit.";
@@ -18,7 +17,6 @@ public class V2UpgradeUnitOrderConsistencyChecker<T> extends OrderRuleChecker<T>
 
     @Override
     protected String checkMyRule(int playerId, Order<T> order, GameStatus<T> gs) {
-        // TODO Auto-generated method stub
         return checkMyRule(playerId, order, gs.getGameBoard());
     }
     
