@@ -56,6 +56,14 @@ public class PageLoader {
     showPage(loader);
   }
 
+  public void showReturnRoomPage(List<GameRoomInfo> roomList){
+    FXMLLoader loader = new FXMLLoader(getClass().getResource("/ui/returnRoom.fxml"));
+    loader.setControllerFactory(c -> {
+      return new ReturnRoomController(window,player,roomList);
+    });
+    showPage(loader);
+  }
+
   public void showWaitPlayerComingPage(){
     System.out.println("in show wait page");
     FXMLLoader loader = new FXMLLoader(getClass().getResource("/ui/waitPlayerComing.fxml"));
@@ -205,8 +213,31 @@ public class PageLoader {
 
   public void showWatchGame(){
     FXMLLoader loader = new FXMLLoader(getClass().getResource("/ui/watchGame.fxml"));
+      loader.setControllerFactory(c -> {
+          if(c.equals(WatchGameController.class)){
+          return new WatchGameController(window,player);
+        }
+        try{
+          return c.getConstructor().newInstance();
+        }catch(Exception e){
+          throw new RuntimeException(e);
+        }
+      });
+    showPage(loader);
+  }
+
+  public void showCombatInfo(){
+    FXMLLoader loader = new FXMLLoader(getClass().getResource("/ui/combatInfo.fxml"));
         loader.setControllerFactory(c -> {
-            return new LoseGameController(window,player);
+            return new CombatInfoController(window,player);
+        });
+    showPage(loader);
+  }
+
+  public void showLoseChoice(){
+    FXMLLoader loader = new FXMLLoader(getClass().getResource("/ui/loseChoice.fxml"));
+        loader.setControllerFactory(c -> {
+            return new LoseChoiceController(window,player);
         });
     showPage(loader);
   }
