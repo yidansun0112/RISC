@@ -69,7 +69,18 @@ public class IssueOrderController implements Initializable{
     player.sendObject(order);
     String result=(String)player.receiveObject();
     player.gameStatus=(GameStatus<String>)player.receiveObject();
+    PageLoader loader=new PageLoader(window,player);
+    loader.showCombatInfo();
   }
+
+
+  @FXML
+  public void leave(){
+    player.disconnect();
+    PageLoader loader=new PageLoader(window,player);
+    loader.showChooseGamePage();
+  }
+
 }
 
 

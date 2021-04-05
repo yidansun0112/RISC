@@ -10,35 +10,35 @@
 
 <AnchorPane fx:id="rootPane" prefHeight="747.0" prefWidth="993.0" style="-fx-border-color: lightskyblue; -fx-border-width: 10;" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.duke.ece651.risc.client.MoveAttackController">
     <children>
-      <Label alignment="CENTER" layoutX="616.0" layoutY="351.0" prefHeight="100.0" prefWidth="275.0" text="What would you like to do?" textAlignment="CENTER" textFill="DARKBLUE" AnchorPane.bottomAnchor="306.0">
+      <Label alignment="CENTER" layoutX="612.0" layoutY="437.0" prefHeight="100.0" prefWidth="275.0" text="What would you like to do?" textAlignment="CENTER" textFill="DARKBLUE" AnchorPane.bottomAnchor="210.0">
          <font>
             <Font name="System Bold" size="19.0" />
          </font>
       </Label>
-      <Label alignment="CENTER" layoutX="400.0" layoutY="550.0" text="Source Territory:" textFill="DARKBLUE" AnchorPane.bottomAnchor="277.0">
+      <Label alignment="CENTER" layoutX="257.0" layoutY="548.0" text="Source Territory:" textFill="DARKBLUE" AnchorPane.bottomAnchor="182.0">
          <font>
             <Font name="System Bold" size="13.0" />
          </font>
       </Label>
-      <ChoiceBox fx:id="sourceBox" layoutX="450.0" layoutY="700.0" prefHeight="18.0" prefWidth="60.0" AnchorPane.bottomAnchor="150.0" />
-      <Label alignment="CENTER" layoutX="500.0" layoutY="550.0" text="Target Territory:" textFill="DARKBLUE" AnchorPane.bottomAnchor="278.0">
+      <ChoiceBox fx:id="sourceBox" layoutX="281.0" layoutY="591.0" prefHeight="18.0" prefWidth="60.0" AnchorPane.bottomAnchor="129.0" />
+      <Label alignment="CENTER" layoutX="392.0" layoutY="541.0" text="Target Territory:" textFill="DARKBLUE" AnchorPane.bottomAnchor="189.0">
          <font>
             <Font name="System Bold" size="13.0" />
          </font>
       </Label>
-      <ChoiceBox fx:id="targetBox" layoutX="550.0" layoutY="700.0" prefHeight="27.0" prefWidth="81.0" AnchorPane.bottomAnchor="150.0" />
-      <Label alignment="CENTER" layoutX="600.0" layoutY="550.0" text="Level 0:" textFill="DARKBLUE" AnchorPane.bottomAnchor="214.0">
+      <ChoiceBox fx:id="targetBox" layoutX="395.0" layoutY="583.0" prefHeight="27.0" prefWidth="81.0" AnchorPane.bottomAnchor="137.0" />
+      <Label alignment="CENTER" layoutX="518.0" layoutY="533.0" text="Level 0:" textFill="DARKBLUE" AnchorPane.bottomAnchor="200.0">
          <font>
             <Font name="System Bold" size="11.0" />
          </font>
       </Label>
-      <ChoiceBox fx:id="lv0Box" layoutX="663.0" layoutY="700.0" prefHeight="0.0" prefWidth="9.0" AnchorPane.bottomAnchor="150.0" />
+      <ChoiceBox fx:id="lv0Box" layoutX="518.0" layoutY="576.0" prefHeight="0.0" prefWidth="9.0" AnchorPane.bottomAnchor="144.0" />
       <Label alignment="CENTER" layoutX="589.0" layoutY="505.0" text="Level 1:" textFill="DARKBLUE" AnchorPane.bottomAnchor="167.0">
          <font>
             <Font name="System Bold" size="11.0" />
          </font>
       </Label>
-      <ChoiceBox fx:id="lv1Box" layoutX="668.0" layoutY="552.0" prefHeight="5.0" prefWidth="40.0" scaleShape="false" AnchorPane.bottomAnchor="168.0" />
+      <ChoiceBox fx:id="lv1Box" layoutX="663.0" layoutY="553.0" prefHeight="5.0" prefWidth="40.0" scaleShape="false" AnchorPane.bottomAnchor="167.0" />
       <Label alignment="CENTER" layoutX="587.0" layoutY="531.0" text="Level 2:" textFill="DARKBLUE" AnchorPane.bottomAnchor="141.0">
          <font>
             <Font name="System Bold" size="11.0" />

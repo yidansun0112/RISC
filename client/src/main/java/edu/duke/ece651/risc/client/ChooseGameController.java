@@ -71,6 +71,22 @@ public class ChooseGameController {
 
   @FXML
   public void returnGame(){
-
+    //ask for list
+    player.connect();
+    JSONObject jsonObject=new JSONObject();
+    jsonObject.put(Constant.KEY_REQUEST_TYPE,Constant.VALUE_REQUEST_TYPE_GET_LEAVING_ROOM_LIST);
+    jsonObject.put(Constant.KEY_USER_NAME,player.username);
+    String request=jsonObject.toString();
+    player.sendObject(request);
+    List<GameRoomInfo> roomList=(List<GameRoomInfo>)player.receiveObject();
+    if(roomList.size()==0){
+      AlterBox box=new AlterBox(window,player);
+      box.display("stay", "Back", "You don't have any room to return right now.");
+      player.disconnect();
+    }else{
+      player.disconnect();
+      PageLoader loader=new PageLoader(window,player);
+      loader.showReturnRoomPage(roomList);
+    }
   }
 }
