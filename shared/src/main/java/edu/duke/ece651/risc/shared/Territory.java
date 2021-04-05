@@ -61,6 +61,11 @@ public interface Territory<T> extends Serializable{
   public Vector<Army<T>> getCurrDefenderArmy();
 
   /**
+   * return PrevDefenderArmy Vectore
+   */
+  public Vector<Army<T>> getPrevDefenderArmy();
+
+  /**
    * return enemyArmy Vectore
    */
   public Vector<Army<T>> getEnemyArmy();

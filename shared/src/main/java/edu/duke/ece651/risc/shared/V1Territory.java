@@ -141,6 +141,14 @@ public class V1Territory<T> implements Territory<T> {
     return this.currDefenderArmy;
   }
 
+  /*
+   * return DefenderArmy Vector
+   */
+  @Override
+  public Vector<Army<T>> getPrevDefenderArmy() {
+    return this.prevDefenderArmy;
+  }
+
   /**
    * return enemyArmy Vector
    */

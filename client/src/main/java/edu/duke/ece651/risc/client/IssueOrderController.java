@@ -4,6 +4,9 @@ import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
 
+import edu.duke.ece651.risc.shared.DoneOrder;
+import edu.duke.ece651.risc.shared.GameStatus;
+import edu.duke.ece651.risc.shared.Order;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
@@ -33,7 +36,7 @@ public class IssueOrderController implements Initializable{
     this.window = window;
     this.player=player;
     PageLoader loader=new PageLoader(window, player);
-    mapPane=loader.loadMap("/ui/map2link.fxml");
+    mapPane=loader.loadMap();
   }
 
 
@@ -45,13 +48,13 @@ public class IssueOrderController implements Initializable{
   @FXML
   public void move(){
     PageLoader loader=new PageLoader(window,player);
-    loader.showMoveAttack();
+    loader.showMoveAttack("move");
   }
 
   @FXML
   public void attack(){
     PageLoader loader=new PageLoader(window,player);
-    loader.showMoveAttack();
+    loader.showMoveAttack("attack");
   }
 
   @FXML
@@ -62,7 +65,10 @@ public class IssueOrderController implements Initializable{
 
   @FXML
   public void done(){
-    
+    Order<String> order=new DoneOrder<String>();
+    player.sendObject(order);
+    String result=(String)player.receiveObject();
+    player.gameStatus=(GameStatus<String>)player.receiveObject();
   }
 }
 

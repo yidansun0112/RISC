@@ -1,5 +1,6 @@
 package edu.duke.ece651.risc.shared;
 
+import java.beans.Transient;
 import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
@@ -12,12 +13,12 @@ public abstract class PlayerEntity<T> implements Serializable{
   /**
    * Fields required by Serializable
    */
-  private static final long serialVersionUID = 9;
+  private static final long serialVersionUID = 9L;
   // TODO: two fields below (object input/output streams) may need to be @Transit
   /** Send data to player */
-  protected ObjectOutputStream toPlayer;
+  transient protected ObjectOutputStream toPlayer;
   /** Read data from player */
-  protected ObjectInputStream fromPlayer;
+  transient protected ObjectInputStream fromPlayer;
   /** The id of this player in a game room */
   protected int playerId;
   /** The symbol that to display the player */
@@ -149,6 +150,7 @@ public abstract class PlayerEntity<T> implements Serializable{
    */
   public void sendObject(Object o) {
     try {
+      toPlayer.reset();
       toPlayer.writeObject(o);
     } catch (IOException e) {
       e.printStackTrace();
