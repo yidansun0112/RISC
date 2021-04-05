@@ -103,12 +103,12 @@ public class GUIPlayerEntity<T> extends PlayerEntity<T> {
     // Fail fast. In actual game process, we need to ensure the order rule checker
     // do robust checking, and these throws should not be executed. Add them here
     // just for the convenience for debugging and fail fast.
-    if (techLevel == Constant.TOTAL_LEVELS) {
-      throw new IllegalStateException("Already on hightest tech level!");
-    }
-    if (needUpTechLv == false) {
-      throw new IllegalStateException("Already on hightest tech level!");
-    }
+    // if (techLevel == Constant.TOTAL_LEVELS) {
+    //   throw new IllegalStateException("Already on hightest tech level!");
+    // }
+    // if (needUpTechLv == false) {
+    //   throw new IllegalStateException("You already issued this order!");
+    // }
     techLevel++;
     needUpTechLv = false;
   }
