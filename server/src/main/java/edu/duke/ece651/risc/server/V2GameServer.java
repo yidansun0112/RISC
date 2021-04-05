@@ -33,7 +33,6 @@ public class V2GameServer {
    * All the sockets that connected to each player on this server. In evolution 1,
    * all the player will in the same game room
    */
-  // TODO: decide do we still need this field in evo2 later!!! -- we dont need this now
   // List<Socket> playerSockets;
 
   /**
@@ -53,9 +52,6 @@ public class V2GameServer {
 
   /** A thread pool to handle different kinds of request from multiple players */
   ThreadPoolExecutor threadPool;
-
-  // TODO: a new field that records the mapping between risc user and the room
-  // they joined in?
 
   /**
    * Contructor that takes in a ServerSocket object.

@@ -72,7 +72,6 @@ public class V2GameRoom extends GameRoom<String> {
    * @param roomCreator
    */
   public V2GameRoom(int roomId, PlayerEntity<String> roomCreator) {
-    // TODO check this contructor again when most of other code are finished!!!
     super(0, Constant.TOTAL_UNITS, roomCreator);
     this.roomId = roomId;
     this.roomStatus = Constant.ROOM_STATUS_WAITING_PLAYERS;
@@ -167,6 +166,7 @@ public class V2GameRoom extends GameRoom<String> {
             playGame();
           } catch (InterruptedException | BrokenBarrierException | ClassNotFoundException e) {
             // TODO: see whether we need to do something here or just ignore it.
+            // TODO:remove the print stackTrace when finished
             e.printStackTrace();
           }
         });

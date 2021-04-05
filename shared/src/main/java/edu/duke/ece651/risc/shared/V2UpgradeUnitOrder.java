@@ -122,7 +122,6 @@ public class V2UpgradeUnitOrder<T> implements Order<T> {
 
   @Override
   public HashMap<Integer, Integer> getArmyHashMap() {
-    // TODO Auto-generated method stub
     return null;
   }
 }

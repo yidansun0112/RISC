@@ -13,7 +13,6 @@ public abstract class PlayerEntity<T> implements Serializable{
    * Fields required by Serializable
    */
   private static final long serialVersionUID = 9L;
-  // TODO: two fields below (object input/output streams) may need to be @Transit
   /** Send data to player */
   transient protected ObjectOutputStream toPlayer;
   /** Read data from player */
