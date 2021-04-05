@@ -1,5 +1,6 @@
 package edu.duke.ece651.risc.server;
 
+import java.util.ArrayList;
 import java.util.Random;
 import java.util.concurrent.BrokenBarrierException;
 import java.util.concurrent.CyclicBarrier;
@@ -14,7 +15,7 @@ import edu.duke.ece651.risc.shared.MoveOrderEffectChecker;
 import edu.duke.ece651.risc.shared.MoveOrderPathChecker;
 import edu.duke.ece651.risc.shared.OrderRuleChecker;
 import edu.duke.ece651.risc.shared.PlayerEntity;
-import edu.duke.ece651.risc.shared.V1BoardFactory;
+import edu.duke.ece651.risc.shared.V2BoardFactory;
 
 /**
  * README: in evo1, we start let the first player to choose map is when all
@@ -79,7 +80,7 @@ public class V2GameRoom extends GameRoom<String> {
 
   // --- Below is the helper method that make the evo2 Battle Resolver --- //
   public static Resolver<String> makeBattleResolver() {
-    return new BattleResolver<String>(new Random(Constant.randomSeed));
+    return new V2BattleResolver<String>(new Random(Constant.randomSeed));
   }
 
   // --- Below are the helper methods that make order rule checker chains --- //
@@ -179,8 +180,7 @@ public class V2GameRoom extends GameRoom<String> {
   @Override
   public void chooseMap() throws ClassNotFoundException {
     PlayerEntity<String> firstPlayer = players.get(0);
-    // TODO: replace V1BoardFactory with V2BoardFactory later!
-    BoardFactory<String> factory = new V1BoardFactory<String>();
+    BoardFactory<String> factory = new V2BoardFactory<String>();
     gameBoard = factory.makeGameBoard(playerNum);
     gameBoard.updateAllPrevDefender();
 
@@ -200,28 +200,36 @@ public class V2GameRoom extends GameRoom<String> {
     // Wait all the player finishing their deployment
     barrier.await();
     while (true) {
-      barrier.await();
+      barrier.await(); // wait for all players done their order
 
       System.out.println("All players done with their orders");
 
-      resolver.executeAllBattle(gameBoard);
+      ArrayList<String> combatInfo = new ArrayList<>();
+      resolver.executeAllBattle(gameBoard,combatInfo);
+      
+      // NOTE: SEND ArrayList to all players - the results of combat
+      sendToAllPlayer(combatInfo); // broadcast the battle results in this turn
+
       incrementUnits();
       gameBoard.updateAllPrevDefender();
       updateAllPlayer(); // we need to update AFTER all combats finished
       System.out.println("Battle finished, now check anyone wins");
 
       if (checkEnd()) {
-        setRoomStatus(Constant.ROOM_STATUS_GAME_FINISHED);
         barrier.await();
-        sendToAllPlayer(getWinnerId()); // send the player id of the winner to all players
+        // NOTE: SEND int to all players - the player id of the winner
+        sendToAllPlayer(getWinnerId());
         barrier.await();
         // closeAllStreams();
         break;
       }
-      barrier.await();
+      barrier.await(); // room finished battle stuff, enable each player issue order again
 
       System.out.println("No one wins, now waiting all players done again");
 
+      setRoomStatus(Constant.ROOM_STATUS_GAME_FINISHED); // we update the room status at last, to avoid the room being
+                                                         // removed by the clearFinishedGameRoom() before finishing
+                                                         // broadcasting the winner info.
     }
   }
 

@@ -32,7 +32,8 @@ public abstract class PlayerEntity<T> implements Serializable{
   /**
    * Indicate whether the player is currently in this game room. True if the
    * player is in the current game room; False if the player disconnect and leave
-   * the game room (may comeback later)
+   * the game room (may comeback later). Note that the false value means that the
+   * client has disconnet with the server.
    * 
    * Note that in evolution 1 this field is NOT USED, since there is only one room
    * in evo1 and all players keep in the room until the game ends and the room is
