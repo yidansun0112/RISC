@@ -52,7 +52,7 @@ public class V2GameBoard<T> extends V1GameBoard<T> {
     });
     // Iterate Over all of the territories to add the Player's Territory to the PriorityQueue.
     for(Territory<T> terr : territories){
-      if(terr.getOwner() == playerId && terr.getId() != srcTerritoryId){
+      if(terr.getOwner() == playerId){  // && terr.getId() != srcTerritoryId){
         //int curr = terr.getId();
         for(int curr : terr.getNeigh()){
           // Make Sure that every territory will only be added once.
