@@ -70,7 +70,7 @@ public class V2MoveOrder<T> implements Order<T> {
   }
   /**
    * This method will return the total amount of units which participated in this
-   * attacking action.
+   * moving action.
    */
   @Override
   public int getUnitAmount() {
