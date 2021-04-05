@@ -41,7 +41,12 @@ public class V2MoveOrder<T> implements Order<T> {
       return false;
     }
     else{
-      currPlayer.consumeFoodResource(pathLength);
+      // Remove the Unit in Source Territory and Add the Unit in Destination Territory
+      for(int i : levelToUnitAmount.keySet()){
+        board.removeDefendUnitsFrom(this.srcTerritory, i, levelToUnitAmount.get(i));
+        board.addDefendUnitsTo(this.destTerritory, i, levelToUnitAmount.get(i));
+      }
+      currPlayer.consumeFoodResource(pathLength * this.getUnitAmount());
     }
     return pathLength > 0;
   }
@@ -56,6 +61,13 @@ public class V2MoveOrder<T> implements Order<T> {
     return destTerritory;
   }
 
+  /**
+   * getter for levelToUnit HashMap. Used in checker
+   */
+  @Override
+  public HashMap<Integer, Integer> getArmyHashMap(){
+    return this.levelToUnitAmount;
+  }
   /**
    * This method will return the total amount of units which participated in this
    * attacking action.

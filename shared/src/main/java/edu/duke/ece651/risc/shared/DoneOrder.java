@@ -1,5 +1,7 @@
 package edu.duke.ece651.risc.shared;
 
+import java.util.HashMap;
+
 public class DoneOrder<T> implements Order<T> {
   /**
    * Fields required by Serializable
@@ -54,5 +56,11 @@ public class DoneOrder<T> implements Order<T> {
   @Override
   public boolean execute(GameStatus<T> gs) {
     return true;
+  }
+
+  @Override
+  public HashMap<Integer, Integer> getArmyHashMap() {
+    // TODO Auto-generated method stub
+    return null;
   }
 }

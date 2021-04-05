@@ -1,5 +1,7 @@
 package edu.duke.ece651.risc.shared;
 
+import java.util.HashMap;
+
 public class AttackOrder<T> implements Order<T> {
 
   /**
@@ -96,5 +98,11 @@ public class AttackOrder<T> implements Order<T> {
   @Override
   public boolean execute(GameStatus<T> gs) {
     return execute(gs.getGameBoard());
+  }
+
+  @Override
+  public HashMap<Integer, Integer> getArmyHashMap() {
+    // TODO Auto-generated method stub
+    return null;
   }
 }

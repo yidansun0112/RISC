@@ -1,11 +1,11 @@
 package edu.duke.ece651.risc.shared;
 
-public class V2MoveOrderRuleChecker<T> extends OrderRuleChecker<T> {
+public class V2MoveOrderPathChecker<T> extends OrderRuleChecker<T> {
 
   /*
    * This is the Constructor
    */
-  public V2MoveOrderRuleChecker(OrderRuleChecker<T> next) {
+  public V2MoveOrderPathChecker(OrderRuleChecker<T> next) {
     super(next);
   }
 

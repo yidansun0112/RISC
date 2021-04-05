@@ -1,5 +1,7 @@
 package edu.duke.ece651.risc.shared;
 
+import java.util.HashMap;
+
 public class V2UpgradeUnitOrder<T> implements Order<T> {
 
   /**
@@ -116,5 +118,11 @@ public class V2UpgradeUnitOrder<T> implements Order<T> {
   @Deprecated
   public boolean execute(Board<T> board) {
     return false;
+  }
+
+  @Override
+  public HashMap<Integer, Integer> getArmyHashMap() {
+    // TODO Auto-generated method stub
+    return null;
   }
 }

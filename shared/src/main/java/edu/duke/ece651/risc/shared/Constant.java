@@ -120,6 +120,24 @@ public class Constant {
    * Store the cost of technology resource of upgrading some amount of units. Key
    * is the level, value is the cost. Same with that in pdf 7.(e).
    */
+  public static final HashMap<Integer, Integer> UP_TECH_LEVEL_COST;
+
+  
+  // Here we use a static block to initialize the map. If we can use Java9, there
+  // is a factory can do this job, which is nicer.
+
+  static {
+    UP_TECH_LEVEL_COST = new HashMap<Integer, Integer>();
+    UP_TECH_LEVEL_COST.put(1, 50);
+    UP_TECH_LEVEL_COST.put(2, 75);
+    UP_TECH_LEVEL_COST.put(3, 125);
+    UP_TECH_LEVEL_COST.put(4, 200);
+    UP_TECH_LEVEL_COST.put(5, 300);
+  }
+  /**
+   * Store the cost of technology resource of upgrading some amount of units. Key
+   * is the level, value is the cost. Same with that in pdf 7.(e).
+   */
   public static final HashMap<String, Integer> terrNameToId;
   // Here we use a static block to initialize the map. If we can use Java9, there
   // is a factory can do this job, which is nicer.
