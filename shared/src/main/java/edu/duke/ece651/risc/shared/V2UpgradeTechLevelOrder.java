@@ -34,6 +34,10 @@ public class V2UpgradeTechLevelOrder<T> implements Order<T> {
     // all battles.
     PlayerEntity<T> playerWhoWantUpgrade = gs.getCurrPlayer();
     playerWhoWantUpgrade.setNeedUpTechLv();
+    
+    // Now consume the tech resource immediately
+    int currTechLevel = playerWhoWantUpgrade.getTechLevel();
+    playerWhoWantUpgrade.consumeTechResource(Constant.UP_TECH_LEVEL_COST.get(currTechLevel));
     return true;
   }
 
