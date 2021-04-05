@@ -6,15 +6,18 @@ public class V2MoveOrderConsistencyChecker<T> extends OrderRuleChecker<T> {
     super(next);
   }
 
-  /*
+  /**
    * Check it If The Source Territory have the enough army
    */
   @Override
   protected String checkMyRule(int playerId, Order<T> order, Board<T> board) {
-    
+
     Territory<T> territory_src = board.getTerritories().get(order.getSrcTerritory());
     Territory<T> territory_dest = board.getTerritories().get(order.getDestTerritory());
 
+    if (order.getSrcTerritory() == order.getDestTerritory()) {
+      return "You cannot move to the same place.\n";
+    }
     if (territory_src.getOwner() != playerId) {
       return "The source territory doesn't belong to this player.\n";
     }
