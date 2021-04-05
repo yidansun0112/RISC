@@ -15,7 +15,7 @@ import edu.duke.ece651.risc.shared.MoveOrderEffectChecker;
 import edu.duke.ece651.risc.shared.MoveOrderPathChecker;
 import edu.duke.ece651.risc.shared.OrderRuleChecker;
 import edu.duke.ece651.risc.shared.PlayerEntity;
-import edu.duke.ece651.risc.shared.V1BoardFactory;
+import edu.duke.ece651.risc.shared.V2BoardFactory;
 
 /**
  * README: in evo1, we start let the first player to choose map is when all
@@ -80,7 +80,7 @@ public class V2GameRoom extends GameRoom<String> {
 
   // --- Below is the helper method that make the evo2 Battle Resolver --- //
   public static Resolver<String> makeBattleResolver() {
-    return new BattleResolver<String>(new Random(Constant.randomSeed));
+    return new V2BattleResolver<String>(new Random(Constant.randomSeed));
   }
 
   // --- Below are the helper methods that make order rule checker chains --- //
@@ -180,8 +180,7 @@ public class V2GameRoom extends GameRoom<String> {
   @Override
   public void chooseMap() throws ClassNotFoundException {
     PlayerEntity<String> firstPlayer = players.get(0);
-    // TODO: replace V1BoardFactory with V2BoardFactory later!
-    BoardFactory<String> factory = new V1BoardFactory<String>();
+    BoardFactory<String> factory = new V2BoardFactory<String>();
     gameBoard = factory.makeGameBoard(playerNum);
     gameBoard.updateAllPrevDefender();
 
