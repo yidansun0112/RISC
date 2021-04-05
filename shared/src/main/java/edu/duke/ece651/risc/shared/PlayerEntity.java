@@ -130,17 +130,7 @@ public abstract class PlayerEntity<T> implements Serializable{
    */
   public abstract void upgradeTechLevel();
 
-  // /**
-  //  * This method can be used in order rule checker for a more concise code in rule
-  //  * checker. Also add this method for better support LSP principle.
-  //  * 
-  //  * You can also write your own rule checking code in rule checker and not use
-  //  * this method, if more easy to implementation without technical debt.
-  //  * 
-  //  * @return {@code true} if the player can upgrade his/her max tech level;
-  //  *         {@code false} if cannot upgrade tech level currently.
-  //  */
-  // public abstract boolean canUpTechLevel();
+  
 
   /**
    * Send an object to the player via ObjectOutputStream. This method is used to

@@ -95,8 +95,6 @@ public class GUIPlayerEntity<T> extends PlayerEntity<T> {
    *          "UpTechLvOrder" in GameHostThread, since this method will
    *          immediately increment the max tech level!
    * 
-   * @return {@code true} if successfully upgrated tech level; {@code false} if
-   *         currently cannot upgrade tech level.
    * @throws IllegalStateException if the player cannot upgrade tech level
    *                               currently
    */
