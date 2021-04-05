@@ -1,6 +1,5 @@
 package edu.duke.ece651.risc.shared;
 
-import java.beans.Transient;
 import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
