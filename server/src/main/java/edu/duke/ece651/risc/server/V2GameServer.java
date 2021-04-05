@@ -126,7 +126,6 @@ public class V2GameServer {
    * @throws IOException
    */
   public void handleRequest(Socket sock) throws ClassNotFoundException, IOException {
-    // TODO: to myself: finish this with joinRoom, createRoom two requets soon!
 
     // Some notes and thoughts here:
     // We may create a playerEntity to reuse the receiveObject() method, but is that
@@ -149,30 +148,31 @@ public class V2GameServer {
 
     // Got the short connection for sending-receiving a request, now we receive the
     // JSON string.
-    ObjectInputStream oisForJSON = new ObjectInputStream(sock.getInputStream());
-    ObjectOutputStream oosForResult = new ObjectOutputStream(sock.getOutputStream());
-    String jsonString = (String) oisForJSON.readObject();
+    ObjectInputStream oisFromClient = new ObjectInputStream(sock.getInputStream());
+    ObjectOutputStream oosToClient = new ObjectOutputStream(sock.getOutputStream());
+    String jsonString = (String) oisFromClient.readObject();
     JSONObject requestJSON = new JSONObject(jsonString);
 
     // Check what type of the request is, then do the appropriate work to process
     // the request.
 
     String requestType = requestJSON.getString(Constant.KEY_REQUEST_TYPE);
+    System.out.println(requestType);
     if (requestType.equals(Constant.VALUE_REQUEST_TYPE_REGISTER)) {
       String result = handleRegister(requestJSON);
       if (result == null) {
-        oosForResult.writeObject(Constant.RESULT_SUCCEED_REQEUST);
+        oosToClient.writeObject(Constant.RESULT_SUCCEED_REQEUST);
       } else {
-        oosForResult.writeObject(result);
+        oosToClient.writeObject(result);
       }
     }
 
     if (requestType.equals(Constant.VALUE_REQUEST_TYPE_LOGIN)) {
       String result = handleLogin(requestJSON);
       if (result == null) {
-        oosForResult.writeObject(Constant.RESULT_SUCCEED_REQEUST);
+        oosToClient.writeObject(Constant.RESULT_SUCCEED_REQEUST);
       } else {
-        oosForResult.writeObject(result);
+        oosToClient.writeObject(result);
       }
     }
 
@@ -187,13 +187,19 @@ public class V2GameServer {
                                                                          // whether the username is an empty string when
                                                                          // register/login, otherwise here will throw an
                                                                          // exception
-      PlayerEntity<String> roomCreator = new GUIPlayerEntity<String>(new ObjectOutputStream(sock.getOutputStream()),
-          new ObjectInputStream(sock.getInputStream()), 0, playerName, -1, Constant.SELF_NOT_LOSE_NO_ONE_WIN_STATUS);
+      System.out.println(playerName);
+      // PlayerEntity<String> roomCreator = new GUIPlayerEntity<String>(new
+      // ObjectOutputStream(sock.getOutputStream()),
+      // new ObjectInputStream(sock.getInputStream()), 0, playerName, -1,
+      // Constant.SELF_NOT_LOSE_NO_ONE_WIN_STATUS);
+      PlayerEntity<String> roomCreator = new GUIPlayerEntity<String>(oosToClient, oisFromClient, 0, playerName, -1,
+          Constant.SELF_NOT_LOSE_NO_ONE_WIN_STATUS);
+      System.out.println("after create player entity");
       handleCreateGameRoom(roomCreator);
     }
 
     if (requestType.equals(Constant.VALUE_REQUEST_TYPE_GET_WATING_ROOM_LIST)) {
-      oosForResult.writeObject(getWaitingRoomList()); // we directly send the list here.
+      oosToClient.writeObject(getWaitingRoomList()); // we directly send the list here.
     }
 
     // The user wants to join an existing game room which is waiting for the rest of
@@ -201,11 +207,26 @@ public class V2GameServer {
     if (requestType.equals(Constant.VALUE_REQUEST_TYPE_JOIN_ROOM)) {
       String playerName = requestJSON.getString(Constant.KEY_USER_NAME);
       int roomIdToJoin = Integer.parseInt(requestJSON.getString(Constant.KEY_ROOM_ID_TO_JOIN).trim());
-      PlayerEntity<String> followingPlayer = new GUIPlayerEntity<String>(new ObjectOutputStream(sock.getOutputStream()),
-          new ObjectInputStream(sock.getInputStream()), 0, playerName, -1, Constant.SELF_NOT_LOSE_NO_ONE_WIN_STATUS);
+      PlayerEntity<String> followingPlayer = new GUIPlayerEntity<String>(oosToClient, oisFromClient, 0, playerName, -1,
+          Constant.SELF_NOT_LOSE_NO_ONE_WIN_STATUS);
       handleJoinGameRoom(followingPlayer, roomIdToJoin);
     }
 
+    // The user wants to get a list of game room which he left before (the game room
+    // should has no winner yet and this user(player) should not have lost the game)
+    if (requestType.equals(Constant.VALUE_REQUEST_TYPE_GET_LEAVING_ROOM_LIST)) {
+      String playerName = requestJSON.getString(Constant.KEY_USER_NAME);
+      oosToClient.writeObject(getLeavingRoomListByUsername(playerName)); // we directly send the list here.
+    }
+
+    // The user wants to return to a specified room he left before
+    if (requestType.equals(Constant.VALUE_REQUEST_TYPE_RETURN_ROOM)) {
+      String playerName = requestJSON.getString(Constant.KEY_USER_NAME);
+      int roomIdToBackTo = Integer.parseInt(requestJSON.getString(Constant.KEY_ROOM_ID_TO_RETURN).trim());
+      PlayerEntity<String> returnedPlayer = new GUIPlayerEntity<String>(oosToClient, oisFromClient, 0, playerName, -1,
+          Constant.SELF_NOT_LOSE_NO_ONE_WIN_STATUS);
+      handleBackToGameRoom(returnedPlayer, roomIdToBackTo);
+    }
   }
 
   /**
@@ -314,16 +335,21 @@ public class V2GameServer {
 
     // Basically same with evo1, we create a room, add this player into this room,
     // set this room's playerNum field based on the content in this request JSON
+    System.out.println("in hancle create game room"); 
     int idForTheNewRoom = nextRoomId;
     this.nextRoomId++;
+    System.out.println("before create room");
     GameRoom<String> newRoom = new V2GameRoom(idForTheNewRoom, roomCreator);
+    System.out.println("after create room");
     gameRooms.put(idForTheNewRoom, newRoom);
 
     // We need to send the player id to this player. Since he/she is the creator of
     // a new game room, player id will be 0 (zero)
     // NOTE: SEND String to client - player id
     roomCreator.setPlayerId(0);
+    System.out.println("before send");
     roomCreator.sendObject(new String("0"));
+    System.out.println("after send");
 
     // Now receive the user decision about how many players should in this room
     int totalPlayer = (int) roomCreator.receiveObject();
@@ -347,8 +373,26 @@ public class V2GameServer {
     roomWantToJoin.addPlayerAndCheckToPlay(followingPlayer);
   }
 
-  // public void handleGetWaitingRoomList() {
-  // }
+  /**
+   * This method handle the request of going back to the game room the player left
+   * before. What we do is that find the target room and the target original
+   * player entity, upadte the streams with the new one to enable communicating,
+   * and update the isInRoomNow status.
+   * 
+   * @param playerWhoComeBack the player entity which connect to the server again
+   *                          and want to back to the game room
+   * @param roomIdToBackTo    the room id the player wants to back to
+   */
+  public void handleBackToGameRoom(PlayerEntity<String> playerWhoComeBack, int roomIdToBackTo) {
+    GameRoom<String> roomToBackTo = gameRooms.get(roomIdToBackTo);
+    // Now find the corresponding player entity which has the same name in this
+    // room, set the Object In/Output Stream with the new one, and update the player
+    // entity's isInRoomNow status
+    PlayerEntity<String> originalPlayer = roomToBackTo.getPlayerByName(playerWhoComeBack.getPlayerSymbol());
+    originalPlayer.setToPlayer(playerWhoComeBack.getToPlayer());
+    originalPlayer.setFromPlayer(playerWhoComeBack.getFromPlayer());
+    originalPlayer.setIsInRoomNow(true);
+  }
 
   /**
    * We are using iterator to remove key-value pairs, the iterator may not be
@@ -362,17 +406,13 @@ public class V2GameServer {
     // I am sleepy to do this. And also check whether the synchronize is necessary
     // First we need to remove the rooms which the games in them have finished to
     // save some memory
-    for (Map.Entry<Integer, GameRoom<String>> e : gameRooms.entrySet()) {
-      if (e.getValue().getRoomStatus() == Constant.ROOM_STATUS_GAME_FINISHED) {
-        gameRooms.remove(e.getKey());
-      }
-    }
+    clearFinishedGameRoom();
 
     // Then build the list of GameRoomInfo of rooms that are waiting for the rest of
     // players
     List<GameRoomInfo> ans = new ArrayList<GameRoomInfo>();
     for (Map.Entry<Integer, GameRoom<String>> e : gameRooms.entrySet()) {
-      if (e.getValue().getRoomStatus() == Constant.ROOM_STATUS_WAITING_PLAYERS) {
+      if (e.getValue().getRoomStatus() == Constant.ROOM_STATUS_WAITING_PLAYERS /* && e.getValue().hasPlayer() */) {
         GameRoom<String> roomToAdd = e.getValue();
         ans.add(new GameRoomInfo(roomToAdd.getRoomId(), roomToAdd.getPlayerNum(),
             roomToAdd.getRoomOwner().getPlayerSymbol()));
@@ -380,6 +420,45 @@ public class V2GameServer {
     }
 
     return ans;
+  }
+
+  /**
+   * We only allow a player back to the room that he previously joined and no one
+   * wins yet. We not allow a player leave a room which is still waiting the rest
+   * of players, for the user experience consideration.
+   * 
+   * @param userName the user name who wants to back to the room he left before.
+   * @return a list contains all the rooms that this player left before, with a
+   *         unfinished game (no one wins yet) and this player has not lost the
+   *         game yet.
+   */
+  protected synchronized List<GameRoomInfo> getLeavingRoomListByUsername(String userName) {
+    // Clear the room with a finished game first
+    clearFinishedGameRoom();
+
+    List<GameRoomInfo> ans = new ArrayList<GameRoomInfo>();
+    for (Map.Entry<Integer, GameRoom<String>> e : gameRooms.entrySet()) {
+      if (e.getValue().getRoomStatus() == Constant.ROOM_STATUS_RUNNING_GAME && e.getValue().hasPlayer(userName)
+          && e.getValue().getPlayerByName(userName).getPlayerStatus() == Constant.SELF_NOT_LOSE_NO_ONE_WIN_STATUS) {
+        GameRoom<String> roomToAdd = e.getValue();
+        ans.add(new GameRoomInfo(roomToAdd.getRoomId(), roomToAdd.getPlayerNum(),
+            roomToAdd.getRoomOwner().getPlayerSymbol()));
+      }
+    }
+
+    return ans;
+  }
+
+  /**
+   * A helper method that will remove the game room instance, which the game in
+   * it has end (i.e., someone already wons)
+   */
+  protected void clearFinishedGameRoom() {
+    for (Map.Entry<Integer, GameRoom<String>> e : gameRooms.entrySet()) {
+      if (e.getValue().getRoomStatus() == Constant.ROOM_STATUS_GAME_FINISHED) {
+        gameRooms.remove(e.getKey());
+      }
+    }
   }
 
   // /**

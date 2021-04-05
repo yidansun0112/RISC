@@ -135,4 +135,12 @@ public interface Board<T> extends Serializable {
    * @param amt         the amount of the units to add
    */
   public void addEnemyUnitsTo(int territoryId, int level, int amount, int playerId);
+
+  /**
+   * This method is for Path Finding. 
+   * @param srcTerritoryId the source territoryId
+   * @param destTerritoryId the destination territoryId
+   * @return The min value of the path. 
+   */
+  public int findMinPathDistance(int srcTerritoryId, int destTerritoryId, int playerId);
 }

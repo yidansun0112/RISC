@@ -299,4 +299,38 @@ public abstract class GameRoom<T> {
     return players.get(0);
   }
 
+  /**
+   * This method returns the player entity with matched playerSymbol, which is
+   * actually the player name (same with the username the user typed when the user
+   * login)
+   * 
+   * @since evolution 2. This method is NOT USED in evolution 1!!
+   * 
+   * @param playerSymbol the player name
+   * @return a PlayerEntity with the name matched
+   */
+  public PlayerEntity<T> getPlayerByName(T playerSymbol) {
+    PlayerEntity<T> player = null;
+    for (PlayerEntity<T> p : players) {
+      if (p.getPlayerSymbol().equals(playerSymbol)) {
+        player = p;
+        break;
+      }
+    }
+    return player;
+  }
+
+  /**
+   * This method will check whether a specified player is in this room, by
+   * checking whether there is a player entity with a name matched.
+   * 
+   * @since evolution 2. This method is NOT USED in evolution 1!!
+   * 
+   * @param playerSymbol the name of the player to find with
+   * @return true if the specified player is in this room; otherwise return false;
+   */
+  public boolean hasPlayer(T playerSymbol) {
+    return (getPlayerByName(playerSymbol) != null) ? true : false;
+  }
+
 }
