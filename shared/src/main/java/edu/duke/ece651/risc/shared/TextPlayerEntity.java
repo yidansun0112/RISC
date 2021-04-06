@@ -10,6 +10,11 @@ import java.io.ObjectOutputStream;
 public class TextPlayerEntity<T> extends PlayerEntity<T> {
 
   /**
+   * Fields required by Serializable
+   */
+  private static final long serialVersionUID = 19L;
+
+  /**
    * Constructor that takes in parameters and call the constructor of super class
    * to initialize corresponding fields.
    * 

@@ -1,6 +1,7 @@
 package edu.duke.ece651.risc.shared;
 
 import java.io.Serializable;
+import java.util.HashMap;
 
 public interface Order<T> extends Serializable {
   /*
@@ -39,4 +40,9 @@ public interface Order<T> extends Serializable {
    *         execution if failed.
    */
   public boolean execute(GameStatus<T> gs);
+
+  /**
+   * THis Function will help to get the Army HashMap, which is levelToUnit.
+   */
+  public HashMap<Integer, Integer> getArmyHashMap();
 }

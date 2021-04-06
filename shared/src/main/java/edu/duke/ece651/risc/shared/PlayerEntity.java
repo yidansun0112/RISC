@@ -1,6 +1,5 @@
 package edu.duke.ece651.risc.shared;
 
-import java.beans.Transient;
 import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
@@ -14,7 +13,6 @@ public abstract class PlayerEntity<T> implements Serializable{
    * Fields required by Serializable
    */
   private static final long serialVersionUID = 9L;
-  // TODO: two fields below (object input/output streams) may need to be @Transit
   /** Send data to player */
   transient protected ObjectOutputStream toPlayer;
   /** Read data from player */
@@ -130,17 +128,7 @@ public abstract class PlayerEntity<T> implements Serializable{
    */
   public abstract void upgradeTechLevel();
 
-  // /**
-  //  * This method can be used in order rule checker for a more concise code in rule
-  //  * checker. Also add this method for better support LSP principle.
-  //  * 
-  //  * You can also write your own rule checking code in rule checker and not use
-  //  * this method, if more easy to implementation without technical debt.
-  //  * 
-  //  * @return {@code true} if the player can upgrade his/her max tech level;
-  //  *         {@code false} if cannot upgrade tech level currently.
-  //  */
-  // public abstract boolean canUpTechLevel();
+  
 
   /**
    * Send an object to the player via ObjectOutputStream. This method is used to

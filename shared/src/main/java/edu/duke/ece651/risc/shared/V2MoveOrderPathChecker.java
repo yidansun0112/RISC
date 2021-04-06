@@ -1,11 +1,11 @@
 package edu.duke.ece651.risc.shared;
 
-public class V2MoveOrderRuleChecker<T> extends OrderRuleChecker<T> {
+public class V2MoveOrderPathChecker<T> extends OrderRuleChecker<T> {
 
   /*
    * This is the Constructor
    */
-  public V2MoveOrderRuleChecker(OrderRuleChecker<T> next) {
+  public V2MoveOrderPathChecker(OrderRuleChecker<T> next) {
     super(next);
   }
 
@@ -19,7 +19,7 @@ public class V2MoveOrderRuleChecker<T> extends OrderRuleChecker<T> {
     int destTerritoryId = order.getDestTerritory();
     int pathLength = board.findMinPathDistance(srcTerritoryId, destTerritoryId, playerId);
 
-    if(pathLength == Integer.MAX_VALUE){
+    if(pathLength == Integer.MAX_VALUE || pathLength < 0){ // temporarily add pathLength < 0
       return "There is no path from " + board.getTerritories().get(srcTerritoryId).getName() + " to " + board.getTerritories().get(destTerritoryId).getName();
     }
     return null;

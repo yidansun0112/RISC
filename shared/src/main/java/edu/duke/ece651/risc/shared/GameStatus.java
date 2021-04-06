@@ -1,8 +1,6 @@
 package edu.duke.ece651.risc.shared;
 
 import java.io.Serializable;
-import java.util.HashMap;
-import java.util.Map;
 
 /**
  * This is a new class introduced in evolution 2 to wrap and represent all the

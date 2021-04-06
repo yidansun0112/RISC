@@ -94,17 +94,14 @@ public class Constant {
   public static final int TERRITORY_FOOD_PRODUCTIVITY = 10;
   // This will be the tech productivity.
   public static final int TERRITORY_TECH_PRODUCTIVITY = 10;
-  
+
   /**
    * Store the cost of technology resource of upgrading some amount of units. Key
    * is the level, value is the cost. Same with that in pdf 7.(e).
    */
   public static final HashMap<Integer, Integer> UP_UNIT_COST;
-
-  
   // Here we use a static block to initialize the map. If we can use Java9, there
   // is a factory can do this job, which is nicer.
-
   static {
     UP_UNIT_COST = new HashMap<Integer, Integer>();
     UP_UNIT_COST.put(0, 0);
@@ -114,6 +111,21 @@ public class Constant {
     UP_UNIT_COST.put(4, 55);
     UP_UNIT_COST.put(5, 90);
     UP_UNIT_COST.put(6, 140);
+  }
+
+  /**
+   * Store the cost of technology resource of upgrading the max tech level. Key is
+   * the current level, value is the cost of upgrade from the current level to the
+   * next level. Same with that in pdf 7.(b).
+   */
+  public static final HashMap<Integer, Integer> UP_TECH_LEVEL_COST;
+  static {
+    UP_TECH_LEVEL_COST = new HashMap<Integer, Integer>();
+    UP_TECH_LEVEL_COST.put(1, 50);
+    UP_TECH_LEVEL_COST.put(2, 75);
+    UP_TECH_LEVEL_COST.put(3, 125);
+    UP_TECH_LEVEL_COST.put(4, 200);
+    UP_TECH_LEVEL_COST.put(5, 300);
   }
 
   /**

@@ -5,17 +5,25 @@ import java.util.Random;
 import java.util.concurrent.BrokenBarrierException;
 import java.util.concurrent.CyclicBarrier;
 
-import edu.duke.ece651.risc.shared.AttackOrderConsistencyChecker;
-import edu.duke.ece651.risc.shared.AttackOrderEffectChecker;
-import edu.duke.ece651.risc.shared.AttackOrderPathChecker;
 import edu.duke.ece651.risc.shared.BoardFactory;
 import edu.duke.ece651.risc.shared.Constant;
-import edu.duke.ece651.risc.shared.MoveOrderConsistencyChecker;
-import edu.duke.ece651.risc.shared.MoveOrderEffectChecker;
-import edu.duke.ece651.risc.shared.MoveOrderPathChecker;
 import edu.duke.ece651.risc.shared.OrderRuleChecker;
 import edu.duke.ece651.risc.shared.PlayerEntity;
+import edu.duke.ece651.risc.shared.V2AttackOrderArmyChecker;
+import edu.duke.ece651.risc.shared.V2AttackOrderConsistencyChecker;
+import edu.duke.ece651.risc.shared.V2AttackOrderFoodChecker;
 import edu.duke.ece651.risc.shared.V2BoardFactory;
+import edu.duke.ece651.risc.shared.V2MoveOrderArmyChecker;
+import edu.duke.ece651.risc.shared.V2MoveOrderConsistencyChecker;
+import edu.duke.ece651.risc.shared.V2MoveOrderFoodChecker;
+import edu.duke.ece651.risc.shared.V2MoveOrderPathChecker;
+import edu.duke.ece651.risc.shared.V2UpgradeMaxTechOrderLevelChecker;
+import edu.duke.ece651.risc.shared.V2UpgradeMaxTechOrderOpenChecker;
+import edu.duke.ece651.risc.shared.V2UpgradeMaxTechOrderResourceChecker;
+import edu.duke.ece651.risc.shared.V2UpgradeUnitOrderConsistencyChecker;
+import edu.duke.ece651.risc.shared.V2UpgradeUnitOrderLevelChecker;
+import edu.duke.ece651.risc.shared.V2UpgradeUnitOrderResourceChecker;
+import edu.duke.ece651.risc.shared.V2UpgradeUnitOrderUnitsChecker;
 
 /**
  * README: in evo1, we start let the first player to choose map is when all
@@ -65,7 +73,6 @@ public class V2GameRoom extends GameRoom<String> {
    * @param roomCreator
    */
   public V2GameRoom(int roomId, PlayerEntity<String> roomCreator) {
-    // TODO check this contructor again when most of other code are finished!!!
     super(0, Constant.TOTAL_UNITS, roomCreator);
     this.roomId = roomId;
     this.roomStatus = Constant.ROOM_STATUS_WAITING_PLAYERS;
@@ -86,25 +93,23 @@ public class V2GameRoom extends GameRoom<String> {
   // --- Below are the helper methods that make order rule checker chains --- //
 
   public static OrderRuleChecker<String> makeMoveOrderRuleCheckerChain() {
-    // TODO: replace the checker into version 2 checker when they are finished!!!
-    return new MoveOrderConsistencyChecker<String>(
-        new MoveOrderPathChecker<String>(new MoveOrderEffectChecker<String>(null)));
+    return new V2MoveOrderConsistencyChecker<String>(new V2MoveOrderArmyChecker<String>(
+        new V2MoveOrderPathChecker<String>(new V2MoveOrderFoodChecker<String>(null))));
   }
 
   public static OrderRuleChecker<String> makeAttackOrderRuleCheckerChain() {
-    // TODO: replace the checker into version 2 checker when they are finished!!!
-    return new AttackOrderConsistencyChecker<String>(
-        new AttackOrderPathChecker<String>(new AttackOrderEffectChecker<String>(null)));
+    return new V2AttackOrderConsistencyChecker<String>(
+        new V2AttackOrderArmyChecker<String>(new V2AttackOrderFoodChecker<String>(null)));
   }
 
   public static OrderRuleChecker<String> makeUpgradeUnitOrderRuleCheckerChain() {
-    // TODO: finish this when checkers are finished!!!
-    return null;
+    return new V2UpgradeUnitOrderConsistencyChecker<String>(new V2UpgradeUnitOrderLevelChecker<String>(
+        new V2UpgradeUnitOrderUnitsChecker<String>(new V2UpgradeUnitOrderResourceChecker<String>(null))));
   }
 
   public static OrderRuleChecker<String> makeUpgradeTechLevelOrderRuleCheckerChain() {
-    // TODO: finish this when checkers are finished!!!
-    return null;
+    return new V2UpgradeMaxTechOrderLevelChecker<String>(
+        new V2UpgradeMaxTechOrderOpenChecker<String>(new V2UpgradeMaxTechOrderResourceChecker<String>(null)));
   }
 
   @Override
@@ -162,6 +167,7 @@ public class V2GameRoom extends GameRoom<String> {
             playGame();
           } catch (InterruptedException | BrokenBarrierException | ClassNotFoundException e) {
             // TODO: see whether we need to do something here or just ignore it.
+            // TODO:remove the print stackTrace when finished
             e.printStackTrace();
           }
         });
@@ -205,8 +211,8 @@ public class V2GameRoom extends GameRoom<String> {
       System.out.println("All players done with their orders");
 
       ArrayList<String> combatInfo = new ArrayList<>();
-      resolver.executeAllBattle(gameBoard,combatInfo);
-      
+      resolver.executeAllBattle(gameBoard, combatInfo);
+
       // NOTE: SEND ArrayList to all players - the results of combat
       sendToAllPlayer(combatInfo); // broadcast the battle results in this turn
 

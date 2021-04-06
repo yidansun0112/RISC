@@ -95,8 +95,6 @@ public class GUIPlayerEntity<T> extends PlayerEntity<T> {
    *          "UpTechLvOrder" in GameHostThread, since this method will
    *          immediately increment the max tech level!
    * 
-   * @return {@code true} if successfully upgrated tech level; {@code false} if
-   *         currently cannot upgrade tech level.
    * @throws IllegalStateException if the player cannot upgrade tech level
    *                               currently
    */
@@ -105,12 +103,12 @@ public class GUIPlayerEntity<T> extends PlayerEntity<T> {
     // Fail fast. In actual game process, we need to ensure the order rule checker
     // do robust checking, and these throws should not be executed. Add them here
     // just for the convenience for debugging and fail fast.
-    if (techLevel == Constant.TOTAL_LEVELS) {
-      throw new IllegalStateException("Already on hightest tech level!");
-    }
-    if (needUpTechLv == false) {
-      throw new IllegalStateException("Already on hightest tech level!");
-    }
+    // if (techLevel == Constant.TOTAL_LEVELS) {
+    //   throw new IllegalStateException("Already on hightest tech level!");
+    // }
+    // if (needUpTechLv == false) {
+    //   throw new IllegalStateException("You already issued this order!");
+    // }
     techLevel++;
     needUpTechLv = false;
   }
