@@ -33,6 +33,7 @@ public class CombatInfoControllerTest {
   
   private CombatInfoController cont;
   private LoseChoiceController loseCont;
+  private WatchGameController watchCont;
   @Mock
   private GUIPlayer player;
   @Mock
@@ -57,6 +58,7 @@ public class CombatInfoControllerTest {
     when(gameStatus.getGameBoard()).thenReturn(board);
     cont = new CombatInfoController(stage, player);
     loseCont = new LoseChoiceController(stage, player);
+    watchCont=new WatchGameController(stage, player);
   }
 
   @Test
@@ -98,6 +100,8 @@ public class CombatInfoControllerTest {
       cont.confirm();
       //robot.clickOn("#watchBtn");
       loseCont.watch();
+      watchCont.next();
+      watchCont.next();
     });
     WaitForAsyncUtils.waitForFxEvents();
   }
