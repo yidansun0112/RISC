@@ -12,4 +12,5 @@
     <children>
       <ListView fx:id="listView" layoutX="435.0" layoutY="48.0" nodeOrientation="LEFT_TO_RIGHT" prefHeight="247.0" prefWidth="245.0" />
     </children>
+    <Button fx:id="nextBtn" layoutX="343.0" layoutY="340.0" mnemonicParsing="false" onAction="#next" prefHeight="30.0" prefWidth="65.0" style="-fx-background-color: lightskyblue; -fx-border-color: black;" text="Next" AnchorPane.bottomAnchor="31.0" />
 </AnchorPane>

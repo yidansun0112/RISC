@@ -45,7 +45,22 @@ public class WatchGameController implements Initializable{
     ObservableList<String> combatInfo = FXCollections.observableArrayList((ArrayList<String>)player.receiveObject());
     this.listView.setItems(combatInfo);
     //then receive gamestatus (game continue) or winner (game end)
+    // Object obj=player.receiveObject();
+    // if(obj instanceof GameStatus){
+    //   player.gameStatus=(GameStatus<String>)obj;
+    //   loader.showWatchGame();
+    // }else{
+    //   int winner=(int)obj;
+    //   String message="Game end! Winner is player "+Integer.toString(winner);
+    //   AlterBox box=new AlterBox(window, player);
+    //   box.display("gameEnd", "Ok", message);
+    // }
+  } 
+
+  @FXML
+  public void next(){
     Object obj=player.receiveObject();
+    PageLoader loader=new PageLoader(window,player);
     if(obj instanceof GameStatus){
       player.gameStatus=(GameStatus<String>)obj;
       loader.showWatchGame();
@@ -55,7 +70,7 @@ public class WatchGameController implements Initializable{
       AlterBox box=new AlterBox(window, player);
       box.display("gameEnd", "Ok", message);
     }
-  } 
+  }
 
 
 }

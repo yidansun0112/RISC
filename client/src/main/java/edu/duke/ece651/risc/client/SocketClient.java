@@ -65,7 +65,9 @@ public class SocketClient implements GameClient {
    */
   @Override
   public void sendObject(Object o) throws IOException {
+    oos.reset();
     oos.writeObject(o);
+    oos.flush();
   }
 
   /**
