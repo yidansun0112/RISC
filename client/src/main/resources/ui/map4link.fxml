@@ -52,7 +52,7 @@
             <Font name="System Bold" size="12.0" />
          </font>
       </Hyperlink>
-      <Hyperlink fx:id="terr7" alignment="CENTER" layoutX="290.0" layoutY="272.0" onAction="#linkSeven" text="Info">
+      <Hyperlink fx:id="terr7" alignment="CENTER" layoutX="297.0" layoutY="282.0" onAction="#linkSeven" text="Info">
          <font>
             <Font name="System Bold" size="12.0" />
          </font>

@@ -10,21 +10,21 @@
 
 <AnchorPane prefHeight="400.0" prefWidth="600.0" style="-fx-border-color: lightskyblue; -fx-border-width: 10;" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.duke.ece651.risc.client.LoseChoiceController">
    <children>
-         <Button fx:id="quitBtn" layoutX="250.0" layoutY="220.0" mnemonicParsing="false" onAction="#quit" prefHeight="50.0" prefWidth="100.0" style="-fx-background-color: lightskyblue; -fx-border-color: black;" text="Quit" wrapText="true">
+         <Button fx:id="quitBtn" layoutX="143.0" layoutY="220.0" mnemonicParsing="false" onAction="#quit" prefHeight="50.0" prefWidth="100.0" style="-fx-background-color: lightskyblue; -fx-border-color: black;" text="Quit" wrapText="true">
          <font>
             <Font size="15.0" />
          </font>
          <cursor>
             <Cursor fx:constant="HAND" />
          </cursor></Button>
-         <Button fx:id="watchBtn" layoutX="400.0" layoutY="220.0" mnemonicParsing="false" onAction="#watch" prefHeight="50.0" prefWidth="100.0" style="-fx-background-color: lightskyblue; -fx-border-color: black;" text="Watch" wrapText="true">
+         <Button fx:id="watchBtn" layoutX="366.0" layoutY="220.0" mnemonicParsing="false" onAction="#watch" prefHeight="50.0" prefWidth="100.0" style="-fx-background-color: lightskyblue; -fx-border-color: black;" text="Watch" wrapText="true">
          <font>
             <Font size="15.0" />
          </font>
          <cursor>
             <Cursor fx:constant="HAND" />
          </cursor></Button>
-      <Label alignment="CENTER" layoutX="200.0" layoutY="102.0" text="Sorry, you lose. What would you like to do?" textAlignment="CENTER" textFill="DARKBLUE">
+      <Label alignment="CENTER" layoutX="108.0" layoutY="120.0" text="Sorry, you lose. What would you like to do?" textAlignment="CENTER" textFill="DARKBLUE">
          <font>
             <Font name="System Bold" size="20.0" />
          </font>
