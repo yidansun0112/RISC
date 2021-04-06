@@ -14,6 +14,8 @@ public class TerrInfoController {
   @FXML
   protected Label foodValue;
   @FXML
+  protected Label sizeValue;
+  @FXML
   protected Label techValue;
   @FXML
   protected Label lv0Value;
