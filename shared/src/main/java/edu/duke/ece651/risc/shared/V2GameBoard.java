@@ -39,55 +39,58 @@ public class V2GameBoard<T> extends V1GameBoard<T> {
   }
 
   @Override
-  public int findMinPathDistance(int srcTerritoryId, int destTerritoryId, int playerId){
+  public int findMinPathDistance(int srcTerritoryId, int destTerritoryId, int playerId) {
     HashSet<Integer> s = new HashSet<>();
 
     // HashSet to help to make sure that every territory is unique.
     HashSet<Integer> helper = new HashSet<>();
-    // For the int[], int[0] is the territory ID, int[1] is the previour Territory Id, int[2] is the value.
-    PriorityQueue<int[]> priorityQ = new PriorityQueue<int[]>(new Comparator<int[]>(){
-      public int compare(int[] edge1, int[] edge2){
-        return edge1[2]- edge2[2];
+    // For the int[], int[0] is the territory ID, int[1] is the previour Territory
+    // Id, int[2] is the value.
+    PriorityQueue<int[]> priorityQ = new PriorityQueue<int[]>(new Comparator<int[]>() {
+      public int compare(int[] edge1, int[] edge2) {
+        return edge1[2] - edge2[2];
       }
     });
-    // Iterate Over all of the territories to add the Player's Territory to the PriorityQueue.
-    for(Territory<T> terr : territories){
-      if(terr.getOwner() == playerId){  // && terr.getId() != srcTerritoryId){
-        //int curr = terr.getId();
-        for(int curr : terr.getNeigh()){
+    // Iterate Over all of the territories to add the Player's Territory to the
+    // PriorityQueue.
+    for (Territory<T> terr : territories) {
+      if (terr.getOwner() == playerId) { // && terr.getId() != srcTerritoryId){
+        // int curr = terr.getId();
+        for (int curr : terr.getNeigh()) {
           // Make Sure that every territory will only be added once.
-          if(curr == srcTerritoryId || helper.contains(curr) || territories.get(curr).getOwner() != playerId){
+          if (curr == srcTerritoryId || helper.contains(curr) || territories.get(curr).getOwner() != playerId) {
             continue;
           }
-          priorityQ.offer(new int[]{curr,curr,Integer.MAX_VALUE});
+          priorityQ.offer(new int[] { curr, curr, Integer.MAX_VALUE });
           helper.add(curr);
         }
       }
     }
 
-    priorityQ.offer(new int[]{srcTerritoryId, srcTerritoryId, territories.get(srcTerritoryId).getSize()});
-    while(!priorityQ.isEmpty()){
-      PriorityQueue<int[]> helperQ = new PriorityQueue<int[]>(new Comparator<int[]>(){
-        public int compare(int[] edge1, int[] edge2){
-          return edge1[2]- edge2[2];
+    priorityQ.offer(new int[] { srcTerritoryId, srcTerritoryId, territories.get(srcTerritoryId).getSize() });
+    while (!priorityQ.isEmpty()) {
+      PriorityQueue<int[]> helperQ = new PriorityQueue<int[]>(new Comparator<int[]>() {
+        public int compare(int[] edge1, int[] edge2) {
+          return edge1[2] - edge2[2];
         }
       });
       int[] u = priorityQ.poll();
-      // As s alway maintain the minPathSet. So if we encounter the srcTerritoryId, we can just return the value;
-      if(u[0] == destTerritoryId){
+      // As s alway maintain the minPathSet. So if we encounter the srcTerritoryId, we
+      // can just return the value;
+      if (u[0] == destTerritoryId) {
         return u[2];
       }
       s.add(u[0]);
       // Relex all of the vertex
-      for(int[] terr : priorityQ){
+      for (int[] terr : priorityQ) {
         // If the terr is the Player's terr and adjacent, we relax
-        if(worldMap[u[0]][terr[0]] > 0){
-          if(terr[2] > u[2] + territories.get(terr[0]).getSize()){
+        if (worldMap[u[0]][terr[0]] > 0) {
+          if (terr[2] > u[2] + territories.get(terr[0]).getSize()) {
             terr[1] = u[0];
             terr[2] = u[2] + territories.get(terr[0]).getSize();
           }
           helperQ.offer(terr);
-        }else{
+        } else {
           helperQ.offer(terr);
           continue;
         }
