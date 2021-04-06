@@ -176,6 +176,14 @@ public class PageLoader {
     AnchorPane.setBottomAnchor(mapPane,200.0);
   }
 
+  public void putPureMap(AnchorPane rootPane,AnchorPane mapPane){
+    rootPane.getChildren().add(mapPane);
+    AnchorPane.setTopAnchor(mapPane,0.0);
+    AnchorPane.setRightAnchor(mapPane,300.0);
+    AnchorPane.setLeftAnchor(mapPane,0.0);
+    AnchorPane.setBottomAnchor(mapPane,200.0);
+  }
+
   public void showMoveAttack(String type){
     FXMLLoader loader = new FXMLLoader(getClass().getResource("/ui/moveAttack.fxml"));
       loader.setControllerFactory(c -> {

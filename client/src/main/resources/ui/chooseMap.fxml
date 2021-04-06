@@ -16,6 +16,6 @@
          </font>
       </Label>
       <ChoiceBox fx:id="mapBox" layoutX="418.0" layoutY="173.0" prefHeight="27.0" prefWidth="81.0" />
-      <Button fx:id="confirmMapBtn" layoutX="424.0" layoutY="242.0" mnemonicParsing="false" onAction="#selectMap" style="-fx-background-color: lightskyblue; -fx-border-color: black;" text="Confirm" />
+      <Button fx:id="confirmMapBtn" layoutX="424.0" layoutY="350.0" mnemonicParsing="false" onAction="#selectMap" style="-fx-background-color: lightskyblue; -fx-border-color: black;" text="Confirm" />
     </children>
 </AnchorPane>

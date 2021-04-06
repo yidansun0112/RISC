@@ -38,7 +38,7 @@ public class PickTerritoryController {
     @FXML
     public void initialize() {
         PageLoader loader=new PageLoader(window,player);
-        loader.putMap(rootPane, mapPane);
+        loader.putPureMap(rootPane, mapPane);
         groupNumBox.setValue("0");
         for(int i=0;i<player.playerNum;i++){
             groupNumBox.getItems().add(Integer.toString(i));

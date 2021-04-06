@@ -38,7 +38,7 @@ public class ChooseMapController {
   @FXML
     public void initialize() {
       PageLoader loader=new PageLoader(window,player);
-      loader.putMap(rootPane, mapPane);
+      loader.putPureMap(rootPane, mapPane);
       mapBox.setValue("Map 0");
     }
 
