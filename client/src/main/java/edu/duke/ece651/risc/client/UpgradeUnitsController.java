@@ -25,6 +25,9 @@ import javafx.scene.control.TextField;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
 
+/**
+ * This class handles for upgrading units tech level
+ */
 public class UpgradeUnitsController implements Initializable{
   // @FXML
   // MapLinkController mapLinkController;
@@ -49,6 +52,11 @@ public class UpgradeUnitsController implements Initializable{
   private Stage window;
   private GUIPlayer player;
 
+  /**
+   * Constructor
+   * @param window
+   * @param player
+   */
   public UpgradeUnitsController(Stage window,GUIPlayer player) {
     this.window = window;
     this.player=player;
@@ -60,6 +68,11 @@ public class UpgradeUnitsController implements Initializable{
     mapPane=loader.loadMap();
   }
 
+  /**
+   * get thr the territory, from level, to level and amount the player selects
+   * make a order based on the information get and send it to the server
+   * get the response froom server, and return back to issue order page
+   */
   @FXML
   public void confirm(){
     // pop up a alert box, saying if the order is legal
@@ -76,12 +89,22 @@ public class UpgradeUnitsController implements Initializable{
     alterBox.display("orderConfirm", "Back", result);
   }
 
+  /**
+   * return back to issue order page
+   */
   @FXML
   public void cancel(){
     PageLoader loader=new PageLoader(window,player);
     loader.showIssueOrderPage();
   }
 
+  /**
+   * load the page for upgrade units tech level and make the drop box 
+   * of territory, from level, to level, amount change dynamically.
+   * to level would change based on from level, amount would change based on from level and amount
+   * @param url
+   * @param rb
+   */
   public void initialize(URL url, ResourceBundle rb){
     PageLoader loader=new PageLoader(window,player);
     loader.putMap(rootPane, mapPane);
@@ -110,6 +133,10 @@ public class UpgradeUnitsController implements Initializable{
     } );
   } 
 
+  /**
+   * This set up the drop box to show the territories that belongs to the player
+   * @param box
+   */
   public void setSelfTerr(ChoiceBox<String> box){
     ArrayList<Territory<String>> territories=player.gameStatus.getGameBoard().getTerritories();
     for(int i=0;i<territories.size();i++){
@@ -120,6 +147,12 @@ public class UpgradeUnitsController implements Initializable{
     }
   }
 
+  /**
+   * This set up the drop box for the units amount
+   * @param box
+   * @param fromAmount
+   * @param toAmount
+   */
   public void setLevelAmount(ChoiceBox<Integer> box,int fromAmount,int toAmount){
     box.getItems().clear();
     box.setValue(fromAmount);

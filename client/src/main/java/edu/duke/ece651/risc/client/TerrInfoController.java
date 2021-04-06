@@ -3,13 +3,14 @@ package edu.duke.ece651.risc.client;
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
 
+/**
+ * This handles the territory information
+ */
 public class TerrInfoController {
   @FXML
   protected Label ownerValue;
   @FXML
   protected Label nameValue;
-  @FXML
-  protected Label sizeValue;
   @FXML
   protected Label foodValue;
   @FXML

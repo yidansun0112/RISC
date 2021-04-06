@@ -11,6 +11,11 @@ import javafx.scene.control.Button;
 import javafx.scene.control.ChoiceBox;
 import javafx.stage.Stage;
 
+/**
+ * This class handles from start game\
+ * after player clicks on start, it would jump to choose map 
+ * or pick territory page
+ */
 public class StartController {
   @FXML
   private Button startBtn;
@@ -25,6 +30,9 @@ public class StartController {
   private Stage window;
   GUIPlayer player;
 
+  /**
+   * Constructor
+   */
   public StartController(Stage window, GUIPlayer player) {
     this.window = window;
     playerNumBox = new ChoiceBox<>();
@@ -32,6 +40,9 @@ public class StartController {
     this.player=player;
   }
 
+  /**
+   * make player choose the number of players in the game
+   */
   @FXML
   public void initialize() {
     playerNumBox.setValue(2);
@@ -40,12 +51,18 @@ public class StartController {
     // mapBox.setValue("Map 0");
   }
 
+  /**
+   * load the start game page
+   */
   @FXML
   public void startGame() {
     PageLoader loader=new PageLoader(window,new GUIPlayer());
     loader.showRegLogPage();
   }
 
+  /**
+   * get the number that the player choose and jump to choose map page
+   */
   @FXML
   public void selectPlayerNum() {
     int num = playerNumBox.getValue();

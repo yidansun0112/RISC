@@ -15,6 +15,11 @@ import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
 
+/**
+ * This class handles registering and logging of the player
+ * player would first register, then use the username and password 
+ * to loggin the game
+ */
 public class RegisterLoginController {
   @FXML
   private Button registerBtn;
@@ -29,6 +34,11 @@ public class RegisterLoginController {
   private Stage window;
   private GUIPlayer player;
   
+  /**
+   * The constructor
+   * @param window
+   * @param player
+   */
   public RegisterLoginController(Stage window, GUIPlayer player) {
     this.window = window;
     this.player=player;
@@ -36,6 +46,9 @@ public class RegisterLoginController {
     passwordField=new TextField();
   }
 
+  /**
+   * let the user type in the name and password to register
+   */
   @FXML
   public void register() {
     String userInput=getUserInput(Constant.VALUE_REQUEST_TYPE_REGISTER);
@@ -52,6 +65,11 @@ public class RegisterLoginController {
     player.disconnect();
   }
 
+  /**
+   * let the user type in the password and username to login. 
+   * If succeed, go to choose game page
+   * if not, stay in the login page
+   */
   @FXML
   public void login() {
     String userInput=getUserInput(Constant.VALUE_REQUEST_TYPE_LOGIN);
@@ -74,6 +92,11 @@ public class RegisterLoginController {
     }
   }
 
+  /**
+   * get the username and password that the player has typed in
+   * @param type
+   * @return
+   */
   private String getUserInput(String type){
     String username=usernameField.getText();
     String password=passwordField.getText();
