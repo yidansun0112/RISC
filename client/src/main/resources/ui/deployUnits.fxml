@@ -25,7 +25,7 @@
       </Label>
       <ChoiceBox fx:id="terrBox" layoutX="100.0" layoutY="297.0" prefHeight="27.0" prefWidth="81.0" AnchorPane.bottomAnchor="76.0" />
       <ChoiceBox fx:id="amountBox" layoutX="261.0" layoutY="297.0" prefHeight="27.0" prefWidth="81.0" AnchorPane.bottomAnchor="76.0" />
-      <Button fx:id="confirmBtn" layoutX="414.0" layoutY="290.0" mnemonicParsing="false" onAction="#deploy" style="-fx-background-color: lightskyblue; -fx-border-color: black;" text="Confirm" AnchorPane.bottomAnchor="81.0" />
+      <Button fx:id="confirmBtn" layoutX="414.0" layoutY="290.0" mnemonicParsing="false" onAction="#deploy" style="-fx-background-color: lightskyblue; -fx-border-color: black;" text="Confirm" AnchorPane.bottomAnchor="76.0" />
       <Label layoutX="100.0" layoutY="269.0" text="Territory to Deploy" />
       <Label layoutX="269.0" layoutY="269.0" prefHeight="17.0" prefWidth="64.0" text="# of units" />
     </children>

@@ -42,7 +42,7 @@
       <ChoiceBox fx:id="fromBox" layoutX="200.0" layoutY="300.0" prefHeight="27.0" prefWidth="60.0" AnchorPane.bottomAnchor="80.0" />
       <ChoiceBox fx:id="toBox" layoutX="300.0" layoutY="300.0" prefHeight="27.0" prefWidth="60.0" AnchorPane.bottomAnchor="80.0" />
       <ChoiceBox fx:id="amountBox" layoutX="400.0" layoutY="300.0" prefHeight="27.0" prefWidth="60.0" AnchorPane.bottomAnchor="80.0" />
-      <Button fx:id="confirmBtn" layoutX="343.0" layoutY="340.0" mnemonicParsing="false" onAction="#confirm" prefHeight="30.0" prefWidth="65.0" style="-fx-background-color: lightskyblue; -fx-border-color: black;" text="Confirm" AnchorPane.bottomAnchor="31.0" />
-      <Button fx:id="cancelBtn" layoutX="201.0" layoutY="350.0" mnemonicParsing="false" onAction="#cancel" prefHeight="30.0" prefWidth="65.0" style="-fx-background-color: lightskyblue; -fx-border-color: black;" text="Cancel" AnchorPane.bottomAnchor="31.0" />
+      <Button fx:id="confirmBtn" layoutX="343.0" layoutY="340.0" mnemonicParsing="false" onAction="#confirm" prefHeight="30.0" prefWidth="80.0" style="-fx-background-color: lightskyblue; -fx-border-color: black;" text="Confirm" AnchorPane.bottomAnchor="31.0" />
+      <Button fx:id="cancelBtn" layoutX="201.0" layoutY="350.0" mnemonicParsing="false" onAction="#cancel" prefHeight="30.0" prefWidth="80.0" style="-fx-background-color: lightskyblue; -fx-border-color: black;" text="Cancel" AnchorPane.bottomAnchor="31.0" />
     </children>
 </AnchorPane>

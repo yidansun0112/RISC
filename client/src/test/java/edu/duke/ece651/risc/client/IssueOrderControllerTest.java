@@ -129,6 +129,16 @@ public class IssueOrderControllerTest {
   }
 
   @Test
+  public void test_upgrade(FxRobot robot) {
+    // when(player.receiveObject()).thenReturn("Your Order is Legal!");
+    Platform.runLater(() -> {
+      PageLoader loader=new PageLoader(new Stage(),player);
+      loader.showUpgradePage();
+    });
+    WaitForAsyncUtils.waitForFxEvents();
+  }
+
+  @Test
   public void test_done(FxRobot robot) {
     ArrayList<String> combatInfo=new ArrayList<String>();
     combatInfo.add("Player 0 win terr 0.");
