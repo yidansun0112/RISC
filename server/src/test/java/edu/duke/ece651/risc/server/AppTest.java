@@ -29,9 +29,12 @@ class AppTest {
 
   @Test
   @ResourceLock(value = Resources.SYSTEM_OUT, mode = ResourceAccessMode.READ_WRITE)
-  @Disabled
-  public void test_App()
+  // @Disabled
+  public void test_Evo1App()
       throws UnknownHostException, IOException, ClassNotFoundException, InterruptedException, BrokenBarrierException {
+
+    System.out.println("***********NOW IS EVO1 END TO END TESTING***********");
+
     ByteArrayOutputStream bytes = new ByteArrayOutputStream();
     PrintStream out = new PrintStream(bytes, true);
 
@@ -148,7 +151,7 @@ class AppTest {
       @Override
       public void run() {
         try {
-          App.main(new String[0]);
+          Evo1App.main(new String[0]);
           // System.out.println("test finished!");
         } catch (Exception e) {
         }
