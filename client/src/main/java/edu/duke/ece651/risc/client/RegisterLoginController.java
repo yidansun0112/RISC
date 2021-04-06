@@ -42,8 +42,6 @@ public class RegisterLoginController {
     player.connect();
     player.sendObject(userInput);
     String result=(String)player.receiveObject();
-    System.out.println("in register");
-    System.out.println(result);
     if(!result.equals(Constant.RESULT_SUCCEED_REQEUST)){
       info.setText(result);
     }else{

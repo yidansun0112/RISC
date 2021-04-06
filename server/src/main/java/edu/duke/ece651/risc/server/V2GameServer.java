@@ -428,7 +428,7 @@ public class V2GameServer {
   protected synchronized List<GameRoomInfo> getLeavingRoomListByUsername(String userName) {
     // Clear the room with a finished game first
     clearFinishedGameRoom();
-
+    System.out.println(userName);
     List<GameRoomInfo> ans = new ArrayList<GameRoomInfo>();
     for (Map.Entry<Integer, GameRoom<String>> e : gameRooms.entrySet()) {
       if (e.getValue().getRoomStatus() == Constant.ROOM_STATUS_RUNNING_GAME && e.getValue().hasPlayer(userName)
@@ -438,7 +438,7 @@ public class V2GameServer {
             roomToAdd.getRoomOwner().getPlayerSymbol()));
       }
     }
-
+    System.out.println(ans.size());
     return ans;
   }
 

@@ -88,10 +88,14 @@ public class UpgradeUnitsController implements Initializable{
     setSelfTerr(terrBox);
     setLevelAmount(fromBox,0,Constant.TOTAL_LEVELS-1);
     setLevelAmount(toBox, 1,Constant.TOTAL_LEVELS);
-    setLevelAmount(amountBox, 0, 0);
+    //setLevelAmount(amountBox, 0, 0);
+    int defaultTerrId=Constant.terrNameToId.get(terrBox.getValue());
+    ArrayList<Territory<String>> territories=player.gameStatus.getGameBoard().getTerritories();
+    Territory<String> defaultTerr=territories.get(defaultTerrId);
+    setLevelAmount(amountBox, 0, defaultTerr.getCurrDefenderArmy().get(0).getBasicUnits());
     terrBox.getSelectionModel().selectedItemProperty().addListener((v, oldValue, newValue) -> {
       int terrId=Constant.terrNameToId.get(newValue);
-      ArrayList<Territory<String>> territories=player.gameStatus.getGameBoard().getTerritories();
+      //ArrayList<Territory<String>> territories=player.gameStatus.getGameBoard().getTerritories();
       Territory<String> terr=territories.get(terrId);
       Army<String> currDefenderArmy=terr.getCurrDefenderArmy().get(0);
       setLevelAmount(amountBox, 0, currDefenderArmy.getUnitAmtByLevel(fromBox.getValue()));
@@ -99,7 +103,7 @@ public class UpgradeUnitsController implements Initializable{
     fromBox.getSelectionModel().selectedItemProperty().addListener((v, oldValue, newValue) -> {
       setLevelAmount(toBox, newValue+1, Constant.TOTAL_LEVELS);
       int terrId=Constant.terrNameToId.get(terrBox.getValue());
-      ArrayList<Territory<String>> territories=player.gameStatus.getGameBoard().getTerritories();
+      //ArrayList<Territory<String>> territories=player.gameStatus.getGameBoard().getTerritories();
       Territory<String> terr=territories.get(terrId);
       Army<String> currDefenderArmy=terr.getCurrDefenderArmy().get(0);
       setLevelAmount(amountBox, 0, currDefenderArmy.getUnitAmtByLevel(newValue));

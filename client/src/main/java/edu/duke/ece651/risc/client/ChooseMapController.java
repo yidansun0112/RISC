@@ -47,7 +47,6 @@ public class ChooseMapController {
       String mapChoice=mapBox.getValue();
       player.sendObject(mapChoice);
       PageLoader loader=new PageLoader(window, player);
-      System.out.println("to show wait page");
       loader.showWaitPlayerComingPage();
       int playerNum=(int)player.receiveObject();//receive player number, indicate all players arrived
       player.playerNum=playerNum; 

@@ -65,7 +65,6 @@ public class PageLoader {
   }
 
   public void showWaitPlayerComingPage(){
-    System.out.println("in show wait page");
     FXMLLoader loader = new FXMLLoader(getClass().getResource("/ui/waitPlayerComing.fxml"));
     loader.setControllerFactory(c -> {
       return new StartController(window,player);
@@ -250,11 +249,9 @@ public class PageLoader {
 
   public void showPage(FXMLLoader loader){
     try{
-      System.out.println("to show page");
       Scene scene = new Scene(loader.load());
       window.setScene(scene);
       window.show();
-      System.out.println("page showed");
     }catch(Exception e){
       throw new RuntimeException(e);
     }

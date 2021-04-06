@@ -68,10 +68,8 @@ public class DeployUnitsController implements Initializable{
     }else{
       GameStatus<String> status=(GameStatus<String>)obj;
       int amount=status.getGameBoard().getTerritories().get(0).getCurrDefenderArmy().get(0).getUnitAmtByLevel(0);
-      System.out.println(amount);
       player.gameStatus=(GameStatus<String>)obj;
       amount=player.gameStatus.getGameBoard().getTerritories().get(0).getCurrDefenderArmy().get(0).getUnitAmtByLevel(0);
-      System.out.println(amount);
       int remainedUnits=(int)player.receiveObject();
       setAmountBox(remainedUnits);
     }

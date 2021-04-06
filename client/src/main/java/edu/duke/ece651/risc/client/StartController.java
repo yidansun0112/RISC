@@ -30,7 +30,6 @@ public class StartController {
     playerNumBox = new ChoiceBox<>();
     // mapBox = new ChoiceBox<>();
     this.player=player;
-    System.out.println("[DEBUG] Inside Start Controller Constructor");
   }
 
   @FXML
@@ -55,17 +54,5 @@ public class StartController {
     PageLoader loader=new PageLoader(window, player);
     loader.showChooseMapPage();
   }
-
-  // @FXML
-  // public void selectMap() throws ClassNotFoundException, IOException{
-  //   String mapChoice=mapBox.getValue();
-  //   player.sendObject(mapChoice);
-  //   PageLoader loader=new PageLoader(window, player);
-  //   System.out.println("to show wait page");
-  //   loader.showWaitPlayerComingPage();
-  //   int playerNum=(int)player.receiveObject();//receive player number, indicate all players arrived
-  //   player.playerNum=playerNum; 
-  //   loader.showPickTerritoryPage();
-  // }
 
 }
