@@ -32,23 +32,23 @@ public class MoveAttackController implements Initializable{
   @FXML
   private Button confirmBtn;
   @FXML
-  private ChoiceBox<String> sourceBox;
+  protected ChoiceBox<String> sourceBox;
   @FXML
-  private ChoiceBox<String> targetBox;
+  protected ChoiceBox<String> targetBox;
   @FXML
-  private ChoiceBox<Integer> lv0Box;
+  protected ChoiceBox<Integer> lv0Box;
   @FXML
-  private ChoiceBox<Integer> lv1Box;
+  protected ChoiceBox<Integer> lv1Box;
   @FXML
-  private ChoiceBox<Integer> lv2Box;
+  protected ChoiceBox<Integer> lv2Box;
   @FXML
-  private ChoiceBox<Integer> lv3Box;
+  protected ChoiceBox<Integer> lv3Box;
   @FXML
-  private ChoiceBox<Integer> lv4Box;
+  protected ChoiceBox<Integer> lv4Box;
   @FXML
-  private ChoiceBox<Integer> lv5Box;
+  protected ChoiceBox<Integer> lv5Box;
   @FXML
-  private ChoiceBox<Integer> lv6Box;
+  protected ChoiceBox<Integer> lv6Box;
   private Stage window;
   private GUIPlayer player;
   private String type;

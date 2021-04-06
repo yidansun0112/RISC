@@ -1,6 +1,6 @@
 package edu.duke.ece651.risc.shared;
 
-import static org.junit.jupiter.api.Assertions.assertSame;
+import static org.junit.jupiter.api.Assertions.*;
 
 import org.junit.jupiter.api.Test;
 
@@ -18,6 +18,7 @@ public class GameStatusTest {
 
     GameStatus<String> s0 = new GameStatus<String>(p0, b, false);
     GameStatus<String> s1 = new GameStatus<String>(p1, b, true);
+    
 
     assertSame(false, s0.getCanShowLatest());
     assertSame(true, s1.getCanShowLatest());
@@ -26,5 +27,21 @@ public class GameStatusTest {
     assertSame(p1, s1.getCurrPlayer());
     assertSame(b, s0.getGameBoard());
     assertSame(b, s1.getGameBoard());
+    s0.setCurrPlayer(p1);
+    assertSame(p1, s0.getCurrPlayer());
+    p0.setIsInRoomNow(false);
+    assertEquals(p0.getIsInRoomNow(),false);
   }
 }
+
+
+
+
+
+
+
+
+
+
+
+

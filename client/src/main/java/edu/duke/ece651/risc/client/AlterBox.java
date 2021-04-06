@@ -56,6 +56,9 @@ public class AlterBox {
       case "backChooseGame":
         button.setOnAction(e->jumpChooseGamePage(alterWindow));
         return;
+      case "gameEnd":
+        button.setOnAction(e->jumpStartPage(alterWindow));
+        return;
       default:
         throw new IllegalArgumentException("We don't have this type button");
       }
@@ -81,6 +84,12 @@ public class AlterBox {
     alterWindow.close();
     PageLoader loader=new PageLoader(window,player);
     loader.showChooseGamePage();
+  }
+
+  public void jumpStartPage(Stage alterWindow){
+    alterWindow.close();
+    PageLoader loader=new PageLoader(window, player);
+    loader.showStartPage();
   }
   
 }

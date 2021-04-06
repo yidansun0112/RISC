@@ -1,6 +1,7 @@
 package edu.duke.ece651.risc.client;
 
 import edu.duke.ece651.risc.shared.GameRoomInfo;
+import edu.duke.ece651.risc.shared.GameStatus;
 import javafx.scene.control.ChoiceBox;
 
 import java.io.IOException;
@@ -21,14 +22,14 @@ import javafx.scene.control.ChoiceBox;
 import javafx.stage.Stage;
 
 
-public class JoinRoomController {
+public class ReturnRoomController {
   @FXML
   protected ChoiceBox<Integer> roomBox;
   private Stage window;
   private GUIPlayer player;
   private List<GameRoomInfo> roomList;
 
-  public JoinRoomController(Stage window,GUIPlayer player,List<GameRoomInfo> roomList){
+  public ReturnRoomController(Stage window,GUIPlayer player,List<GameRoomInfo> roomList){
     this.window=window;
     this.player=player;
     this.roomList=roomList;
@@ -47,27 +48,18 @@ public class JoinRoomController {
   public void enterRoom(){
     player.connect();
     JSONObject jsonObject=new JSONObject();
-    jsonObject.put(Constant.KEY_REQUEST_TYPE,Constant.VALUE_REQUEST_TYPE_JOIN_ROOM);
+    jsonObject.put(Constant.KEY_REQUEST_TYPE,Constant.VALUE_REQUEST_TYPE_RETURN_ROOM);
     jsonObject.put(Constant.KEY_USER_NAME,player.username);
     int roomId=roomBox.getValue();
     String strRoomId=Integer.toString(roomId);
-    jsonObject.put(Constant.KEY_ROOM_ID_TO_JOIN,strRoomId);
+    jsonObject.put(Constant.KEY_ROOM_ID_TO_RETURN,strRoomId);
     String request=jsonObject.toString();
     player.sendObject(request);
-    String strId=(String)player.receiveObject();
-    int playerId=Integer.parseInt(strId);
-    if(playerId==-1){
-      player.disconnect();
-      AlterBox box=new AlterBox(window,player);
-      box.display("backChooseGame","Back","Sorry, this room has been chosen!");
-    }else{
-      PageLoader loader=new PageLoader(window,player);
-      loader.showWaitPlayerComingPage();
-      int playerNum=(int)player.receiveObject();
-      player.playerNum=playerNum;
-      player.playerId=playerId;
-      loader.showPickTerritoryPage();
-    }
+    player.gameStatus=(GameStatus<String>)player.receiveObject();
+    player.playerId=player.gameStatus.getCurrPlayer().getPlayerId();
+    player.playerNum=player.gameStatus.getGameBoard().getTerritories().size()/3;
+    PageLoader loader=new PageLoader(window,player);
+    loader.showIssueOrderPage();
   }
   
 }

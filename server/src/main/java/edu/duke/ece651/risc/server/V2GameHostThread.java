@@ -292,11 +292,11 @@ public class V2GameHostThread<T> extends Thread {
       loseChoice();
       return true;
     case Constant.SELF_WIN_STATUS:
-      player.sendObject(Constant.WIN_INFO);
+      //player.sendObject(Constant.WIN_INFO);
       doEndPhase();
       return true;
     case Constant.SELF_LOSE_OTHER_WIN_STATUS:
-      player.sendObject(Constant.GAME_END_INFO);
+      //player.sendObject(Constant.GAME_END_INFO);
       doEndPhase();
       return true;
     default:
@@ -351,19 +351,30 @@ public class V2GameHostThread<T> extends Thread {
    * @throws ClassNotFoundException
    */
   public void doWatchPhase() throws IOException, InterruptedException, BrokenBarrierException, ClassNotFoundException {
-    player.sendObject(Constant.CONFIRM_INFO);
+    //player.sendObject(Constant.CONFIRM_INFO);
     while (true) {
       barrier.await();
       barrier.await();
-      player.sendObject(makeLatestGameStatus(true)); // this line is different with evo 1
+      //TODO: may need to check status first, then send gamestatus
+      //if game end, don't send (game room will send winner)
+      //else, send gamestatus
+      //so each round just receive one thing
+      //player.sendObject(makeLatestGameStatus(true)); // this line is different with evo 1
       if (player.getPlayerStatus() == Constant.SELF_LOSE_OTHER_WIN_STATUS) {
-        player.sendObject(Constant.GAME_END_INFO);
+        //TODO: may not need this
+        //if we get a int, we know game end
+        //player.sendObject(Constant.GAME_END_INFO);
         break;
       } else {
-        player.sendObject(Constant.GAME_CONTINUE_INFO);
+        //TODO: maybe even don't need this
+        //if we get gamestatus, we know game continue
+        //need to send gamestatus here
+        player.sendObject(makeLatestGameStatus(true));
+        //player.sendObject(Constant.GAME_CONTINUE_INFO);
       }
     }
-    player.receiveObject(); // at the client side the player is informed that the game is end by this
+    //maybe should not have receive here
+    //player.receiveObject(); // at the client side the player is informed that the game is end by this
                             // method.
                             // the client will automatically enter the doEndPhase() method,
                             // which will first send a message to here.
@@ -388,7 +399,7 @@ public class V2GameHostThread<T> extends Thread {
    * @throws BrokenBarrierException
    */
   public void doEndPhase() throws IOException, InterruptedException, BrokenBarrierException {
-    player.sendObject(Constant.CONFIRM_INFO);
+    //player.sendObject(Constant.CONFIRM_INFO);
     while (true) {
       int status = player.getPlayerStatus();
       if (status == Constant.SELF_WIN_STATUS || status == Constant.SELF_LOSE_OTHER_WIN_STATUS) {
@@ -429,7 +440,7 @@ public class V2GameHostThread<T> extends Thread {
         // }
 
         // One turn is done, now send the latest game status to player
-        player.sendObject(makeLatestGameStatus(true)); // this line is different with evo 1
+        //player.sendObject(makeLatestGameStatus(true)); // this line is different with evo 1
         if (checkWinLose()) {
           break;
         }

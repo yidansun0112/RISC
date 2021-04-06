@@ -35,13 +35,13 @@ public class UpgradeUnitsController implements Initializable{
   @FXML
   private Button confirmBtn;
   @FXML
-  private ChoiceBox<String> terrBox;
+  protected ChoiceBox<String> terrBox;
   @FXML
-  private ChoiceBox<Integer> fromBox;
+  protected ChoiceBox<Integer> fromBox;
   @FXML
-  private ChoiceBox<Integer> toBox;
+  protected ChoiceBox<Integer> toBox;
   @FXML
-  private ChoiceBox<Integer> amountBox;
+  protected ChoiceBox<Integer> amountBox;
   // @FXML
   // Hyperlink terr0;
   // @FXML

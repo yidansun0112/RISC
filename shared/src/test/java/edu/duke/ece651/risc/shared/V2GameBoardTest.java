@@ -20,6 +20,14 @@ public class V2GameBoardTest {
     b.getTerritories().get(3).setOwner(0);
     b.getTerritories().get(4).setOwner(0);
     b.getTerritories().get(5).setOwner(1);
+    b.addDefendUnitsTo(0, 0, 2);
+    assertEquals(b.getTerritories().get(0).getBasicDefendUnitAmount(), 2);
+    b.removeDefendUnitsFrom(0, 0, 2);
+    assertEquals(b.getTerritories().get(0).getBasicDefendUnitAmount(), 0);
+    b.addEnemyUnitsTo(0, 0, 0, 2);
+    assertEquals(b.getTerritories().get(0).getEnemyArmy().get(0).getBasicUnits(), 2);
+    b.getTerritories().get(0).updatePrevDefender();
+    assertEquals(b.getTerritories().get(0).getPrevDefenderArmy().get(0).getBasicUnits(),0);
 
     assertEquals(15, b.findMinPathDistance(5, 2, 1));
     assertEquals(10, b.findMinPathDistance(5, 0, 1));
