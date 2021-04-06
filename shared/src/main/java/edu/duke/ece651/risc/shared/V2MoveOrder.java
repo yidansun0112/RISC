@@ -34,14 +34,19 @@ public class V2MoveOrder<T> implements Order<T> {
     // TODO finish this method when move the BFS/Dijkstra method into Board.java
     // This is the advice given by TA in the feedback of evo1 - I think this is reasonable.
     Board<T> board = gs.getGameBoard();
-    // Don't Know the serialVersionUID represent, so I just use it as the User ID(which is playerID in Evol1)
+
     PlayerEntity<T> currPlayer = gs.currPlayer;
     int pathLength = board.findMinPathDistance(this.srcTerritory, this.destTerritory, currPlayer.getPlayerId());
     if(pathLength == Integer.MAX_VALUE){
       return false;
     }
     else{
-      currPlayer.consumeFoodResource(pathLength);
+      // Remove the Unit in Source Territory and Add the Unit in Destination Territory
+      for(int i : levelToUnitAmount.keySet()){
+        board.removeDefendUnitsFrom(this.srcTerritory, i, levelToUnitAmount.get(i));
+        board.addDefendUnitsTo(this.destTerritory, i, levelToUnitAmount.get(i));
+      }
+      currPlayer.consumeFoodResource(pathLength * this.getUnitAmount());
     }
     return pathLength > 0;
   }
@@ -57,8 +62,15 @@ public class V2MoveOrder<T> implements Order<T> {
   }
 
   /**
+   * getter for levelToUnit HashMap. Used in checker
+   */
+  @Override
+  public HashMap<Integer, Integer> getArmyHashMap(){
+    return this.levelToUnitAmount;
+  }
+  /**
    * This method will return the total amount of units which participated in this
-   * attacking action.
+   * moving action.
    */
   @Override
   public int getUnitAmount() {

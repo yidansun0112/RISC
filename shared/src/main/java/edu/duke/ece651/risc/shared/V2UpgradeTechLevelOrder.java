@@ -1,5 +1,7 @@
 package edu.duke.ece651.risc.shared;
 
+import java.util.HashMap;
+
 public class V2UpgradeTechLevelOrder<T> implements Order<T> {
 
   /**
@@ -27,11 +29,15 @@ public class V2UpgradeTechLevelOrder<T> implements Order<T> {
   @Override
   public boolean execute(GameStatus<T> gs) {
     // Attention: we only need to set the boolean field needUpTechLv in
-    // playerEntity, and let the game room to really do the final step (i.e., call
-    // the upgradeTechLevel method) after resolving
+    // playerEntity, and consume the tech resource. Let the game room to really do
+    // the final step (i.e., call the upgradeTechLevel method) after resolving
     // all battles.
     PlayerEntity<T> playerWhoWantUpgrade = gs.getCurrPlayer();
     playerWhoWantUpgrade.setNeedUpTechLv();
+
+    // Now consume the tech resource immediately
+    int currTechLevel = playerWhoWantUpgrade.getTechLevel();
+    playerWhoWantUpgrade.consumeTechResource(Constant.UP_TECH_LEVEL_COST.get(currTechLevel));
     return true;
   }
 
@@ -67,5 +73,10 @@ public class V2UpgradeTechLevelOrder<T> implements Order<T> {
   @Deprecated
   public boolean execute(Board<T> board) {
     return false;
+  }
+
+  @Override
+  public HashMap<Integer, Integer> getArmyHashMap() {
+    return null;
   }
 }

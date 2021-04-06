@@ -1,5 +1,7 @@
 package edu.duke.ece651.risc.shared;
 
+import java.util.HashMap;
+
 public class V2UpgradeUnitOrder<T> implements Order<T> {
 
   /**
@@ -100,7 +102,7 @@ public class V2UpgradeUnitOrder<T> implements Order<T> {
       throw new IllegalArgumentException("Invalid input parameter!");
     }
     return Constant.UP_UNIT_COST.get(levelAfter) - Constant.UP_UNIT_COST.get(levelBefore);
-  } 
+  }
 
 
   /**
@@ -116,5 +118,10 @@ public class V2UpgradeUnitOrder<T> implements Order<T> {
   @Deprecated
   public boolean execute(Board<T> board) {
     return false;
+  }
+
+  @Override
+  public HashMap<Integer, Integer> getArmyHashMap() {
+    return null;
   }
 }

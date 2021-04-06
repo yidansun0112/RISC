@@ -38,6 +38,7 @@ subprojects{
         testRuntimeOnly 'org.junit.jupiter:junit-jupiter-engine:5.5.1'
         clover 'org.openclover:clover:4.3.1'
         testCompile "org.mockito:mockito-core:2.+"
+        testRuntime 'org.testfx:openjfx-monocle:jdk-12.0.1+2'
     }
     clover{
         enabled = true
@@ -58,6 +59,8 @@ subprojects{
     test {
         // Use junit platform for unit tests
         useJUnitPlatform()
+        systemProperty "testfx.headless", "true"
+        systemProperty "testfx.robot", "glass"
     }
 }
 

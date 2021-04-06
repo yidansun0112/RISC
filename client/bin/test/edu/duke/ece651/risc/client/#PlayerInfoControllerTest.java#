@@ -1,0 +1,13 @@
+package edu.duke.ece651.risc.client;
+
+import static org.junit.jupiter.api.Assertions.*;
+
+import org.junit.jupiter.api.Test;
+
+public class PlayerInfoControllerTest {
+  @Test
+  public void test_() {
+
+  }
+
+}

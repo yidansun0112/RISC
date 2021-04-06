@@ -23,7 +23,7 @@ import javafx.stage.Stage;
 
 public class JoinRoomController {
   @FXML
-  private ChoiceBox<Integer> roomBox;
+  protected ChoiceBox<Integer> roomBox;
   private Stage window;
   private GUIPlayer player;
   private List<GameRoomInfo> roomList;
@@ -57,9 +57,9 @@ public class JoinRoomController {
     String strId=(String)player.receiveObject();
     int playerId=Integer.parseInt(strId);
     if(playerId==-1){
+      player.disconnect();
       AlterBox box=new AlterBox(window,player);
       box.display("backChooseGame","Back","Sorry, this room has been chosen!");
-      player.disconnect();
     }else{
       PageLoader loader=new PageLoader(window,player);
       loader.showWaitPlayerComingPage();

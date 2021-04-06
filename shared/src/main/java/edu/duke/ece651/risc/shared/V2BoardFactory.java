@@ -11,7 +11,6 @@ public class V2BoardFactory<T> extends BoardFactory<T> {
 
     @Override
     protected Board<T> make2PlayerBoard() {
-        // TODO Auto-generated method stub
         ArrayList<Territory<T>> territories = new ArrayList<>();
         for (int i = 0; i < 6; i++) {
             territories.add(new V2Territory<T>(i, terriName.get(i), i / 3, worldMap2[i], Constant.TERRITORY_SIZE,
@@ -24,7 +23,6 @@ public class V2BoardFactory<T> extends BoardFactory<T> {
 
     @Override
     protected Board<T> make3PlayerBoard() {
-        // TODO Auto-generated method stub
         ArrayList<Territory<T>> territories = new ArrayList<>();
         for (int i = 0; i < 9; i++) {
             territories.add(new V2Territory<T>(i, terriName.get(i), i / 3, worldMap3[i], Constant.TERRITORY_SIZE,
@@ -37,7 +35,6 @@ public class V2BoardFactory<T> extends BoardFactory<T> {
 
     @Override
     protected Board<T> make4PlayerBoard() {
-        // TODO Auto-generated method stub
         ArrayList<Territory<T>> territories = new ArrayList<>();
         for (int i = 0; i < 12; i++) {
             territories.add(new V2Territory<T>(i, terriName.get(i), i / 3, worldMap4[i], Constant.TERRITORY_SIZE,
@@ -50,7 +47,6 @@ public class V2BoardFactory<T> extends BoardFactory<T> {
 
     @Override
     protected Board<T> make5PlayerBoard() {
-        // TODO Auto-generated method stub
         ArrayList<Territory<T>> territories = new ArrayList<>();
         for (int i = 0; i < 15; i++) {
             territories.add(new V2Territory<T>(i, terriName.get(i), i / 3, worldMap5[i], Constant.TERRITORY_SIZE,

@@ -21,25 +21,27 @@ public class RegisterLoginController {
   @FXML
   private Button loginBtn;
   @FXML
-  private Label info;
+  protected Label info;
   @FXML
-  private TextField usernameField;
+  protected TextField usernameField;
   @FXML
-  private TextField passwordField;
+  protected TextField passwordField;
   private Stage window;
+  private GUIPlayer player;
   
-  public RegisterLoginController(Stage window) {
+  public RegisterLoginController(Stage window, GUIPlayer player) {
     this.window = window;
+    this.player=player;
     usernameField=new TextField();
     passwordField=new TextField();
   }
 
   @FXML
-  public void register() throws IOException,ClassNotFoundException{
+  public void register() {
     String userInput=getUserInput(Constant.VALUE_REQUEST_TYPE_REGISTER);
-    SocketClient client=new SocketClient(12345,Constant.ipaddress);
-    client.sendObject(userInput);
-    String result=(String)client.receiveObject();
+    player.connect();
+    player.sendObject(userInput);
+    String result=(String)player.receiveObject();
     System.out.println("in register");
     System.out.println(result);
     if(!result.equals(Constant.RESULT_SUCCEED_REQEUST)){
@@ -49,17 +51,20 @@ public class RegisterLoginController {
       usernameField.setText("");
       passwordField.setText("");
     }
-    client.disconnectServer();
+    player.disconnect();
   }
 
   @FXML
-  public void login() throws IOException,ClassNotFoundException{
+  public void login() {
     String userInput=getUserInput(Constant.VALUE_REQUEST_TYPE_LOGIN);
-    SocketClient client=new SocketClient(12345,Constant.ipaddress);
-    client.sendObject(userInput);
-    String result=(String)client.receiveObject();
-    client.disconnectServer();
-    GUIPlayer player=new GUIPlayer(null);
+    // SocketClient client=new SocketClient(12345,Constant.ipaddress);
+    // client.sendObject(userInput);
+    // String result=(String)client.receiveObject();
+    player.connect();
+    player.sendObject(userInput);
+    String result=(String)player.receiveObject();
+    player.disconnect();
+    //GUIPlayer player=new GUIPlayer(null);
     if(result.equals(Constant.RESULT_SUCCEED_REQEUST)){
       player.username=usernameField.getText();
       PageLoader loader=new PageLoader(window,player);

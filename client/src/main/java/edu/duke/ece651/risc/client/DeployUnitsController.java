@@ -26,11 +26,11 @@ public class DeployUnitsController implements Initializable{
   @FXML
   private Button confirmBtn;
   @FXML
-  private ChoiceBox<String> terrBox;
+  protected ChoiceBox<String> terrBox;
   @FXML
   private Label waitLabel;
   @FXML
-  private ChoiceBox<Integer> amountBox;
+  protected ChoiceBox<Integer> amountBox;
   private Stage window;
   private GUIPlayer player;
 

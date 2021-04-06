@@ -21,7 +21,7 @@ public class PickTerritoryController {
     @FXML
     AnchorPane rootPane;
     @FXML
-    private ChoiceBox<String> groupNumBox;
+    protected ChoiceBox<String> groupNumBox;
     @FXML
     private Label waitLabel;
     private Stage window;

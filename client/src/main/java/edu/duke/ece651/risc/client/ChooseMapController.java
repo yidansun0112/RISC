@@ -21,7 +21,7 @@ public class ChooseMapController {
   @FXML
   AnchorPane rootPane;
   @FXML
-  private ChoiceBox<String> mapBox;
+  protected ChoiceBox<String> mapBox;
   @FXML
   private Button confirmMapBtn;
   private Stage window;
@@ -43,7 +43,7 @@ public class ChooseMapController {
     }
 
     @FXML
-    public void selectMap() throws ClassNotFoundException, IOException{
+    public void selectMap() {
       String mapChoice=mapBox.getValue();
       player.sendObject(mapChoice);
       PageLoader loader=new PageLoader(window, player);

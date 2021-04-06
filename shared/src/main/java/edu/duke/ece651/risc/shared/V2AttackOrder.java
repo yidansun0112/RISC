@@ -89,6 +89,14 @@ public class V2AttackOrder<T> implements Order<T> {
   }
 
   /**
+   * getter for levelToUnit HashMap. Used in checker
+   */
+  @Override
+  public HashMap<Integer, Integer> getArmyHashMap(){
+    return this.levelToUnitAmount;
+  }
+
+  /**
    * This method SHOULD NOT be used in evo 2. This violate LSP.. you can let the
    * new execute call this one, but the code would be somehow wired to write..
    * 
