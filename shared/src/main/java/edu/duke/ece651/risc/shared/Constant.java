@@ -79,13 +79,13 @@ public class Constant {
    * Indicate the initial amount of food resource that each player can have at the
    * beginning
    */
-  public static final int INIT_FOOD_RESOURCE = 50;
+  public static final int INIT_FOOD_RESOURCE = 0;
 
   /**
    * Indicate the initial amount of technology resource that each player can have
    * at the beginning
    */
-  public static final int INIT_TECH_RESOURCE = 50;
+  public static final int INIT_TECH_RESOURCE = 0;
 
 
   // This will for TERRITORY_SIZE
