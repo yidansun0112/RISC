@@ -18,50 +18,52 @@ import javafx.scene.layout.AnchorPane;
 import javafx.scene.control.TextArea;
 import javafx.stage.Stage;
 
+/**
+ * This class handles displaying combat info.
+ */
 public class CombatInfoController{
-
+    /** Confirm button, load from fxml */
     @FXML
     private Button confirmBtn;
-
+    /** list view to show combat info. */
     @FXML
     private ListView<String> listView;
-
-    // @FXML
-    // private ObservableList<String> combatInfo;
-
+    /** window to display */
     private Stage window;
-
+    /** player to handle game logic */
     GUIPlayer player;
+
+    /**
+     * The constructor
+     * 
+     * Initialize the listview.
+     * 
+     * @param window
+     * @param player
+     */
     public CombatInfoController(Stage window, GUIPlayer player){
         this.window = window;
         confirmBtn = new Button("Confirm");
         this.player = player;
-        //this.combatInfo = FXCollections.observableArrayList();
         this.listView = new ListView<>();
     }
 
+    /**
+     * Receive combat info from server and display.
+     */
     @FXML
     public void initialize() {
         // The ListView can not be edited by the user.
         this.listView.setEditable(false);
-        // ObservableList<String> combatInfo = FXCollections.observableArrayList();
-        // this.listView.setItems(combatInfo);
-        // //receive combat info
-        // String toAdd = "We call for peace!";
-        // int i = 0;
-        // while(i<20){
-        //     combatInfo.add(toAdd);
-        //     if(confirmBtn.isPressed()){
-        //         break;
-        //     }
-        //     i++;
-        // }
-        //ArrayList<String> combatInfo=(ArrayList<String>)player.receiveObject();
         ObservableList<String> combatInfo = FXCollections.observableArrayList((ArrayList<String>)player.receiveObject());
         this.listView.setItems(combatInfo);
     }
 
-
+    /**
+     * This method receive game result from server.
+     * If is a string, means game not end, go to losechoice or issueorder.
+     * If is an int, means game end, then go to start page.
+     */
     @FXML
     public void confirm(){
         Object obj=player.receiveObject();

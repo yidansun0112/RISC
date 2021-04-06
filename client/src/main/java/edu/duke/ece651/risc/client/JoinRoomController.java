@@ -20,14 +20,26 @@ import javafx.scene.control.Button;
 import javafx.scene.control.ChoiceBox;
 import javafx.stage.Stage;
 
-
+/**
+ * This class handles join room.
+ */
 public class JoinRoomController {
+  /** Choice box to select room */
   @FXML
   protected ChoiceBox<Integer> roomBox;
+  /** window to display */
   private Stage window;
+  /** player to handle game logic */
   private GUIPlayer player;
+  /** list of rooms to join */
   private List<GameRoomInfo> roomList;
 
+  /**
+   * The constructor
+   * @param window
+   * @param player
+   * @param roomList
+   */
   public JoinRoomController(Stage window,GUIPlayer player,List<GameRoomInfo> roomList){
     this.window=window;
     this.player=player;
@@ -35,6 +47,10 @@ public class JoinRoomController {
     roomBox=new ChoiceBox<>();
   }
 
+  /**
+   * Initialize room box.
+   * Set default value and other values.
+   */
   @FXML
   public void initialize() {
     roomBox.setValue(roomList.get(0).getRoomId());
@@ -43,6 +59,13 @@ public class JoinRoomController {
     }
   }
 
+  /**
+   * Select a room and join.
+   * 
+   * Send request, and receive id.
+   * If id == -1, means this room is full.
+   * Otherwise, means success. Game Start! Jump to pick territory page.
+   */
   @FXML
   public void enterRoom(){
     player.connect();

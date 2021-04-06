@@ -66,6 +66,8 @@ public class MapLinkController implements Initializable{
     }
     //name
     terrInfoController.nameValue.setText(terr.getName());
+    //size
+    terrInfoController.sizeValue.setText(Integer.toString(terr.getSize()));
     //food
     terrInfoController.foodValue.setText("+"+Integer.toString(terr.getFoodProduction())+"/round");
     //tech

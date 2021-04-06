@@ -55,6 +55,7 @@ public class MapLinkControllerTest {
     terrCont = new TerrInfoController();
     terrCont.ownerValue=new Label();
     terrCont.nameValue=new Label();
+    terrCont.sizeValue=new Label();
     terrCont.foodValue=new Label();
     terrCont.techValue=new Label();
     terrCont.lv0Value=new Label();
