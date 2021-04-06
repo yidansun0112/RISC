@@ -100,14 +100,7 @@ public class PageLoader {
   public void showDeployUnitsPage(){
     FXMLLoader loader = new FXMLLoader(getClass().getResource("/ui/deployUnits.fxml"));
     loader.setControllerFactory(c -> {
-      if(c.equals(DeployUnitsController.class)){
-        return new DeployUnitsController(window,player);
-      }
-      try{
-        return c.getConstructor().newInstance();
-      }catch(Exception e){
-        throw new RuntimeException(e);
-      }
+      return new DeployUnitsController(window,player);
     });
     showPage(loader);
   }
@@ -118,14 +111,15 @@ public class PageLoader {
     AnchorPane mapPane;
     FXMLLoader mapLoader = new FXMLLoader(getClass().getResource(mapResource));
     mapLoader.setControllerFactory(c -> {
-      if(c.equals(StartController.class)){
-        return new StartController(window,player);
-      }
-      try{
-        return c.getConstructor().newInstance();
-      }catch(Exception e){
-        throw new RuntimeException(e);
-      }
+      // if(c.equals(StartController.class)){
+      //   return new StartController(window,player);
+      // }
+      // try{
+      //   return c.getConstructor().newInstance();
+      // }catch(Exception e){
+      //   throw new RuntimeException(e);
+      // }
+      return new StartController(window, player);
     });
     try{
       mapPane=mapLoader.load();
@@ -161,14 +155,15 @@ public class PageLoader {
   public void showIssueOrderPage(){
     FXMLLoader loader = new FXMLLoader(getClass().getResource("/ui/issueOrder.fxml"));
       loader.setControllerFactory(c -> {
-        if(c.equals(IssueOrderController.class)){
-          return new IssueOrderController(window,player);
-        }
-        try{
-          return c.getConstructor().newInstance();
-        }catch(Exception e){
-          throw new RuntimeException(e);
-        }
+        // if(c.equals(IssueOrderController.class)){
+        //   return new IssueOrderController(window,player);
+        // }
+        // try{
+        //   return c.getConstructor().newInstance();
+        // }catch(Exception e){
+        //   throw new RuntimeException(e);
+        // }
+        return new IssueOrderController(window,player);
       });
     showPage(loader);
   }
@@ -184,14 +179,15 @@ public class PageLoader {
   public void showMoveAttack(String type){
     FXMLLoader loader = new FXMLLoader(getClass().getResource("/ui/moveAttack.fxml"));
       loader.setControllerFactory(c -> {
-        if(c.equals(MoveAttackController.class)){
-          return new MoveAttackController(window,player,type);
-        }
-        try{
-          return c.getConstructor().newInstance();
-        }catch(Exception e){
-          throw new RuntimeException(e);
-        }
+        // if(c.equals(MoveAttackController.class)){
+        //   return new MoveAttackController(window,player,type);
+        // }
+        // try{
+        //   return c.getConstructor().newInstance();
+        // }catch(Exception e){
+        //   throw new RuntimeException(e);
+        // }
+        return new MoveAttackController(window, player, type);
       });
       showPage(loader);
   }
@@ -199,14 +195,15 @@ public class PageLoader {
   public void showUpgradePage(){
     FXMLLoader loader = new FXMLLoader(getClass().getResource("/ui/upgradeUnits.fxml"));
       loader.setControllerFactory(c -> {
-          if(c.equals(UpgradeUnitsController.class)){
-          return new UpgradeUnitsController(window,player);
-        }
-        try{
-          return c.getConstructor().newInstance();
-        }catch(Exception e){
-          throw new RuntimeException(e);
-        }
+        //   if(c.equals(UpgradeUnitsController.class)){
+        //   return new UpgradeUnitsController(window,player);
+        // }
+        // try{
+        //   return c.getConstructor().newInstance();
+        // }catch(Exception e){
+        //   throw new RuntimeException(e);
+        // }
+        return new UpgradeUnitsController(window, player);
       });
       showPage(loader);
   }
@@ -214,14 +211,15 @@ public class PageLoader {
   public void showWatchGame(){
     FXMLLoader loader = new FXMLLoader(getClass().getResource("/ui/watchGame.fxml"));
       loader.setControllerFactory(c -> {
-          if(c.equals(WatchGameController.class)){
-          return new WatchGameController(window,player);
-        }
-        try{
-          return c.getConstructor().newInstance();
-        }catch(Exception e){
-          throw new RuntimeException(e);
-        }
+        //   if(c.equals(WatchGameController.class)){
+        //   return new WatchGameController(window,player);
+        // }
+        // try{
+        //   return c.getConstructor().newInstance();
+        // }catch(Exception e){
+        //   throw new RuntimeException(e);
+        // }
+        return new WatchGameController(window, player);
       });
     showPage(loader);
   }

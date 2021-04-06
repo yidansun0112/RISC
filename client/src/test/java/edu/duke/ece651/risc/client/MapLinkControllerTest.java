@@ -1,5 +1,4 @@
 package edu.duke.ece651.risc.client;
-import static org.junit.jupiter.api.Assertions.*;
 
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -24,24 +23,24 @@ import edu.duke.ece651.risc.shared.Territory;
 import edu.duke.ece651.risc.shared.V2BoardFactory;
 import edu.duke.ece651.risc.shared.V2GameBoard;
 import javafx.application.Platform;
+import javafx.scene.control.Label;
 import javafx.stage.Stage;
 
 @ExtendWith(ApplicationExtension.class)
-
-public class UpgradeUnitsControllerTest {
-
-  private UpgradeUnitsController upc;
+public class MapLinkControllerTest {
   @Mock
   private GUIPlayer player;
   @Mock
   private GameStatus<String> gameStatus;
   @Mock
   private PlayerEntity<String> playerEntity;
+  private MapLinkController mapCont;
+  private TerrInfoController terrCont;
 
   @Start
   private void start(Stage stage) {
     MockitoAnnotations.initMocks(this);
-    player.playerNum=2;
+    player.playerNum=5;
     player.playerId=1;
     player.gameStatus=gameStatus;
     when(gameStatus.getCurrPlayer()).thenReturn(playerEntity);
@@ -49,41 +48,58 @@ public class UpgradeUnitsControllerTest {
     when(playerEntity.getTechResourceAmount()).thenReturn(5);
     when(playerEntity.getTechLevel()).thenReturn(1);
     BoardFactory<String> factory=new V2BoardFactory<>();
-    Board<String> board=factory.makeGameBoard(2);
+    Board<String> board=factory.makeGameBoard(5);
     ArrayList<Territory<String>> territories=board.getTerritories();
     territories.get(0).setOwner(1);
     when(gameStatus.getGameBoard()).thenReturn(board);
-    upc = new UpgradeUnitsController(stage, player);
+    terrCont = new TerrInfoController();
+    terrCont.ownerValue=new Label();
+    terrCont.nameValue=new Label();
+    terrCont.foodValue=new Label();
+    terrCont.techValue=new Label();
+    terrCont.lv0Value=new Label();
+    terrCont.lv1Value=new Label();
+    terrCont.lv2Value=new Label();
+    terrCont.lv3Value=new Label();
+    terrCont.lv4Value=new Label();
+    terrCont.lv5Value=new Label();
+    terrCont.lv6Value=new Label();
+    mapCont= new MapLinkController(player);
+    mapCont.terrInfoController=terrCont;
   }
-  
+
   @Test
-  public void test_confirm() {
-    when(player.receiveObject()).thenReturn("Your Order is Legal!", gameStatus);
+  public void test_hyperLink(FxRobot robot) {
+    //when(player.receiveObject()).thenReturn("Your Order is Legal!", gameStatus);
     Platform.runLater(() -> {
-      upc.terrBox.setValue("Narnia");
-      upc.fromBox.setValue(0);
-      upc.toBox.setValue(1);
-      upc.amountBox.setValue(1);
-      //robot.clickOn("#confirmBtn");
-      upc.confirm();
+      mapCont.linkZero();
+      mapCont.linkOne();
+      mapCont.linkTwo();
+      mapCont.linkThree();
+      mapCont.linkFour();
+      mapCont.linkFive();
+      mapCont.linkSix();
+      mapCont.linkSeven();
+      mapCont.linkEight();
+      mapCont.linkNine();
+      mapCont.linkTen();
+      mapCont.linkEleven();
+      mapCont.linkTwelve();
+      mapCont.linkThirteen();
+      mapCont.linkFourteen();
     });
     WaitForAsyncUtils.waitForFxEvents();   
   }
 
   @Test
-  public void test_cancel(FxRobot robot) {
-    // when(player.receiveObject()).thenReturn("Your Order is Legal!");
+  public void test_show_true(FxRobot robot) {
+    //when(player.receiveObject()).thenReturn("Your Order is Legal!", gameStatus);
     Platform.runLater(() -> {
-      //robot.clickOn("#cancelBtn");
-      upc.cancel();
+      when(gameStatus.getCanShowLatest()).thenReturn(true);
+      mapCont.linkZero();
+      mapCont.linkOne();
     });
-    WaitForAsyncUtils.waitForFxEvents();
+    WaitForAsyncUtils.waitForFxEvents();   
   }
 
-
 }
-
-
-
-
-

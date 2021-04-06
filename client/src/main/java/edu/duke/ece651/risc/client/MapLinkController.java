@@ -58,8 +58,12 @@ public class MapLinkController implements Initializable{
     Territory<String> terr=territories.get(index);
     //owner
     int owner=terr.getOwner();
-    String strOwner="Player "+Integer.toString(owner);
-    terrInfoController.ownerValue.setText(strOwner);
+    if(owner!=-1){
+      String strOwner="Player "+Integer.toString(owner);
+      terrInfoController.ownerValue.setText(strOwner);
+    }else{
+      terrInfoController.ownerValue.setText("Not Picked");
+    }
     //name
     terrInfoController.nameValue.setText(terr.getName());
     //food
@@ -81,9 +85,9 @@ public class MapLinkController implements Initializable{
 
 
   public String getUnitAmount(int level,int owner,boolean showCurr,Army<String> currDefenderArmy,Army<String> prevDefenderArmy){
-    System.out.println("owner is"+owner);
-    System.out.println("level "+level+" current unit is "+currDefenderArmy.getUnitAmtByLevel(level));
-    System.out.println("level "+level+" prev unit is "+prevDefenderArmy.getUnitAmtByLevel(level));
+    // System.out.println("owner is"+owner);
+    // System.out.println("level "+level+" current unit is "+currDefenderArmy.getUnitAmtByLevel(level));
+    // System.out.println("level "+level+" prev unit is "+prevDefenderArmy.getUnitAmtByLevel(level));
     if(player.playerId==owner){
       return Integer.toString(currDefenderArmy.getUnitAmtByLevel(level));
     }else if(showCurr){
