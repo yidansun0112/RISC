@@ -15,6 +15,10 @@ import javafx.scene.control.Label;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
 
+/**
+ * This handles for picking territories for each player
+ * Each would pick a group of territories
+ */
 public class PickTerritoryController {
     @FXML
     AnchorPane mapPane;
@@ -27,6 +31,11 @@ public class PickTerritoryController {
     private Stage window;
     GUIPlayer player;
   
+    /**
+     * Construtor
+     * @param window
+     * @param player
+     */
     public PickTerritoryController(Stage window, GUIPlayer player) {
       this.window = window;
       this.player=player;
@@ -35,16 +44,27 @@ public class PickTerritoryController {
       mapPane=loader.loadPureMap();
     }
 
+    /**
+     * load the map and set up the drop box for choosing map
+     */
     @FXML
     public void initialize() {
         PageLoader loader=new PageLoader(window,player);
-        loader.putMap(rootPane, mapPane);
+        loader.putPureMap(rootPane, mapPane);
         groupNumBox.setValue("0");
         for(int i=0;i<player.playerNum;i++){
             groupNumBox.getItems().add(Integer.toString(i));
         }
     }
 
+    /**
+     * Make each player select a group and send the choice to the server
+     * If the group has been picked by other players, it would remind the player to pick 
+     * another one.
+     * If the group hasn't been picked yet, the player would get this group of territories
+     * @throws ClassNotFoundException
+     * @throws IOException
+     */
     @FXML
     public void selectGroup() throws ClassNotFoundException, IOException{
         String choice=groupNumBox.getValue();

@@ -11,6 +11,11 @@ import javafx.scene.control.Button;
 import javafx.scene.control.ChoiceBox;
 import javafx.stage.Stage;
 
+/**
+ * This class handles from start game\
+ * after player clicks on start, it would jump to choose map 
+ * or pick territory page
+ */
 public class StartController {
   @FXML
   private Button startBtn;
@@ -25,14 +30,19 @@ public class StartController {
   private Stage window;
   GUIPlayer player;
 
+  /**
+   * Constructor
+   */
   public StartController(Stage window, GUIPlayer player) {
     this.window = window;
     playerNumBox = new ChoiceBox<>();
     // mapBox = new ChoiceBox<>();
     this.player=player;
-    System.out.println("[DEBUG] Inside Start Controller Constructor");
   }
 
+  /**
+   * make player choose the number of players in the game
+   */
   @FXML
   public void initialize() {
     playerNumBox.setValue(2);
@@ -41,12 +51,18 @@ public class StartController {
     // mapBox.setValue("Map 0");
   }
 
+  /**
+   * load the start game page
+   */
   @FXML
   public void startGame() {
     PageLoader loader=new PageLoader(window,new GUIPlayer());
     loader.showRegLogPage();
   }
 
+  /**
+   * get the number that the player choose and jump to choose map page
+   */
   @FXML
   public void selectPlayerNum() {
     int num = playerNumBox.getValue();
@@ -55,17 +71,5 @@ public class StartController {
     PageLoader loader=new PageLoader(window, player);
     loader.showChooseMapPage();
   }
-
-  // @FXML
-  // public void selectMap() throws ClassNotFoundException, IOException{
-  //   String mapChoice=mapBox.getValue();
-  //   player.sendObject(mapChoice);
-  //   PageLoader loader=new PageLoader(window, player);
-  //   System.out.println("to show wait page");
-  //   loader.showWaitPlayerComingPage();
-  //   int playerNum=(int)player.receiveObject();//receive player number, indicate all players arrived
-  //   player.playerNum=playerNum; 
-  //   loader.showPickTerritoryPage();
-  // }
 
 }

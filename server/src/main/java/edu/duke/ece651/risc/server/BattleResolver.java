@@ -79,8 +79,8 @@ public class BattleResolver<T> implements Resolver<T> {
       currDefender.set(0, winner);
       // delete enemy
       enemyArmy.remove(index);
-      String newspaper = "In Territory "+battleField.getName()+", Defender "+defender.getCommanderId()+"(id) fight with Attacker "
-                        +attacker.getCommanderId()+"(id) and the Winner is " + winner.getCommanderId()+"(id).";
+      String newspaper = "In Territory "+battleField.getName()+", Defender "+defender.getCommanderId()+" fight with Attacker "
+                        +attacker.getCommanderId()+" and the Winner is " + winner.getCommanderId()+".";
       combatInfo.add(newspaper);
     }
     battleField.setOwner(currDefender.get(0).getCommanderId());

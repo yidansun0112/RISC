@@ -1,42 +1,38 @@
 package edu.duke.ece651.risc.client;
-import static org.junit.jupiter.api.Assertions.*;
+
+import static org.mockito.Mockito.when;
+
+import java.io.IOException;
+import java.util.ArrayList;
 
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
-
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
-import static org.mockito.Mockito.*;
-
-import java.util.ArrayList;
-
-import org.testfx.api.FxRobot;
 import org.testfx.framework.junit5.ApplicationExtension;
 import org.testfx.framework.junit5.Start;
 import org.testfx.util.WaitForAsyncUtils;
 
-import edu.duke.ece651.risc.shared.Army;
 import edu.duke.ece651.risc.shared.Board;
 import edu.duke.ece651.risc.shared.BoardFactory;
 import edu.duke.ece651.risc.shared.GameStatus;
 import edu.duke.ece651.risc.shared.PlayerEntity;
 import edu.duke.ece651.risc.shared.Territory;
 import edu.duke.ece651.risc.shared.V2BoardFactory;
-import edu.duke.ece651.risc.shared.V2GameBoard;
 import javafx.application.Platform;
 import javafx.stage.Stage;
 
 @ExtendWith(ApplicationExtension.class)
-
-public class UpgradeUnitsControllerTest {
-
-  private UpgradeUnitsController upc;
+public class ChooseBoxTest {
+  private ChooseBox box;
+  private Stage alterWindow;
   @Mock
   private GUIPlayer player;
   @Mock
   private GameStatus<String> gameStatus;
   @Mock
   private PlayerEntity<String> playerEntity;
+  @Test
 
   @Start
   private void start(Stage stage) {
@@ -53,37 +49,34 @@ public class UpgradeUnitsControllerTest {
     ArrayList<Territory<String>> territories=board.getTerritories();
     territories.get(0).setOwner(1);
     when(gameStatus.getGameBoard()).thenReturn(board);
-    upc = new UpgradeUnitsController(stage, player);
+    box=new ChooseBox(stage,player);
+    alterWindow = new Stage();
+  }
+
+  @Test
+  public void test_display(){
+    Platform.runLater(() -> {
+      box.display("message");
+    });
+    WaitForAsyncUtils.waitForFxEvents(); 
+  }
+
+  @Test
+  public void test_set_upgrade(){
+    when(player.receiveObject()).thenReturn("success",gameStatus);
+    Platform.runLater(() -> {
+      box.sendUpgradeTechLevel();
+    });
+    WaitForAsyncUtils.waitForFxEvents(); 
+  }
+
+  @Test
+  public void test_jump_upgrade(){
+    //when(player.receiveObject()).thenReturn("success",gameStatus);
+    Platform.runLater(() -> {
+      box.jumpUpgradeUnitsrPage(alterWindow);;
+    });
+    WaitForAsyncUtils.waitForFxEvents(); 
   }
   
-  @Test
-  public void test_confirm() {
-    when(player.receiveObject()).thenReturn("Your Order is Legal!", gameStatus);
-    Platform.runLater(() -> {
-      upc.terrBox.setValue("Narnia");
-      upc.fromBox.setValue(0);
-      upc.toBox.setValue(1);
-      upc.amountBox.setValue(1);
-      //robot.clickOn("#confirmBtn");
-      upc.confirm();
-    });
-    WaitForAsyncUtils.waitForFxEvents();   
-  }
-
-  @Test
-  public void test_cancel(FxRobot robot) {
-    // when(player.receiveObject()).thenReturn("Your Order is Legal!");
-    Platform.runLater(() -> {
-      //robot.clickOn("#cancelBtn");
-      upc.cancel();
-    });
-    WaitForAsyncUtils.waitForFxEvents();
-  }
-
-
 }
-
-
-
-
-

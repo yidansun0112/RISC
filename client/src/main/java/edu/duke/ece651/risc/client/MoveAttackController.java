@@ -22,6 +22,11 @@ import javafx.scene.control.ChoiceBox;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
 
+/**
+ * This class handles the move and attack order of the player
+ * make the player choose territory to attack, also choose units 
+ * type and amount
+ */
 public class MoveAttackController implements Initializable{
   @FXML
   AnchorPane mapPane;
@@ -53,6 +58,12 @@ public class MoveAttackController implements Initializable{
   private GUIPlayer player;
   private String type;
 
+  /**
+   * the constructor
+   * @param window
+   * @param player
+   * @param type
+   */
   public MoveAttackController(Stage window,GUIPlayer player, String type) {
     this.window = window;
     this.player=player;
@@ -70,6 +81,13 @@ public class MoveAttackController implements Initializable{
     this.lv6Box=new ChoiceBox<Integer>();
   }
 
+  /**
+   * set the drop box for source territory and destination territory
+   * Move and Attack has different setting up
+   * get the territory id that the player picks
+   * @param url
+   * @param rb
+   */
   public void initialize(URL url, ResourceBundle rb){
     PageLoader loader=new PageLoader(window,player);
     loader.putMap(rootPane, mapPane);
@@ -89,6 +107,10 @@ public class MoveAttackController implements Initializable{
     } );
   }
 
+  /**
+   * set up the drop box for different levels of units bases on the gamestatus it receives
+   * @param terrId
+   */
   public void setAllLevelBox(int terrId){
       ArrayList<Territory<String>> territories=player.gameStatus.getGameBoard().getTerritories();
       Territory<String> terr=territories.get(terrId);
@@ -102,6 +124,10 @@ public class MoveAttackController implements Initializable{
       setLevelBox(lv6Box, currDefenderArmy.getUnitAmtByLevel(6));
   }
 
+  /**
+   * set the drop box to show territories of the player
+   * @param box
+   */
   public void setSelfTerr(ChoiceBox<String> box){
     ArrayList<Territory<String>> territories=player.gameStatus.getGameBoard().getTerritories();
     for(int i=0;i<territories.size();i++){
@@ -112,6 +138,10 @@ public class MoveAttackController implements Initializable{
     }
   }
 
+  /**
+   * set up the drop box to show territories of the player's enemies
+   * @param box
+   */
   public void setEnemyTerr(ChoiceBox<String> box){
     ArrayList<Territory<String>> territories=player.gameStatus.getGameBoard().getTerritories();
     for(int i=0;i<territories.size();i++){
@@ -122,6 +152,11 @@ public class MoveAttackController implements Initializable{
     }
   }
 
+  /**
+   * set up the drop box for units amounr
+   * @param box
+   * @param amount
+   */
   public void setLevelBox(ChoiceBox<Integer> box,int amount){
     box.getItems().clear();
     box.setValue(0);
@@ -129,13 +164,19 @@ public class MoveAttackController implements Initializable{
       box.getItems().add(i);
     }
   }
-
+  /**
+   * load the issue order page
+   */
   @FXML
   public void cancel(){
     PageLoader loader=new PageLoader(window,player);
     loader.showIssueOrderPage();
   }
 
+  /**
+   * make a move/attack order based on the valuea the player picks and 
+   * send it to the server and waits for response
+   */
   @FXML
   public void confirm(){
     int sourceTerr=Constant.terrNameToId.get(sourceBox.getValue());
@@ -155,6 +196,10 @@ public class MoveAttackController implements Initializable{
     alterBox.display("orderConfirm", "Back", result);
   }
 
+  /**
+   * get the amount of the different levels of units
+   * @param unitsMap
+   */
   public void setUnitsMap(HashMap<Integer,Integer> unitsMap){
     if(lv0Box.getValue()!=0){
       unitsMap.put(0,lv0Box.getValue());

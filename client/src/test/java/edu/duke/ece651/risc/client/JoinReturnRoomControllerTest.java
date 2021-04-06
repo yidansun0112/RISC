@@ -1,36 +1,35 @@
 package edu.duke.ece651.risc.client;
+
 import static org.junit.jupiter.api.Assertions.*;
 
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
-
-import org.mockito.Mock;
-import org.mockito.MockitoAnnotations;
 import static org.mockito.Mockito.*;
 
 import java.util.ArrayList;
+import java.util.List;
 
+import org.mockito.Mock;
+import org.mockito.MockitoAnnotations;
 import org.testfx.api.FxRobot;
 import org.testfx.framework.junit5.ApplicationExtension;
 import org.testfx.framework.junit5.Start;
 import org.testfx.util.WaitForAsyncUtils;
 
-import edu.duke.ece651.risc.shared.Army;
 import edu.duke.ece651.risc.shared.Board;
 import edu.duke.ece651.risc.shared.BoardFactory;
+import edu.duke.ece651.risc.shared.GameRoomInfo;
 import edu.duke.ece651.risc.shared.GameStatus;
 import edu.duke.ece651.risc.shared.PlayerEntity;
-import edu.duke.ece651.risc.shared.Territory;
 import edu.duke.ece651.risc.shared.V2BoardFactory;
-import edu.duke.ece651.risc.shared.V2GameBoard;
 import javafx.application.Platform;
 import javafx.stage.Stage;
 
 @ExtendWith(ApplicationExtension.class)
+public class JoinReturnRoomControllerTest {
 
-public class UpgradeUnitsControllerTest {
-
-  private UpgradeUnitsController upc;
+  private JoinRoomController joinCont;
+  private ReturnRoomController returnCont;
   @Mock
   private GUIPlayer player;
   @Mock
@@ -41,49 +40,48 @@ public class UpgradeUnitsControllerTest {
   @Start
   private void start(Stage stage) {
     MockitoAnnotations.initMocks(this);
+    List<GameRoomInfo> roomList=new ArrayList<GameRoomInfo>();
+    roomList.add(new GameRoomInfo(1, 3, "a"));
+    joinCont=new JoinRoomController(stage, player, roomList);
+    returnCont=new ReturnRoomController(stage, player, roomList);
+    joinCont.roomBox.setValue(1);
+    returnCont.roomBox.setValue(1);
     player.playerNum=2;
     player.playerId=1;
     player.gameStatus=gameStatus;
     when(gameStatus.getCurrPlayer()).thenReturn(playerEntity);
-    when(playerEntity.getFoodResourceAmount()).thenReturn(5);
-    when(playerEntity.getTechResourceAmount()).thenReturn(5);
-    when(playerEntity.getTechLevel()).thenReturn(1);
+    when(playerEntity.getPlayerId()).thenReturn(0);
     BoardFactory<String> factory=new V2BoardFactory<>();
     Board<String> board=factory.makeGameBoard(2);
-    ArrayList<Territory<String>> territories=board.getTerritories();
-    territories.get(0).setOwner(1);
     when(gameStatus.getGameBoard()).thenReturn(board);
-    upc = new UpgradeUnitsController(stage, player);
-  }
-  
-  @Test
-  public void test_confirm() {
-    when(player.receiveObject()).thenReturn("Your Order is Legal!", gameStatus);
-    Platform.runLater(() -> {
-      upc.terrBox.setValue("Narnia");
-      upc.fromBox.setValue(0);
-      upc.toBox.setValue(1);
-      upc.amountBox.setValue(1);
-      //robot.clickOn("#confirmBtn");
-      upc.confirm();
-    });
-    WaitForAsyncUtils.waitForFxEvents();   
   }
 
+
   @Test
-  public void test_cancel(FxRobot robot) {
-    // when(player.receiveObject()).thenReturn("Your Order is Legal!");
+  public void test_join_fail() {
+    when(player.receiveObject()).thenReturn("-1");
     Platform.runLater(() -> {
-      //robot.clickOn("#cancelBtn");
-      upc.cancel();
+      joinCont.enterRoom();
     });
     WaitForAsyncUtils.waitForFxEvents();
   }
 
+  @Test
+  public void test_join_success() {
+    when(player.receiveObject()).thenReturn("1",3);
+    Platform.runLater(() -> {
+      joinCont.enterRoom();
+    });
+    WaitForAsyncUtils.waitForFxEvents();
+  }
+
+  @Test
+  public void test_return() {
+    when(player.receiveObject()).thenReturn(gameStatus);
+    Platform.runLater(() -> {
+      returnCont.enterRoom();
+    });
+    WaitForAsyncUtils.waitForFxEvents();
+  }
 
 }
-
-
-
-
-

@@ -426,9 +426,15 @@ public class V2GameServer {
    *         game yet.
    */
   protected synchronized List<GameRoomInfo> getLeavingRoomListByUsername(String userName) {
+    // System.out.println("before clear");
+    // printAllRoom();
     // Clear the room with a finished game first
     clearFinishedGameRoom();
 
+    // System.out.println("after clear");
+    // printAllRoom();
+
+    System.out.println(userName);
     List<GameRoomInfo> ans = new ArrayList<GameRoomInfo>();
     for (Map.Entry<Integer, GameRoom<String>> e : gameRooms.entrySet()) {
       if (e.getValue().getRoomStatus() == Constant.ROOM_STATUS_RUNNING_GAME && e.getValue().hasPlayer(userName)
@@ -438,7 +444,7 @@ public class V2GameServer {
             roomToAdd.getRoomOwner().getPlayerSymbol()));
       }
     }
-
+    System.out.println(ans.size());
     return ans;
   }
 
@@ -449,10 +455,28 @@ public class V2GameServer {
   protected void clearFinishedGameRoom() {
     for (Map.Entry<Integer, GameRoom<String>> e : gameRooms.entrySet()) {
       if (e.getValue().getRoomStatus() == Constant.ROOM_STATUS_GAME_FINISHED) {
+        // System.out.println("In clearFinishedRoom, room to clear:");
+        // printRoom(e.getValue());
         gameRooms.remove(e.getKey());
       }
     }
   }
+
+  // protected void printRoom(GameRoom<String> r) {
+  //   System.out.println("room id: " + r.getRoomId());
+  //   System.out.println("player num: " + r.getPlayerNum());
+  //   System.out.println("room status: " + r.getRoomStatus());
+  //   for (int i = 0; i < r.players.size(); i++) {
+  //     System.out.println("room player name: " + r.players.get(i).getPlayerSymbol());
+  //     System.out.println("room player status: " + r.players.get(i).getPlayerStatus());
+  //   }
+  // }
+
+  // protected void printAllRoom() {
+  //   for (GameRoom<String> r : gameRooms.values()) {
+  //     printRoom(r);
+  //   }
+  // }
 
   // /**
   // * Try out some JSON API behaviors

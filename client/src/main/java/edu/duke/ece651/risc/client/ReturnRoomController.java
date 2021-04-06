@@ -21,7 +21,10 @@ import javafx.scene.control.Button;
 import javafx.scene.control.ChoiceBox;
 import javafx.stage.Stage;
 
-
+/**
+ * This class handles for returning back to the room the player
+ * left before.
+ */
 public class ReturnRoomController {
   @FXML
   protected ChoiceBox<Integer> roomBox;
@@ -29,6 +32,12 @@ public class ReturnRoomController {
   private GUIPlayer player;
   private List<GameRoomInfo> roomList;
 
+  /**
+   * constructor
+   * @param window
+   * @param player
+   * @param roomList
+   */
   public ReturnRoomController(Stage window,GUIPlayer player,List<GameRoomInfo> roomList){
     this.window=window;
     this.player=player;
@@ -36,6 +45,9 @@ public class ReturnRoomController {
     roomBox=new ChoiceBox<>();
   }
 
+  /**
+   * set the drop box of room list
+   */
   @FXML
   public void initialize() {
     roomBox.setValue(roomList.get(0).getRoomId());
@@ -44,6 +56,10 @@ public class ReturnRoomController {
     }
   }
 
+  /**
+   * send server the room player picks, get the game status back from 
+   * server and go to issue order page
+   */
   @FXML
   public void enterRoom(){
     player.connect();

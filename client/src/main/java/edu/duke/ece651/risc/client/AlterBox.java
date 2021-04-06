@@ -17,14 +17,29 @@ import javafx.stage.Stage;
  */
 public class AlterBox {
 
+  /** Stage to be passed to other controllers */
   private Stage window;
+  /** GUIPlayer to be passed to other controllers */
   private GUIPlayer player;
 
+  /**
+   * The constructor
+   * 
+   * @param window to pass
+   * @param player to pass
+   */
   public AlterBox(Stage window, GUIPlayer player){
     this.window=window;
     this.player=player;
   }
 
+  /**
+   * This method will display an alert window with the given message, and set the action of the button based on type.
+   * 
+   * @param type decide how to set button action
+   * @param buttonInfo decide the button text
+   * @param message the message shown on the window
+   */
     public void display(String type, String buttonInfo,String message){
       Stage alterWindow = new Stage();
       alterWindow.initModality(Modality.APPLICATION_MODAL);
@@ -42,6 +57,13 @@ public class AlterBox {
       alterWindow.showAndWait();
   }
 
+  /**
+   * This function set actions on button based on button type
+   * 
+   * @param button to set
+   * @param type decide the action 
+   * @param alterWindow window to close
+   */
   public void chooseActions(Button button, String type,Stage alterWindow){
     switch (type){
       case "orderConfirm":
@@ -65,8 +87,9 @@ public class AlterBox {
   }
 
   /**
-   * Note: Your method need to close the alterWindow at first
-   * @param alterwindow
+   * Jump to issue order page
+   * 
+   * @param alterwindow window to close
    */
   public void jumpIssueOrderPage(Stage alterWindow){
     alterWindow.close();
@@ -74,18 +97,33 @@ public class AlterBox {
     loader.showIssueOrderPage();
   }
 
+  /**
+   * Jump to deploy units page
+   * 
+   * @param alterWindow window to close
+   */
   public void jumpDeployUnitsPage(Stage alterWindow){
     alterWindow.close();
     PageLoader loader=new PageLoader(window,player);
     loader.showDeployUnitsPage();
   }
 
+  /**
+   * Jump to choose game page
+   * 
+   * @param alterWindow window to close
+   */
   public void jumpChooseGamePage(Stage alterWindow){
     alterWindow.close();
     PageLoader loader=new PageLoader(window,player);
     loader.showChooseGamePage();
   }
 
+  /**
+   * Jump to start page
+   * 
+   * @param alterWindow
+   */
   public void jumpStartPage(Stage alterWindow){
     alterWindow.close();
     PageLoader loader=new PageLoader(window, player);

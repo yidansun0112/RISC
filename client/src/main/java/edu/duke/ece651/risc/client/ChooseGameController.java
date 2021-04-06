@@ -17,22 +17,41 @@ import javafx.scene.control.Button;
 import javafx.scene.control.ChoiceBox;
 import javafx.stage.Stage;
 
+/**
+ * This class handles for choose game.
+ * Player could decide to create a room, join a room or return back to a room.
+ */
 public class ChooseGameController {
+  /** create button, load from fxml */
   @FXML
   private Button createBtn;
+  /** join button, load from fxml */
   @FXML
   private Button joinBtn;
+  /** return button, load from fxml */
   @FXML
   private Button returnBtn;
-
+  /** window to display on */
   private Stage window;
+  /** model, who control the game logic */
   private GUIPlayer player;
 
+  /**
+   * The constructor
+   * @param window
+   * @param player
+   */
   public ChooseGameController(Stage window, GUIPlayer player) {
     this.window = window;
     this.player = player;
   }
 
+  /**
+   * This method let the player to create a room.
+   * 
+   * Send a request, and receive player id.
+   * Then jump to choose player number page.
+   */
   @FXML
   public void createGame() {
     player.connect();
@@ -47,6 +66,14 @@ public class ChooseGameController {
     loader.showChoosePlayerNum();
   }
 
+
+  /**
+   * This method let the player to join a room.
+   * 
+   * Send a request, and receive the room list could join.
+   * If the list is empty, the player have to stay on the page.
+   * Othersie, jump to join room page.
+   */
   @FXML
   public void joinGame() {
     // ask for list
@@ -68,6 +95,13 @@ public class ChooseGameController {
     }
   }
 
+  /**
+   * This method let the player to return to a room.
+   * 
+   * Send a request, and receive the room list could join.
+   * If the list is empty, the player have to stay on the page.
+   * Othersie, jump to return room page.
+   */
   @FXML
   public void returnGame() {
     // ask for list

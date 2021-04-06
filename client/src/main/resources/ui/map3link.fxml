@@ -17,7 +17,7 @@
             <Image url="@../map/map3.jpg" />
          </image>
       </ImageView>
-      <Hyperlink fx:id="terr0" alignment="CENTER" layoutX="253.0" layoutY="240.0" onAction="#linkZero" text="terr0">
+      <Hyperlink fx:id="terr0" alignment="CENTER" layoutX="253.0" layoutY="240.0" onAction="#linkZero" text="Info">
          <font>
             <Font name="System Bold" size="12.0" />
          </font>
@@ -47,7 +47,7 @@
             <Font name="System Bold" size="12.0" />
          </font>
       </Hyperlink>
-      <Hyperlink fx:id="terr6" alignment="CENTER" layoutX="160.0" layoutY="240.0" onAction="#linkSix" text="terr6">
+      <Hyperlink fx:id="terr6" alignment="CENTER" layoutX="160.0" layoutY="240.0" onAction="#linkSix" text="Info">
          <font>
             <Font name="System Bold" size="12.0" />
          </font>

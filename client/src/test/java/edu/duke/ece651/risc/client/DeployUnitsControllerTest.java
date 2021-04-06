@@ -52,7 +52,6 @@ public class DeployUnitsControllerTest {
   }
   @Test
   public void test_deploy_success(FxRobot robot) {
-    
     when(player.receiveObject()).thenReturn("Choice Succeed!", "finish");
     Platform.runLater(() -> {
       duc.terrBox.setValue("Narnia");

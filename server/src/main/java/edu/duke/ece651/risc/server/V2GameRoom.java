@@ -227,15 +227,15 @@ public class V2GameRoom extends GameRoom<String> {
         sendToAllPlayer(getWinnerId());
         barrier.await();
         // closeAllStreams();
+        setRoomStatus(Constant.ROOM_STATUS_GAME_FINISHED); // we update the room status at last, to avoid the room being
+                                                           // removed by the clearFinishedGameRoom() before finishing
+                                                           // broadcasting the winner info.
         break;
       }
       barrier.await(); // room finished battle stuff, enable each player issue order again
 
       System.out.println("No one wins, now waiting all players done again");
 
-      setRoomStatus(Constant.ROOM_STATUS_GAME_FINISHED); // we update the room status at last, to avoid the room being
-                                                         // removed by the clearFinishedGameRoom() before finishing
-                                                         // broadcasting the winner info.
     }
   }
 
