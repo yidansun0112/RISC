@@ -118,10 +118,20 @@ public class V2GameBoardTest {
     assertEquals(Constant.TERRITORY_SIZE * 2, b.findMinPathDistance(0, 6, 1));
     assertEquals(Constant.TERRITORY_SIZE * 2, b.findMinPathDistance(6, 0, 1));
 
-    // --- FAILED ON THIS LINE: expected: <2147483647> but was: <-2147483644> ---
-    // assertEquals(Integer.MAX_VALUE, b.findMinPathDistance(7, 2, 0)); // no connected path 
-    // --- FAILED ON THIS LINE: expected: <2147483647> but was: <-2147483644> ---
-    // assertEquals(Integer.MAX_VALUE, b.findMinPathDistance(2, 7, 0));
+    assertEquals(Integer.MAX_VALUE, b.findMinPathDistance(7, 2, 0)); // no connected path 
+    assertEquals(Integer.MAX_VALUE, b.findMinPathDistance(2, 7, 0));
+    assertEquals(Integer.MAX_VALUE, b.findMinPathDistance(7, 2, 0)); // no connected path 
+    assertEquals(Integer.MAX_VALUE, b.findMinPathDistance(2, 7, 0));
+    assertEquals(Integer.MAX_VALUE, b.findMinPathDistance(5, 0, 1));
+    assertEquals(Integer.MAX_VALUE, b.findMinPathDistance(5, 6, 1));
+    assertEquals(Integer.MAX_VALUE, b.findMinPathDistance(5, 8, 1));
+    assertEquals(Integer.MAX_VALUE, b.findMinPathDistance(3, 2, 2));
+
+    b.getTerritories().get(5).setOwner(2);
+    b.getTerritories().get(2).setOwner(2);
+    assertEquals(Constant.TERRITORY_SIZE * 2, b.findMinPathDistance(3, 5, 2));
+    assertEquals(Constant.TERRITORY_SIZE * 3, b.findMinPathDistance(3, 2, 2));
+
   }
 
 }

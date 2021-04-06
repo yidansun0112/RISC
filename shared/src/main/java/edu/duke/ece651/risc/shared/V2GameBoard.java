@@ -78,7 +78,7 @@ public class V2GameBoard<T> extends V1GameBoard<T> {
       // As s alway maintain the minPathSet. So if we encounter the srcTerritoryId, we
       // can just return the value;
       if (u[0] == destTerritoryId) {
-        return u[2];
+        return u[2] < 0 ? Integer.MAX_VALUE : u[2];
       }
       s.add(u[0]);
       // Relex all of the vertex
