@@ -13,7 +13,7 @@
       <!--<fx:include fx:id="mapLink" source="map2link.fxml"
                   prefHeight="300.0" prefWidth="400.0"/>-->
       <!--<AnchorPane fx:id="mapPane" prefHeight="200.0" prefWidth="300.0" layoutX="300.0" layoutY="104.0"/>-->
-      <Label alignment="CENTER" layoutX="200.0" layoutY="104.0" text="Now please upgrade your units" textFill="DARKBLUE" AnchorPane.bottomAnchor="150">
+      <Label alignment="CENTER" layoutX="167.0" layoutY="229.0" text="Now please upgrade your units" textFill="DARKBLUE" AnchorPane.bottomAnchor="147.0">
          <font>
             <Font name="System Bold" size="19.0" />
          </font>
@@ -23,12 +23,12 @@
             <Font name="System Bold" size="10.0" />
          </font>
       </Label>
-      <Label alignment="CENTER" layoutX="200.0" layoutY="265.0" text="From which level" textFill="DARKBLUE" AnchorPane.bottomAnchor="120.0">
+      <Label alignment="CENTER" layoutX="200.0" layoutY="265.0" text="From which level" textFill="DARKBLUE" AnchorPane.bottomAnchor="110.0">
          <font>
             <Font name="System Bold" size="10.0" />
          </font>
       </Label>
-      <Label alignment="CENTER" layoutX="300.0" layoutY="261.0" text="To which level" textFill="DARKBLUE" AnchorPane.bottomAnchor="126.0">
+      <Label alignment="CENTER" layoutX="300.0" layoutY="261.0" text="To which level" textFill="DARKBLUE" AnchorPane.bottomAnchor="110.0">
          <font>
             <Font name="System Bold" size="10.0" />
          </font>
@@ -40,8 +40,8 @@
       </Label>
       <ChoiceBox fx:id="terrBox" layoutX="100.0" layoutY="300.0" prefHeight="27.0" prefWidth="60.0" AnchorPane.bottomAnchor="80.0" />
       <ChoiceBox fx:id="fromBox" layoutX="200.0" layoutY="300.0" prefHeight="27.0" prefWidth="60.0" AnchorPane.bottomAnchor="80.0" />
-      <ChoiceBox fx:id="toBox" layoutX="300.0" layoutY="300.0" prefHeight="27.0" prefWidth="60.0" AnchorPane.bottomAnchor="86.0" />
-      <ChoiceBox fx:id="amountBox" layoutX="400.0" layoutY="300.0" prefHeight="27.0" prefWidth="60.0" AnchorPane.bottomAnchor="82.0" />
+      <ChoiceBox fx:id="toBox" layoutX="300.0" layoutY="300.0" prefHeight="27.0" prefWidth="60.0" AnchorPane.bottomAnchor="80.0" />
+      <ChoiceBox fx:id="amountBox" layoutX="400.0" layoutY="300.0" prefHeight="27.0" prefWidth="60.0" AnchorPane.bottomAnchor="80.0" />
       <Button fx:id="confirmBtn" layoutX="343.0" layoutY="340.0" mnemonicParsing="false" onAction="#confirm" prefHeight="30.0" prefWidth="65.0" style="-fx-background-color: lightskyblue; -fx-border-color: black;" text="Confirm" AnchorPane.bottomAnchor="31.0" />
       <Button fx:id="cancelBtn" layoutX="201.0" layoutY="350.0" mnemonicParsing="false" onAction="#cancel" prefHeight="30.0" prefWidth="65.0" style="-fx-background-color: lightskyblue; -fx-border-color: black;" text="Cancel" AnchorPane.bottomAnchor="31.0" />
     </children>

@@ -13,7 +13,7 @@
       <!--<fx:include fx:id="mapLink" source="map2link.fxml"
                   prefHeight="300.0" prefWidth="400.0"/>-->
       <!--<AnchorPane fx:id="mapPane" prefHeight="200.0" prefWidth="300.0" layoutX="300.0" layoutY="104.0"/>-->
-      <Label alignment="CENTER" layoutX="185.0" layoutY="232.0" text="Now please deploy your units" textFill="DARKBLUE" AnchorPane.bottomAnchor="144.0">
+      <Label alignment="CENTER" layoutX="169.0" layoutY="233.0" text="Now please deploy your units" textFill="DARKBLUE" AnchorPane.bottomAnchor="143.0">
          <font>
             <Font name="System Bold" size="19.0" />
          </font>
@@ -23,9 +23,9 @@
             <Font name="System Bold" size="19.0" />
          </font>
       </Label>
-      <ChoiceBox fx:id="terrBox" layoutX="100.0" layoutY="311.0" prefHeight="27.0" prefWidth="81.0" AnchorPane.bottomAnchor="62.0" />
-      <ChoiceBox fx:id="amountBox" layoutX="260.0" layoutY="301.0" prefHeight="27.0" prefWidth="81.0" AnchorPane.bottomAnchor="72.0" />
-      <Button fx:id="confirmBtn" layoutX="406.0" layoutY="300.0" mnemonicParsing="false" onAction="#deploy" style="-fx-background-color: lightskyblue; -fx-border-color: black;" text="Confirm" AnchorPane.bottomAnchor="71.0" />
+      <ChoiceBox fx:id="terrBox" layoutX="100.0" layoutY="297.0" prefHeight="27.0" prefWidth="81.0" AnchorPane.bottomAnchor="76.0" />
+      <ChoiceBox fx:id="amountBox" layoutX="261.0" layoutY="297.0" prefHeight="27.0" prefWidth="81.0" AnchorPane.bottomAnchor="76.0" />
+      <Button fx:id="confirmBtn" layoutX="414.0" layoutY="290.0" mnemonicParsing="false" onAction="#deploy" style="-fx-background-color: lightskyblue; -fx-border-color: black;" text="Confirm" AnchorPane.bottomAnchor="81.0" />
       <Label layoutX="100.0" layoutY="269.0" text="Territory to Deploy" />
       <Label layoutX="269.0" layoutY="269.0" prefHeight="17.0" prefWidth="64.0" text="# of units" />
     </children>
