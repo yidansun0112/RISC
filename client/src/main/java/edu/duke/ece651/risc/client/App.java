@@ -15,14 +15,26 @@ import javafx.fxml.*;
  * This is the App class for client project
  */
 public class App extends Application{
+
+  /** window to display */
   private Stage window;
 
+  /**
+   * The start point of this app.
+   * 
+   * @param primaryStage window to display
+   */
   @Override
   public void start(Stage primaryStage) throws Exception {
     this.window = primaryStage;
     showStartView(window);
   }
 
+  /**
+   * This method display the start view
+   * 
+   * @param window to display
+   */
   public void showStartView(Stage window) throws IOException{
     PageLoader loader=new PageLoader(window,null);
     loader.showStartPage();
