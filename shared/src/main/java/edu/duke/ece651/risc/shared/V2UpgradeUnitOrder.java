@@ -102,7 +102,7 @@ public class V2UpgradeUnitOrder<T> implements Order<T> {
       throw new IllegalArgumentException("Invalid input parameter!");
     }
     return Constant.UP_UNIT_COST.get(levelAfter) - Constant.UP_UNIT_COST.get(levelBefore);
-  } 
+  }
 
 
   /**

@@ -34,7 +34,7 @@ public class V2MoveOrder<T> implements Order<T> {
     // TODO finish this method when move the BFS/Dijkstra method into Board.java
     // This is the advice given by TA in the feedback of evo1 - I think this is reasonable.
     Board<T> board = gs.getGameBoard();
-    // Don't Know the serialVersionUID represent, so I just use it as the User ID(which is playerID in Evol1)
+
     PlayerEntity<T> currPlayer = gs.currPlayer;
     int pathLength = board.findMinPathDistance(this.srcTerritory, this.destTerritory, currPlayer.getPlayerId());
     if(pathLength == Integer.MAX_VALUE){
