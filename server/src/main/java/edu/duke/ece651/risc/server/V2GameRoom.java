@@ -21,6 +21,7 @@ import edu.duke.ece651.risc.shared.V2UpgradeMaxTechOrderLevelChecker;
 import edu.duke.ece651.risc.shared.V2UpgradeMaxTechOrderOpenChecker;
 import edu.duke.ece651.risc.shared.V2UpgradeMaxTechOrderResourceChecker;
 import edu.duke.ece651.risc.shared.V2UpgradeUnitOrderConsistencyChecker;
+import edu.duke.ece651.risc.shared.V2UpgradeUnitOrderLevelChecker;
 import edu.duke.ece651.risc.shared.V2UpgradeUnitOrderResourceChecker;
 import edu.duke.ece651.risc.shared.V2UpgradeUnitOrderUnitsChecker;
 
@@ -102,8 +103,8 @@ public class V2GameRoom extends GameRoom<String> {
   }
 
   public static OrderRuleChecker<String> makeUpgradeUnitOrderRuleCheckerChain() {
-    return new V2UpgradeUnitOrderConsistencyChecker<String>(
-        new V2UpgradeUnitOrderUnitsChecker<String>(new V2UpgradeUnitOrderResourceChecker<String>(null)));
+    return new V2UpgradeUnitOrderConsistencyChecker<String>(new V2UpgradeUnitOrderLevelChecker<String>(
+        new V2UpgradeUnitOrderUnitsChecker<String>(new V2UpgradeUnitOrderResourceChecker<String>(null))));
   }
 
   public static OrderRuleChecker<String> makeUpgradeTechLevelOrderRuleCheckerChain() {
