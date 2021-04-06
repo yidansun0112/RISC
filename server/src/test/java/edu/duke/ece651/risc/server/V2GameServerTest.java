@@ -141,11 +141,11 @@ public class V2GameServerTest {
     p0.sendObject(json4.toString());
     Thread.sleep(1000);
 
-    ArrayList<GameRoomInfo> receivedList = (ArrayList<GameRoomInfo>) p0.receiveObject();
-    assertEquals(1, receivedList.size());
-    assertEquals(0, receivedList.get(0).getRoomId());
-    assertEquals(userNameP0, receivedList.get(0).getRoomOwnerName());
-    assertEquals(3, receivedList.get(0).getTotalPlayers());
+    ArrayList<GameRoomInfo> receivedWaitingRoomList = (ArrayList<GameRoomInfo>) p0.receiveObject();
+    assertEquals(1, receivedWaitingRoomList.size());
+    assertEquals(0, receivedWaitingRoomList.get(0).getRoomId());
+    assertEquals(userNameP0, receivedWaitingRoomList.get(0).getRoomOwnerName());
+    assertEquals(3, receivedWaitingRoomList.get(0).getTotalPlayers());
 
     // --- 4. Test join a game room
     String userNameP1 = "Azusa Nakano";
@@ -178,6 +178,35 @@ public class V2GameServerTest {
     assertEquals("1", (String) p1.receiveObject()); // receive the player id
     assertEquals(2, server.gameRooms.get(0).players.size());
 
+    // --- 5. Test get leaving room list ---
+    String userNameP2 = "Mio Akiyama";
+    String userPasswordP2 = "mio115";
+    GUIPlayer p2 = new GUIPlayer();
+    p2.connect();
+    // register her first
+    JSONObject json7 = new JSONObject();
+    json7.put(Constant.KEY_REQUEST_TYPE, Constant.VALUE_REQUEST_TYPE_REGISTER);
+    json7.put(Constant.KEY_USER_NAME, userNameP2);
+    json7.put(Constant.KEY_PASSWORD, userPasswordP2);
+    p2.sendObject(json7.toString()); // register for her first
+
+    Thread.sleep(1000);
+    assertEquals(Constant.RESULT_SUCCEED_REQEUST, (String) p2.receiveObject());
+    // Now check the data in the server to ensure we really succeed in registering
+    assertEquals(userNameP2, server.userList.get(2).getUserName());
+    assertEquals(userPasswordP2, server.userList.get(2).getPassword());
+
+    p2.disconnect();
+    p2.connect();
+
+    JSONObject json8 = new JSONObject();
+    json8.put(Constant.KEY_REQUEST_TYPE, Constant.VALUE_REQUEST_TYPE_GET_LEAVING_ROOM_LIST);
+    json8.put(Constant.KEY_USER_NAME, userNameP2);
+    p2.sendObject(json8.toString());
+    Thread.sleep(1000);
+
+    ArrayList<GameRoomInfo> receivedLeavingRoomList = (ArrayList<GameRoomInfo>) p2.receiveObject();
+    assertEquals(0, receivedLeavingRoomList.size()); // there should be no gamerooms that is running but some one leving
   }
 
   @Test
