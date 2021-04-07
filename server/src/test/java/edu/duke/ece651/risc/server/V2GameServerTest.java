@@ -13,6 +13,7 @@ import org.junit.jupiter.api.Test;
 
 import edu.duke.ece651.risc.client.GUIPlayer;
 import edu.duke.ece651.risc.shared.Constant;
+import edu.duke.ece651.risc.shared.GUIPlayerEntity;
 import edu.duke.ece651.risc.shared.GameRoomInfo;
 
 public class V2GameServerTest {
@@ -207,6 +208,32 @@ public class V2GameServerTest {
 
     ArrayList<GameRoomInfo> receivedLeavingRoomList = (ArrayList<GameRoomInfo>) p2.receiveObject();
     assertEquals(0, receivedLeavingRoomList.size()); // there should be no gamerooms that is running but some one leving
+
+    p2.disconnect();
+
+    // 6. Test back to game room
+    server.gameRooms.get(0).setRoomStatus(Constant.ROOM_STATUS_RUNNING_GAME); // here we set the room 0 with status
+                                                                              // running game even it is still waiting
+                                                                              // for the third player, to enable our
+                                                                              // testing
+    server.gameRooms.get(0).getRoomOwner().setIsInRoomNow(false); // we first set this fake status, and check it in the
+                                                                  // end
+
+    // Make sure we have the correct status before we move further
+    assertEquals(false, server.gameRooms.get(0).getRoomOwner().getIsInRoomNow());                                                              
+    p0.disconnect();
+    p0.connect();
+
+    JSONObject json9 = new JSONObject();
+    json9.put(Constant.KEY_REQUEST_TYPE, Constant.VALUE_REQUEST_TYPE_RETURN_ROOM);
+    json9.put(Constant.KEY_USER_NAME, userNameP0);
+    json9.put(Constant.KEY_ROOM_ID_TO_RETURN, "0");
+    p0.sendObject(json9.toString());
+
+    Thread.sleep(1000);
+
+    assertEquals(true, server.gameRooms.get(0).getRoomOwner().getIsInRoomNow());
+    
   }
 
   @Test
@@ -215,8 +242,43 @@ public class V2GameServerTest {
   }
 
   @Test
-  public void test_handleLogin() {
-    // TODO
+  public void test_handleLogin() throws IOException {
+    try{
+      ServerSocket servSock = new ServerSocket(23335);
+      V2GameServer server = new V2GameServer(servSock);
+      server.userList.add(new RISCUser("yui", "yui1127")); // first we put some user in server
+      JSONObject json0 = new JSONObject();
+      assertEquals(Constant.FAIL_REASON_INVALID_JSON, server.handleLogin(json0));
+      
+      json0.put(Constant.KEY_REQUEST_TYPE, Constant.VALUE_REQUEST_TYPE_LOGIN);
+      json0.put(Constant.KEY_USER_NAME, "");
+      json0.put(Constant.KEY_PASSWORD, "mio115");
+      assertEquals(Constant.FAIL_REASON_INVALID_USER_NAME, server.handleLogin(json0));
+      
+      json0.remove(Constant.KEY_USER_NAME);
+      json0.put(Constant.KEY_USER_NAME, "mio");
+      assertEquals(Constant.FAIL_REASON_HAS_NOT_REGISTERED, server.handleLogin(json0));
+
+    } catch (IOException ignored) {}
+  }
+
+  @Test
+  public void test_getLeavingRoomListByUsername() throws IOException {
+    ServerSocket servSock = new ServerSocket(23334);
+    V2GameServer server = new V2GameServer(servSock);
+
+    V2GameRoom r0 = new V2GameRoom(0, new GUIPlayerEntity<String>(null, null, 0, "yui", 0, Constant.SELF_NOT_LOSE_NO_ONE_WIN_STATUS));
+    r0.setRoomStatus(Constant.ROOM_STATUS_RUNNING_GAME);
+    V2GameRoom r1 = new V2GameRoom(1, new GUIPlayerEntity<String>(null, null, 0, "mio", 0, Constant.SELF_NOT_LOSE_NO_ONE_WIN_STATUS));
+    r1.setRoomStatus(Constant.ROOM_STATUS_RUNNING_GAME);
+    V2GameRoom r2 = new V2GameRoom(2, new GUIPlayerEntity<String>(null, null, 0, "lzy", 0, Constant.SELF_NOT_LOSE_NO_ONE_WIN_STATUS));
+    r2.setRoomStatus(Constant.ROOM_STATUS_GAME_FINISHED);
+
+    server.gameRooms.put(0, r0);
+    server.gameRooms.put(1, r1);
+    server.gameRooms.put(2, r2);
+
+    assertEquals("yui", server.getLeavingRoomListByUsername("yui").get(0).getRoomOwnerName()); 
   }
 
   // /**

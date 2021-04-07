@@ -141,7 +141,7 @@ public abstract class PlayerEntity<T> implements Serializable{
       toPlayer.reset();
       toPlayer.writeObject(o);
     } catch (IOException e) {
-      e.printStackTrace();
+      // e.printStackTrace();
       setIsInRoomNow(false); // if an IOException throws here, it indicates that the
                              // socket connection has closed at the client side.
     }
@@ -159,7 +159,7 @@ public abstract class PlayerEntity<T> implements Serializable{
     try {
       data = fromPlayer.readObject();
     } catch (IOException e) {
-      e.printStackTrace();
+      // e.printStackTrace();
       setIsInRoomNow(false); // if an IOException throws here, it indicates that the
                              // socket connection has closed at the client side.
     }
