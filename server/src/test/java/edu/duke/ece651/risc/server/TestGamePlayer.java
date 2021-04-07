@@ -15,7 +15,9 @@ public class TestGamePlayer implements Runnable {
   @Override
   public void run() {
     try {
-      SocketClient client = new SocketClient(12345, "localhost");
+      SocketClient client = new SocketClient(12346, "localhost"); // since the testing for evo2 uses 12345 port, here we
+                                                                  // change to 12346 to enable parallel testing to speed
+                                                                  // up the whole testing process
       BufferedReader input = new BufferedReader(new InputStreamReader(in));
       GamePlayer<String> player = new V1GamePlayer<String>(-1, client, input, out);
       player.initGame();

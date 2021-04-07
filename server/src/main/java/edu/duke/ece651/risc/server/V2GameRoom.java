@@ -254,9 +254,9 @@ public class V2GameRoom extends GameRoom<String> {
         break;
       }
     }
-    if (winnerId == -1) { // should not happen
-      throw new IllegalStateException("There is no winner yet!"); // fail fast. May remove after finished.
-    }
+    // if (winnerId == -1) { // should not happen
+    //   throw new IllegalStateException("There is no winner yet!"); // fail fast. May remove after finished.
+    // }
     return winnerId;
   }
 

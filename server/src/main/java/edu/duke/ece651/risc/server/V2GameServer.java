@@ -12,6 +12,7 @@ import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.net.ServerSocket;
 import java.net.Socket;
+import java.net.SocketException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
@@ -58,9 +59,11 @@ public class V2GameServer {
    * 
    * @param serverSocket the server socket object this server will used to listen
    *                     to the incomming connections.
+   * @throws SocketException
    */
-  public V2GameServer(ServerSocket serverSocket) {
+  public V2GameServer(ServerSocket serverSocket) throws SocketException {
     this.serverSocket = serverSocket;
+    // this.serverSocket.setSoTimeout(500); // will only block on accept() for 0.5 second
     // this.playerSockets = new Vector<Socket>();
     /**
      * Here we need a thread-safe data sturcture, and ConcurrentHashMap is good at
@@ -98,7 +101,10 @@ public class V2GameServer {
     while (!Thread.currentThread().isInterrupted()) {
       // We need to make sure that the run() method is capable for resolving almost
       // all exceptions to keep the server run forever
+      System.out.println("We now wait on accept");
       Socket sock = serverSocket.accept();
+      // if(sock != null) {
+      System.out.println("We got a connection");
       threadPool.execute(() -> {
         try {
           handleRequest(sock);
@@ -109,7 +115,12 @@ public class V2GameServer {
           e.printStackTrace();
         }
       });
+      // }
+      System.out.println("now we let a thread to handle the connection");
     }
+    System.out.println("Now the server is interrupted");
+    serverSocket.close(); // close the server socker when is interrupted, which means we want to close the
+                          // server.
   }
 
   /**
