@@ -144,10 +144,10 @@ public class V2GameHostThread<T> extends Thread {
       // NOTE: SEND GameStatus to client - used to show the self group of territory
       // when deploying units
       GameStatus<T> gamestatus=makeLatestGameStatus(false);
-      System.out.println("gamesatus's info:");
-      System.out.println(gamestatus.getGameBoard().getTerritories().get(0).getBasicDefendUnitAmount());
+      // System.out.println("gamesatus's info:");
+      // System.out.println(gamestatus.getGameBoard().getTerritories().get(0).getBasicDefendUnitAmount());
       int amount=gamestatus.getGameBoard().getTerritories().get(0).getCurrDefenderArmy().get(0).getUnitAmtByLevel(0);
-      System.out.println(amount);
+      // System.out.println(amount);
       player.sendObject(gamestatus); // this line is different with evo 1
       // NOTE: SEND int to client - used to show the scentence "You have XXX unit
       // remained" in GUI window
@@ -157,8 +157,8 @@ public class V2GameHostThread<T> extends Thread {
       ArrayList<Integer> deployment = (ArrayList<Integer>) player.receiveObject();
       int territoryId = deployment.get(0);
       int unitAmount = deployment.get(1);
-      System.out.println("terr id"+territoryId);
-      System.out.println("unit amount"+unitAmount);
+      // System.out.println("terr id"+territoryId);
+      // System.out.println("unit amount"+unitAmount);
       // TODO: check the negative number at client side! And/Or check whether the
       // following lines of new code will cause stuck!!!!
       if (territoryId < 0 || unitAmount < 0) {
@@ -174,7 +174,7 @@ public class V2GameHostThread<T> extends Thread {
       if (remainedUnits >= unitAmount) {
         boolean result = board.deployUnits(territoryId, unitAmount, player.getPlayerId());
         if (result) {
-          System.out.println(board.getTerritories().get(territoryId).getBasicDefendUnitAmount());
+          // System.out.println(board.getTerritories().get(territoryId).getBasicDefendUnitAmount());
           remainedUnits -= unitAmount;
           player.sendObject(Constant.LEGAL_DEPLOY_INFO);
         } else {

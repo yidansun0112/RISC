@@ -56,9 +56,9 @@ public class V2GameServerTest {
     serverThread.start();
     Thread.sleep(1000); // give some time to let the server setup
 
-    System.out.println("Now server should be setup");
+    // System.out.println("Now server should be setup");
     p0.connect();
-    System.out.println("Now p0 is connected");
+    // System.out.println("Now p0 is connected");
 
     // serverThread.interrupt();
     // System.out.println("Now server should be interrupted");
